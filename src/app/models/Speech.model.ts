@@ -20,4 +20,5 @@ export class Speech {
   org: OrganizedSpeech;
   lang: string;
   top: Top;
+  duration: number;
 }

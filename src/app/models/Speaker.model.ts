@@ -1,4 +1,5 @@
 import {LocalizedTexts} from './LocalizedTexts.model';
+import {SpeakerLink} from './SpeakerLink.model';
 
 export class Speaker {
   names: LocalizedTexts;
@@ -6,4 +7,5 @@ export class Speaker {
   image: string;
   imageUrl: string;
   url: string;
+  links: SpeakerLink[];
 }

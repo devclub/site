@@ -136,6 +136,12 @@
               </ng-container>
             </h4>
             <div class="small text-muted">{{speaker.titles | localize}}</div>
+            <div class="small" *ngIf="speaker.links && speaker.links.length">
+              <a *ngFor="let link of speaker.links" [href]="link.url" target="_blank" rel="noopener noreferrer"
+                 class="mr-2" [tooltip]="link.label" placement="top" [attr.aria-label]="link.label">
+                <fa-icon [icon]="link.kind | speakerLinkIcon"></fa-icon>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -180,6 +186,9 @@
                   [ngClass]="{'badge-lang': lang === speech.lang,
                   'badge-danger': lang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}
+          </span>
+            <span class="badge badge-big badge-label mr-3 mt-2" *ngIf="speech.duration">
+            {{speech.duration}} {{'common.speech.duration.minutes' | translate}}
           </span>
             <span *ngFor="let presentationUrl of speech.presentations"
                   [tooltip]="'common.speech.presentation.tooltip' | translate"

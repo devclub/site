@@ -35,6 +35,7 @@ import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
 import {GoogleAnalyticsService} from './services/GoogleAnalyticsService';
 import {TranslationService} from './translations/TranslationService';
 import {TranslatePipe} from './translations/TranslatePipe';
+import {SpeakerLinkIconPipe} from './util/SpeakerLinkIconPipe';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {
@@ -63,7 +64,16 @@ import {
   faUser,
   faVideoSlash
 } from '@fortawesome/free-solid-svg-icons';
-import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
+import {
+  faFacebook,
+  faGithub,
+  faLinkedin,
+  faMedium,
+  faSlideshare,
+  faTwitter,
+  faWordpress,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DataHttpService} from './services/DataHttpService';
 import {AppContext} from './context/AppContext';
@@ -113,7 +123,8 @@ export function initialize(dataHttpService: DataHttpService, appContext: AppCont
     DcRessourcesComponent,
     TranslatePipe,
     LocalizePipe,
-    LocalizeOrgPipe
+    LocalizeOrgPipe,
+    SpeakerLinkIconPipe
   ],
   imports: [
     BrowserModule,
@@ -170,6 +181,8 @@ export class AppModule {
     library.addIcons(faDesktop);
     library.addIcons(faEnvelope);
     library.addIcons(faGithub);
+    library.addIcons(faLinkedin);
+    library.addIcons(faMedium);
     library.addIcons(faWordpress);
     library.addIcons(faTwitter);
     library.addIcons(faFacebook);

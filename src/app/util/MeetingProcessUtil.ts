@@ -1,6 +1,7 @@
 import {Meeting} from '../models/Meeting.model';
 import {Speech} from '../models/Speech.model';
 import {Config} from '../models/Config.model';
+import {SpeakerLinkUtil} from './SpeakerLinkUtil';
 
 export class MeetingProcessUtil {
 
@@ -28,6 +29,7 @@ export class MeetingProcessUtil {
     if (speech.speakers) {
       speech.speakers.forEach(speaker => {
         speaker.imageUrl = config.personUrlPrefix + '/' + (speaker.image ? speaker.image : config.personDefaultImage);
+        speaker.links = SpeakerLinkUtil.sanitizeSpeakerLinks(speaker.links);
       });
     }
   }

@@ -42,6 +42,11 @@
       <fa-icon [icon]="['fas', 'language']" class="mr-1 text-danger"></fa-icon>
     </span>
 
+    <!-- duration -->
+    <span class="badge badge-secondary mr-1" *ngIf="speech.duration">
+      {{speech.duration}} {{'common.speech.duration.minutes' | translate}}
+    </span>
+
     <!-- additional materials: presentation -->
     <span *ngFor="let presentationUrl of speech.presentations"
           [tooltip]="'common.speech.presentation.tooltip' | translate"
@@ -64,6 +69,12 @@
       <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
         <fa-icon [icon]="['fas', 'user']" class="small mr-1"></fa-icon>
       </a>
+      <ng-container *ngIf="speaker.links && speaker.links.length">
+        <a *ngFor="let link of speaker.links" [href]="link.url" target="_blank" rel="noopener noreferrer"
+           [tooltip]="link.label" placement="top" [attr.aria-label]="link.label">
+          <fa-icon [icon]="link.kind | speakerLinkIcon" class="small mr-1"></fa-icon>
+        </a>
+      </ng-container>
       <a *ngIf="options && options.clickNameFn" class="dotted" (click)="options.clickNameFn(speaker)"
          href="javascript:void(0)">{{speaker.names | localize}}</a>
       <ng-container *ngIf="!options || !options.clickNameFn">{{speaker.names | localize}}</ng-container>

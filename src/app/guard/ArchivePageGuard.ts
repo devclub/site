@@ -27,11 +27,28 @@ export class ArchivePageGuard implements CanActivate {
     const urls = this.appContext.config.meetingsUrls.archive;
     return this.initialized ? Promise.resolve(true) : forkJoin(urls.map(url => this.dataHttpService.getMeetings(url)))
       .toPromise().then((meetingsMatrix: Array<Array<Meeting>>) => {
-        meetingsMatrix.forEach(meetings => meetings.forEach(meeting => this.archiveContext.meetings.push(meeting)));
+        meetingsMatrix.forEach(meetings => meetings.forEach(meeting => this.addOrReplaceMeeting(meeting)));
         this.processData();
         this.initialized = true;
         return true;
       });
+  }
+
+  // The "latest" feed (pushed into ArchiveContext at app startup) and the bounded archive
+  // files can both legitimately contain the same meeting while its durable archive copy is
+  // being maintained. Archive files are the durable, continuously-updated record for a
+  // meeting (post-event recordings/photos/corrections land there), while "latest" is only a
+  // transient snapshot of the newest meeting before it has been archived. When the same
+  // meeting number appears in both, replace the "latest" stub with the archive copy so later
+  // enrichment is never hidden behind a stale duplicate; a meeting that only exists in
+  // "latest" so far (not archived yet) is still appended as-is.
+  private addOrReplaceMeeting(meeting: Meeting): void {
+    const index = this.archiveContext.meetings.findIndex(existing => existing.num === meeting.num);
+    if (index >= 0) {
+      this.archiveContext.meetings[index] = meeting;
+    } else {
+      this.archiveContext.meetings.push(meeting);
+    }
   }
 
   private processData(): void {
