@@ -66,7 +66,8 @@
 
     <!-- speakers -->
     <ng-container *ngFor="let speaker of speech.speakers; let last = last">
-      <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
+      <a *ngIf="speaker.url" [href]="speaker.url" target="_blank" rel="noopener noreferrer"
+         [attr.aria-label]="'common.speaker.profile_link' | translate:{name: (speaker.names | localize)}">
         <fa-icon [icon]="['fas', 'user']" class="small mr-1"></fa-icon>
       </a>
       <ng-container *ngIf="speaker.links && speaker.links.length">

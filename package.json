@@ -21,7 +21,8 @@
     "build:dev:ee": "npm run clean && ng build --dev --configuration=dev-ee",
     "build:prod:eu": "npm run clean && ng build --configuration=prod-eu",
     "build:prod:ee": "npm run clean && ng build --configuration=prod-ee",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "test:unit": "rimraf .tmp-test-out && tsc --target es2017 --module commonjs --moduleResolution node --esModuleInterop --resolveJsonModule --skipLibCheck --outDir .tmp-test-out src/app/util/SpeakerLinkUtil.ts src/app/util/SpeakerLinkUtil.spec.ts src/app/models/SpeakerLink.model.ts && node .tmp-test-out/util/SpeakerLinkUtil.spec.js && rimraf .tmp-test-out"
   },
   "dependencies": {
     "@angular/animations": "11.0.5",

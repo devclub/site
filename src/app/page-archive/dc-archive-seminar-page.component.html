@@ -15,7 +15,8 @@
     <tr class="small">
       <td colspan="6">
         <span *ngFor="let speaker of seminar.speakers; trackBy: trackByIndex">
-          <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
+          <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank" rel="noopener noreferrer"
+             [attr.aria-label]="'common.speaker.profile_link' | translate:{name: (speaker.names | localize)}">
             <fa-icon [icon]="['fas', 'user']" class="small"></fa-icon>
           </a>
           {{speaker.names | localize}}

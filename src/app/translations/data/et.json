@@ -64,6 +64,7 @@
 	"archive.speaker.tab": "Esinejad",
 	"archive.title.archive": "Arhiiv",
 	"common.footer.devclub_team": "Devclub meeskond",
+	"common.speaker.profile_link": "{{name}} profiil",
 	"common.speech.duration.minutes": "min",
 	"common.speech.example.tooltip": "Näided seotud kõnega.",
 	"common.speech.lang.en": "Inglise keeles",

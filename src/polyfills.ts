@@ -33,6 +33,11 @@ import 'core-js/es/regexp';
 import 'core-js/es/map';
 import 'core-js/es/set';
 
+/** IE9, IE10 and IE11 lack the URL API used by SpeakerLinkUtil.isSafeUrl() to validate
+ *  speaker/link href values before rendering; without this polyfill, `new URL(...)` throws
+ *  on those browsers and every secondary speaker link is silently dropped there only. **/
+import 'core-js/web/url';
+
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 import 'classlist.js';  // Run `npm install --save classlist.js`.
 

@@ -33,7 +33,11 @@ export class DcSocialYoutubeBlockComponent implements OnInit, OnDestroy {
     js.onload = onloadFn;
 
     const fjs = document.getElementsByTagName('script')[0];
-    fjs.parentNode.insertBefore(js, fjs);
+    if (fjs && fjs.parentNode) {
+      fjs.parentNode.insertBefore(js, fjs);
+    } else {
+      document.head.appendChild(js);
+    }
   }
 
   ngOnInit() {

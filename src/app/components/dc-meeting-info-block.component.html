@@ -121,10 +121,13 @@
       <div class="col-sm-4 col-md-3">
         <div *ngFor="let speaker of speech.speakers">
           <div class="image-wrap mb-3">
-            <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
-              <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
+            <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank" rel="noopener noreferrer"
+               [attr.aria-label]="'common.speaker.profile_link' | translate:{name: (speaker.names | localize)}">
+              <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image"
+                   alt="{{speaker.names | localize}}">
             </a>
-            <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
+            <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image"
+                 alt="{{speaker.names | localize}}">
           </div>
           <div class="name-container">
             <h4>
