@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "devclub/site"
+  },
+  "apps": [
+    {
+      "name": "app",
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        {
+          "glob": "**/*",
+          "input": "./assets/",
+          "output": "./assets/"
+        }
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "tsconfig": "tsconfig.json",
+      "environmentSource": "environments/environment.dev-eu.ts",
+      "environments": {
+        "dev-eu": "environments/environment.dev-eu.ts",
+        "dev-ee": "environments/environment.dev-ee.ts",
+        "prod-eu": "environments/environment.prod-eu.ts",
+        "prod-ee": "environments/environment.prod-ee.ts"
+      }
+    }
+  ],
+  "lint": [
+    {
+      "project": "tsconfig.json"
+    }
+  ],
+  "defaults": {
+    "styleExt": "css",
+    "component": {},
+    "serve": {
+      "port": 3000
+    }
+  }
+}

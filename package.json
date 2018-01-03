@@ -1,0 +1,59 @@
+{
+  "name": "@devclub/site",
+  "version": "2.0.0",
+  "description": "Devclub site platform: devclub.eu & devclub.ee",
+  "author": [
+    "Anton Stalnuhhin <anton.stalnuhhin@nortal.com>"
+  ],
+  "private": true,
+  "homepage": "https://github.com/devclub/site",
+  "repository": {
+    "type": "git",
+    "url": "devclub/site.git"
+  },
+  "scripts": {
+    "ng": "ng",
+    "clean": "rimraf dist",
+    "start:eu": "ng serve --env=dev-eu --aot --open",
+    "start:ee": "ng serve --env=dev-ee --aot --open",
+    "start": "npm run start:eu",
+    "build:dev:eu": "npm run clean && ng build --dev --env=dev-eu",
+    "build:dev:ee": "npm run clean && ng build --dev --env=dev-ee",
+    "build:prod:eu": "npm run clean && ng build --prod --env=prod-eu",
+    "build:prod:ee": "npm run clean && ng build --prod --env=prod-ee",
+    "extract": "ngx-translate-extract --input ./src/app --output ./src/assets/i18n/{et,en,ru}.json --sort --format json",
+    "lint": "ng lint"
+  },
+  "dependencies": {
+    "@angular/animations": "5.2.0-beta.1",
+    "@angular/common": "5.2.0-beta.1",
+    "@angular/compiler": "5.2.0-beta.1",
+    "@angular/core": "5.2.0-beta.1",
+    "@angular/forms": "5.2.0-beta.1",
+    "@angular/http": "5.2.0-beta.1",
+    "@angular/platform-browser": "5.2.0-beta.1",
+    "@angular/platform-browser-dynamic": "5.2.0-beta.1",
+    "@angular/router": "5.2.0-beta.1",
+    "@ngx-translate/core": "9.0.2",
+    "bootstrap": "4.0.0-alpha.6",
+    "classlist.js": "1.1.20150312",
+    "core-js": "2.5.3",
+    "rxjs": "5.5.6",
+    "web-animations-js": "2.3.1",
+    "zone.js": "0.8.19"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.6.3",
+    "@angular/compiler-cli": "5.2.0-beta.1",
+    "@angular/language-service": "5.2.0-beta.1",
+    "@angular/tsc-wrapped": "5.0.0-beta.7",
+    "@biesbjerg/ngx-translate-extract": "2.3.4",
+    "@types/node": "8.5.2",
+    "codelyzer": "4.0.2",
+    "cpr": "3.0.1",
+    "rimraf": "2.6.2",
+    "ts-node": "4.1.0",
+    "tslint": "5.8.0",
+    "typescript": "2.6.2"
+  }
+}
