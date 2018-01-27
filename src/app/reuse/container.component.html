@@ -1,0 +1,61 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" [ngStyle]="dataContext.config.navbarStyle"
+     style="">
+  <a class="navbar-brand" href="#/">{{dataContext.config.devclubText}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navbarNavDropdown" class="navbar-collapse collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">EST</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">ENG</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:void(0)">РУC</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#/">Встреча</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#/archive">Архив</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#/sponsors">Спонсорство</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#/about">О нас</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{dataContext.config.blogUrl}}">Блог</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-danger mr-sm-2"
+           role="button" href="#/speaker">Выступающему</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-light"
+           role="button" href="{{dataContext.config.devclubMenuUrl}}">
+          {{dataContext.config.devclubMenuText}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<sponsors-line></sponsors-line>
+<router-outlet></router-outlet>
+<div class="container">
+  <team-rows sectionTitle="Команда Devclub" [memberRows]="dataContext.teamMember"></team-rows>
+</div>
+<sponsors-line></sponsors-line>
+<footer>
+  <div class="container text-center">
+    <small class="opacity8">
+      © 2008-{{currentYear}} команда Devclub
+    </small>
+  </div>
+</footer>

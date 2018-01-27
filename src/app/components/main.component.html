@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h2 class="text-muted text-right">Следующая встреча</h2>
+      <meeting-info
+        *ngIf="nextMeeting"
+        [showRegisterEvent]="true"
+        [meeting]="nextMeeting"></meeting-info>
+      <h2 class="text-muted text-right">Последние встречи</h2>
+      <meeting-info
+        *ngFor="let lastMeeting of lastMeetings"
+        [showRegisterEvent]="false"
+        [meeting]="lastMeeting"></meeting-info>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col text-center">
+      <a href="#/archive" class="btn btn-danger">Больше докладов в "Архиве"</a>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,11 @@
           "glob": "**/*",
           "input": "./assets/",
           "output": "./assets/"
+        },
+        {
+          "glob": "bootstrap.css",
+          "input": "../node_modules/bootstrap/dist/css/",
+          "output": "./assets/css/"
         }
       ],
       "index": "index.html",

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-12">
+    <h4 class="mb-0">Встреча #{{meeting.num}} {{meeting.titles | localize}}</h4>
+    <hr class="mt-1 mb-1"/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-9">
+    <p>
+      <span class="fas fa-calendar-alt"></span>
+      {{meeting.start | date:'dd.MM.yyyy'}}
+      | {{'weekday.' + meeting.start.getDay() | translate }}
+      <span class="fas fa-clock"></span>
+      {{meeting.start | date:'HH:mm'}}<br/>
+      <span *ngIf="meeting.place">
+        <span class="fas fa-home w20"></span>
+        {{meeting.place.name}}
+        <a *ngIf="meeting.place.url" href="{{meeting.place.url}}" target="_blank">
+          <span class="fas fa-external-link-alt"></span></a>
+        <br/>
+        <span class="fas fa-location-arrow w20"></span>
+        {{meeting.place.addr}}
+        <a *ngIf="meeting.place.loc" href="{{meeting.place.loc}}" target="_blank">
+          <span class="fas fa-external-link-alt"></span></a>
+      </span>
+    </p>
+  </div>
+  <div class="col-sm-3 text-right">
+    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info">Регистрация</a>
+    <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
+      <span *ngIf="photo" class="fas fa-5x fa-camera"></span></a>
+  </div>
+</div>
+<div class="row mb-3" *ngFor="let speech of meeting.speeches">
+  <div class="col-sm-4 col-md-3">
+    <div *ngFor="let speaker of speech.speakers" class="image-wrap">
+      <a href="{{speaker.url}}" target="_blank">
+        <img src="{{speaker.image}}" class="img-fluid">
+      </a>
+      <div class="member-text">
+        {{speaker.names | localize}}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-9">
+    <div class="mb-1" *ngFor="let speaker of speech.speakers">
+      <h5>
+        <a *ngFor="let youtubeUrl of speech.youtube" href="{{youtubeUrl}}" target="_blank">
+          <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
+        {{speech.titles | localize}}
+      </h5>
+      <h6 class="mb-0">{{speaker.names | localize}}</h6>
+      <span class="small text-muted">{{speaker.titles | localize}}</span>
+    </div>
+    <div>
+      <p class="small" *ngFor="let paragr of (speech.descr | localize)">{{paragr}}</p>
+    </div>
+  </div>
+</div>
+<div class="row mb-4"></div>
