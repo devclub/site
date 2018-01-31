@@ -1,21 +1,21 @@
 import { Routes } from '@angular/router';
-import { AboutComponent } from './components/about.component';
-import { ArchiveComponent } from './components/archive.component';
-import { MainComponent } from './components/main.component';
-import { SpeakerComponent } from './components/speaker.component';
-import { SponsorsComponent } from './components/sponsors.component';
-import { ContainerComponent } from './reuse/container.component';
+import { AboutPage } from './pages/about';
+import { ArchivePage } from './pages/archive';
+import { MainPage } from './pages/main';
+import { SpeakerPage } from './pages/speaker';
+import { CommercialPage } from './pages/commercial';
+import { Container } from './components/container';
 
 export const ROUTES: Routes = [
   {
     path: '',
-    component: ContainerComponent,
+    component: Container,
     children: [
-      {path: '', pathMatch: 'full', component: MainComponent},
-      {path: 'archive', component: ArchiveComponent},
-      {path: 'sponsors', component: SponsorsComponent},
-      {path: 'about', component: AboutComponent},
-      {path: 'speaker', component: SpeakerComponent}
+      {path: '', pathMatch: 'full', component: MainPage},
+      {path: 'archive', component: ArchivePage},
+      {path: 'sponsors', component: CommercialPage},
+      {path: 'about', component: AboutPage},
+      {path: 'speaker', component: SpeakerPage}
     ]
   }
 ];

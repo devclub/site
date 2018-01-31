@@ -3,9 +3,9 @@ import { DataContext } from '../data.context';
 import { Meeting } from '../models';
 
 @Component({
-  templateUrl: './main.component.html'
+  templateUrl: './main.html'
 })
-export class MainComponent implements OnInit {
+export class MainPage implements OnInit {
   public nextMeeting: Meeting;
   public lastMeetings: Meeting[];
 

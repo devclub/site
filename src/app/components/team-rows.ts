@@ -3,9 +3,8 @@ import { Member } from '../models';
 
 @Component({
   selector: 'team-rows',
-  templateUrl: './team-rows.component.html'
+  templateUrl: './team-rows.html'
 })
-export class TeamRowsComponent {
-  @Input() public sectionTitle: string;
+export class TeamRows {
   @Input() public memberRows: Array<Member[]>;
 }

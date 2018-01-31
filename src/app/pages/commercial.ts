@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { DataContext } from '../data.context';
 
 @Component({
-  templateUrl: './sponsors.component.html'
+  templateUrl: './commercial.html'
 })
-export class SponsorsComponent {
+export class CommercialPage {
   constructor(public dataContext: DataContext) {
   }
 }

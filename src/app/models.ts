@@ -13,19 +13,26 @@ export class LocalizedTextLists extends Map<string, string[]> {
 
 export class Config {
   defaultLang: string;
+
   navbarStyle: Map<string, string>;
+  footerStyle: Map<string, string>;
+
   devclubText: string;
   devclubMenuUrl: string;
   devclubMenuText: string;
   blogUrl: string;
   speechAddFormUrl: string;
-  bodyCssStyle: string;
-  photoUrlPrefix: string;
-  photoDefaultImage: string;
+
+  personUrlPrefix: string;
+  personDefaultImage: string;
   fileUrlPrefix: string;
+
+  photoUrlPrefix: string;
+  photos: { main: string, small: string, texts: LocalizedTexts }[][];
+
   meetingsUrls: { main: string; archive: string[] };
-  sponsors: { dataUrl: string; logoUrlPrefix: string };
-  team: { dataUrl: string; photoUrlPrefix: string };
+  commercial: { dataUrl: string; logoUrlPrefix: string };
+  team: { dataUrl: string; personUrlPrefix: string };
 }
 
 export class MemberComplex {
@@ -42,7 +49,7 @@ export class Member {
   emptyCell = false;
 }
 
-export class Sponsor {
+export class Commercial {
   name: string;
   logo: string;
   url: string;

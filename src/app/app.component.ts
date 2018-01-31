@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DataContext } from './data.context';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {DataContext} from './data.context';
+import {ParamMap} from '@angular/router/src/shared';
 
 @Component({
   selector: '[app]',
@@ -11,14 +12,16 @@ export class AppComponent {
 
   constructor(private dataContext: DataContext,
               private translate: TranslateService,
-              private router: Router) {
+              private route: ActivatedRoute) {
     this.translate.setDefaultLang(dataContext.config.defaultLang);
     this.translate.currentLang = dataContext.config.defaultLang;
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        // FIXME
-      }
-    });
-  }
+    this.translate.use(dataContext.config.defaultLang);
 
+    // this.route.queryParamMap.subscribe((paramMap: ParamMap) => {
+    //   const langParam = paramMap.get('lang');
+    //   const lang = langParam ? langParam : dataContext.config.defaultLang;
+    //   this.translate.currentLang = lang;
+    //   this.translate.use(lang);
+    // });
+  }
 }

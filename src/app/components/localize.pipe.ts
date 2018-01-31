@@ -8,10 +8,10 @@ export class LocalizePipe implements PipeTransform {
   constructor(private translate: TranslateService) {
   }
 
-  transform(value: any): any {
-    if (!value) return value;
+  transform(value: any, defaultValue: any = ''): any {
+    if (!value) return defaultValue;
     if (value[this.translate.currentLang]) return value[this.translate.currentLang];
     if (value[Lang.DEFAULT]) return value[Lang.DEFAULT];
-    return value;
+    return defaultValue;
   }
 }

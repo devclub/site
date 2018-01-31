@@ -53,7 +53,7 @@
       <span class="small text-muted">{{speaker.titles | localize}}</span>
     </div>
     <div>
-      <p class="small" *ngFor="let paragr of (speech.descr | localize)">{{paragr}}</p>
+      <p class="small" *ngFor="let paragr of (speech.descr | localize:[])">{{paragr}}</p>
     </div>
   </div>
 </div>

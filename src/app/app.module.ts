@@ -6,18 +6,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './components/about.component';
-import { ArchiveComponent } from './components/archive.component';
-import { MainComponent } from './components/main.component';
-import { SpeakerComponent } from './components/speaker.component';
-import { SponsorsComponent } from './components/sponsors.component';
+import { AboutPage } from './pages/about';
+import { ArchivePage } from './pages/archive';
+import { MainPage } from './pages/main';
+import { SpeakerPage } from './pages/speaker';
+import { CommercialPage } from './pages/commercial';
 import { DataContext } from './data.context';
-import { ContainerComponent } from './reuse/container.component';
-import { LocalizePipe } from './reuse/localize.pipe';
-import { MeetingInfo } from './reuse/meeting.info';
-import { SponsorsLineComponent } from './reuse/sponsors-line.component';
-import { TeamRowsComponent } from './reuse/team-rows.component';
+import { Container } from './components/container';
+import { LocalizePipe } from './components/localize.pipe';
+import { MeetingInfo } from './components/meeting-info';
+import { CommercialRow } from './components/commercial-row';
+import { TeamRows } from './components/team-rows';
 import { ROUTES } from './routes';
+import {Ressources} from './components/ressources';
+import {TitleRow} from './components/title-row';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -38,15 +40,17 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    ContainerComponent,
-    MainComponent,
-    ArchiveComponent,
-    SponsorsComponent,
-    AboutComponent,
-    SponsorsLineComponent,
+    Container,
+    MainPage,
+    ArchivePage,
+    CommercialPage,
+    AboutPage,
+    CommercialRow,
     MeetingInfo,
-    SpeakerComponent,
-    TeamRowsComponent,
+    SpeakerPage,
+    TeamRows,
+    TitleRow,
+    Ressources,
     LocalizePipe
   ],
   imports: [
@@ -61,8 +65,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
         provide: TranslateLoader,
         useFactory: (http) => new DevclubTranslateHttpLoader(http),
         deps: [HttpClient]
-      },
-      isolate: false
+      }
     })
   ],
   providers: [

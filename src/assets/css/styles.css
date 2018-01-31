@@ -1,3 +1,7 @@
+/**************************
+ * image lighten
+ **************************/
+
 .image-wrap {
   position: relative;
 }
@@ -29,4 +33,76 @@
   color: #FFFFFF;
   text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
   font-weight: bold;
+}
+
+a.photo-text
+a.photo-text:hover,
+a.photo-text:active,
+a.photo-text:visited,
+a.photo-text:link {
+  text-decoration: none;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 100%;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
+  font-weight: bold;
+}
+
+
+/**************************
+ * footer
+ **************************/
+
+footer {
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+footer a,
+footer a:hover,
+footer a:active,
+footer a:visited,
+footer a:link {
+  color: #FFFFFF;
+}
+
+.f-icon {
+  width: 25px;
+  display: inline-block;
+}
+
+
+/**************************
+ * start page
+ **************************/
+
+.start-page {
+  background-color: #000000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+.start-page-neo {
+  color: #1ec503;
+  font-family: "Courier New";
+  font-size: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 10px 10px 0;
+}
+
+.start-page-logo {
+  background-color: #000000;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

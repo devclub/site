@@ -18,7 +18,7 @@ fontawesome.library.add(faYoutube, faCamera);
 
 @Component({
   selector: 'meeting-info',
-  templateUrl: './meeting.info.html'
+  templateUrl: './meeting-info.html'
 })
 export class MeetingInfo {
   @Input() public meeting: Meeting;
