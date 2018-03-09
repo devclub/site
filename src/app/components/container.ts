@@ -38,7 +38,6 @@ export class Container {
       queryParams: {'lang': langCode},
       relativeTo: this.route
     });
-    window.location.reload();
   }
 
   isMainUrl() {

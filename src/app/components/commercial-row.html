@@ -1,9 +1,12 @@
 <div class="container-fluid d-none d-sm-block">
-  <div class="row mt-4 mb-4 ml-2 mr-2">
+  <div class="row mt-4 ml-2 mr-2">
     <div class="col image-wrap pl-1 pr-2" *ngFor="let item of dataContext.commercial">
-      <a href="{{item.url}}" target="_blank" class="image-lighten">
+      <a *ngIf="item.url" href="{{item.url}}" target="_blank" class="image-lighten">
         <img src="{{item.logo}}" alt="{{item.name}}" class="img-fluid">
       </a>
+      <span *ngIf="!item.url" class="image-lighten">
+        <img src="{{item.logo}}" alt="{{item.name}}" class="img-fluid">
+      </span>
     </div>
   </div>
 </div>

@@ -1,21 +1,25 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col">
-      <h2 class="text-muted text-right">Следующая встреча</h2>
-      <meeting-info
-        *ngIf="nextMeeting"
-        [showRegisterEvent]="true"
-        [meeting]="nextMeeting"></meeting-info>
-      <h2 class="text-muted text-right">Последние встречи</h2>
-      <meeting-info
-        *ngFor="let lastMeeting of lastMeetings"
-        [showRegisterEvent]="false"
-        [meeting]="lastMeeting"></meeting-info>
+
+      <title-row>{{'title.next_meetings' | translate}}</title-row>
+      <span *ngIf="this.dataContext.nextMeetings.length > 0">
+        <meeting-info *ngFor="let m of this.dataContext.nextMeetings"
+                      [showRegisterEvent]="true" [meeting]="m"></meeting-info>
+      </span>
+      <div class="pb-5" *ngIf="this.dataContext.nextMeetings.length === 0" translate>
+        next.meeting.info.not_avaliable
+      </div>
+
+      <title-row>{{'title.last_meetings' | translate}}</title-row>
+      <meeting-info *ngFor="let m of this.dataContext.lastMeetings"
+                    [showRegisterEvent]="false" [meeting]="m"></meeting-info>
+
     </div>
   </div>
   <div class="row justify-content-center mb-3">
     <div class="col text-center">
-      <a href="#/archive" class="btn btn-danger">Больше докладов в "Архиве"</a>
+      <a href="#/archive" class="btn btn-danger" translate>button.archived_meetings</a>
     </div>
   </div>
 </div>

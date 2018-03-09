@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/fontawesome-free-solid';
 import { DataContext } from '../data.context';
 import { Meeting } from '../models';
+import {TranslateService} from '@ngx-translate/core';
 
 fontawesome.library.add(faCalendarAlt, faClock);
 fontawesome.library.add(faHome, faLocationArrow, faExternalLinkAlt);
@@ -24,6 +25,11 @@ export class MeetingInfo {
   @Input() public meeting: Meeting;
   @Input() public showRegisterEvent: boolean;
 
-  constructor(public dataContext: DataContext) {
+  constructor(public dataContext: DataContext,
+              private translate: TranslateService) {
+  }
+
+  isActiveLanguage(lang: string) {
+    return this.translate.currentLang === lang;
   }
 }

@@ -1,7 +1,10 @@
 <div class="row">
   <div class="col-12">
-    <h4 class="mb-0">Встреча #{{meeting.num}} {{meeting.titles | localize}}</h4>
-    <hr class="mt-1 mb-1"/>
+    <h4 class="mb-0">
+      <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
+        <span *ngIf="photo" class="fas fa-camera"></span></a>
+      {{'title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
+    </h4>
   </div>
 </div>
 <div class="row">
@@ -27,8 +30,6 @@
   </div>
   <div class="col-sm-3 text-right">
     <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info">Регистрация</a>
-    <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
-      <span *ngIf="photo" class="fas fa-5x fa-camera"></span></a>
   </div>
 </div>
 <div class="row mb-3" *ngFor="let speech of meeting.speeches">
@@ -48,6 +49,15 @@
         <a *ngFor="let youtubeUrl of speech.youtube" href="{{youtubeUrl}}" target="_blank">
           <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
         {{speech.titles | localize}}
+        <small>
+          <small>
+            <span class="badge"
+                  [ngClass]="{'badge-secondary': isActiveLanguage(speech.lang),
+                  'badge-danger': !isActiveLanguage(speech.lang)}">
+              {{'speech.lang.' + speech.lang | translate}}
+            </span>
+          </small>
+        </small>
       </h5>
       <h6 class="mb-0">{{speaker.names | localize}}</h6>
       <span class="small text-muted">{{speaker.titles | localize}}</span>

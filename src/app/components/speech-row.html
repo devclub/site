@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <ng-content></ng-content>
+    <a *ngFor="let youtubeUrl of speech.youtube" href="{{youtubeUrl}}" target="_blank">
+      <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
+    <b>{{speech.titles | localize}}</b>
+    <span> — </span>
+    <span *ngFor="let speaker of speech.speakers; let last = last">
+      <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
+        <span class="fas fa-user small"></span></a>
+      {{speaker.names | localize}}<span *ngIf="!last">, </span>
+    </span>
+  </div>
+</div>

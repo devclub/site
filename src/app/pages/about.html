@@ -1,6 +1,6 @@
 <div class="container">
 
-  <title-row titleCode="О клубе"></title-row>
+  <title-row>{{'title.about' | translate}}</title-row>
 
   <div class="row">
     <div class="col">
@@ -25,18 +25,18 @@
     </div>
   </div>
 
-  <title-row titleCode="Расписание событий"></title-row>
+  <title-row>{{'title.events' | translate}}</title-row>
 
   <div class="row mb-3">
     <iframe [src]="calendarUrl" class="col" style="border: 0"
             height="200" frameborder="0" scrolling="no"></iframe>
   </div>
 
-  <title-row titleCode="Ресурсы клуба"></title-row>
+  <title-row>{{'title.resources' | translate}}</title-row>
 
   <ressources></ressources>
 
-  <title-row titleCode="В фотографиях"></title-row>
+  <title-row>{{'title.photos' | translate}}</title-row>
 
   <div class="row" *ngFor="let rows of dataContext.config.photos">
     <div class="col-12 col-md mb-3" *ngFor="let photo of rows">
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <title-row titleCode="В прошлом нам помогали"></title-row>
+  <title-row>{{'title.thanks' | translate}}</title-row>
 
   <div class="row mb-3">
     <div class="col-12 col-md" *ngFor="let rows of dataContext.teamThanks">

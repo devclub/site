@@ -1,19 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DataContext } from '../data.context';
-import { Meeting } from '../models';
+import {Component} from '@angular/core';
+import {DataContext} from '../data.context';
 
 @Component({
   templateUrl: './main.html'
 })
-export class MainPage implements OnInit {
-  public nextMeeting: Meeting;
-  public lastMeetings: Meeting[];
-
+export class MainPage {
   constructor(public dataContext: DataContext) {
-  }
-
-  ngOnInit() {
-    this.nextMeeting = this.dataContext.meetings[0];
-    this.lastMeetings = [this.dataContext.meetings[1], this.dataContext.meetings[2], this.dataContext.meetings[3]];
   }
 }
