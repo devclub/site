@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {DataContext} from './data.context';
 import * as fontawesome from '@fortawesome/fontawesome';
@@ -31,6 +31,7 @@ export class AppComponent {
 
   constructor(private dataContext: DataContext,
               private translate: TranslateService,
+              private router: Router,
               private activatedRoute: ActivatedRoute) {
     activatedRoute.queryParams.subscribe(
       params => {
@@ -40,5 +41,10 @@ export class AppComponent {
         this.translate.reloadLang(language);
       }
     );
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 }
