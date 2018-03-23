@@ -36,14 +36,13 @@
            translate>menu.blog</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-danger mr-sm-2 mb-sm-0 mb-2"
+        <a class="btn btn-danger mr-sm-2 mb-sm-0 mb-2"
            role="button" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/speaker')}"
            (click)="navigate('/speaker')" translate>menu.speaker</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-outline-light" role="button"
-           href="{{dataContext.config.devclubMenuUrl}}">
+        <a class="nav-link" href="{{dataContext.config.devclubMenuUrl}}">
           {{dataContext.config.devclubMenuText}}
         </a>
       </li>
