@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="col-sm-8 col-md-9">
-    <div class="mb-1" *ngFor="let speaker of speech.speakers">
+    <div class="mb-1">
       <h5>
         <a *ngFor="let youtubeUrl of speech.youtube" href="{{youtubeUrl}}" target="_blank">
           <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
@@ -59,8 +59,10 @@
           </small>
         </small>
       </h5>
-      <h6 class="mb-0">{{speaker.names | localize}}</h6>
-      <span class="small text-muted">{{speaker.titles | localize}}</span>
+      <span *ngFor="let speaker of speech.speakers">
+        <h6 class="mb-0">{{speaker.names | localize}}</h6>
+        <span class="small text-muted">{{speaker.titles | localize}}</span>
+      </span>
     </div>
     <div>
       <p class="small" *ngFor="let paragr of (speech.descr | localize:[])">{{paragr}}</p>
