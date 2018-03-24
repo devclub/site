@@ -11,10 +11,11 @@
         next.meeting.info.not_avaliable
       </div>
 
-      <title-row>{{'title.last_meetings' | translate}}</title-row>
-      <meeting-info *ngFor="let m of this.dataContext.lastMeetings"
-                    [showRegisterEvent]="false" [meeting]="m"></meeting-info>
-
+      <span class="d-none d-sm-block">
+        <title-row>{{'title.last_meetings' | translate}}</title-row>
+        <meeting-info *ngFor="let m of this.dataContext.lastMeetings"
+                      [showRegisterEvent]="false" [meeting]="m"></meeting-info>
+      </span>
     </div>
   </div>
   <div class="row justify-content-center mb-3">
