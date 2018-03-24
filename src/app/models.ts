@@ -56,17 +56,17 @@ export class Member {
   emptyCell = false;
 }
 
-export class Commerce {
-  prices: CommercialPrice[];
-  companies: CommercialCompany[];
+export class Advertising {
+  prices: AdvertisingPrice[];
+  companies: AdvertisingCompany[];
 }
 
-export class CommercialPrice {
+export class AdvertisingPrice {
   month: number;
   price: number;
 }
 
-export class CommercialCompany {
+export class AdvertisingCompany {
   name: string;
   logo: string;
   url: string;

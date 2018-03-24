@@ -5,9 +5,8 @@ import 'rxjs/add/observable/of';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../environments/environment.dev-eu';
 import {
-  Commerce,
-  CommercialCompany,
-  CommercialPrice,
+  Advertising,
+  AdvertisingCompany,
   Config,
   Lang,
   Meeting,
@@ -25,7 +24,7 @@ export class DataContext {
   public readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
   public config: Config;
 
-  public commerce: Commerce;
+  public advertising: Advertising;
 
   public teamMember = new Array<Member[]>();
   public teamThanks = new Array<Member[]>();
@@ -54,7 +53,7 @@ export class DataContext {
       .then((config: Config) => {
         this.setConfig(config);
         return Observable.forkJoin([
-          this.http.get<CommercialCompany[]>(this.config.commercial.dataUrl),
+          this.http.get<AdvertisingCompany[]>(this.config.commercial.dataUrl),
           this.http.get<MemberComplex>(this.config.team.dataUrl),
           this.http.get<Meeting[]>(this.config.meetingsUrls.main)
         ]).toPromise()
@@ -108,9 +107,9 @@ export class DataContext {
         }));
   }
 
-  setCommercial(commerce: Commerce) {
-    this.commerce = commerce;
-    this.commerce.companies.forEach(item => {
+  setCommercial(advertising: Advertising) {
+    this.advertising = advertising;
+    this.advertising.companies.forEach(item => {
       item.logo = this.config.commercial.logoUrlPrefix + '/' + item.logo;
     });
   }
