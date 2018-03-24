@@ -1,13 +1,16 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark" [ngStyle]="dataContext.config.navbarStyle"
      style="">
-  <a class="navbar-brand" href="#/">{{dataContext.config.devclubText}}</a>
+  <a class="navbar-brand" href="#/">
+    <img src="/assets/images/logo_navbar.png" height="30" class="d-inline-block align-top" />
+    {{dataContext.config.devclubText}}
+  </a>
   <button class="navbar-toggler" [ngClass]="{'collapsed': !isMenuOpen}" type="button" (click)="toggleMenu()">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div id="navbarNavDropdown" class="navbar-collapse collapse" [ngClass]="{'show': isMenuOpen}">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [ngClass]="{'active': isCurrentLang(lang.code)}" *ngFor="let lang of langs">
-        <a class="nav-link" href="javascript:void(0)" (click)="switchLang(lang.code)">{{lang.text}}</a>
+        <a class="nav-link lang" href="javascript:void(0)" (click)="switchLang(lang.code)">{{lang.text}}</a>
       </li>
     </ul>
     <ul class="navbar-nav">
@@ -32,18 +35,21 @@
            (click)="navigate('/about')" translate>menu.about</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{dataContext.config.blogUrl}}"
-           translate>menu.blog</a>
-      </li>
-      <li class="nav-item">
         <a class="btn btn-danger mr-sm-2 mb-sm-0 mb-2"
            role="button" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/speaker')}"
            (click)="navigate('/speaker')" translate>menu.speaker</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="dataContext.config.blogUrl">
+        <a class="nav-link" href="{{dataContext.config.blogUrl}}">
+          {{ 'menu.blog' | translate }}
+          <span class="fas fa-external-link-alt"></span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="dataContext.config.devclubMenuText">
         <a class="nav-link" href="{{dataContext.config.devclubMenuUrl}}">
           {{dataContext.config.devclubMenuText}}
+          <span class="fas fa-external-link-alt"></span>
         </a>
       </li>
     </ul>

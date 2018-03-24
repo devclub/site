@@ -114,3 +114,7 @@ footer a:link {
 .lighten {
   opacity: 0.3;
 }
+
+.lang {
+  font-size: 75%;
+}
