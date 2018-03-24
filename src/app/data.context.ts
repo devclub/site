@@ -5,8 +5,11 @@ import 'rxjs/add/observable/of';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../environments/environment.dev-eu';
 import {
-  Commercial,
-  Config, Lang,
+  Commerce,
+  CommercialCompany,
+  CommercialPrice,
+  Config,
+  Lang,
   Meeting,
   MeetingFilter,
   Member,
@@ -22,7 +25,8 @@ export class DataContext {
   public readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
   public config: Config;
 
-  public commercial: Commercial[];
+  public commerce: Commerce;
+
   public teamMember = new Array<Member[]>();
   public teamThanks = new Array<Member[]>();
 
@@ -50,7 +54,7 @@ export class DataContext {
       .then((config: Config) => {
         this.setConfig(config);
         return Observable.forkJoin([
-          this.http.get<Commercial[]>(this.config.commercial.dataUrl),
+          this.http.get<CommercialCompany[]>(this.config.commercial.dataUrl),
           this.http.get<MemberComplex>(this.config.team.dataUrl),
           this.http.get<Meeting[]>(this.config.meetingsUrls.main)
         ]).toPromise()
@@ -104,9 +108,9 @@ export class DataContext {
         }));
   }
 
-  setCommercial(commercial: Commercial[]) {
-    this.commercial = commercial;
-    this.commercial.forEach(item => {
+  setCommercial(commerce: Commerce) {
+    this.commerce = commerce;
+    this.commerce.companies.forEach(item => {
       item.logo = this.config.commercial.logoUrlPrefix + '/' + item.logo;
     });
   }
