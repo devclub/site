@@ -4,25 +4,25 @@
   <div class="row">
     <div class="col-sm-12 col-md-6">
       <div class="card mb-2">
-        <h6 class="card-header">
-          А сколько стоит стать спонсором?
-        </h6>
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <li>
-              1 год: 200€ * 12 = 2400€
-            </li>
-            <li>
-              6 мес: 250€ * 6 = 1500€ <span class="text-muted">// год за 3000€</span>
-            </li>
-            <li>
-              3 мес: 300€ * 3 = 900€ <span class="text-muted">// год за 3600€</span>
-            </li>
-            <li>
-              1 мес: 350€ * 1 = 350€ <span class="text-muted">// год за 4200€</span>
-            </li>
-          </ul>
-        </div>
+        <h6 class="card-header" translate>title.advertising_howto.how_much</h6>
+        <table class="card-body table">
+          <thead>
+          <tr>
+            <th class="text-right" scope="col" translate>price.months</th>
+            <th class="text-right" scope="col" translate>price.total</th>
+            <th class="text-right text-muted" scope="col" translate>price.per_month</th>
+            <th class="text-right text-muted" scope="col" translate>price.per_year</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let price of dataContext.advertising.prices">
+            <td class="text-right">{{price.month}}</td>
+            <td class="text-right">{{price.price*price.month}}</td>
+            <td class="text-right text-muted">{{price.price}}</td>
+            <td class="text-right text-muted">{{price.price*12}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="card mb-2">
