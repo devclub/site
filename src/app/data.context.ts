@@ -66,7 +66,7 @@ export class DataContext {
   public advertising: Advertising;
 
   public teamMember = new Array<Member[]>();
-  public teamThanks = new Array<Member[]>();
+  public teamThanks = new Array<Member>();
 
   public seminarsLoaded = false;
   public seminars = new Array<Seminar>();
@@ -92,12 +92,12 @@ export class DataContext {
       .then((config: Config) => {
         this.setConfig(config);
         return Observable.forkJoin([
-          this.http.get<AdvertisingCompany[]>(this.config.commercial.dataUrl),
+          this.http.get<AdvertisingCompany[]>(this.config.finances.dataUrl),
           this.http.get<MemberComplex>(this.config.team.dataUrl),
           this.http.get<Meeting[]>(this.config.meetingsUrls.main)
         ]).toPromise()
           .then((results: any[]) => {
-            this.setCommercial(results[0]);
+            this.setAdvertising(results[0]);
             this.setMembers(results[1]);
             this.addMeetings(results[2]);
             this.setNextMeetings();
@@ -146,10 +146,10 @@ export class DataContext {
         }));
   }
 
-  setCommercial(advertising: Advertising) {
+  setAdvertising(advertising: Advertising) {
     this.advertising = advertising;
     this.advertising.companies.forEach(item => {
-      item.logo = this.config.commercial.logoUrlPrefix + '/' + item.logo;
+      item.logo = this.config.finances.logoUrlPrefix + '/' + item.logo;
     });
   }
 
@@ -159,7 +159,7 @@ export class DataContext {
     memberComplex.thanks.forEach(imageChange);
 
     this.fillMemberList(this.teamMember, memberComplex.team);
-    this.fillMemberList(this.teamThanks, memberComplex.thanks);
+    this.teamThanks = memberComplex.thanks;
   }
 
   fillMemberList(matrix: Array<Member[]>, data: Member[]) {

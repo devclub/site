@@ -38,7 +38,7 @@ export class Config {
 
   seminarsUrl: string;
   meetingsUrls: { main: string; archive: string[] };
-  commercial: { dataUrl: string; logoUrlPrefix: string };
+  finances: { dataUrl: string; logoUrlPrefix: string };
   team: { dataUrl: string; personUrlPrefix: string };
 }
 

@@ -51,10 +51,8 @@
   <title-row>{{'about.title.thanks' | translate}}</title-row>
 
   <div class="row mb-3">
-    <div class="col-12 col-md" *ngFor="let rows of dataContext.teamThanks">
-      <div *ngFor="let p of rows">
-        <a href="{{p.url}}">{{p.names | localize}}</a>
-      </div>
+    <div class="col-12 col-md" *ngFor="let p of dataContext.teamThanks">
+      <a href="{{p.url}}">{{p.names | localize}}</a>
     </div>
   </div>
 </div>
