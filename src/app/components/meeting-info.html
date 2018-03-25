@@ -29,7 +29,8 @@
     </p>
   </div>
   <div class="col-sm-3 text-right">
-    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info">Регистрация</a>
+    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank"
+       translate>meeting.registration</a>
   </div>
 </div>
 <div class="row mb-3" *ngFor="let speech of meeting.speeches">
@@ -50,13 +51,11 @@
           <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
         {{speech.titles | localize}}
         <small>
-          <small>
-            <span class="badge"
-                  [ngClass]="{'badge-secondary': isActiveLanguage(speech.lang),
-                  'badge-danger': !isActiveLanguage(speech.lang)}">
-              {{'speech.lang.' + speech.lang | translate}}
-            </span>
-          </small>
+          <span class="badge"
+                [ngClass]="{'badge-secondary': isActiveLanguage(speech.lang),
+                'badge-danger': !isActiveLanguage(speech.lang)}">
+            {{'speech.lang.' + speech.lang | translate}}
+          </span>
         </small>
       </h5>
       <span *ngFor="let speaker of speech.speakers">
