@@ -18,50 +18,17 @@ import {
   SpeakerTabItem,
   Speech
 } from './models';
+import {DataCommon, DataEE, DataEU, DataLV} from './data';
 
 @Injectable()
 export class DataContext {
   public readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
   public config: Config;
 
-  public common = {
-    mail: 'info@devclub.eu',
-    github: 'https://github.com/devclub',
-    googlecalendar: 'https://calendar.google.com/calendar/embed?src=fmju94mnjv0a5s70hat38evqm8%40group.calendar.google.com&ctz=Europe%2FTallinn',
-    bank: 'Swedbank',
-    banknumber: 'EE822200221049645988',
-    bankrecipient: 'MTÜ DEVCLUB',
-    bankdescription: 'devclub.eu donation'
-  }
-  public eu = {
-    site: 'http://devclub.eu',
-    youtube: 'https://www.youtube.com/channel/UCLq7vcHtwDtx4m9ZUrgxEBA',
-    googlephoto: 'https://photos.google.com/b/105266766340206558621/albums',
-    facebookgroup: 'https://www.facebook.com/groups/devclub.eu',
-    googleplus: 'https://plus.google.com/u/0/+DEVCLUBEU',
-    blog: 'http://blog.devclub.eu',
-    blogfeed: 'http://blog.devclub.eu/feed',
-    googlegroup: 'https://groups.google.com/forum/#!forum/devclub-eu'
-  }
-  public ee = {
-    site: 'http://devclub.ee',
-    youtube: 'https://www.youtube.com/channel/UC9lRNfzenw_7MVmDPFyRFjQ',
-    googlephoto: 'https://photos.google.com/b/114000264628426130066/albums',
-    facebook: 'https://www.facebook.com/devclub.ee',
-    googleplus: 'https://plus.google.com/u/0/b/114000264628426130066/',
-    blog: 'http://blog.devclub.ee',
-    blogfeed: 'http://blog.devclub.ee/feed',
-    twitter: 'https://twitter.com/devclubs'
-  }
-  public lv = {
-    site: 'http://devclub.lv',
-    youtube: 'https://www.youtube.com/channel/UCyCCNFXxxW7_ed20UdcYywQ',
-    flickrphoto: 'https://www.flickr.com/photos/88054423@N06/sets/',
-    facebook: 'https://www.facebook.com/DevClubLV',
-    mail: 'info@devclub.lv',
-    googlecalendar: 'https://calendar.google.com/calendar/embed?src=m84uql4ktbptludngkgtfbdvl0%40group.calendar.google.com&ctz=Europe%2FTallinn',
-    twitter: 'https://twitter.com/DevClub_lv'
-  }
+  public common = new DataCommon();
+  public eu = new DataEU();
+  public ee = new DataEE();
+  public lv = new DataLV();
 
   public advertising: Advertising;
 
