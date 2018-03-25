@@ -27,7 +27,11 @@ export class DataContext {
   public common = {
     mail: 'info@devclub.eu',
     github: 'https://github.com/devclub',
-    googlecalendar: 'https://calendar.google.com/calendar/embed?src=fmju94mnjv0a5s70hat38evqm8%40group.calendar.google.com&ctz=Europe%2FTallinn'
+    googlecalendar: 'https://calendar.google.com/calendar/embed?src=fmju94mnjv0a5s70hat38evqm8%40group.calendar.google.com&ctz=Europe%2FTallinn',
+    bank: 'Swedbank',
+    banknumber: 'EE822200221049645988',
+    bankrecipient: 'MTÜ DEVCLUB',
+    bankdescription: 'devclub.eu donation'
   }
   public eu = {
     site: 'http://devclub.eu',

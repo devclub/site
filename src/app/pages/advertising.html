@@ -1,123 +1,88 @@
 <div class="container">
-  <title-row>{{'advertising.title.howto' | translate}}</title-row>
+  <title-row>{{'advertising.howto.title' | translate}}</title-row>
 
   <div class="row">
     <div class="col-sm-12 col-md-6">
       <div class="card mb-2">
-        <h6 class="card-header" translate>advertising.title.howto.how_much</h6>
-        <table class="card-body table">
-          <thead>
-          <tr>
-            <th class="text-right" scope="col" translate>advertising.price.months</th>
-            <th class="text-right" scope="col" translate>advertising.price.total</th>
-            <th class="text-right text-muted" scope="col" translate>advertising.price.per_month</th>
-            <th class="text-right text-muted" scope="col" translate>advertising.price.per_year</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let price of dataContext.advertising.prices">
-            <td class="text-right">{{price.month}}</td>
-            <td class="text-right">{{price.price*price.month}}</td>
-            <td class="text-right text-muted">{{price.price}}</td>
-            <td class="text-right text-muted">{{price.price*12}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <h6 class="card-header">{{"advertising.price.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.price.desc" | translate}}</p>
+          <table class="table">
+            <thead>
+            <tr>
+              <th class="text-right" scope="col">{{"advertising.price.months" | translate}}</th>
+              <th class="text-right" scope="col">{{"advertising.price.total" | translate}}</th>
+              <th class="text-right text-muted" scope="col">{{"advertising.price.per_month" | translate}}</th>
+              <th class="text-right text-muted" scope="col">{{"advertising.price.per_year" | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let price of dataContext.advertising.prices">
+              <td class="text-right">{{price.month}}</td>
+              <td class="text-right">{{price.price*price.month}}</td>
+              <td class="text-right text-muted">{{price.price}}</td>
+              <td class="text-right text-muted">{{price.price*12}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="card mb-2">
-        <h6 class="card-header">
-          Зачем становиться спонсором Devclub?
-        </h6>
+        <h6 class="card-header">{{"advertising.where_money_goes.title" | translate}}</h6>
         <div class="card-body">
-          <ul>
-            <li>
-              Лого вашей фирмы появится на сайтах devclub.eu и devclub.ee.
-            </li>
-            <li>
-              Лого вашей фирмы появится во всех видео выступающих со всех таллинских встреч на разных языках.
-            </li>
-            <li>
-              Ведущий встречи упоминает и благодарит вас на всех мероприятиях в начале встречи.
-            </li>
-            <li>
-              На всех таллинских встречах вы сможете выступать до 5 минут, раздавать брошюры и ставить
-              рекламные стэнды.
-            </li>
-            <li>
-              Пять ваших сотрудников гарантированно смогут посетить мероприятие без регистрации.
-            </li>
-            <li>
-              Раз в год мы стараемся устроить семинар на один или два дня с приглашенным иностранным
-              специалистом. В этом случае вы получаете несколько бесплатных мест для своих работников.
-              Иногда уже только это с лихвой окупает годовое спонсорство.
-            </li>
-          </ul>
-          <p class="card-text">
-            Поддержите инициативу интеллектуального, профессионального и социального развития специалистов
-            в области IT на долгосрочной основе. Станьте нашим спонсором! Поддержка интеллектуальных инициатив
-            – это дополнительные очки в копилку престижа любой фирмы.
-          </p>
+          <p class="card-text">{{"advertising.where_money_doesnt_go" | translate}}</p>
+          <p class="card-text">{{"advertising.where_money_goes" | translate}}</p>
         </div>
       </div>
+
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.donation_help.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.donation_help" | translate}}</p>
+          <ul class="list-unstyled">
+            <li><b>{{dataContext.common.bank}}:</b> {{dataContext.common.banknumber}}</li>
+            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{dataContext.common.bankrecipient}}</li>
+            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{dataContext.common.bankdescription}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
     <div class="col-sm-12 col-md-6">
       <div class="card mb-2">
-        <h6 class="card-header">
-          Хорошо, убедили! Мы крутая и модная компания. Как нам стать спонсором Devclub?
-        </h6>
+        <h6 class="card-header">{{"advertising.what_to_do.title" | translate}}</h6>
         <div class="card-body">
           <p class="card-text">
             <img class="float-left mr-3" src="assets/images/take_my_money.jpg"/>
-            Напишите нам нам на info@devclub.eu – мы обязательно свяжемся с вами в кратчайшие сроки,
-            чтобы объяснить нюансы и выслать вам договор для ознакомления.
+            {{"advertising.what_to_do" | translate}}
+          </p>
+          <p class="card-text">
+            {{"advertising.what_to_do.mail" | translate:{mail: dataContext.common.mail} }}
           </p>
         </div>
       </div>
 
       <div class="card mb-2">
-        <h6 class="card-header">
-          На что уйдут спонсорские деньги?
-        </h6>
+        <h6 class="card-header">{{"advertising.why.title" | translate}}</h6>
         <div class="card-body">
-          <p class="card-text">
-            Деньги спонсоров <b>БУДУТ</b> потрачены на аренду зала, на напитки и еду, на аппаратуру
-            для съёмки встречи, на небольшие призы выступающим, на призы лучшим докладчикам по
-            итогам года. Также деньги могут быть потрачены на организацию семинаров и приём в
-            Таллине иностранных докладчиков.
-          </p>
-          <p class="card-text">
-            Деньги спонсоров <b>НЕ БУДУТ</b> потрачены на организаторов. Команда Devclub работает
-            бесплатно, а докладчики зарабатывают лишь апплодисменты и небольшой памятный сувенир.
-          </p>
+          <ol>
+            <li>{{"advertising.why.p1" | translate }}</li>
+            <li>{{"advertising.why.p2" | translate }}</li>
+            <li>{{"advertising.why.p3" | translate }}</li>
+            <li>{{"advertising.why.p4" | translate }}</li>
+            <li>{{"advertising.why.p5" | translate }}</li>
+            <li>{{"advertising.why.p6" | translate }}</li>
+          </ol>
+          <p class="card-text">{{"advertising.why.p7" | translate}}</p>
         </div>
       </div>
 
-      <div class="card mb-2">
-        <h6 class="card-header">
-          У меня нет фирмы, но есть деньги. Как помочь клубу?
-        </h6>
-        <div class="card-body">
-          <p class="card-text">
-            Вы всегда можете сделать пожертвование, как <b>частное</b> лицо. Спасибо!
-          </p>
-          <ul class="list-unstyled">
-            <li>
-              <b>Swedbank:</b> EE822200221049645988
-            </li>
-            <li>
-              <b>Получатель:</b> MTÜ DEVCLUB
-            </li>
-            <li>
-              <b>Пояснение:</b> DevClub.eu donation
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
 
-  <title-row>{{'advertising.title.companies' | translate}}</title-row>
+  <title-row>{{'advertising.companies.title' | translate}}</title-row>
 
   <div class="row align-items-center mb-3">
     <div class="col-6 col-sm-4 col-lg-3 text-center" *ngFor="let item of dataContext.advertising.companies">
