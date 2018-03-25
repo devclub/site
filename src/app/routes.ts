@@ -3,7 +3,7 @@ import {AboutPage} from './pages/about';
 import {ArchiveContainerPage} from './pages/archive/archive-container';
 import {MainPage} from './pages/main';
 import {SpeakerPage} from './pages/speaker';
-import {CommercialPage} from './pages/commercial';
+import {AdvertisingPage} from './pages/advertising';
 import {Container} from './components/container';
 import {ArchivePageGuard} from './pages/archive/archive.guard';
 import {ArchiveMainPage} from './pages/archive/archive-main';
@@ -29,7 +29,7 @@ export const ROUTES: Routes = [
           {path: 'seminar', component: ArchiveSeminarPage, canActivate: [ArchiveSeminarPageGuard]}
         ]
       },
-      {path: 'commercial', component: CommercialPage},
+      {path: 'advertising', component: AdvertisingPage},
       {path: 'about', component: AboutPage},
       {path: 'speaker', component: SpeakerPage}
     ]

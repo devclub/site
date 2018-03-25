@@ -10,7 +10,7 @@ import {AboutPage} from './pages/about';
 import {ArchiveContainerPage} from './pages/archive/archive-container';
 import {MainPage} from './pages/main';
 import {SpeakerPage} from './pages/speaker';
-import {CommercialPage} from './pages/commercial';
+import {AdvertisingPage} from './pages/advertising';
 import {DataContext} from './data.context';
 import {Container} from './components/container';
 import {LocalizePipe} from './components/localize.pipe';
@@ -55,7 +55,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveBestPage,
     ArchiveSpeakerPage,
     ArchiveSeminarPage,
-    CommercialPage,
+    AdvertisingPage,
     AboutPage,
     CommercialRow,
     MeetingInfo,

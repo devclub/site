@@ -1,18 +1,18 @@
 <div class="form-row mt-3 mb-3">
   <div class="form-group col-md-5">
-    <label for="speaker" translate>archive.filter.speaker</label>
+    <label for="speaker" translate>archive.main.filter.speaker</label>
     <input id="speaker" [(ngModel)]="dataContext.filter.speaker" (change)="search()"
            type="text" class="form-control">
   </div>
   <div class="form-group col-md-5">
-    <label for="texts" translate>archive.filter.texts</label>
+    <label for="texts" translate>archive.main.filter.texts</label>
     <input id="texts" [(ngModel)]="dataContext.filter.texts" (change)="search()"
            type="text" class="form-control">
   </div>
   <div class="form-group col-md-2">
-    <label for="season" translate>archive.filter.seasons</label>
+    <label for="season" translate>archive.main.filter.seasons</label>
     <select id="season" class="form-control" (change)="seasonTouched = true; search()" [(ngModel)]="dataContext.filter.season">
-      <option [ngValue]="ALL_SEASONS" translate>archive.filter.seasons.all</option>
+      <option [ngValue]="ALL_SEASONS" translate>archive.main.filter.seasons.all</option>
       <option *ngFor="let year of dataContext.seasons" [ngValue]="year">{{year}}</option>
     </select>
   </div>

@@ -3,7 +3,7 @@
     <h4 class="mb-0">
       <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
         <span *ngIf="photo" class="fas fa-camera"></span></a>
-      {{'title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
+      {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
     </h4>
   </div>
 </div>
@@ -12,7 +12,7 @@
     <p>
       <span class="fas fa-calendar-alt"></span>
       {{meeting.start | date:'dd.MM.yyyy'}}
-      | {{'weekday.' + meeting.start.getDay() | translate }}
+      | {{'common.weekday.' + meeting.start.getDay() | translate }}
       <span class="fas fa-clock"></span>
       {{meeting.start | date:'HH:mm'}}<br/>
       <span *ngIf="meeting.place">
@@ -30,7 +30,7 @@
   </div>
   <div class="col-sm-3 text-right">
     <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank"
-       translate>meeting.registration</a>
+       translate>main.meeting.registration</a>
   </div>
 </div>
 <div class="row mb-3" *ngFor="let speech of meeting.speeches">
@@ -54,7 +54,7 @@
           <span class="badge"
                 [ngClass]="{'badge-secondary': isActiveLanguage(speech.lang),
                 'badge-danger': !isActiveLanguage(speech.lang)}">
-            {{'speech.lang.' + speech.lang | translate}}
+            {{'common.speech.lang.' + speech.lang | translate}}
           </span>
         </small>
       </h5>

@@ -1,6 +1,6 @@
 <div class="container">
 
-  <title-row>{{'title.about' | translate}}</title-row>
+  <title-row>{{'about.title.about_us' | translate}}</title-row>
 
   <div class="row">
     <div class="col">
@@ -11,29 +11,29 @@
   <div class="row">
     <div class="col">
       <img class="d-none d-sm-block" style="float:left" src="assets/images/logo_desc.png" />
-      <p translate>about.p1</p>
-      <p translate>about.p2</p>
-      <p translate>about.p3</p>
-      <p translate>about.p4.base_ressources</p>
+      <p translate>about.desc.p1</p>
+      <p translate>about.desc.p2</p>
+      <p translate>about.desc.p3</p>
+      <p translate>about.desc.p4.base_ressources</p>
       <ul>
-        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank" translate>about.p4.video</a> | <a [href]="dataContext.eu.googlephoto" target="_blank" translate>about.p4.photo</a> | <a [href]="dataContext.eu.facebookgroup" target="_blank" translate>about.p4.facebook</a></li>
-        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank" translate>about.p4.video</a> | <a [href]="dataContext.ee.googlephoto" target="_blank" translate>about.p4.photo</a> | <a [href]="dataContext.ee.facebook" target="_blank" translate>about.p4.facebook</a> | <a [href]="dataContext.ee.twitter" target="_blank" translate>about.p4.twitter</a></li>
+        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank" translate>about.desc.p4.video</a> | <a [href]="dataContext.eu.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a [href]="dataContext.eu.facebookgroup" target="_blank" translate>about.desc.p4.facebook</a></li>
+        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank" translate>about.desc.p4.video</a> | <a [href]="dataContext.ee.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a [href]="dataContext.ee.facebook" target="_blank" translate>about.desc.p4.facebook</a> | <a [href]="dataContext.ee.twitter" target="_blank" translate>about.desc.p4.twitter</a></li>
       </ul>
     </div>
   </div>
 
-  <title-row>{{'title.events' | translate}}</title-row>
+  <title-row>{{'about.title.events' | translate}}</title-row>
 
   <div class="row mb-3">
     <iframe [src]="calendarUrl" class="col" style="border: 0"
             height="200" frameborder="0" scrolling="no"></iframe>
   </div>
 
-  <title-row>{{'title.resources' | translate}}</title-row>
+  <title-row>{{'about.title.resources' | translate}}</title-row>
 
   <ressources></ressources>
 
-  <title-row>{{'title.photos' | translate}}</title-row>
+  <title-row>{{'about.title.photos' | translate}}</title-row>
 
   <div class="row" *ngFor="let rows of dataContext.config.photos">
     <div class="col-6 col-md-3 mb-3" *ngFor="let photo of rows">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <title-row>{{'title.thanks' | translate}}</title-row>
+  <title-row>{{'about.title.thanks' | translate}}</title-row>
 
   <div class="row mb-3">
     <div class="col-12 col-md" *ngFor="let rows of dataContext.teamThanks">

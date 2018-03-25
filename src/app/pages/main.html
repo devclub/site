@@ -2,17 +2,17 @@
   <div class="row justify-content-center">
     <div class="col">
 
-      <title-row>{{'title.next_meetings' | translate}}</title-row>
+      <title-row>{{'main.title.next_meetings' | translate}}</title-row>
       <span *ngIf="this.dataContext.nextMeetings.length > 0">
         <meeting-info *ngFor="let m of this.dataContext.nextMeetings"
                       [showRegisterEvent]="true" [meeting]="m"></meeting-info>
       </span>
       <div class="pb-5" *ngIf="this.dataContext.nextMeetings.length === 0" translate>
-        next.meeting.info.not_avaliable
+        main.next_meeting.info.not_avaliable
       </div>
 
       <span class="d-none d-sm-block">
-        <title-row>{{'title.last_meetings' | translate}}</title-row>
+        <title-row>{{'main.title.last_meetings' | translate}}</title-row>
         <meeting-info *ngFor="let m of this.dataContext.lastMeetings"
                       [showRegisterEvent]="false" [meeting]="m"></meeting-info>
       </span>
@@ -20,7 +20,7 @@
   </div>
   <div class="row justify-content-center mb-3">
     <div class="col text-center">
-      <a href="#/archive" class="btn btn-danger" translate>button.archived_meetings</a>
+      <a href="#/archive" class="btn btn-danger" translate>main.button.archived_meetings</a>
     </div>
   </div>
 </div>

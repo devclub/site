@@ -26,8 +26,8 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
-           [ngClass]="{'active': isCurrentUrl('/commercial')}"
-           (click)="navigate('/commercial')" translate>menu.commercial</a>
+           [ngClass]="{'active': isCurrentUrl('/advertising')}"
+           (click)="navigate('/advertising')" translate>menu.advertising</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
@@ -63,7 +63,7 @@
 <router-outlet></router-outlet>
 
 <div class="container">
-  <title-row>{{'title.team_members' | translate}}</title-row>
+  <title-row>{{'common.title.team_members' | translate}}</title-row>
   <team-rows [memberRows]="dataContext.teamMember"></team-rows>
 </div>
 
@@ -74,7 +74,7 @@
     <ressources></ressources>
     <div class="row mt-3">
       <div class="col">
-        <small>© 2008-{{currentYear}} {{ 'devclub_team' | translate }}</small>
+        <small>© 2008-{{currentYear}} {{'common.footer.devclub_team' | translate}}</small>
       </div>
     </div>
   </div>
