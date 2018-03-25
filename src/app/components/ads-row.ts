@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { DataContext } from '../data.context';
 
 @Component({
-  selector: 'commercial-row',
-  templateUrl: './commercial-row.html'
+  selector: 'ads-row',
+  templateUrl: './ads-row.html'
 })
-export class CommercialRow {
+export class AdsRow {
   constructor(public dataContext: DataContext) {
   }
 }

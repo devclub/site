@@ -4,20 +4,25 @@
 
   <div class="row">
     <div class="col">
-      <img class="mx-auto d-block d-sm-none" src="assets/images/logo_desc.png" />
+      <img class="mx-auto d-block d-sm-none" src="assets/images/logo_desc.png"/>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <img class="d-none d-sm-block" style="float:left" src="assets/images/logo_desc.png" />
+      <img class="d-none d-sm-block" style="float:left" src="assets/images/logo_desc.png"/>
       <p translate>about.desc.p1</p>
       <p translate>about.desc.p2</p>
       <p translate>about.desc.p3</p>
       <p translate>about.desc.p4.base_ressources</p>
       <ul>
-        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank" translate>about.desc.p4.video</a> | <a [href]="dataContext.eu.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a [href]="dataContext.eu.facebookgroup" target="_blank" translate>about.desc.p4.facebook</a></li>
-        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank" translate>about.desc.p4.video</a> | <a [href]="dataContext.ee.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a [href]="dataContext.ee.facebook" target="_blank" translate>about.desc.p4.facebook</a> | <a [href]="dataContext.ee.twitter" target="_blank" translate>about.desc.p4.twitter</a></li>
+        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank" translate>about.desc.p4.video</a> | <a
+          [href]="dataContext.eu.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a
+          [href]="dataContext.eu.facebookgroup" target="_blank" translate>about.desc.p4.facebook</a></li>
+        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank" translate>about.desc.p4.video</a> | <a
+          [href]="dataContext.ee.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a
+          [href]="dataContext.ee.facebook" target="_blank" translate>about.desc.p4.facebook</a> | <a
+          [href]="dataContext.ee.twitter" target="_blank" translate>about.desc.p4.twitter</a></li>
       </ul>
     </div>
   </div>
@@ -51,7 +56,15 @@
   <title-row>{{'about.title.thanks' | translate}}</title-row>
 
   <div class="row mb-3">
-    <div class="col-12 col-md" *ngFor="let p of dataContext.teamThanks">
+    <div class="col d-none d-md-block" *ngFor="let p of dataContext.teamThanks">
+      <div class="image-wrap">
+        <a href="{{p.url}}" target="_blank" class="image-lighten">
+          <img src="{{p.image}}" class="img-fluid">
+        </a>
+        <div class="member-text">{{p.names | localize}}</div>
+      </div>
+    </div>
+    <div class="col-12 d-block d-md-none" *ngFor="let p of dataContext.teamThanks">
       <a href="{{p.url}}">{{p.names | localize}}</a>
     </div>
   </div>

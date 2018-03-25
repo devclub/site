@@ -29,8 +29,7 @@
     </p>
   </div>
   <div class="col-sm-3 text-right">
-    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank"
-       translate>main.meeting.registration</a>
+    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">{{'main.meeting.registration' | translate}}</a>
   </div>
 </div>
 <div class="row mb-3" *ngFor="let speech of meeting.speeches">

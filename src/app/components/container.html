@@ -17,28 +17,28 @@
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
            [ngClass]="{'active': isMainUrl()}"
-           (click)="navigate('/')" translate>menu.meeting</a>
+           (click)="navigate('/')">{{'menu.meeting' | translate}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/archive')}"
-           (click)="navigate('/archive')" translate>menu.archive</a>
+           (click)="navigate('/archive')">{{'menu.archive' | translate}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/advertising')}"
-           (click)="navigate('/advertising')" translate>menu.advertising</a>
+           (click)="navigate('/advertising')">{{'menu.advertising' | translate}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/about')}"
-           (click)="navigate('/about')" translate>menu.about</a>
+           (click)="navigate('/about')">{{'menu.about' | translate}}</a>
       </li>
       <li class="nav-item">
         <a class="btn btn-danger mr-sm-2 mb-sm-0 mb-2"
            role="button" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/speaker')}"
-           (click)="navigate('/speaker')" translate>menu.speaker</a>
+           (click)="navigate('/speaker')">{{'menu.speaker' | translate}}</a>
       </li>
       <li class="nav-item" *ngIf="dataContext.config.blogUrl">
         <a class="nav-link" href="{{dataContext.config.blogUrl}}">
@@ -56,7 +56,7 @@
   </div>
 </nav>
 
-<commercial-row></commercial-row>
+<ads-row></ads-row>
 
 <div class="mt-3"></div>
 
@@ -67,7 +67,7 @@
   <team-rows [memberRows]="dataContext.teamMember"></team-rows>
 </div>
 
-<commercial-row></commercial-row>
+<ads-row></ads-row>
 
 <footer [ngStyle]="dataContext.config.footerStyle" class="pt-3 mt-3 pb-5">
   <div class="container">

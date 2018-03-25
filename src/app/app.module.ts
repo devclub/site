@@ -15,7 +15,7 @@ import {DataContext} from './data.context';
 import {Container} from './components/container';
 import {LocalizePipe} from './components/localize.pipe';
 import {MeetingInfo} from './components/meeting-info';
-import {CommercialRow} from './components/commercial-row';
+import {AdsRow} from './components/ads-row';
 import {TeamRows} from './components/team-rows';
 import {ROUTES} from './routes';
 import {Ressources} from './components/ressources';
@@ -57,7 +57,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveSeminarPage,
     AdvertisingPage,
     AboutPage,
-    CommercialRow,
+    AdsRow,
     MeetingInfo,
     SpeechRow,
     SpeakerPage,
