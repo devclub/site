@@ -26,7 +26,6 @@ export class Config {
   devclubMenuUrl: string;
   devclubMenuText: string;
   blogUrl: string;
-  speechAddFormUrl: string;
   hasTop: boolean;
 
   personUrlPrefix: string;
