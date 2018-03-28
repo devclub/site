@@ -43,7 +43,7 @@
   <title-row>{{'about.title.photos' | translate}}</title-row>
 
   <div class="row" *ngFor="let rows of dataContext.config.photos">
-    <div class="col-6 col-md-3 mb-3" *ngFor="let photo of rows">
+    <div class="col mb-3" *ngFor="let photo of rows">
       <div class="image-wrap">
         <a href="{{photo.main}}" target="_blank" class="image-lighten">
           <img src="{{photo.small}}" class="img-fluid"/>
