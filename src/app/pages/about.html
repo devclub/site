@@ -11,18 +11,20 @@
   <div class="row">
     <div class="col">
       <img class="d-none d-sm-block" style="float:left" src="assets/images/logo_desc.png"/>
-      <p translate>about.desc.p1</p>
-      <p translate>about.desc.p2</p>
-      <p translate>about.desc.p3</p>
-      <p translate>about.desc.p4.base_ressources</p>
+      <p>{{'about.desc.p1' | translate}}</p>
+      <p>{{'about.desc.p2' | translate}}</p>
+      <p>{{'about.desc.p3' | translate}}</p>
+      <p>{{'about.desc.p4.base_ressources' | translate}}</p>
       <ul>
-        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank" translate>about.desc.p4.video</a> | <a
-          [href]="dataContext.eu.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a
-          [href]="dataContext.eu.facebookgroup" target="_blank" translate>about.desc.p4.facebook</a></li>
-        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank" translate>about.desc.p4.video</a> | <a
-          [href]="dataContext.ee.googlephoto" target="_blank" translate>about.desc.p4.photo</a> | <a
-          [href]="dataContext.ee.facebook" target="_blank" translate>about.desc.p4.facebook</a> | <a
-          [href]="dataContext.ee.twitter" target="_blank" translate>about.desc.p4.twitter</a></li>
+        <li>DEVCLUB.EU: <a [href]="dataContext.eu.youtube" target="_blank">{{'about.desc.p4.video' | translate}}</a> |
+          <a
+            [href]="dataContext.eu.googlephoto" target="_blank">{{'about.desc.p4.photo' | translate}}</a> | <a
+            [href]="dataContext.eu.facebookgroup" target="_blank">{{'about.desc.p4.facebook' | translate}}</a></li>
+        <li>DEVCLUB.EE: <a [href]="dataContext.ee.youtube" target="_blank">{{'about.desc.p4.video' | translate}}</a> |
+          <a
+            [href]="dataContext.ee.googlephoto" target="_blank">{{'about.desc.p4.photo' | translate}}</a> | <a
+            [href]="dataContext.ee.facebook" target="_blank">{{'about.desc.p4.facebook' | translate}}</a> | <a
+            [href]="dataContext.ee.twitter" target="_blank">{{'about.desc.p4.twitter' | translate}}</a></li>
       </ul>
     </div>
   </div>
@@ -50,6 +52,40 @@
           {{photo.texts | localize}}
         </a>
       </div>
+    </div>
+  </div>
+
+  <title-row>{{'about.logos.title' | translate}}</title-row>
+
+  <div class="row mb-3">
+    <div class="col">
+      <p>{{'about.logos.p1' | translate}}</p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3">
+    <div class="col text-center">
+      <a href="{{dataContext.logosArchiveUrl}}" target="_blank" class="btn btn-primary">
+        {{'about.logos.button.download' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <img src="assets/images/brand/logo_eu.png" class="img-fluid">
+    </div>
+    <div class="col">
+      <img src="assets/images/brand/logo_ee.png" class="img-fluid">
+    </div>
+    <div class="col">
+      <img src="assets/images/brand/logo_void.png" class="img-fluid">
+    </div>
+    <div class="col">
+      <img src="assets/images/brand/logo_lv.png" class="img-fluid">
+    </div>
+    <div class="col">
+      <img src="assets/images/brand/logo_ru.png" class="img-fluid">
     </div>
   </div>
 

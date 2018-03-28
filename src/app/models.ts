@@ -41,7 +41,8 @@ export class Config {
   team: { dataUrl: string; personUrlPrefix: string };
 }
 
-export class MemberComplex {
+export class Team {
+  logos: string;
   team: Array<Member>;
   thanks: Array<Member>;
 }

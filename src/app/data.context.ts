@@ -12,7 +12,7 @@ import {
   Meeting,
   MeetingFilter,
   Member,
-  MemberComplex,
+  Team,
   Seminar,
   Speaker,
   SpeakerTabItem,
@@ -24,6 +24,7 @@ import {DataCommon, DataEE, DataEU, DataLV} from './data';
 export class DataContext {
   public readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
   public config: Config;
+  public logosArchiveUrl: string;
 
   public common = new DataCommon();
   public eu = new DataEU();
@@ -60,12 +61,12 @@ export class DataContext {
         this.setConfig(config);
         return Observable.forkJoin([
           this.http.get<AdvertisingCompany[]>(this.config.finances.dataUrl),
-          this.http.get<MemberComplex>(this.config.team.dataUrl),
+          this.http.get<Team>(this.config.team.dataUrl),
           this.http.get<Meeting[]>(this.config.meetingsUrls.main)
         ]).toPromise()
           .then((results: any[]) => {
             this.setAdvertising(results[0]);
-            this.setMembers(results[1]);
+            this.setTeam(results[1]);
             this.addMeetings(results[2]);
             this.setNextMeetings();
             this.setLastMeetings();
@@ -120,13 +121,15 @@ export class DataContext {
     });
   }
 
-  setMembers(memberComplex: MemberComplex) {
-    const imageChange = member => member.image = this.config.team.personUrlPrefix + '/' + member.image;
-    memberComplex.team.forEach(imageChange);
-    memberComplex.thanks.forEach(imageChange);
+  setTeam(team: Team) {
+    this.logosArchiveUrl = team.logos;
 
-    this.fillMemberList(this.teamMember, memberComplex.team);
-    this.teamThanks = memberComplex.thanks;
+    const imageChange = member => member.image = this.config.team.personUrlPrefix + '/' + member.image;
+    team.team.forEach(imageChange);
+    team.thanks.forEach(imageChange);
+
+    this.fillMemberList(this.teamMember, team.team);
+    this.teamThanks = team.thanks;
   }
 
   fillMemberList(matrix: Array<Member[]>, data: Member[]) {
