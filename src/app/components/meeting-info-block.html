@@ -29,14 +29,15 @@
     </p>
   </div>
   <div class="col-sm-3 text-right">
-    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">{{'main.meeting.registration' | translate}}</a>
+    <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">{{'main.meeting.registration'
+      | translate}}</a>
   </div>
 </div>
 <div class="row mb-3" *ngFor="let speech of meeting.speeches">
   <div class="col-sm-4 col-md-3">
     <div *ngFor="let speaker of speech.speakers" class="image-wrap">
       <a href="{{speaker.url}}" target="_blank">
-        <img src="{{speaker.image}}" class="img-fluid">
+        <img src="{{speaker.imageUrl}}" class="img-fluid">
       </a>
       <div class="member-text">
         {{speaker.names | localize}}
@@ -45,18 +46,40 @@
   </div>
   <div class="col-sm-8 col-md-9">
     <div class="mb-1">
-      <h5>
-        <a *ngFor="let youtubeUrl of speech.youtube" href="{{youtubeUrl}}" target="_blank">
-          <span *ngIf="youtubeUrl" class="fab fa-youtube"></span></a>
+      <h5 class="mb-0 pb-0">
+        <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
+          <span *ngIf="youtubeUrl" class="fab fa-youtube"></span>
+        </a>
+        <span *ngIf="speech.info" [tooltip]="speech.info" placement="right">
+          <i class="fas fa-info-circle"></i>
+        </span>
+        <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
+              [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
+              placement="right">
+          <i class="fas fa-trophy"></i>
+        </span>
         {{speech.titles | localize}}
-        <small>
-          <span class="badge"
-                [ngClass]="{'badge-secondary': isActiveLanguage(speech.lang),
-                'badge-danger': !isActiveLanguage(speech.lang)}">
-            {{'common.speech.lang.' + speech.lang | translate}}
-          </span>
-        </small>
       </h5>
+      <div class="mb-3">
+        <span class="badge badge-label mr-1" *ngFor="let label of speech.labels">
+          {{label}}
+        </span>
+        <span class="badge mr-1"
+              [ngClass]="{'badge-lang': translate.currentLang === speech.lang,
+                'badge-danger': translate.currentLang !== speech.lang}">
+          {{'common.speech.lang.' + speech.lang | translate}}
+        </span>
+        <span *ngFor="let presentationUrl of speech.presentations"
+              [tooltip]="'common.speech.presentation.tooltip' | translate"
+              placement="bottom">
+          <a [href]="presentationUrl" target="_blank"><i class="fab fa-slideshare small"></i></a>
+        </span>
+            <span *ngFor="let exampleUrl of speech.examples"
+                  [tooltip]="'common.speech.example.tooltip' | translate"
+                  placement="bottom">
+          <a [href]="exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
+        </span>
+      </div>
       <span *ngFor="let speaker of speech.speakers">
         <h6 class="mb-0">{{speaker.names | localize}}</h6>
         <span class="small text-muted">{{speaker.titles | localize}}</span>

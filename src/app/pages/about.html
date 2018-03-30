@@ -45,10 +45,10 @@
   <div class="row" *ngFor="let rows of dataContext.config.photos">
     <div class="col mb-3" *ngFor="let photo of rows">
       <div class="image-wrap">
-        <a href="{{photo.main}}" target="_blank" class="image-lighten">
-          <img src="{{photo.small}}" class="img-fluid"/>
+        <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
+          <img src="{{photo.smallUrl}}" class="img-fluid"/>
         </a>
-        <a href="{{photo.main}}" target="_blank" class="photo-text">
+        <a href="{{photo.mainUrl}}" target="_blank" class="photo-text">
           {{photo.texts | localize}}
         </a>
       </div>
@@ -95,7 +95,7 @@
     <div class="col d-none d-md-block" *ngFor="let p of dataContext.teamThanks">
       <div class="image-wrap">
         <a href="{{p.url}}" target="_blank" class="image-lighten">
-          <img src="{{p.image}}" class="img-fluid">
+          <img src="{{p.imageUrl}}" class="img-fluid">
         </a>
         <div class="member-text">{{p.names | localize}}</div>
       </div>

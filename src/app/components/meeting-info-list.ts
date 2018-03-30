@@ -1,14 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {DataContext} from '../data.context';
-import {Speech} from '../models';
+import {Meeting} from '../models';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'speech-row',
-  templateUrl: './speech-row.html'
+  selector: 'meeting-info-list',
+  templateUrl: './meeting-info-list.html'
 })
-export class SpeechRow {
-  @Input() public speech: Speech;
+export class MeetingInfoList {
+  @Input() public meeting: Meeting;
 
   constructor(public dataContext: DataContext,
               public translate: TranslateService) {

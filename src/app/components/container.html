@@ -41,13 +41,13 @@
            (click)="navigate('/speaker')">{{'menu.speaker' | translate}}</a>
       </li>
       <li class="nav-item" *ngIf="dataContext.config.blogUrl">
-        <a class="nav-link" href="{{dataContext.config.blogUrl}}">
+        <a class="nav-link" [href]="dataContext.config.blogUrl">
           {{ 'menu.blog' | translate }}
           <span class="fas fa-external-link-alt"></span>
         </a>
       </li>
       <li class="nav-item" *ngIf="dataContext.config.devclubMenuText">
-        <a class="nav-link" href="{{dataContext.config.devclubMenuUrl}}">
+        <a class="nav-link" [href]="dataContext.config.devclubMenuUrl">
           {{dataContext.config.devclubMenuText}}
           <span class="fas fa-external-link-alt"></span>
         </a>

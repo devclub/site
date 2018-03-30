@@ -4,18 +4,14 @@ import { Meeting } from '../models';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'meeting-info',
-  templateUrl: './meeting-info.html'
+  selector: 'meeting-info-block',
+  templateUrl: './meeting-info-block.html'
 })
-export class MeetingInfo {
+export class MeetingInfoBlock {
   @Input() public meeting: Meeting;
   @Input() public showRegisterEvent: boolean;
 
   constructor(public dataContext: DataContext,
-              private translate: TranslateService) {
-  }
-
-  isActiveLanguage(lang: string) {
-    return this.translate.currentLang === lang;
+              public translate: TranslateService) {
   }
 }

@@ -7,26 +7,26 @@
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
           <a class="nav-link" [ngClass]="{'active': archiveTabState.isMain()}"
-             href="javascript:void(0)" (click)="navigate('/archive')" role="tab" translate>
-            archive.main.tab
+             href="javascript:void(0)" (click)="navigate('/archive')" role="tab">
+            {{'archive.main.tab' | translate}}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [ngClass]="{'active': archiveTabState.isSeminar()}"
-             href="javascript:void(0)" (click)="navigate('/archive/seminar')" role="tab" translate>
-            archive.seminar.tab
+             href="javascript:void(0)" (click)="navigate('/archive/seminar')" role="tab">
+            {{'archive.seminar.tab' | translate}}
           </a>
         </li>
         <li class="nav-item" *ngIf="dataContext.config.hasTop">
           <a class="nav-link" [ngClass]="{'active': archiveTabState.isBest()}"
-             href="javascript:void(0)" (click)="navigate('/archive/best')" role="tab" translate>
-            archive.best.tab
+             href="javascript:void(0)" (click)="navigate('/archive/best')" role="tab">
+            {{'archive.best.tab' | translate}}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [ngClass]="{'active': archiveTabState.isSpeaker()}"
-             href="javascript:void(0)" (click)="navigate('/archive/speaker')" role="tab" translate>
-            archive.speaker.tab
+             href="javascript:void(0)" (click)="navigate('/archive/speaker')" role="tab">
+            {{'archive.speaker.tab' | translate}}
           </a>
         </li>
       </ul>

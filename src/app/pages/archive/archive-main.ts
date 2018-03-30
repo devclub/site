@@ -2,14 +2,16 @@ import {Component} from '@angular/core';
 import {ArchiveTabState} from './archive.tab.state';
 import {DataContext} from '../../data.context';
 import {Meeting, Speaker} from '../../models';
+import {DataUtil} from '../../data.util';
 
 @Component({
   templateUrl: './archive-main.html'
 })
 export class ArchiveMainPage {
   public readonly ALL_SEASONS = -1;
+  public asList = true;
   public seasonTouched = false;
-  public meetings: Meeting[];
+  public meetings: Meeting[] = [];
 
   constructor(private archiveTabState: ArchiveTabState,
               public dataContext: DataContext) {
@@ -20,6 +22,7 @@ export class ArchiveMainPage {
   search(initial = false) {
     // deep copy
     let result = JSON.parse(JSON.stringify(this.dataContext.meetings));
+    DataUtil.processMeetings(result, this.dataContext.config.personUrlPrefix, this.dataContext.config.personDefaultImage);
 
     if (!initial && !this.seasonTouched) {
       if (this.dataContext.filter.speaker || this.dataContext.filter.texts) {

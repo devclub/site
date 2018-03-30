@@ -10,18 +10,28 @@ import {
   faComments,
   faDesktop,
   faExternalLinkAlt,
+  faFileAlt,
   faHome,
   faInfoCircle,
   faLocationArrow,
   faRss,
+  faTh,
+  faThList,
+  faTrophy,
   faUser
 } from '@fortawesome/fontawesome-free-solid';
-import {faGithub, faGooglePlusG, faTwitter, faWordpress, faYoutube} from '@fortawesome/fontawesome-free-brands';
+import {
+  faGithub,
+  faGooglePlusG,
+  faSlideshare,
+  faTwitter,
+  faWordpress,
+  faYoutube
+} from '@fortawesome/fontawesome-free-brands';
 import {faEnvelope} from '@fortawesome/fontawesome-free-regular';
 
 fontawesome.library.add(
-  faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle, faUser,
-  faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkAlt);
+  faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle, faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkAlt, faFileAlt, faSlideshare, faTrophy, faThList, faTh);
 
 @Component({
   selector: '[app]',

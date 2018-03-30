@@ -4,17 +4,17 @@
     <th scope="col">#</th>
     <th scope="col">
       <a href="javascript:void(0)" (click)="sortByDate()" translate>
-        archive.speaker.col.date
+        {{'archive.speaker.col.date' | translate}}
       </a>
     </th>
     <th scope="col">
       <a href="javascript:void(0)" (click)="sortByName()" translate>
-        archive.speaker.col.name
+        {{'archive.speaker.col.name' | translate}}
       </a>
     </th>
     <th scope="col">
       <a href="javascript:void(0)" (click)="sortByCount()" translate>
-        archive.speaker.col.count
+        {{'archive.speaker.col.count' | translate}}
       </a>
     </th>
     <th scope="col" *ngIf="dataContext.config.hasTop">
@@ -24,11 +24,11 @@
       <span class="badge badge-pill badge-dark">&gt;III</span>
       =
       <span class="badge badge-pill badge-success" translate>
-        archive.speaker.col.top.total
+        {{'archive.speaker.col.top.total' | translate}}
       </span>
       <br/>
       <a href="javascript:void(0)" (click)="sortByTop()" translate>
-        archive.speaker.col.top
+        {{'archive.speaker.col.top' | translate}}
       </a>
     </th>
   </tr>

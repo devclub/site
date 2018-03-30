@@ -51,7 +51,6 @@ a.photo-text:link {
   font-weight: bold;
 }
 
-
 /**************************
  * footer
  **************************/
@@ -73,7 +72,6 @@ footer a:link {
   width: 25px;
   display: inline-block;
 }
-
 
 /**************************
  * start page
@@ -117,4 +115,50 @@ footer a:link {
 
 .lang {
   font-size: 75%;
+}
+
+.badge-lang {
+  color: #ffffff;
+  background-color: #c1c1c1;
+}
+
+.badge-label {
+  color: #ffffff;
+  background-color: rgba(110, 171, 255, 0.73);
+}
+
+.place1 {
+  color: #cd9500;
+}
+
+.place2 {
+  color: #cdcdcd;
+}
+
+.place3 {
+  color: #9b7000;
+}
+
+.place4 {
+  color: #000000;
+}
+
+.place5 {
+  color: #000000;
+}
+
+.place6 {
+  color: #000000;
+}
+
+.place7 {
+  color: #000000;
+}
+
+.place8 {
+  color: #000000;
+}
+
+.place9 {
+  color: #000000;
 }

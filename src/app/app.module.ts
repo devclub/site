@@ -14,7 +14,7 @@ import {AdvertisingPage} from './pages/advertising';
 import {DataContext} from './data.context';
 import {Container} from './components/container';
 import {LocalizePipe} from './components/localize.pipe';
-import {MeetingInfo} from './components/meeting-info';
+import {MeetingInfoBlock} from './components/meeting-info-block';
 import {AdsRow} from './components/ads-row';
 import {TeamRows} from './components/team-rows';
 import {ROUTES} from './routes';
@@ -28,6 +28,8 @@ import {ArchiveSeminarPage} from './pages/archive/archive-seminar';
 import {ArchiveTabState} from './pages/archive/archive.tab.state';
 import {SpeechRow} from './components/speech-row';
 import {ArchiveSeminarPageGuard} from './pages/archive/archive.seminar.guard';
+import {TooltipModule} from 'ngx-bootstrap';
+import {MeetingInfoList} from './components/meeting-info-list';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -58,7 +60,8 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     AdvertisingPage,
     AboutPage,
     AdsRow,
-    MeetingInfo,
+    MeetingInfoBlock,
+    MeetingInfoList,
     SpeechRow,
     SpeakerPage,
     TeamRows,
@@ -73,6 +76,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
+    TooltipModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

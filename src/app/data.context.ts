@@ -6,23 +6,22 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../environments/environment.dev-eu';
 import {
   Advertising,
-  AdvertisingCompany,
   Config,
   Lang,
   Meeting,
   MeetingFilter,
   Member,
-  Team,
   Seminar,
   Speaker,
   SpeakerTabItem,
-  Speech
+  Speech,
+  Team
 } from './models';
 import {DataCommon, DataEE, DataEU, DataLV} from './data';
+import {DataUtil} from './data.util';
 
 @Injectable()
 export class DataContext {
-  public readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
   public config: Config;
   public logosArchiveUrl: string;
 
@@ -54,182 +53,101 @@ export class DataContext {
     this.filter.season = new Date().getFullYear();
   }
 
-  initialize() {
-    return this.http.get<Config>(environment.config)
-      .toPromise()
-      .then((config: Config) => {
-        this.setConfig(config);
-        return Observable.forkJoin([
-          this.http.get<AdvertisingCompany[]>(this.config.finances.dataUrl),
-          this.http.get<Team>(this.config.team.dataUrl),
-          this.http.get<Meeting[]>(this.config.meetingsUrls.main)
-        ]).toPromise()
-          .then((results: any[]) => {
-            this.setAdvertising(results[0]);
-            this.setTeam(results[1]);
-            this.addMeetings(results[2]);
-            this.setNextMeetings();
-            this.setLastMeetings();
-          });
-      });
+  initialize(): Promise<boolean> {
+    return this.http.get<Config>(environment.config).toPromise().then(this.initializeWithConfig);
+  }
+
+  initializeWithConfig = (config: Config): Promise<boolean> => {
+    this.setConfig(config);
+    return Observable.forkJoin([
+      this.http.get<Advertising>(this.config.finances.dataUrl),
+      this.http.get<Team>(this.config.team.dataUrl),
+      this.http.get<Meeting[]>(this.config.meetingsUrls.main)
+    ]).toPromise().then((results: any[]) => {
+      return this.initializeBaseData(results[0], results[1], results[2]);
+    });
+  };
+
+  initializeBaseData(advertising: Advertising, team: Team, meetings: Meeting[]): boolean {
+    this.setAdvertising(advertising);
+    this.setTeam(team);
+    this.addMeetings(meetings);
+    this.nextMeetings = DataUtil.getNextMeetings(this.meetings);
+    this.lastMeetings = DataUtil.getLastMeetings(this.meetings);
+    return true;
   }
 
   initializeArchive(): Promise<boolean> {
-    if (this.meetingsLoaded) {
-      return Promise.resolve(true);
-    }
-    return Observable.forkJoin(
-      this.config.meetingsUrls.archive
-        .map((url: string) => this.http.get<Meeting[]>(url)))
-      .toPromise()
-      .then(results => {
-        results.forEach((meetings: Meeting[]) => {
-          this.addMeetings(meetings);
-        });
-        this.meetingsLoaded = true;
-        return true;
-      });
+    return this.meetingsLoaded
+      ? Promise.resolve(true)
+      : Observable.forkJoin(
+        this.config.meetingsUrls.archive
+          .map((url: string) => this.http.get<Meeting[]>(url)))
+        .toPromise().then(this.addMeetingLists);
   }
 
   initializeSeminars(): Promise<boolean> {
-    if (this.seminarsLoaded) {
-      return Promise.resolve(true);
-    }
-    return this.http.get<Seminar[]>(this.config.seminarsUrl)
-      .toPromise()
-      .then(seminars => {
-        this.addSeminars(seminars);
-        this.seminarsLoaded = true;
-        return true;
-      });
+    return this.seminarsLoaded
+      ? Promise.resolve(true)
+      : this.http.get<Seminar[]>(this.config.seminarsUrl).toPromise().then(this.addSeminars);
   }
 
   setConfig(config: Config) {
     this.config = config;
-    this.config.photos.forEach(
-      row => row.forEach(
-        photo => {
-          photo.main = this.config.photoUrlPrefix + '/' + photo.main;
-          photo.small = this.config.photoUrlPrefix + '/' + photo.small;
-        }));
+    DataUtil.processPhotos(this.config.photos, this.config.photoUrlPrefix);
   }
 
   setAdvertising(advertising: Advertising) {
     this.advertising = advertising;
-    this.advertising.companies.forEach(item => {
-      item.logo = this.config.finances.logoUrlPrefix + '/' + item.logo;
-    });
+    DataUtil.processAdvertisingCompanies(
+      this.advertising.companies, this.config.finances.logoUrlPrefix);
   }
 
   setTeam(team: Team) {
     this.logosArchiveUrl = team.logos;
-
-    const imageChange = member => member.image = this.config.team.personUrlPrefix + '/' + member.image;
-    team.team.forEach(imageChange);
-    team.thanks.forEach(imageChange);
-
-    this.fillMemberList(this.teamMember, team.team);
+    DataUtil.processMembers(team.team, this.config.team.personUrlPrefix);
+    DataUtil.processMembers(team.thanks, this.config.team.personUrlPrefix);
     this.teamThanks = team.thanks;
+    this.teamMember = DataUtil.convertToMatrix(team.team);
   }
 
-  fillMemberList(matrix: Array<Member[]>, data: Member[]) {
-    let rowMaxLength = 0;
-    const loop = [0, 1, 2, 3, 4];
-    const sort = (a: Member, b: Member) => a.col - b.col;
-
-    loop.forEach(i => {
-      const row = data.filter(m => m.row === i + 1).sort(sort);
-      if (rowMaxLength < row.length) rowMaxLength = row.length;
-      if (row.length > 0) matrix[i] = row;
-    });
-
-    const empty = new Member();
-    empty.emptyCell = true;
-    matrix.forEach((row: Member[]) => {
-      let push = true;
-      while (row.length < rowMaxLength) {
-        push ? row.push(empty) : row.unshift(empty);
-        push = !push;
-      }
-    });
-  }
-
-  setNextMeetings() {
-    const today = new Date().getTime() + this.MEETING_DURATION;
-    this.nextMeetings = this.meetings.filter(m => today <= m.start.getTime());
-  }
-
-  setLastMeetings() {
-    const maxCount = 3;
-    let count = 0;
-    const today = new Date().getTime() + this.MEETING_DURATION;
-    this.lastMeetings = this.meetings.filter(m => {
-      if (today > m.start.getTime() && count < maxCount) {
-        count++;
-        return true;
-      }
-      return false;
-    });
-  }
-
-  addSeminars(seminars: Seminar[]) {
-    this.processSeminars(seminars);
+  addSeminars(seminars: Seminar[]): boolean {
+    DataUtil.processSeminars(seminars);
     this.seminars.push(...seminars);
+    this.seminarsLoaded = true;
+    return this.seminarsLoaded;
   }
 
-  processSeminars(seminars: Seminar[]) {
-    seminars.forEach(seminar => {
-      seminar.start = seminar.datetime ? new Date(seminar.datetime) : null;
+  addMeetingLists = (meetingLists: Meeting[][]): boolean => {
+    meetingLists.forEach((meetings: Meeting[]) => {
+      this.addMeetings(meetings);
     });
-  }
+    this.meetingsLoaded = true;
+    return this.meetingsLoaded;
+  };
 
   addMeetings(meetings: Meeting[]) {
-    this.processMeetings(meetings);
-    meetings.forEach(m => {
-      if (!m.hidden) {
-        this.meetings.push(m);
-      }
-    });
-  }
-
-  processMeetings(meetings: Meeting[]) {
+    DataUtil.processMeetings(meetings, this.config.personUrlPrefix, this.config.personDefaultImage);
     meetings.forEach(meeting => {
+      if (!meeting.hidden) {
+        this.meetings.push(meeting);
+      }
       if (this.seasons.indexOf(meeting.season) < 0) {
         this.seasons.push(meeting.season);
       }
-      meeting.start = meeting.datetime ? new Date(meeting.datetime) : null;
       if (meeting.speeches) {
-        this.processSpeeches(meeting.speeches, meeting.start);
-      }
-    });
-  }
-
-  processSpeeches(speeches: Speech[], date: Date) {
-    speeches.forEach(speech => {
-      this.addBest(speech);
-      if (speech.speakers) {
-        this.processSpeakers(speech.speakers, date, speech.top ? speech.top.place : -1);
-      }
-      if (speech.youtube) {
-        speech.youtube.forEach((youtubeId, index) => {
-          if (youtubeId) {
-            speech.youtube[index] = 'https://www.youtube.com/watch?v=' + youtubeId;
+        meeting.speeches.forEach(speech => {
+          if (speech.top) {
+            this.best.push(speech);
+          }
+          if (speech.speakers) {
+            speech.speakers.forEach(speaker => {
+              const topPlace = speech.top ? speech.top.place : -1;
+              this.addSpeaker(speaker, meeting.start, topPlace);
+            });
           }
         });
       }
-    });
-  }
-
-  addBest(speech: Speech) {
-    if (speech.top) {
-      this.best.push(speech);
-    }
-  }
-
-  processSpeakers(speakers: Speaker[], date: Date, topPlace: number) {
-    speakers.forEach(speaker => {
-      speaker.image = this.config.personUrlPrefix + '/' + (speaker.image ? speaker.image : this.config.personDefaultImage);
-      this.addSpeaker(speaker, date, topPlace);
     });
   }
 

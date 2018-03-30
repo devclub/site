@@ -33,12 +33,20 @@ export class Config {
   fileUrlPrefix: string;
 
   photoUrlPrefix: string;
-  photos: { main: string, small: string, texts: LocalizedTexts }[][];
+  photos: Photo[][];
 
   seminarsUrl: string;
   meetingsUrls: { main: string; archive: string[] };
   finances: { dataUrl: string; logoUrlPrefix: string };
   team: { dataUrl: string; personUrlPrefix: string };
+}
+
+export class Photo {
+  main: string;
+  mainUrl: string;
+  small: string;
+  smallUrl: string;
+  texts: LocalizedTexts;
 }
 
 export class Team {
@@ -52,6 +60,7 @@ export class Member {
   col: number;
   names: LocalizedTexts;
   image: string;
+  imageUrl: string;
   url: string;
   emptyCell = false;
 }
@@ -69,6 +78,7 @@ export class AdvertisingPrice {
 export class AdvertisingCompany {
   name: string;
   logo: string;
+  logoUrl: string;
   url: string;
 }
 
@@ -76,6 +86,7 @@ export class Speaker {
   names: LocalizedTexts;
   titles: LocalizedTexts;
   image: string;
+  imageUrl: string;
   url: string;
 }
 
@@ -90,9 +101,14 @@ export class SpeakerTabItem extends Speaker {
 
 export class Speech {
   youtube: string[];
+  youtubeUrls: string[];
   speakers: Speaker[];
   titles: LocalizedTexts;
   descr: LocalizedTextLists;
+  presentations: string[];
+  examples: string[];
+  labels: string[];
+  info: string;
   lang: string;
   top: Top;
 }
