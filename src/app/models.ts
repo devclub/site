@@ -131,6 +131,7 @@ export class MeetingFilter {
   public season: number;
   public speaker: string;
   public texts: string;
+  public label: string;
 }
 
 export class Meeting {

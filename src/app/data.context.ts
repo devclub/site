@@ -45,6 +45,7 @@ export class DataContext {
   public lastMeetings = new Array<Meeting>();
 
   public filter = new MeetingFilter();
+  public labels = new Array<string>();
   public seasons = new Array<number>();
   public best = new Array<Speech>();
   public speakers = new Map<String, SpeakerTabItem>();
@@ -139,6 +140,13 @@ export class DataContext {
         meeting.speeches.forEach(speech => {
           if (speech.top) {
             this.best.push(speech);
+          }
+          if (speech.labels) {
+            speech.labels.forEach(label => {
+              if (this.labels.indexOf(label) < 0) {
+                this.labels.push(label);
+              }
+            });
           }
           if (speech.speakers) {
             speech.speakers.forEach(speaker => {

@@ -44,12 +44,13 @@
 	"archive.best.filter.groupby.place": "Группировать по месту",
 	"archive.best.filter.groupby.year": "Группировать по году",
 	"archive.best.tab": "Лучшие",
+	"archive.main.filter.label": "Тэг (eng)",
 	"archive.main.filter.seasons": "Сезоны",
 	"archive.main.filter.seasons.all": "Все",
 	"archive.main.filter.speaker": "Выступающий",
 	"archive.main.filter.texts": "Тема/описание",
-	"archive.main.mode.block": "Больше информации",
-	"archive.main.mode.list": "Компактный вид",
+	"archive.main.mode.block": "Подробно",
+	"archive.main.mode.list": "Компактно",
 	"archive.main.tab": "Встречи",
 	"archive.seminar.hours": "ч",
 	"archive.seminar.places": "Места",
@@ -142,5 +143,10 @@
 	"speaker.want_to_talk.p3": "У нас вы найдёте собеседников и сможете утвердиться в своём решении или же узнать о новых вариантах.",
 	"speaker.want_to_talk.p4": "От нас вы получите небольшой сувенир в память о встрече и своё упоминание на этом сайте, что может расцениваться как бонусом к вашим социальным навыкам в вашем CV.",
 	"speaker.want_to_talk.p5": "Вы заинтересованы? У вас есть тема? Заполняйте форму, и мы свяжемся с вами!",
-	"speaker.want_to_talk.title": "Хочешь выступить?"
+	"speaker.want_to_talk.title": "Хочешь выступить?",
+	"{{'archive.speaker.col.count' | translate}}": "",
+	"{{'archive.speaker.col.date' | translate}}": "",
+	"{{'archive.speaker.col.name' | translate}}": "",
+	"{{'archive.speaker.col.top' | translate}}": "",
+	"{{'archive.speaker.col.top.total' | translate}}": ""
 }

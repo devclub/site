@@ -28,7 +28,7 @@ import {ArchiveSeminarPage} from './pages/archive/archive-seminar';
 import {ArchiveTabState} from './pages/archive/archive.tab.state';
 import {SpeechRow} from './components/speech-row';
 import {ArchiveSeminarPageGuard} from './pages/archive/archive.seminar.guard';
-import {TooltipModule} from 'ngx-bootstrap';
+import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {MeetingInfoList} from './components/meeting-info-list';
 
 export function initialize(configContext: DataContext) {
@@ -77,6 +77,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TooltipModule.forRoot(),
+    TypeaheadModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

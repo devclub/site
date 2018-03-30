@@ -44,12 +44,13 @@
 	"archive.best.filter.groupby.place": "Koha järgi",
 	"archive.best.filter.groupby.year": "Aasta järgi",
 	"archive.best.tab": "Parimad",
+	"archive.main.filter.label": "Silt (eng)",
 	"archive.main.filter.seasons": "Hooajad",
 	"archive.main.filter.seasons.all": "Kõik",
 	"archive.main.filter.speaker": "Esineja",
 	"archive.main.filter.texts": "Nimetus/kirjeldus",
 	"archive.main.mode.block": "Rohkem info",
-	"archive.main.mode.list": "Kompaktne vaade",
+	"archive.main.mode.list": "Kompaktselt",
 	"archive.main.tab": "Kõned",
 	"archive.seminar.hours": "t",
 	"archive.seminar.places": "Kohad",
@@ -142,5 +143,10 @@
 	"speaker.want_to_talk.p3": "Siin sa leiad sõpru ja kolleege, kes aitavad kinnitada oma mõtteid ja lahendusi või teada saada lahenduse uutest variantidest.",
 	"speaker.want_to_talk.p4": "Kingitame sulle väikset suveniiri mälestuseks, ja sina jääd Devclub arhiivis oma enda videoga, mille kohta võib ka kirjutada oma CV'is.",
 	"speaker.want_to_talk.p5": "Oled huvitatud? Esinemise teema juba peas? Vajuta punast nuppu, täida vorm ja esimesel võimalusel võtame sinuga ühendust!",
-	"speaker.want_to_talk.title": "Tahad esineda?"
+	"speaker.want_to_talk.title": "Tahad esineda?",
+	"{{'archive.speaker.col.count' | translate}}": "",
+	"{{'archive.speaker.col.date' | translate}}": "",
+	"{{'archive.speaker.col.name' | translate}}": "",
+	"{{'archive.speaker.col.top' | translate}}": "",
+	"{{'archive.speaker.col.top.total' | translate}}": ""
 }
