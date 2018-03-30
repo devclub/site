@@ -10,6 +10,11 @@ export class BestGroupBy {
   static SEASON = 'SEASON';
 }
 
+export class SpeechOptions {
+  clickNameFn: Function;
+  clickLabelFn: Function;
+}
+
 export class LocalizedTexts extends Map<string, string> {
 }
 
@@ -160,4 +165,17 @@ export class Seminar {
   descr: LocalizedTextLists;
   prices: LocalizedTexts;
   info: LocalizedTexts;
+}
+
+export class LabelItem {
+  name: string;
+  count = 1;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  addCount() {
+    this.count++;
+  }
 }

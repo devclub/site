@@ -4,6 +4,7 @@ import {DataContext} from '../../data.context';
 import {Meeting, Speaker} from '../../models';
 import {DataUtil} from '../../data.util';
 import {TypeaheadMatch} from 'ngx-bootstrap';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   templateUrl: './archive-main.html'
@@ -13,15 +14,26 @@ export class ArchiveMainPage {
   public asList = true;
   public seasonTouched = false;
   public meetings: Meeting[] = [];
+  public speechOptions = {
+    clickNameFn: (speaker: Speaker) => {
+      this.dataContext.filter.speaker = speaker.names[this.translate.currentLang];
+      this.search();
+    },
+    clickLabelFn: (label: string) => {
+      this.dataContext.filter.label = label;
+      this.search();
+    }
+  };
 
   constructor(private archiveTabState: ArchiveTabState,
+              private translate: TranslateService,
               public dataContext: DataContext) {
     archiveTabState.setMain();
     this.search(true);
   }
 
   searchByLabel(event: TypeaheadMatch) {
-    this.dataContext.filter.label = event.item;
+    this.dataContext.filter.label = event.item.name;
     this.search();
   }
 
@@ -32,6 +44,7 @@ export class ArchiveMainPage {
   }
 
   searchBySeason() {
+    this.seasonTouched = true;
     this.search();
   }
 

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {DataContext} from '../data.context';
-import {Meeting} from '../models';
+import {Meeting, SpeechOptions} from '../models';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class MeetingInfoList {
   @Input() public meeting: Meeting;
+  @Input() public speechOptions: SpeechOptions;
 
   constructor(public dataContext: DataContext,
               public translate: TranslateService) {

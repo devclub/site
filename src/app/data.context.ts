@@ -7,6 +7,7 @@ import {environment} from '../environments/environment.dev-eu';
 import {
   Advertising,
   Config,
+  LabelItem,
   Lang,
   Meeting,
   MeetingFilter,
@@ -44,8 +45,10 @@ export class DataContext {
   public nextMeetings = new Array<Meeting>();
   public lastMeetings = new Array<Meeting>();
 
+  public labelMap = new Map<string, LabelItem>();
+  public labels = new Array<LabelItem>();
+
   public filter = new MeetingFilter();
-  public labels = new Array<string>();
   public seasons = new Array<number>();
   public best = new Array<Speech>();
   public speakers = new Map<String, SpeakerTabItem>();
@@ -123,6 +126,8 @@ export class DataContext {
     meetingLists.forEach((meetings: Meeting[]) => {
       this.addMeetings(meetings);
     });
+    this.labels = Array.from(this.labelMap.values())
+      .sort((a, b) => b.count - a.count);
     this.meetingsLoaded = true;
     return this.meetingsLoaded;
   };
@@ -143,8 +148,10 @@ export class DataContext {
           }
           if (speech.labels) {
             speech.labels.forEach(label => {
-              if (this.labels.indexOf(label) < 0) {
-                this.labels.push(label);
+              if (!this.labelMap.get(label)) {
+                this.labelMap.set(label, new LabelItem(label));
+              } else {
+                this.labelMap.get(label).addCount();
               }
             });
           }

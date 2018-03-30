@@ -16,4 +16,4 @@
     {{ meeting.place?.name }}
   </div>
 </div>
-<speech-row *ngFor="let speech of meeting.speeches" [speech]="speech"></speech-row>
+<speech-row *ngFor="let speech of meeting.speeches" [speech]="speech" [options]="speechOptions"></speech-row>

@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {DataContext} from '../data.context';
-import {Speech} from '../models';
+import {Speech, SpeechOptions} from '../models';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class SpeechRow {
   @Input() public speech: Speech;
+  @Input() public options: SpeechOptions;
 
   constructor(public dataContext: DataContext,
               public translate: TranslateService) {

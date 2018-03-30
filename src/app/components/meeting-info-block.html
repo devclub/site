@@ -61,9 +61,14 @@
         {{speech.titles | localize}}
       </h5>
       <div class="mb-3">
-        <span class="badge badge-label mr-1" *ngFor="let label of speech.labels">
-          {{label}}
-        </span>
+        <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
+          <span class="badge badge-label mr-1 pointer" (click)="speechOptions.clickLabelFn(label)" *ngFor="let label of speech.labels">
+            {{label}}</span>
+        </ng-container>
+        <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
+          <span class="badge badge-label mr-1" *ngFor="let label of speech.labels">
+            {{label}}</span>
+        </ng-container>
         <span class="badge mr-1"
               [ngClass]="{'badge-lang': translate.currentLang === speech.lang,
                 'badge-danger': translate.currentLang !== speech.lang}">
@@ -81,7 +86,16 @@
         </span>
       </div>
       <span *ngFor="let speaker of speech.speakers">
-        <h6 class="mb-0">{{speaker.names | localize}}</h6>
+        <h6 class="mb-0">
+          <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
+            <i class="fas fa-user small"></i></a>
+          <a *ngIf="speechOptions && speechOptions.clickNameFn" class="dotted"
+             (click)="speechOptions.clickNameFn(speaker)" href="javascript:void(0)">
+            {{speaker.names | localize}}</a>
+          <ng-container *ngIf="!speechOptions || !speechOptions.clickNameFn">
+            {{speaker.names | localize}}
+          </ng-container>
+        </h6>
         <span class="small text-muted">{{speaker.titles | localize}}</span>
       </span>
     </div>

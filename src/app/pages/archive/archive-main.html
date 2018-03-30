@@ -1,26 +1,58 @@
 <div class="form-row mt-3 mb-3">
   <div class="form-group col-md-4">
     <label for="speaker">{{'archive.main.filter.speaker' | translate}}</label>
-    <input id="speaker" [(ngModel)]="dataContext.filter.speaker"
-           (change)="searchBySpeaker()" type="text" class="form-control">
+    <div class="input-group">
+      <input id="speaker" [(ngModel)]="dataContext.filter.speaker"
+             (change)="searchBySpeaker()" type="text" class="form-control"/>
+      <div class="input-group-append">
+        <span class="input-group-text pointer"
+              (click)="dataContext.filter.speaker = ''; search()">
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="form-group col-md-4">
     <label for="texts">{{'archive.main.filter.texts' | translate}}</label>
-    <input id="texts" [(ngModel)]="dataContext.filter.texts"
-           (change)="searchByTexts()" type="text" class="form-control">
+    <div class="input-group">
+      <input id="texts" [(ngModel)]="dataContext.filter.texts"
+             (change)="searchByTexts()" type="text" class="form-control"/>
+      <div class="input-group-append">
+        <span class="input-group-text pointer"
+              (click)="dataContext.filter.texts = ''; search()">
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="form-group col-md-2">
     <label for="labels">{{'archive.main.filter.label' | translate}}</label>
-    <input id="labels" [(ngModel)]="dataContext.filter.label"
-           [typeahead]="dataContext.labels" [typeaheadOptionsLimit]="7"
-           [typeaheadMinLength]="0" (typeaheadOnSelect)="searchByLabel($event)"
-           (change)="searchByLabelClear()" class="form-control">
+    <div class="input-group">
+      <ng-template #labelItemTemplate let-model="item">
+        <span>{{model.name}} ({{model.count}})</span>
+      </ng-template>
+      <input id="labels"
+             [(ngModel)]="dataContext.filter.label"
+             [typeahead]="dataContext.labels"
+             [typeaheadOptionsLimit]="7"
+             [typeaheadMinLength]="0"
+             typeaheadOptionField="name"
+             [typeaheadItemTemplate]="labelItemTemplate"
+             (typeaheadOnSelect)="searchByLabel($event)"
+             (change)="searchByLabelClear()"
+             class="form-control"/>
+      <div class="input-group-append">
+        <span class="input-group-text pointer"
+              (click)="dataContext.filter.label = ''; search()">
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="form-group col-md-2">
     <label for="season">{{'archive.main.filter.seasons' | translate}}</label>
     <select id="season" class="form-control"
-            (change)="searchBySeason()"
-            [(ngModel)]="dataContext.filter.season">
+            [(ngModel)]="dataContext.filter.season" (change)="searchBySeason()">
       <option [ngValue]="ALL_SEASONS">
         {{'archive.main.filter.seasons.all' | translate}}
       </option>
@@ -49,6 +81,10 @@
 </div>
 
 <div class="mt-3" *ngFor="let m of meetings">
-  <meeting-info-block *ngIf="asList === false" [meeting]="m"></meeting-info-block>
-  <meeting-info-list *ngIf="asList === true" [meeting]="m"></meeting-info-list>
+  <meeting-info-block
+    *ngIf="asList === false" [meeting]="m"
+    [speechOptions]="speechOptions"></meeting-info-block>
+  <meeting-info-list
+    *ngIf="asList === true" [meeting]="m"
+    [speechOptions]="speechOptions"></meeting-info-list>
 </div>
