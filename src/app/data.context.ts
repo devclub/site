@@ -112,12 +112,12 @@ export class DataContext {
     this.teamMember = DataUtil.convertToMatrix(team.team);
   }
 
-  addSeminars(seminars: Seminar[]): boolean {
+  addSeminars = (seminars: Seminar[]): boolean => {
     DataUtil.processSeminars(seminars);
     this.seminars.push(...seminars);
     this.seminarsLoaded = true;
     return this.seminarsLoaded;
-  }
+  };
 
   addMeetingLists = (meetingLists: Meeting[][]): boolean => {
     meetingLists.forEach((meetings: Meeting[]) => {
