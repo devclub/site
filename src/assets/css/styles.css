@@ -114,8 +114,8 @@ footer a:link {
 }
 
 a.dotted {
-  text-decoration: none;
-  border-bottom: dashed 1px #007bff;
+  color: #000000;
+  border-bottom: dashed 1px #000000;
   text-decoration: none;
 }
 

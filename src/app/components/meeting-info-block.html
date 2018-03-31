@@ -50,7 +50,7 @@
         <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
           <span *ngIf="youtubeUrl" class="fab fa-youtube"></span>
         </a>
-        <span *ngIf="speech.info" [tooltip]="speech.info" placement="right">
+        <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right">
           <i class="fas fa-info-circle"></i>
         </span>
         <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
