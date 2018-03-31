@@ -4,6 +4,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {DataContext} from './data.context';
 import * as fontawesome from '@fortawesome/fontawesome';
 import {
+  faAngleLeft,
+  faAngleRight,
   faCalendarAlt,
   faCamera,
   faClock,
@@ -32,7 +34,7 @@ import {
 import {faEnvelope} from '@fortawesome/fontawesome-free-regular';
 
 fontawesome.library.add(
-  faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle, faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkAlt, faFileAlt, faSlideshare, faTrophy, faThList, faTh, faTimes);
+  faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle, faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkAlt, faFileAlt, faSlideshare, faTrophy, faThList, faTh, faTimes, faAngleLeft, faAngleRight);
 
 @Component({
   selector: '[app]',

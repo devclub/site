@@ -48,6 +48,30 @@ export class ArchiveMainPage {
     this.search();
   }
 
+  plusYear() {
+    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    if (index === -1) {
+      return;
+    } else if (index === 0) {
+      this.dataContext.filter.season = this.ALL_SEASONS;
+    } else {
+      this.dataContext.filter.season = this.dataContext.seasons[index - 1];
+    }
+    this.searchBySeason();
+  }
+
+  minusYear() {
+    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    if (index === -1) {
+      this.dataContext.filter.season = this.dataContext.seasons[0];
+    } else if (index < this.dataContext.seasons.length - 1) {
+      this.dataContext.filter.season = this.dataContext.seasons[index + 1];
+    } else {
+      return;
+    }
+    this.searchBySeason();
+  }
+
   searchByTexts() {
     this.search();
   }
