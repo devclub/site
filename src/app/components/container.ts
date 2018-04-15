@@ -6,7 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LocationStrategy} from '@angular/common';
 
 @Component({
-  templateUrl: './container.html'
+  templateUrl: './container.html',
+  styleUrls: ['./container.css']
 })
 export class Container {
   public langs = [

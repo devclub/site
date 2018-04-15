@@ -2,6 +2,10 @@
  * image lighten
  **************************/
 
+*:focus, *:visited{
+  outline: none !important;
+}
+
 .image-wrap {
   position: relative;
 }
@@ -14,9 +18,9 @@
   top: 0;
   left: 0;
   background: #FFFFFF;
-  opacity: 0.5;
-  transition: all 1s;
-  -webkit-transition: all 1s;
+  opacity: 0.3;
+  transition: all 0.2s;
+  -webkit-transition: all 0.3s;
 }
 
 .image-lighten:hover:after {
@@ -126,7 +130,10 @@ a.dotted {
 .lang {
   font-size: 75%;
 }
-
+.badge{
+  padding: 8px 24px;
+  border-radius: 24px;
+}
 .badge-lang {
   color: #ffffff;
   background-color: #c1c1c1;
@@ -171,4 +178,9 @@ a.dotted {
 
 .place9 {
   color: #000000;
+}
+
+.light-border{
+  border-top: 1px solid #ccc;
+  margin-bottom: 1rem;
 }

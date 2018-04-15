@@ -5,7 +5,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'meeting-info-block',
-  templateUrl: './meeting-info-block.html'
+  templateUrl: './meeting-info-block.html',
+  styleUrls: ['./meeting-info-block.css']
 })
 export class MeetingInfoBlock {
   @Input() public meeting: Meeting;
