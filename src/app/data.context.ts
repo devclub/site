@@ -1,8 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import 'rxjs/add/observable/forkJoin';
-import 'rxjs/add/observable/of';
-import {Observable} from 'rxjs/Observable';
+import {forkJoin} from 'rxjs';
 import {environment} from '../environments/environment.dev-eu';
 import {
   Advertising,
@@ -63,7 +61,7 @@ export class DataContext {
 
   initializeWithConfig = (config: Config): Promise<boolean> => {
     this.setConfig(config);
-    return Observable.forkJoin([
+    return forkJoin([
       this.http.get<Advertising>(this.config.finances.dataUrl),
       this.http.get<Team>(this.config.team.dataUrl),
       this.http.get<Meeting[]>(this.config.meetingsUrls.main)
@@ -84,7 +82,7 @@ export class DataContext {
   initializeArchive(): Promise<boolean> {
     return this.meetingsLoaded
       ? Promise.resolve(true)
-      : Observable.forkJoin(
+      : forkJoin(
         this.config.meetingsUrls.archive
           .map((url: string) => this.http.get<Meeting[]>(url)))
         .toPromise().then(this.addMeetingLists);

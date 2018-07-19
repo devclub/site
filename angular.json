@@ -1,0 +1,127 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "bootstrap.css",
+                "input": "node_modules/bootstrap/dist/css",
+                "output": "/assets/css"
+              }
+            ],
+            "styles": [],
+            "scripts": []
+          },
+          "configurations": {
+            "dev-ee": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.dev-eu.ts",
+                  "with": "src/environments/environment.dev-ee.ts"
+                }
+              ]
+            },
+            "prod-eu": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.dev-eu.ts",
+                  "with": "src/environments/environment.prod-eu.ts"
+                }
+              ]
+            },
+            "prod-ee": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.dev-eu.ts",
+                  "with": "src/environments/environment.prod-ee.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "app:build",
+            "port": 3000
+          },
+          "configurations": {
+            "dev-ee": {
+              "browserTarget": "app:build:dev-ee"
+            },
+            "prod-eu": {
+              "browserTarget": "app:build:prod-eu"
+            },
+            "prod-ee": {
+              "browserTarget": "app:build:prod-ee"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "app:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.json"
+            ],
+            "exclude": []
+          }
+        }
+      }
+    },
+    "app-e2e": {
+      "root": "",
+      "sourceRoot": "e2e",
+      "projectType": "application"
+    }
+  },
+  "defaultProject": "app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {}
+  }
+}
