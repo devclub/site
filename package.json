@@ -44,7 +44,8 @@
     "ngx-bootstrap": "3.0.1",
     "rxjs": "6.2.2",
     "web-animations-js": "2.3.1",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "hoek": "~> 4.2.1"
   },
   "devDependencies": {
     "@angular/cli": "6.0.8",
