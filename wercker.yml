@@ -3,7 +3,7 @@
 # Steps: https://devcenter.wercker.com/development/steps/
 
 box: node
-build-eu:
+build:
   steps:
     - npm-install
     - script:
@@ -12,50 +12,22 @@ build-eu:
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
     - script:
-        name: build devclub.eu production
+        name: build production
         code: |
-          npm run build:prod:eu
-deploy-eu:
+          npm run build:prod:$CONF
+deploy:
   steps:
   - add-to-known_hosts:
-      hostname: $EU_SERVER_HOST
+      hostname: $SERVER_HOST
   - mktemp:
-      envvar: EU_SERVER_PRIVATE_KEY_PATH
+      envvar: SERVER_PRIVATE_KEY_PATH
   - create-file:
       name: write key
-      filename: $EU_SERVER_PRIVATE_KEY_PATH
-      content: $EU_SERVER_PRIVATE_KEY
+      filename: $SERVER_PRIVATE_KEY_PATH
+      content: $SERVER_PRIVATE_KEY
       overwrite: true
       hide-from-log: true
   - script:
-      name: transfer EU application
+      name: transfer application
       code: |
-        scp -i $EU_SERVER_PRIVATE_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r dist $EU_SERVER_USER@$EU_SERVER_HOST:$EU_SERVER_DIR
-build-ee:
-  steps:
-  - npm-install
-  - script:
-      name: echo nodejs information
-      code: |
-        echo "node version $(node -v) running"
-        echo "npm version $(npm -v) running"
-  - script:
-      name: build devclub.ee production
-      code: |
-        npm run build:prod:ee
-deploy-ee:
-  steps:
-  - add-to-known_hosts:
-      hostname: $EE_SERVER_HOST
-  - mktemp:
-      envvar: EE_SERVER_PRIVATE_KEY_PATH
-  - create-file:
-      name: write key
-      filename: $EE_SERVER_PRIVATE_KEY_PATH
-      content: $EE_SERVER_PRIVATE_KEY
-      overwrite: true
-      hide-from-log: true
-  - script:
-      name: transfer EE application
-      code: |
-        scp -i $EE_SERVER_PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r dist $EE_SERVER_USER@$EE_SERVER_HOST:$EE_SERVER_DIR
+        scp -i $SERVER_PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r dist $SERVER_USER@$SERVER_HOST:$SERVER_DIR
