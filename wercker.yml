@@ -30,7 +30,7 @@ deploy-eu:
   - script:
       name: transfer EU application
       code: |
-        scp -i $EU_SERVER_PRIVATE_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=no dist $EU_SERVER_USER@$EU_SERVER_HOST:$EU_SERVER_DIR
+        scp -i $EU_SERVER_PRIVATE_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r dist $EU_SERVER_USER@$EU_SERVER_HOST:$EU_SERVER_DIR
 build-ee:
   steps:
   - npm-install
@@ -58,4 +58,4 @@ deploy-ee:
   - script:
       name: transfer EE application
       code: |
-        scp -i $EE_SERVER_PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no dist $EE_SERVER_USER@$EE_SERVER_HOST:$EE_SERVER_DIR
+        scp -i $EE_SERVER_PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r dist $EE_SERVER_USER@$EE_SERVER_HOST:$EE_SERVER_DIR
