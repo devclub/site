@@ -17,6 +17,16 @@ build-eu:
           npm run build:prod:eu
 deploy-eu:
   steps:
+  - add-to-known_hosts:
+      hostname: $EU_SERVER_HOST
+  - mktemp:
+      envvar: EU_SERVER_PRIVATE_KEY_PATH
+  - create-file:
+      name: write key
+      filename: $EU_SERVER_PRIVATE_KEY_PATH
+      content: $EU_SERVER_PRIVATE_KEY
+      overwrite: true
+      hide-from-log: true
   - script:
       name: transfer EU application
       code: |
@@ -35,7 +45,17 @@ build-ee:
         npm run build:prod:ee
 deploy-ee:
   steps:
+  - add-to-known_hosts:
+      hostname: $EE_SERVER_HOST
+  - mktemp:
+      envvar: EE_SERVER_PRIVATE_KEY_PATH
+  - create-file:
+      name: write key
+      filename: $EE_SERVER_PRIVATE_KEY_PATH
+      content: $EE_SERVER_PRIVATE_KEY
+      overwrite: true
+      hide-from-log: true
   - script:
       name: transfer EE application
       code: |
-        scp -i $EE_SERVER_PRIVATE_KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=no dist $EE_SERVER_USER@$EE_SERVER_HOST:$EE_SERVER_DIR
+        scp -i $EE_SERVER_PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no dist $EE_SERVER_USER@$EE_SERVER_HOST:$EE_SERVER_DIR
