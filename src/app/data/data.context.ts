@@ -25,11 +25,6 @@ export class DataContext {
   public config: Config;
   public logosArchiveUrl: string;
 
-  public common = new DataResourcesCommon();
-  public eu = new DataResourcesEu();
-  public ee = new DataResourcesEe();
-  public lv = new DataResourcesLv();
-
   public advertising: Advertising;
 
   public teamMember = new Array<Member[]>();
