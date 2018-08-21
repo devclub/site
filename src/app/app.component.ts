@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {DataContext} from './data.context';
+import {DataContext} from './data/data.context';
 import * as fontawesome from '@fortawesome/fontawesome';
 import {
   faAngleLeft,
