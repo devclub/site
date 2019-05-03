@@ -1,8 +1,8 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {DataContext} from '../../data/data.context';
 import {TranslateService} from '@ngx-translate/core';
-import {Speech} from '../../speech.model';
-import {SpeechOptions} from '../../speech-options.model';
+import {Speech} from '../../reuse-meeting-model/speech.model';
+import {SpeechOptions} from '../../page-main/speech-options.model';
 
 @Component({
   selector: 'speech-row',

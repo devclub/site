@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Member} from '../member.model';
+import {Member} from './member.model';
 
 @Component({
   selector: 'team-rows',

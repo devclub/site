@@ -4,8 +4,8 @@ import {DataContext} from '../../data/data.context';
 import {DataUtil} from '../../data/data.util';
 import {TypeaheadMatch} from 'ngx-bootstrap';
 import {TranslateService} from '@ngx-translate/core';
-import {Speaker} from '../../speaker.model';
-import {Meeting} from '../../meeting.model';
+import {Speaker} from '../../reuse-meeting-model/speaker.model';
+import {Meeting} from '../../reuse-meeting-model/meeting.model';
 
 @Component({
   templateUrl: './archive-main.html'

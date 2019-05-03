@@ -1,4 +1,4 @@
-import {Photo} from '../photo.model';
+import {Photo} from '../page-about/photo.model';
 
 export class Config {
   defaultLang: string;

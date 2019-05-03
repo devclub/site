@@ -3,7 +3,7 @@ import {DataContext} from '../data/data.context';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocationStrategy} from '@angular/common';
-import {Lang} from '../lang.model';
+import {Lang} from '../reuse/lang.model';
 
 @Component({
   templateUrl: './container.html',

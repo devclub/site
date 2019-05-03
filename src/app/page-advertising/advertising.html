@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let price of dataContext.advertising.prices">
+            <tr *ngFor="let price of advertising.prices">
               <td class="text-right">{{price.month}}</td>
               <td class="text-right">{{price.price*price.month}}</td>
               <td class="text-right text-muted">{{price.price}}</td>
@@ -41,9 +41,9 @@
         <div class="card-body">
           <p class="card-text">{{"advertising.donation_help" | translate}}</p>
           <ul class="list-unstyled">
-            <li><b>{{dataContext.common.bank}}:</b> {{dataContext.common.banknumber}}</li>
-            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{dataContext.common.bankrecipient}}</li>
-            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{dataContext.common.bankdescription}}
+            <li><b>{{DataResourcesCommon.bank}}:</b> {{DataResourcesCommon.banknumber}}</li>
+            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{DataResourcesCommon.bankrecipient}}</li>
+            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{DataResourcesCommon.bankdescription}}
             </li>
           </ul>
         </div>
@@ -59,7 +59,7 @@
             {{"advertising.what_to_do" | translate}}
           </p>
           <p class="card-text">
-            {{"advertising.what_to_do.mail" | translate:{mail: dataContext.common.mail} }}
+            {{"advertising.what_to_do.mail" | translate:{mail: DataResourcesCommon.mail} }}
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@
   <title-row>{{'advertising.companies.title' | translate}}</title-row>
 
   <div class="row align-items-center mb-3">
-    <div class="col-6 col-sm-4 col-lg-3 text-center" *ngFor="let item of dataContext.advertising.companies">
+    <div class="col-6 col-sm-4 col-lg-3 text-center" *ngFor="let item of advertising.companies">
       <a href="{{item.url}}" target="_blank">
         <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid">
       </a>

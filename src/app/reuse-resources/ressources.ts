@@ -9,8 +9,8 @@ import {DataResourcesLv} from './data.resources.lv';
   templateUrl: './ressources.html'
 })
 export class Ressources {
-  public common = new DataResourcesCommon();
-  public eu = new DataResourcesEu();
-  public ee = new DataResourcesEe();
-  public lv = new DataResourcesLv();
+  public DataResourcesCommon = DataResourcesCommon;
+  public DataResourcesEu = DataResourcesEu;
+  public DataResourcesEe = DataResourcesEe;
+  public DataResourcesLv = DataResourcesLv;
 }

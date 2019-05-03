@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ArchiveTabState} from '../archive.tab.state';
 import {DataContext} from '../../data/data.context';
 import {BestGroupBy} from './best-groups-by.model';
-import {Speech} from '../../speech.model';
+import {Speech} from '../../reuse-meeting-model/speech.model';
 
 @Component({
   templateUrl: './archive-best.html'

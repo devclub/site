@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Lang} from '../lang.model';
+import {Lang} from './lang.model';
 
 @Pipe({name: 'localize', pure: false})
 export class LocalizePipe implements PipeTransform {

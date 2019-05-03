@@ -1,6 +1,6 @@
 import {Speaker} from './speaker.model';
-import {LocalizedTexts} from './localized-texts.model';
-import {LocalizedTextLists} from './localized-text-lists.model';
+import {LocalizedTexts} from '../reuse/localized-texts.model';
+import {LocalizedTextLists} from '../reuse/localized-text-lists.model';
 import {Top} from './top.model';
 
 export class Speech {

@@ -17,7 +17,7 @@ import {LocalizePipe} from './reuse/localize.pipe';
 import {MeetingInfoBlock} from './page-main/meeting-info-block';
 import {AdsRow} from './reuse-advertising/ads-row';
 import {TeamRows} from './container/team-rows';
-import {ROUTES} from './routes';
+import {AppRoutes} from './app.routes';
 import {Ressources} from './reuse-resources/ressources';
 import {TitleRow} from './reuse/title-row';
 import {ArchivePageGuard} from './page-archive/archive.guard';
@@ -75,7 +75,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
+    RouterModule.forRoot(AppRoutes, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     TranslateModule.forRoot({

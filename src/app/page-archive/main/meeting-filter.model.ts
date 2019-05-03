@@ -1,4 +1,4 @@
-import {BestGroupBy} from './page-archive/best/best-groups-by.model';
+import {BestGroupBy} from '../best/best-groups-by.model';
 
 export class MeetingFilter {
   public bestGroupBy = BestGroupBy.PLACE;

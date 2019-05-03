@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {DataContext} from '../../data/data.context';
 import {TranslateService} from '@ngx-translate/core';
-import {Meeting} from '../../meeting.model';
-import {SpeechOptions} from '../../speech-options.model';
+import {Meeting} from '../../reuse-meeting-model/meeting.model';
+import {SpeechOptions} from '../../page-main/speech-options.model';
 
 @Component({
   selector: 'meeting-info-list',

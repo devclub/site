@@ -1,4 +1,4 @@
-import {Speaker} from '../../speaker.model';
+import {Speaker} from '../../reuse-meeting-model/speaker.model';
 
 export class SpeakerTabItem extends Speaker {
   date: Date;

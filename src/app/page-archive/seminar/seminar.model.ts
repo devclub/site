@@ -1,7 +1,7 @@
-import {Speaker} from '../../speaker.model';
-import {Place} from '../../place.model';
-import {LocalizedTexts} from '../../localized-texts.model';
-import {LocalizedTextLists} from '../../localized-text-lists.model';
+import {Speaker} from '../../reuse-meeting-model/speaker.model';
+import {Place} from '../../reuse-meeting-model/place.model';
+import {LocalizedTexts} from '../../reuse/localized-texts.model';
+import {LocalizedTextLists} from '../../reuse/localized-text-lists.model';
 
 export class Seminar {
   datetime: string;

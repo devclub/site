@@ -12,7 +12,7 @@ import {ArchiveSpeakerPage} from './page-archive/speaker/archive-speaker';
 import {ArchiveSeminarPage} from './page-archive/seminar/archive-seminar';
 import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
 
-export const ROUTES: Routes = [
+export const AppRoutes: Routes = [
   {
     path: '',
     component: Container,
