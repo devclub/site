@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col">
-
-      <title-row>{{'main.title.next_meetings' | translate}}</title-row>
       <span *ngIf="this.dataContext.nextMeetings.length > 0">
         <meeting-info-block
           *ngFor="let m of this.dataContext.nextMeetings"
@@ -11,20 +9,6 @@
       <div class="pb-5" *ngIf="this.dataContext.nextMeetings.length === 0">
         {{'main.next_meeting.info.not_avaliable' | translate}}
       </div>
-
-      <span class="d-none d-sm-block">
-        <title-row>{{'main.title.last_meetings' | translate}}</title-row>
-        <meeting-info-block
-          *ngFor="let m of this.dataContext.lastMeetings"
-          [showRegisterEvent]="false" [meeting]="m"></meeting-info-block>
-      </span>
-    </div>
-  </div>
-  <div class="row justify-content-center mb-3">
-    <div class="col text-center">
-      <a href="#/archive" class="btn btn-danger">
-        {{'main.button.archived_meetings' | translate}}
-      </a>
     </div>
   </div>
 </div>
