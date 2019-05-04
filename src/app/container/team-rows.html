@@ -1,17 +1,13 @@
 <div class="row justify-content-center" *ngFor="let members of memberRows">
   <div class="col-md-12 col-lg-8">
     <div class="row">
-      <div class="col-12 col-md" *ngFor="let member of members">
-        <div class="image-wrap mb-3 d-none d-md-block">
+      <div class="col" *ngFor="let member of members">
+        <div class="image-wrap mb-3">
           <a href="{{member.url}}" target="_blank" class="image-lighten">
             <img src="{{member.imageUrl}}" class="img-fluid">
           </a>
-          <div class="member-text">{{member.names | localize}}</div>
+          <div class="member-text d-none d-md-block">{{member.names | localize}}</div>
         </div>
-        <a href="{{member.url}}" target="_blank"
-           class="d-block d-md-none">
-          {{member.names | localize}}
-        </a>
       </div>
     </div>
   </div>
