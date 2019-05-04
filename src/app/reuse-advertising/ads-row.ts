@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { DataContext } from '../data/data.context';
 
 @Component({
@@ -7,6 +7,9 @@ import { DataContext } from '../data/data.context';
   styleUrls: ['./ads-row.css']
 })
 export class AdsRow {
+  @Input()
+  classStyles: string;
+
   constructor(public dataContext: DataContext) {
   }
 }
