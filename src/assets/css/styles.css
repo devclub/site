@@ -2,7 +2,7 @@
  * image lighten
  **************************/
 
-*:focus, *:visited{
+*:focus, *:visited {
   outline: none !important;
 }
 
@@ -130,10 +130,12 @@ a.dotted {
 .lang {
   font-size: 75%;
 }
-.badge{
+
+.badge-big {
   padding: 8px 24px;
   border-radius: 24px;
 }
+
 .badge-lang {
   color: #ffffff;
   background-color: #c1c1c1;
@@ -180,7 +182,7 @@ a.dotted {
   color: #000000;
 }
 
-.light-border{
+.light-border {
   border-top: 1px solid #ccc;
   margin-bottom: 1rem;
 }

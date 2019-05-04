@@ -76,14 +76,14 @@
         </h3>
         <div class="mb-3 mt-3">
           <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
-            <span class="badge badge-label mr-3 pointer" (click)="speechOptions.clickLabelFn(label)" *ngFor="let label of speech.labels">
+            <span class="badge badge-big badge-label mr-3 pointer" (click)="speechOptions.clickLabelFn(label)" *ngFor="let label of speech.labels">
               {{label}}</span>
           </ng-container>
           <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
-            <span class="badge badge-label mr-3" *ngFor="let label of speech.labels">
+            <span class="badge badge-big badge-label mr-3" *ngFor="let label of speech.labels">
               {{label}}</span>
           </ng-container>
-          <span class="badge mr-1"
+          <span class="badge badge-big mr-1"
                 [ngClass]="{'badge-lang': translate.currentLang === speech.lang,
                   'badge-danger': translate.currentLang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}

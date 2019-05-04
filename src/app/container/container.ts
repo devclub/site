@@ -6,8 +6,7 @@ import {LocationStrategy} from '@angular/common';
 import {Lang} from '../reuse/lang.model';
 
 @Component({
-  templateUrl: './container.html',
-  styleUrls: ['./container.css']
+  templateUrl: './container.html'
 })
 export class Container {
   public langs = [
