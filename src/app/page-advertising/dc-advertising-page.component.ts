@@ -4,7 +4,7 @@ import {DataResourcesCommon} from '../reuse-resources/data.resources.common';
 import {Advertising} from '../data/models/advertising.model';
 
 @Component({
-  templateUrl: './dc-advertising.component.html'
+  templateUrl: './dc-advertising-page.component.html'
 })
 export class DcAdvertisingPageComponent {
   public advertising: Advertising;

@@ -1,9 +1,7 @@
 import {Routes} from '@angular/router';
 import {AboutPage} from './page-about/about';
 import {ArchiveContainerPage} from './page-archive/archive-container';
-import {MainPage} from './page-main/main';
 import {SpeakerPage} from './page-speaker/speaker';
-import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising.component';
 import {DcContainerComponent} from './container/dc-container.component';
 import {ArchivePageGuard} from './page-archive/archive.guard';
 import {ArchiveMainPage} from './page-archive/main/archive-main';
@@ -11,13 +9,15 @@ import {ArchiveBestPage} from './page-archive/best/archive-best';
 import {ArchiveSpeakerPage} from './page-archive/speaker/archive-speaker';
 import {ArchiveSeminarPage} from './page-archive/seminar/archive-seminar';
 import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
+import {DcMainPageComponent} from './page-main/dc-main-page.component';
+import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
 
 export const AppRoutes: Routes = [
   {
     path: '',
     component: DcContainerComponent,
     children: [
-      {path: '', pathMatch: 'full', component: MainPage},
+      {path: '', pathMatch: 'full', component: DcMainPageComponent},
       {
         path: 'archive',
         component: ArchiveContainerPage,

@@ -8,9 +8,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {AboutPage} from './page-about/about';
 import {ArchiveContainerPage} from './page-archive/archive-container';
-import {MainPage} from './page-main/main';
 import {SpeakerPage} from './page-speaker/speaker';
-import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising.component';
 import {DataContext} from './data/data.context';
 import {DcContainerComponent} from './container/dc-container.component';
 import {LocalizePipe} from './reuse/localize.pipe';
@@ -31,6 +29,8 @@ import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
 import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {MeetingInfoList} from './page-archive/main/meeting-info-list';
 import {DcAdsRowUpperComponent} from './reuse-advertising/dc-ads-row-upper.component';
+import {DcMainPageComponent} from './page-main/dc-main-page.component';
+import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -52,7 +52,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
   declarations: [
     AppComponent,
     DcContainerComponent,
-    MainPage,
+    DcMainPageComponent,
     ArchiveContainerPage,
     ArchiveMainPage,
     ArchiveBestPage,
