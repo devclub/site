@@ -10,13 +10,13 @@ import {AboutPage} from './page-about/about';
 import {ArchiveContainerPage} from './page-archive/archive-container';
 import {MainPage} from './page-main/main';
 import {SpeakerPage} from './page-speaker/speaker';
-import {AdvertisingPage} from './page-advertising/advertising';
+import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising.component';
 import {DataContext} from './data/data.context';
-import {Container} from './container/container';
+import {DcContainerComponent} from './container/dc-container.component';
 import {LocalizePipe} from './reuse/localize.pipe';
 import {MeetingInfoBlock} from './page-main/meeting-info-block';
 import {DcAdsRowLowerComponent} from './reuse-advertising/dc-ads-row-lower.component';
-import {TeamRows} from './container/team-rows';
+import {DcTeamRowsComponent} from './container/dc-team-rows.component';
 import {AppRoutes} from './app.routes';
 import {Ressources} from './reuse-resources/ressources';
 import {TitleRow} from './reuse/title-row';
@@ -51,14 +51,14 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    Container,
+    DcContainerComponent,
     MainPage,
     ArchiveContainerPage,
     ArchiveMainPage,
     ArchiveBestPage,
     ArchiveSpeakerPage,
     ArchiveSeminarPage,
-    AdvertisingPage,
+    DcAdvertisingPageComponent,
     AboutPage,
     DcAdsRowUpperComponent,
     DcAdsRowLowerComponent,
@@ -66,7 +66,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     MeetingInfoList,
     SpeechRow,
     SpeakerPage,
-    TeamRows,
+    DcTeamRowsComponent,
     TitleRow,
     Ressources,
     LocalizePipe

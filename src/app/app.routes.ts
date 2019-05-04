@@ -3,8 +3,8 @@ import {AboutPage} from './page-about/about';
 import {ArchiveContainerPage} from './page-archive/archive-container';
 import {MainPage} from './page-main/main';
 import {SpeakerPage} from './page-speaker/speaker';
-import {AdvertisingPage} from './page-advertising/advertising';
-import {Container} from './container/container';
+import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising.component';
+import {DcContainerComponent} from './container/dc-container.component';
 import {ArchivePageGuard} from './page-archive/archive.guard';
 import {ArchiveMainPage} from './page-archive/main/archive-main';
 import {ArchiveBestPage} from './page-archive/best/archive-best';
@@ -15,7 +15,7 @@ import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
 export const AppRoutes: Routes = [
   {
     path: '',
-    component: Container,
+    component: DcContainerComponent,
     children: [
       {path: '', pathMatch: 'full', component: MainPage},
       {
@@ -29,7 +29,7 @@ export const AppRoutes: Routes = [
           {path: 'seminar', component: ArchiveSeminarPage, canActivate: [ArchiveSeminarPageGuard]}
         ]
       },
-      {path: 'advertising', component: AdvertisingPage},
+      {path: 'advertising', component: DcAdvertisingPageComponent},
       {path: 'about', component: AboutPage},
       {path: 'speaker', component: SpeakerPage}
     ]

@@ -3,11 +3,6 @@ import {Injectable} from '@angular/core';
 import {forkJoin} from 'rxjs';
 import {environment} from '../../environments/environment.dev-eu';
 import {DataUtil} from './data.util';
-import {DataResourcesLv} from '../reuse-resources/data.resources.lv';
-import {DataResourcesCommon} from '../reuse-resources/data.resources.common';
-import {DataResourcesEu} from '../reuse-resources/data.resources.eu';
-import {DataResourcesEe} from '../reuse-resources/data.resources.ee';
-import {Member} from '../container/member.model';
 import {Seminar} from '../page-archive/seminar/seminar.model';
 import {Meeting} from '../reuse-meeting-model/meeting.model';
 import {LabelItem} from '../reuse/label-item.model';
@@ -15,10 +10,11 @@ import {MeetingFilter} from '../page-archive/main/meeting-filter.model';
 import {Speech} from '../reuse-meeting-model/speech.model';
 import {SpeakerTabItem} from '../page-archive/speaker/speaker-tab-item.model';
 import {Config} from './config.model';
-import {Advertising} from '../reuse-advertising/advertising.model';
-import {Team} from '../container/team.model';
 import {Speaker} from '../reuse-meeting-model/speaker.model';
 import {Lang} from '../reuse/lang.model';
+import {Advertising} from './models/advertising.model';
+import {Member} from './models/member.model';
+import {Team} from './models/team.model';
 
 @Injectable()
 export class DataContext {

@@ -6,9 +6,9 @@ import {LocationStrategy} from '@angular/common';
 import {Lang} from '../reuse/lang.model';
 
 @Component({
-  templateUrl: './container.html'
+  templateUrl: './dc-container.component.html'
 })
-export class Container {
+export class DcContainerComponent {
   public langs = [
     {code: Lang.ET, text: 'EST'},
     {code: Lang.EN, text: 'ENG'},

@@ -1,10 +1,10 @@
 import {Photo} from '../page-about/photo.model';
-import {AdvertisingCompany} from '../reuse-advertising/advertising-company.model';
-import {Member} from '../container/member.model';
 import {Meeting} from '../reuse-meeting-model/meeting.model';
 import {Seminar} from '../page-archive/seminar/seminar.model';
 import {Speech} from '../reuse-meeting-model/speech.model';
 import {Speaker} from '../reuse-meeting-model/speaker.model';
+import {AdvertisingCompany} from './models/advertising-company.model';
+import {Member} from './models/member.model';
 
 export class DataUtil {
   public static readonly MEETING_DURATION = 4 * 60 * 60 * 1000;

@@ -1,4 +1,4 @@
-import {LocalizedTexts} from '../reuse/localized-texts.model';
+import {LocalizedTexts} from '../../reuse/localized-texts.model';
 
 export class Member {
   row: number;

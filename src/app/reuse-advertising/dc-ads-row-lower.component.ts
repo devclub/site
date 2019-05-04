@@ -3,8 +3,8 @@ import {DataContext} from '../data/data.context';
 
 @Component({
   selector: 'dc-ads-row-lower',
-  templateUrl: './dc-ads-row-lower.html',
-  styleUrls: ['./dc-ads-row-lower.css']
+  templateUrl: './dc-ads-row-lower.component.html',
+  styleUrls: ['./dc-ads-row-lower.component.css']
 })
 export class DcAdsRowLowerComponent {
   constructor(public dataContext: DataContext) {

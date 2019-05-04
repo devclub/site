@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {DataContext} from '../data/data.context';
-import {Advertising} from '../reuse-advertising/advertising.model';
 import {DataResourcesCommon} from '../reuse-resources/data.resources.common';
+import {Advertising} from '../data/models/advertising.model';
 
 @Component({
-  templateUrl: './advertising.html'
+  templateUrl: './dc-advertising.component.html'
 })
-export class AdvertisingPage {
+export class DcAdvertisingPageComponent {
   public advertising: Advertising;
   public DataResourcesCommon = DataResourcesCommon;
 
