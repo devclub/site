@@ -1,12 +1,12 @@
-<div class="container d-none d-sm-block">
+<div class="container">
   <div class="row mt-4 ml-2 mr-2">
-    <div class="image-wrap pl-1 pr-2" [ngClass]="classStyles"
+    <div class="image-wrap text-center pl-1 pr-2 col-3 col-md-2"
          *ngFor="let item of dataContext.advertising.companies">
       <a *ngIf="item.url" href="{{item.url}}" target="_blank" class="image-lighten">
-        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid">
+        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid p-2 mh">
       </a>
       <span *ngIf="!item.url" class="image-lighten">
-        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid">
+        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid p-2 mh">
       </span>
     </div>
   </div>

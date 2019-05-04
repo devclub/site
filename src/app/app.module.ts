@@ -15,7 +15,7 @@ import {DataContext} from './data/data.context';
 import {Container} from './container/container';
 import {LocalizePipe} from './reuse/localize.pipe';
 import {MeetingInfoBlock} from './page-main/meeting-info-block';
-import {AdsRow} from './reuse-advertising/ads-row';
+import {DcAdsRowLowerComponent} from './reuse-advertising/dc-ads-row-lower.component';
 import {TeamRows} from './container/team-rows';
 import {AppRoutes} from './app.routes';
 import {Ressources} from './reuse-resources/ressources';
@@ -30,6 +30,7 @@ import {SpeechRow} from './page-archive/main/speech-row';
 import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
 import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {MeetingInfoList} from './page-archive/main/meeting-info-list';
+import {DcAdsRowUpperComponent} from './reuse-advertising/dc-ads-row-upper.component';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -59,7 +60,8 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveSeminarPage,
     AdvertisingPage,
     AboutPage,
-    AdsRow,
+    DcAdsRowUpperComponent,
+    DcAdsRowLowerComponent,
     MeetingInfoBlock,
     MeetingInfoList,
     SpeechRow,
