@@ -1,0 +1,19 @@
+<div class="container" *ngIf="videos.length > 0">
+
+  <title-row>{{'main.title.latest_videos' | translate}}</title-row>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6" *ngFor="let video of videos">
+      <div class="video-wrap mb-3">
+        <a href="{{video.url}}" target="_blank" class="video-lighten">
+          <img src="{{video.imageUrl}}" class="img-fluid">
+          <div class="upper-text">{{video.title}}</div>
+          <div class="lower-text">
+            {{'main.title.latest_videos.published' | translate}} {{video.publishedAgo}}<br/>
+            {{video.publishedAt}}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

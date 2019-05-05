@@ -1,0 +1,42 @@
+.video-wrap {
+  position: relative;
+}
+
+.video-lighten:after {
+  content: '\A';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #FFFFFF;
+  opacity: 0.2;
+  transition: all 0.2s;
+  -webkit-transition: all 0.3s;
+}
+
+.video-lighten:hover:after {
+  opacity: 0;
+}
+
+.upper-text {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  font-size: 12px;
+  color: #FFFFFF;
+  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
+  font-weight: bold;
+}
+
+.lower-text {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 90%;
+  font-size: 12px;
+  color: #FFFFFF;
+  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
+  font-weight: bold;
+}

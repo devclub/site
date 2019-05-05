@@ -80,6 +80,8 @@
 	"common.weekday.7": "Воскресенье",
 	"main.meeting.registration": "Регистрация",
 	"main.next_meeting.info.not_avaliable": "Данные по следующей встрече пока ещё не открыты. Следите за анонсами здесь или на других ресурсах Devclub.",
+	"main.title.latest_videos": "Последние добавленные видео",
+	"main.title.latest_videos.published": "Опубликовано",
 	"menu.about": "О нас",
 	"menu.advertising": "Реклама",
 	"menu.archive": "Архив",

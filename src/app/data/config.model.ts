@@ -1,4 +1,5 @@
 import {Photo} from '../page-about/photo.model';
+import {ConfigResources} from './config-resources.model';
 
 export class Config {
   defaultLang: string;
@@ -23,4 +24,7 @@ export class Config {
   meetingsUrls: { main: string; archive: string[] };
   finances: { dataUrl: string; logoUrlPrefix: string };
   team: { dataUrl: string; personUrlPrefix: string };
+
+  googleApiKey: string;
+  resources: ConfigResources;
 }

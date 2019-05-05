@@ -31,6 +31,8 @@ import {MeetingInfoList} from './page-archive/main/meeting-info-list';
 import {DcAdsRowUpperComponent} from './reuse-advertising/dc-ads-row-upper.component';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
+import {DcLatestVideosComponent} from './page-main/dc-latest-videos.component';
+import {CachedHttpService} from './data/cached-http.service';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -53,6 +55,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     AppComponent,
     DcContainerComponent,
     DcMainPageComponent,
+    DcLatestVideosComponent,
     ArchiveContainerPage,
     ArchiveMainPage,
     ArchiveBestPage,
@@ -94,6 +97,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveSeminarPageGuard,
     ArchiveTabState,
     DataContext,
+    CachedHttpService,
     DatePipe,
     LocalizePipe
   ]
