@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DataContext} from '../data/data.context';
-import {YoutubeVideo} from './youtube-video.model';
+import {YoutubeVideo} from './models/youtube-video.model';
 import * as moment from 'moment';
 import {CachedHttpService} from '../data/cached-http.service';
 import {TranslateService} from '@ngx-translate/core';
