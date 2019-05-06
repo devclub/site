@@ -5,8 +5,8 @@
         <div class="image-wrap mb-3">
           <a href="{{member.url}}" target="_blank" class="image-lighten">
             <img src="{{member.imageUrl}}" class="img-fluid">
+            <div class="member-text d-none d-md-block">{{member.names | localize}}</div>
           </a>
-          <div class="member-text d-none d-md-block">{{member.names | localize}}</div>
         </div>
       </div>
     </div>
