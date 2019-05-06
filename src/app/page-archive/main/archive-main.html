@@ -93,9 +93,9 @@
 </div>
 
 <div class="mt-3" *ngFor="let m of meetings">
-  <meeting-info-block
+  <dc-meeting-info-block
     *ngIf="asList === false" [meeting]="m"
-    [speechOptions]="speechOptions"></meeting-info-block>
+    [speechOptions]="speechOptions"></dc-meeting-info-block>
   <meeting-info-list
     *ngIf="asList === true" [meeting]="m"
     [speechOptions]="speechOptions"></meeting-info-list>
