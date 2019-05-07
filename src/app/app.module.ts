@@ -16,7 +16,7 @@ import {DcMeetingInfoBlockComponent} from './page-main/dc-meeting-info-block.com
 import {DcAdsRowLowerComponent} from './reuse-advertising/dc-ads-row-lower.component';
 import {DcTeamRowsComponent} from './container/dc-team-rows.component';
 import {AppRoutes} from './app.routes';
-import {Ressources} from './reuse-resources/ressources';
+import {DcRessourcesComponent} from './reuse-resources/dc-ressources.component';
 import {TitleRow} from './reuse/title-row';
 import {ArchivePageGuard} from './page-archive/archive.guard';
 import {ArchiveMainPage} from './page-archive/main/archive-main';
@@ -73,7 +73,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     SpeakerPage,
     DcTeamRowsComponent,
     TitleRow,
-    Ressources,
+    DcRessourcesComponent,
     LocalizePipe
   ],
   imports: [
