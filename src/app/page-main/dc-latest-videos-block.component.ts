@@ -6,11 +6,11 @@ import {CachedHttpService} from '../data/cached-http.service';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'dc-latest-videos',
-  templateUrl: './dc-latest-videos.component.html',
-  styleUrls: ['./dc-latest-videos.component.css']
+  selector: 'dc-latest-videos-block',
+  templateUrl: './dc-latest-videos-block.component.html',
+  styleUrls: ['./dc-latest-videos-block.component.css']
 })
-export class DcLatestVideosComponent {
+export class DcLatestVideosBlockComponent {
   videos: YoutubeVideo[] = [];
 
   constructor(private dataContext: DataContext,

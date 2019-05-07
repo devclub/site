@@ -12,7 +12,7 @@ import {SpeakerPage} from './page-speaker/speaker';
 import {DataContext} from './data/data.context';
 import {DcContainerComponent} from './container/dc-container.component';
 import {LocalizePipe} from './reuse/localize.pipe';
-import {DcMeetingInfoBlockComponent} from './page-main/dc-meeting-info-block.component';
+import {DcMeetingInfoBlockComponent} from './reuse-meeting-info-block/dc-meeting-info-block.component';
 import {DcAdsRowLowerComponent} from './reuse-advertising/dc-ads-row-lower.component';
 import {DcTeamRowsComponent} from './container/dc-team-rows.component';
 import {AppRoutes} from './app.routes';
@@ -31,9 +31,12 @@ import {MeetingInfoList} from './page-archive/main/meeting-info-list';
 import {DcAdsRowUpperComponent} from './reuse-advertising/dc-ads-row-upper.component';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
-import {DcLatestVideosComponent} from './page-main/dc-latest-videos.component';
 import {CachedHttpService} from './data/cached-http.service';
 import {DcSocialBlockComponent} from './page-main/dc-social-block.component';
+import {DcSocialYoutubeBlockComponent} from './page-main/dc-social-youtube-block.component';
+import {DcMeetingBlockComponent} from './page-main/dc-meeting-block.component';
+import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.component';
+import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.component';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -56,8 +59,11 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     AppComponent,
     DcContainerComponent,
     DcMainPageComponent,
+    DcMeetingBlockComponent,
+    DcSocialYoutubeBlockComponent,
+    DcShortInfoBlockComponent,
     DcSocialBlockComponent,
-    DcLatestVideosComponent,
+    DcLatestVideosBlockComponent,
     ArchiveContainerPage,
     ArchiveMainPage,
     ArchiveBestPage,

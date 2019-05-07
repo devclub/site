@@ -5,21 +5,13 @@ declare var FB: any;
 
 @Component({
   selector: 'dc-social-block',
-  templateUrl: './dc-social-block.component.html',
-  styleUrls: ['./dc-social-block.component.css']
+  templateUrl: './dc-social-block.component.html'
 })
 export class DcSocialBlockComponent implements OnInit, OnDestroy {
-  youtubeChannelIds: string[] = [];
   facebookPageUrl: string;
   facebookGroupUrl: string;
 
   constructor(private dataContext: DataContext) {
-    this.youtubeChannelIds.push(dataContext.config.resources.main.youtubeChannelId);
-    dataContext.config.resources.extra.forEach(res => {
-      if (res.youtubeChannelId) {
-        this.youtubeChannelIds.push(res.youtubeChannelId);
-      }
-    })
     this.facebookPageUrl = 'https://www.facebook.com/' + dataContext.config.resources.main.facebookPageId;
     this.facebookGroupUrl = 'https://www.facebook.com/groups/' + dataContext.config.resources.main.facebookGroupId;
   }
@@ -41,13 +33,7 @@ export class DcSocialBlockComponent implements OnInit, OnDestroy {
     fjs.parentNode.insertBefore(js, fjs);
   }
 
-  removeScript(id: string) {
-    const fjs = document.getElementsByTagName('script')[0];
-    fjs.parentNode.removeChild(document.getElementById(id));
-  }
-
   ngOnInit() {
-    this.addScript('google-apis', 'https://apis.google.com/js/platform.js');
     this.addScript('github-buttons', 'https://buttons.github.io/buttons.js');
     this.addScript('facebook-jssdk', 'https://connect.facebook.net/en_US/sdk.js', () => {
       FB.init({
@@ -60,8 +46,14 @@ export class DcSocialBlockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.removeScript('google-apis');
-    this.removeScript('github-buttons');
-    this.removeScript('facebook-jssdk');
+    const elements = document.getElementsByTagName('script');
+    const parentNode = elements[0].parentNode;
+    for (let i = (elements.length - 1); i >= 0; i--) {
+      if (elements[i].id === 'github-buttons'
+        || elements[i].id === 'facebook-jssdk'
+        || elements[i].src.startsWith('https://connect.facebook.net')) {
+        parentNode.removeChild(elements[i]);
+      }
+    }
   }
 }
