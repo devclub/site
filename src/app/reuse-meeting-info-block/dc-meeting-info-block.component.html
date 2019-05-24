@@ -34,7 +34,7 @@
         | translate}}</a>
     </div>
   </div>
-  <div class="row speech-container" *ngFor="let speech of meeting.speeches">
+  <div class="row speech-container" *ngFor="let speech of meeting.speeches" style="background-color: #FFFFFF">
     <div class="col-sm-4 col-md-3" *ngFor="let speaker of speech.speakers">
       <div class="image-wrap mb-3">
         <a href="{{speaker.url}}" target="_blank">
