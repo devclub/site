@@ -8,6 +8,9 @@
 .small{
   font-size: 14px;
 }
+.main-info {
+  color: #000000;
+}
 .name-container{
   text-align: center;
 }
