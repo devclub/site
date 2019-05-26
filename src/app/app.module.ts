@@ -33,7 +33,7 @@ import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
 import {CachedHttpService} from './data/cached-http.service';
 import {DcSocialBlockComponent} from './page-main/dc-social-block.component';
-import {DcSocialYoutubeBlockComponent} from './page-main/dc-social-youtube-block.component';
+import {DcSocialYoutubeBlockComponent} from './container/dc-social-youtube-block.component';
 import {DcMeetingBlockComponent} from './page-main/dc-meeting-block.component';
 import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.component';
 import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.component';
