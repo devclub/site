@@ -1,5 +1,5 @@
 <div class="form-row mt-3 mb-3">
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-3 col-lg-3">
     <label for="speaker">{{'archive.main.filter.speaker' | translate}}</label>
     <div class="input-group">
       <input id="speaker" [(ngModel)]="dataContext.filter.speaker"
@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3 col-lg-4">
     <label for="texts">{{'archive.main.filter.texts' | translate}}</label>
     <div class="input-group">
       <input id="texts" [(ngModel)]="dataContext.filter.texts"
@@ -49,12 +49,12 @@
       </div>
     </div>
   </div>
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-4 col-lg-3">
     <label for="season">{{'archive.main.filter.seasons' | translate}}</label>
     <div class="input-group">
-      <div class="input-group-append">
+      <div class="input-group-append" *ngIf="getMinusYearText() != ''">
         <span class="input-group-text pointer" (click)="minusYear()">
-          <i class="fas fa-angle-left"></i>
+          <i class="fas fa-angle-left"></i> &nbsp; {{getMinusYearText()}}
         </span>
       </div>
       <select id="season" class="form-control"
@@ -64,9 +64,9 @@
         </option>
         <option *ngFor="let year of dataContext.seasons" [ngValue]="year">{{year}}</option>
       </select>
-      <div class="input-group-append">
+      <div class="input-group-append" *ngIf="getPlusYearText() != ''">
         <span class="input-group-text pointer" (click)="plusYear()">
-          <i class="fas fa-angle-right"></i>
+          {{getPlusYearText() | translate}} &nbsp; <i class="fas fa-angle-right"></i>
         </span>
       </div>
     </div>

@@ -49,6 +49,26 @@ export class ArchiveMainPage {
     this.search();
   }
 
+  getPlusYearText(): string {
+    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    if (index === 0) {
+      return 'archive.main.filter.seasons.all';
+    } else if (index !== -1) {
+      return '+1';
+    }
+    return '';
+  }
+
+  getMinusYearText(): string {
+    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    if (index === -1) {
+      return '' + this.dataContext.seasons[0];
+    } else if (index < this.dataContext.seasons.length - 1) {
+      return '-1';
+    }
+    return '';
+  }
+
   plusYear() {
     const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
     if (index === -1) {
