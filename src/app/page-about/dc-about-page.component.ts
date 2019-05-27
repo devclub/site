@@ -5,7 +5,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {Lang} from '../common/models/lang.model';
 
 @Component({
-  templateUrl: './dc-about-page.component.html'
+  templateUrl: './dc-about-page.component.html',
+  styleUrls: ['./dc-about-page.component.css']
 })
 export class DcAboutPageComponent {
   public calendarUrl: SafeResourceUrl;

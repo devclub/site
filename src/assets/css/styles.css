@@ -1,83 +1,4 @@
 /**************************
- * image lighten
- **************************/
-
-*:focus, *:visited {
-  outline: none !important;
-}
-
-.image-wrap {
-  position: relative;
-}
-
-.image-lighten:after {
-  content: '\A';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: #FFFFFF;
-  opacity: 0.3;
-  transition: all 0.2s;
-  -webkit-transition: all 0.3s;
-}
-
-.image-lighten:hover:after {
-  opacity: 0;
-}
-
-.member-text {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-  width: 100%;
-  padding-right: 5%;
-  font-size: 12px;
-  color: #FFFFFF;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  font-weight: bold;
-}
-
-a.photo-text
-a.photo-text:hover,
-a.photo-text:active,
-a.photo-text:visited,
-a.photo-text:link {
-  text-decoration: none;
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 100%;
-  font-size: 18px;
-  color: #FFFFFF;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  font-weight: bold;
-}
-
-/**************************
- * footer
- **************************/
-
-footer {
-  color: #FFFFFF;
-  background-color: #000000;
-}
-
-footer a,
-footer a:hover,
-footer a:active,
-footer a:visited,
-footer a:link {
-  color: #FFFFFF;
-}
-
-.f-icon {
-  width: 25px;
-  display: inline-block;
-}
-
-/**************************
  * start page
  **************************/
 
@@ -107,6 +28,28 @@ footer a:link {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+/**************************
+ * footer
+ **************************/
+
+footer {
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+footer a,
+footer a:hover,
+footer a:active,
+footer a:visited,
+footer a:link {
+  color: #FFFFFF;
+}
+
+.f-icon {
+  width: 25px;
+  display: inline-block;
 }
 
 /**************************

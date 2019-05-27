@@ -63,9 +63,7 @@
       <div class="image-wrap">
         <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
           <img src="{{photo.smallUrl}}" class="img-fluid"/>
-        </a>
-        <a href="{{photo.mainUrl}}" target="_blank" class="photo-text">
-          {{photo.texts | localize}}
+          <div class="photo-text">{{photo.texts | localize}}</div>
         </a>
       </div>
     </div>
@@ -78,8 +76,8 @@
       <div class="image-wrap">
         <a href="{{p.url}}" target="_blank" class="image-lighten">
           <img src="{{p.imageUrl}}" class="img-fluid">
+          <div class="member-text">{{p.names | localize}}</div>
         </a>
-        <div class="member-text">{{p.names | localize}}</div>
       </div>
     </div>
     <div class="col-12 d-block d-md-none" *ngFor="let p of dataContext.teamThanks">
