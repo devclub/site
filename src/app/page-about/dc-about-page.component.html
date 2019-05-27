@@ -29,21 +29,6 @@
 
   <dc-ressources></dc-ressources>
 
-  <dc-title-row>{{'about.title.photos' | translate}}</dc-title-row>
-
-  <div class="row" *ngFor="let rows of dataContext.config.photos">
-    <div class="col mb-3" *ngFor="let photo of rows">
-      <div class="image-wrap">
-        <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
-          <img src="{{photo.smallUrl}}" class="img-fluid"/>
-        </a>
-        <a href="{{photo.mainUrl}}" target="_blank" class="photo-text">
-          {{photo.texts | localize}}
-        </a>
-      </div>
-    </div>
-  </div>
-
   <dc-title-row>{{'about.logos.title' | translate}}</dc-title-row>
 
   <div class="row mb-3">
@@ -68,13 +53,22 @@
       <img src="assets/images/brand/logo_ee.png" class="img-fluid">
     </div>
     <div class="col">
-      <img src="assets/images/brand/logo_void.png" class="img-fluid">
-    </div>
-    <div class="col">
       <img src="assets/images/brand/logo_lv.png" class="img-fluid">
     </div>
-    <div class="col">
-      <img src="assets/images/brand/logo_ru.png" class="img-fluid">
+  </div>
+
+  <dc-title-row>{{'about.title.photos' | translate}}</dc-title-row>
+
+  <div class="row" *ngFor="let rows of dataContext.config.photos">
+    <div class="col mb-3" *ngFor="let photo of rows">
+      <div class="image-wrap">
+        <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
+          <img src="{{photo.smallUrl}}" class="img-fluid"/>
+        </a>
+        <a href="{{photo.mainUrl}}" target="_blank" class="photo-text">
+          {{photo.texts | localize}}
+        </a>
+      </div>
     </div>
   </div>
 
