@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../data/data.context';
+import {DataContext} from '../common/context/data.context';
 
 @Component({
   templateUrl: './dc-main-page.component.html'

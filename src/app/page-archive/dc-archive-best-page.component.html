@@ -1,0 +1,25 @@
+<div class="form-row mt-3 mb-3">
+  <div class="col">
+    <div class="btn-group" role="group">
+      <button (click)="groupByPlace()"
+              [ngClass]="{'active': isGroupByPlace()}"
+              type="button" class="btn btn-dark" translate>
+        archive.best.filter.groupby.place
+      </button>
+      <button (click)="groupBySeason()"
+              [ngClass]="{'active': isGroupBySeason()}"
+              type="button" class="btn btn-dark" translate>
+        archive.best.filter.groupby.year
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3" *ngFor="let groupNumber of groupNumbers">
+  <div class="row border-bottom small" *ngIf="groups.get(groupNumber)">
+    <div class="col">{{ getGroupHeader(groupNumber) }}</div>
+  </div>
+  <dc-speech-row [speech]="speech" *ngFor="let speech of groups.get(groupNumber)">
+    <small>{{ getRowNumber(speech) }}</small>
+  </dc-speech-row>
+</div>

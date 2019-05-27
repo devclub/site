@@ -1,14 +1,14 @@
 import {Routes} from '@angular/router';
-import {AboutPage} from './page-about/about';
-import {ArchiveContainerPage} from './page-archive/archive-container';
-import {SpeakerPage} from './page-speaker/speaker';
-import {DcContainerComponent} from './container/dc-container.component';
-import {ArchivePageGuard} from './page-archive/archive.guard';
-import {ArchiveMainPage} from './page-archive/main/archive-main';
-import {ArchiveBestPage} from './page-archive/best/archive-best';
-import {ArchiveSpeakerPage} from './page-archive/speaker/archive-speaker';
-import {ArchiveSeminarPage} from './page-archive/seminar/archive-seminar';
-import {ArchiveSeminarPageGuard} from './page-archive/archive.seminar.guard';
+import {DcAboutPageComponent} from './page-about/dc-about-page.component';
+import {DcArchiveContainerPageComponent} from './page-archive/dc-archive-container.component';
+import {DcSpeakerPageComponent} from './page-speaker/dc-speaker-page.component';
+import {DcContainerComponent} from './common/container/dc-container.component';
+import {ArchivePageGuard} from './page-archive/services/archive.guard';
+import {DcArchiveMainPageComponent} from './page-archive/dc-archive-main-page.component';
+import {DcArchiveBestPageComponent} from './page-archive/dc-archive-best-page.component';
+import {DcArchiveSpeakerPageComponent} from './page-archive/dc-archive-speaker-page.component';
+import {DcArchiveSeminarPageComponent} from './page-archive/dc-archive-seminar-page.component';
+import {ArchiveSeminarPageGuard} from './page-archive/services/archive.seminar.guard';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
 
@@ -20,18 +20,18 @@ export const AppRoutes: Routes = [
       {path: '', pathMatch: 'full', component: DcMainPageComponent},
       {
         path: 'archive',
-        component: ArchiveContainerPage,
+        component: DcArchiveContainerPageComponent,
         canActivate: [ArchivePageGuard],
         children: [
-          {path: '', component: ArchiveMainPage},
-          {path: 'best', component: ArchiveBestPage},
-          {path: 'speaker', component: ArchiveSpeakerPage},
-          {path: 'seminar', component: ArchiveSeminarPage, canActivate: [ArchiveSeminarPageGuard]}
+          {path: '', component: DcArchiveMainPageComponent},
+          {path: 'best', component: DcArchiveBestPageComponent},
+          {path: 'speaker', component: DcArchiveSpeakerPageComponent},
+          {path: 'seminar', component: DcArchiveSeminarPageComponent, canActivate: [ArchiveSeminarPageGuard]}
         ]
       },
       {path: 'advertising', component: DcAdvertisingPageComponent},
-      {path: 'about', component: AboutPage},
-      {path: 'speaker', component: SpeakerPage}
+      {path: 'about', component: DcAboutPageComponent},
+      {path: 'speaker', component: DcSpeakerPageComponent}
     ]
   }
 ];

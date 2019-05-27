@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataContext} from '../data/data.context';
+import {DataContext} from '../common/context/data.context';
 
 declare var FB: any;
 
