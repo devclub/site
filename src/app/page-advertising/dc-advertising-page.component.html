@@ -19,9 +19,9 @@
             <tbody>
             <tr *ngFor="let price of advertising.prices">
               <td class="text-right">{{price.month}}</td>
-              <td class="text-right">{{price.price*price.month}}</td>
+              <td class="text-right">{{price.price * price.month}}</td>
               <td class="text-right text-muted">{{price.price}}</td>
-              <td class="text-right text-muted">{{price.price*12}}</td>
+              <td class="text-right text-muted">{{price.price * 12}}</td>
             </tr>
             </tbody>
           </table>
@@ -41,9 +41,9 @@
         <div class="card-body">
           <p class="card-text">{{"advertising.donation_help" | translate}}</p>
           <ul class="list-unstyled">
-            <li><b>{{bank}}:</b> {{banknumber}}</li>
-            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{bankrecipient}}</li>
-            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{bankdescription}}
+            <li><b>{{advertising.bankName}}:</b> {{advertising.bankNumber}}</li>
+            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{advertising.bankRecipient}}</li>
+            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{advertising.bankDescription}}
             </li>
           </ul>
         </div>

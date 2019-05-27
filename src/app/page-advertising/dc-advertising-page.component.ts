@@ -6,16 +6,11 @@ import {DataContext} from '../common/context/data.context';
   templateUrl: './dc-advertising-page.component.html'
 })
 export class DcAdvertisingPageComponent {
+  public mail;
   public advertising: Advertising;
 
-  // FIXME move to properties
-  public mail = 'info@devclub.eu';
-  public bank = 'Swedbank';
-  public banknumber = 'EE822200221049645988';
-  public bankrecipient = 'MTÜ DEVCLUB';
-  public bankdescription = 'devclub.eu donation';
-
   constructor(dataContext: DataContext) {
+    this.mail = dataContext.config.resources.main.mail;
     this.advertising = dataContext.advertising;
   }
 }
