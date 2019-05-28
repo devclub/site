@@ -19,6 +19,7 @@ deploy:
   steps:
   - add-to-known_hosts:
       hostname: $SERVER_HOST
+      port: $SERVER_PORT
   - mktemp:
       envvar: SERVER_PRIVATE_KEY_PATH
   - create-file:
