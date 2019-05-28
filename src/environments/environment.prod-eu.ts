@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  config: 'https://data.devclub.eu/eu_conf.json'
+  config: 'https://devclub.github.io/data/eu_conf_dev.json'
 };
