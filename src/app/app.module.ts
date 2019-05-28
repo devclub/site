@@ -6,30 +6,37 @@ import {BrowserModule} from '@angular/platform-browser';
 import {PreloadAllModules, RouterModule} from '@angular/router';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
-import {AboutPage} from './pages/about';
-import {ArchiveContainerPage} from './pages/archive/archive-container';
-import {MainPage} from './pages/main';
-import {SpeakerPage} from './pages/speaker';
-import {AdvertisingPage} from './pages/advertising';
-import {DataContext} from './data.context';
-import {Container} from './components/container';
-import {LocalizePipe} from './components/localize.pipe';
-import {MeetingInfoBlock} from './components/meeting-info-block';
-import {AdsRow} from './components/ads-row';
-import {TeamRows} from './components/team-rows';
-import {ROUTES} from './routes';
-import {Ressources} from './components/ressources';
-import {TitleRow} from './components/title-row';
-import {ArchivePageGuard} from './pages/archive/archive.guard';
-import {ArchiveMainPage} from './pages/archive/archive-main';
-import {ArchiveBestPage} from './pages/archive/archive-best';
-import {ArchiveSpeakerPage} from './pages/archive/archive-speaker';
-import {ArchiveSeminarPage} from './pages/archive/archive-seminar';
-import {ArchiveTabState} from './pages/archive/archive.tab.state';
-import {SpeechRow} from './components/speech-row';
-import {ArchiveSeminarPageGuard} from './pages/archive/archive.seminar.guard';
+import {DcAboutPageComponent} from './page-about/dc-about-page.component';
+import {DcArchiveContainerPageComponent} from './page-archive/dc-archive-container.component';
+import {DcSpeakerPageComponent} from './page-speaker/dc-speaker-page.component';
+import {DataContext} from './common/context/data.context';
+import {DcContainerComponent} from './common/container/dc-container.component';
+import {LocalizePipe} from './common/localize.pipe';
+import {DcMeetingInfoBlockComponent} from './common/components/dc-meeting-info-block.component';
+import {DcAdsRowLowerComponent} from './common/container/dc-ads-row-lower.component';
+import {DcTeamRowsComponent} from './common/container/dc-team-rows.component';
+import {AppRoutes} from './app.routes';
+import {DcRessourcesComponent} from './common/components/dc-ressources.component';
+import {DcTitleRowComponent} from './common/components/dc-title-row.component';
+import {ArchivePageGuard} from './page-archive/services/archive.guard';
+import {DcArchiveMainPageComponent} from './page-archive/dc-archive-main-page.component';
+import {DcArchiveBestPageComponent} from './page-archive/dc-archive-best-page.component';
+import {DcArchiveSpeakerPageComponent} from './page-archive/dc-archive-speaker-page.component';
+import {DcArchiveSeminarPageComponent} from './page-archive/dc-archive-seminar-page.component';
+import {ArchiveTabState} from './page-archive/services/archive.tab.state';
+import {ArchiveSeminarPageGuard} from './page-archive/services/archive.seminar.guard';
 import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
-import {MeetingInfoList} from './components/meeting-info-list';
+import {DcAdsRowUpperComponent} from './common/container/dc-ads-row-upper.component';
+import {DcMainPageComponent} from './page-main/dc-main-page.component';
+import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
+import {CachedHttpService} from './common/cached-http.service';
+import {DcSocialBlockComponent} from './page-main/dc-social-block.component';
+import {DcSocialYoutubeBlockComponent} from './common/container/dc-social-youtube-block.component';
+import {DcMeetingBlockComponent} from './page-main/dc-meeting-block.component';
+import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.component';
+import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.component';
+import {DcMeetingInfoListComponent} from './page-archive/dc-meeting-info-list.component';
+import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -50,23 +57,29 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    Container,
-    MainPage,
-    ArchiveContainerPage,
-    ArchiveMainPage,
-    ArchiveBestPage,
-    ArchiveSpeakerPage,
-    ArchiveSeminarPage,
-    AdvertisingPage,
-    AboutPage,
-    AdsRow,
-    MeetingInfoBlock,
-    MeetingInfoList,
-    SpeechRow,
-    SpeakerPage,
-    TeamRows,
-    TitleRow,
-    Ressources,
+    DcContainerComponent,
+    DcMainPageComponent,
+    DcMeetingBlockComponent,
+    DcSocialYoutubeBlockComponent,
+    DcShortInfoBlockComponent,
+    DcSocialBlockComponent,
+    DcLatestVideosBlockComponent,
+    DcArchiveContainerPageComponent,
+    DcArchiveMainPageComponent,
+    DcArchiveBestPageComponent,
+    DcArchiveSpeakerPageComponent,
+    DcArchiveSeminarPageComponent,
+    DcAdvertisingPageComponent,
+    DcAboutPageComponent,
+    DcAdsRowUpperComponent,
+    DcAdsRowLowerComponent,
+    DcMeetingInfoBlockComponent,
+    DcMeetingInfoListComponent,
+    DcSpeechRowComponent,
+    DcSpeakerPageComponent,
+    DcTeamRowsComponent,
+    DcTitleRowComponent,
+    DcRessourcesComponent,
     LocalizePipe
   ],
   imports: [
@@ -75,7 +88,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
+    RouterModule.forRoot(AppRoutes, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     TranslateModule.forRoot({
@@ -92,6 +105,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveSeminarPageGuard,
     ArchiveTabState,
     DataContext,
+    CachedHttpService,
     DatePipe,
     LocalizePipe
   ]

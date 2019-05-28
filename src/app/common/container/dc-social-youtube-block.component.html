@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="d-flex">
+      <div *ngFor="let youtubeChannelId of youtubeChannelIds; let i = index">
+        <div class="pr-4" [ngClass]="{'d-none d-md-block': i !== 0}">
+          <div class="g-ytsubscribe"
+               [attr.data-channelid]="youtubeChannelId"
+               data-layout="full"
+               data-theme="default"
+               data-count="default">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

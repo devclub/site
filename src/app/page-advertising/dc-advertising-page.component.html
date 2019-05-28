@@ -1,0 +1,95 @@
+<div class="container">
+  <dc-title-row>{{'advertising.howto.title' | translate}}</dc-title-row>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.price.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.price.desc" | translate}}</p>
+          <table class="table">
+            <thead>
+            <tr>
+              <th class="text-right" scope="col">{{"advertising.price.months" | translate}}</th>
+              <th class="text-right" scope="col">{{"advertising.price.total" | translate}}</th>
+              <th class="text-right text-muted" scope="col">{{"advertising.price.per_month" | translate}}</th>
+              <th class="text-right text-muted" scope="col">{{"advertising.price.per_year" | translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let price of advertising.prices">
+              <td class="text-right">{{price.month}}</td>
+              <td class="text-right">{{price.price * price.month}}</td>
+              <td class="text-right text-muted">{{price.price}}</td>
+              <td class="text-right text-muted">{{price.price * 12}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.where_money_goes.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.where_money_doesnt_go" | translate}}</p>
+          <p class="card-text">{{"advertising.where_money_goes" | translate}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.donation_help.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.donation_help" | translate}}</p>
+          <ul class="list-unstyled">
+            <li><b>{{advertising.bankName}}:</b> {{advertising.bankNumber}}</li>
+            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{advertising.bankRecipient}}</li>
+            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{advertising.bankDescription}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.what_to_do.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">
+            <img class="float-left mr-3" src="assets/images/take_my_money.jpg"/>
+            {{"advertising.what_to_do" | translate}}
+          </p>
+          <p class="card-text">
+            {{"advertising.what_to_do.mail" | translate:{mail: mail} }}
+          </p>
+        </div>
+      </div>
+
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.why.title" | translate}}</h6>
+        <div class="card-body">
+          <ol>
+            <li>{{"advertising.why.p1" | translate }}</li>
+            <li>{{"advertising.why.p2" | translate }}</li>
+            <li>{{"advertising.why.p3" | translate }}</li>
+            <li>{{"advertising.why.p4" | translate }}</li>
+            <li>{{"advertising.why.p5" | translate }}</li>
+            <li>{{"advertising.why.p6" | translate }}</li>
+          </ol>
+          <p class="card-text">{{"advertising.why.p7" | translate}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <dc-title-row>{{'advertising.companies.title' | translate}}</dc-title-row>
+
+  <div class="row align-items-center mb-3">
+    <div class="col-6 col-sm-4 col-lg-3 text-center" *ngFor="let item of advertising.companies">
+      <a href="{{item.url}}" target="_blank">
+        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid">
+      </a>
+    </div>
+  </div>
+
+</div>
