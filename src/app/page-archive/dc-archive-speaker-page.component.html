@@ -18,9 +18,9 @@
       </a>
     </th>
     <th scope="col" *ngIf="dataContext.config.hasTop">
-      <span class="badge badge-pill badge-warning">I</span>
-      <span class="badge badge-pill badge-secondary">II</span>
-      <span class="badge badge-pill badge-info">III</span>
+      <span class="badge badge-pill badge-warning mr-1">I</span>
+      <span class="badge badge-pill badge-secondary mr-1">II</span>
+      <span class="badge badge-pill badge-info mr-1">III</span>
       <span class="badge badge-pill badge-dark">&gt;III</span>
       =
       <span class="badge badge-pill badge-success" translate>
@@ -41,15 +41,15 @@
     <td>{{speaker.speechCount}}</td>
     <td *ngIf="dataContext.config.hasTop">
       <span *ngIf="speaker.top1 + speaker.top2 + speaker.top3 + speaker.topOther > 0">
-        <span class="badge badge-pill badge-warning"
+        <span class="badge badge-pill badge-warning mr-1"
               [ngClass]="{'lighten': speaker.top1 === 0}">
           {{speaker.top1}}
         </span>
-        <span class="badge badge-pill badge-secondary"
+        <span class="badge badge-pill badge-secondary mr-1"
               [ngClass]="{'lighten': speaker.top2 === 0}">
           {{speaker.top2}}
         </span>
-        <span class="badge badge-pill badge-info"
+        <span class="badge badge-pill badge-info mr-1"
               [ngClass]="{'lighten': speaker.top3 === 0}">
           {{speaker.top3}}
         </span>
