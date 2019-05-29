@@ -7,7 +7,7 @@
             *ngFor="let m of this.dataContext.nextMeetings"
             [showRegisterEvent]="true" [meeting]="m"></dc-meeting-info-block>
         </span>
-        <div class="text-light" *ngIf="this.dataContext.nextMeetings.length === 0">
+        <div *ngIf="this.dataContext.nextMeetings.length === 0">
           {{'main.next_meeting.info.not_avaliable' | translate}}
         </div>
       </div>
