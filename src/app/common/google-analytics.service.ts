@@ -47,16 +47,24 @@ export class GoogleAnalyticsService {
 
   public appendGaTrackingCode(googleAnalyticsKey: string) {
     try {
-      const script = document.createElement('script');
-      script.innerHTML = `
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      const script1 = document.createElement('script');
+      script1.id = 'googletagmanager';
+      script1.src = 'https://www.googletagmanager.com/gtag/js?id=' + googleAnalyticsKey;
+      script1.type = 'text/javascript';
+      script1.async = true;
+      document.head.appendChild(script1);
 
-        ga('create', '` + googleAnalyticsKey + `', 'auto');
+      const script2 = document.createElement('script');
+      script2.id = 'gtag';
+      script2.type = 'text/javascript';
+      script2.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '` + googleAnalyticsKey + `');
       `;
-      document.head.appendChild(script);
+      document.head.appendChild(script2);
     } catch (ex) {
       console.error('Error appending google analytics');
       console.error(ex);
