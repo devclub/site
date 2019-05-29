@@ -16,12 +16,14 @@ export class DcContainerComponent {
   ];
   public isMenuOpen = false;
   public currentYear = new Date().getFullYear();
+  public blogUrl;
 
   constructor(public dataContext: DataContext,
               private translate: TranslateService,
               private url: LocationStrategy,
               private router: Router,
               private route: ActivatedRoute) {
+    this.blogUrl = dataContext.config.resources.main.blog;
   }
 
   toggleMenu() {
