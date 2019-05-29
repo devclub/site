@@ -40,9 +40,6 @@
         <a href="{{speaker.url}}" target="_blank">
           <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
         </a>
-        <!-- <div class="member-text">
-          {{speaker.names | localize}}
-        </div> -->
       </div>
       <div class="name-container">
         <h4>
@@ -99,19 +96,6 @@
             <a [href]="exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
           </span>
         </div>
-        <!-- <span *ngFor="let speaker of speech.speakers">
-          <h6 class="mb-0">
-            <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
-              <i class="fas fa-user small"></i></a>
-            <a *ngIf="speechOptions && speechOptions.clickNameFn" class="dotted"
-               (click)="speechOptions.clickNameFn(speaker)" href="javascript:void(0)">
-              {{speaker.names | localize}}</a>
-            <ng-container *ngIf="!speechOptions || !speechOptions.clickNameFn">
-              {{speaker.names | localize}}
-            </ng-container>
-          </h6>
-          <span class="small text-muted">{{speaker.titles | localize}}</span>
-        </span> -->
       </div>
       <div>
         <p class="small" *ngFor="let paragr of (speech.descr | localize:[])">{{paragr}}</p>
