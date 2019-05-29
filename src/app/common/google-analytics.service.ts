@@ -13,7 +13,6 @@ export class GoogleAnalyticsService {
           if (event instanceof NavigationEnd) {
             ga('set', 'page', event.urlAfterRedirects);
             ga('send', 'pageview');
-            console.log('%%% Google Analytics page view event %%%');
           }
         }
       } catch (e) {
@@ -61,7 +60,6 @@ export class GoogleAnalyticsService {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', '` + googleAnalyticsKey + `');
       `;
       document.head.appendChild(script2);
