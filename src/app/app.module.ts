@@ -37,6 +37,7 @@ import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.c
 import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.component';
 import {DcMeetingInfoListComponent} from './page-archive/dc-meeting-info-list.component';
 import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
+import {GoogleAnalyticsService} from './common/google-analytics.service';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -106,6 +107,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveTabState,
     DataContext,
     CachedHttpService,
+    GoogleAnalyticsService,
     DatePipe,
     LocalizePipe
   ]

@@ -25,6 +25,8 @@ import {
 } from '@fortawesome/fontawesome-free-solid';
 import {faGithub, faGooglePlusG, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/fontawesome-free-brands';
 import {faEnvelope} from '@fortawesome/fontawesome-free-regular';
+import {GoogleAnalyticsService} from './common/google-analytics.service';
+import {environment} from '../environments/environment.dev-eu';
 
 fontawesome.library.add(faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle,
   faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkSquareAlt,
@@ -39,7 +41,8 @@ export class AppComponent {
   constructor(private dataContext: DataContext,
               private translate: TranslateService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private googleAnalyticsService: GoogleAnalyticsService) {
     activatedRoute.queryParams.subscribe(
       params => {
         let language = params['lang'];
@@ -53,5 +56,9 @@ export class AppComponent {
         window.scrollTo(0, 0);
       }
     });
+
+    if (environment.googleAnalyticsKey) {
+      googleAnalyticsService.appendGaTrackingCode(environment.googleAnalyticsKey);
+    }
   }
 }
