@@ -48,6 +48,7 @@
 	"archive.main.filter.seasons.all": "All",
 	"archive.main.filter.speaker": "Speaker",
 	"archive.main.filter.texts": "Topic/description",
+  "archive.main.filter.view": "View",
 	"archive.main.mode.block": "More info",
 	"archive.main.mode.list": "Compact",
 	"archive.main.tab": "Meetings",
@@ -133,10 +134,5 @@
 	"speaker.want_to_talk.p3": "You'll get experience and feedback on your talk ideas - that's how you can find alternative solutions.",
 	"speaker.want_to_talk.p4": "Small souvenir from Devclub and you'll be mentioned here on site - this can be regarded as a bonus to your social skills in your CV.",
 	"speaker.want_to_talk.p5": "Are you interested? Have ideas? Push the red button, fill the form, and we will contact you!",
-	"speaker.want_to_talk.title": "Want to talk?",
-	"{{'archive.speaker.col.count' | translate}}": "",
-	"{{'archive.speaker.col.date' | translate}}": "",
-	"{{'archive.speaker.col.name' | translate}}": "",
-	"{{'archive.speaker.col.top' | translate}}": "",
-	"{{'archive.speaker.col.top.total' | translate}}": ""
+	"speaker.want_to_talk.title": "Want to talk?"
 }
