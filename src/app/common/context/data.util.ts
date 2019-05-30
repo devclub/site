@@ -7,7 +7,7 @@ import {AdvertisingCompany} from '../models/advertising-company.model';
 import {Member} from '../models/member.model';
 
 export class DataUtil {
-  public static readonly MEETING_DURATION = 4 * 60 * 60 * 1000;
+  public static readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
   public static readonly LATEST_MEETINGS_MAX_COUNT = 3;
 
   static processPhotos(photos: Photo[][], photoUrlPrefix: string): void {
@@ -41,8 +41,14 @@ export class DataUtil {
 
     loop.forEach(i => {
       const row = members.filter(m => m.row === i + 1).sort(sort);
-      if (rowMaxLength < row.length) {rowMaxLength = row.length};
-      if (row.length > 0) {result[i] = row};
+      if (rowMaxLength < row.length) {
+        rowMaxLength = row.length
+      }
+      ;
+      if (row.length > 0) {
+        result[i] = row
+      }
+      ;
     });
 
     const empty = new Member();
@@ -58,13 +64,13 @@ export class DataUtil {
   }
 
   static getNextMeetings(meetings: Meeting[]): Meeting[] {
-    const today = new Date().getTime() + this.MEETING_DURATION;
-    return meetings.filter(m => today <= m.start.getTime());
+    const now = new Date().getTime();
+    return meetings.filter(m => now <= m.start.getTime() + this.MEETING_DURATION_IN_MS);
   }
 
   static getLastMeetings(meetings: Meeting[]): Meeting[] {
     let count = 0;
-    const today = new Date().getTime() + this.MEETING_DURATION;
+    const today = new Date().getTime() + this.MEETING_DURATION_IN_MS;
     return meetings.filter(m => {
       if (today > m.start.getTime() && count < this.LATEST_MEETINGS_MAX_COUNT) {
         count++;
