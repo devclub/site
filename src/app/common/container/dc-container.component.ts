@@ -16,6 +16,7 @@ export class DcContainerComponent {
   ];
   public isMenuOpen = false;
   public currentYear = new Date().getFullYear();
+  public styleColor;
   public blogUrl;
 
   constructor(public dataContext: DataContext,
@@ -23,6 +24,7 @@ export class DcContainerComponent {
               private url: LocationStrategy,
               private router: Router,
               private route: ActivatedRoute) {
+    this.styleColor = dataContext.config.baseColor;
     this.blogUrl = dataContext.config.resources.main.blog;
   }
 

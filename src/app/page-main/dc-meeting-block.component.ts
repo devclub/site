@@ -7,6 +7,8 @@ import {DataContext} from '../common/context/data.context';
   styleUrls: ['./dc-meeting-block.component.css']
 })
 export class DcMeetingBlockComponent {
+  public styleColor: string;
   constructor(public dataContext: DataContext) {
+    this.styleColor = dataContext.config.lightColor;
   }
 }

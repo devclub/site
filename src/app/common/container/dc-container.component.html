@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark" [ngStyle]="dataContext.config.navbarStyle"
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" [ngStyle]="{'background-color': styleColor}"
      style="">
   <a class="navbar-brand" href="#/">
     <img src="assets/images/logo_navbar.png" height="30" class="d-inline-block align-top"/>
@@ -71,7 +71,7 @@
 
 <dc-ads-row-lower></dc-ads-row-lower>
 
-<footer [ngStyle]="dataContext.config.footerStyle" class="pt-3 mt-3 pb-5">
+<footer [ngStyle]="{'background-color': styleColor}" class="pt-3 mt-3 pb-5">
   <div class="container">
     <dc-ressources></dc-ressources>
     <div class="row mt-3">

@@ -4,7 +4,8 @@ import {ConfigResources} from './config-resources.model';
 export class Config {
   defaultLang: string;
 
-  navbarStyle: Map<string, string>;
+  baseColor: string;
+  lightColor: string;
   footerStyle: Map<string, string>;
 
   devclubText: string;
