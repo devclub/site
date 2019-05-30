@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocationStrategy} from '@angular/common';
 import {Lang} from '../models/lang.model';
 import {DataContext} from '../context/data.context';
+import {TranslationService} from '../translations/translation.service';
 
 @Component({
   templateUrl: './dc-container.component.html'
@@ -20,7 +20,7 @@ export class DcContainerComponent {
   public blogUrl;
 
   constructor(public dataContext: DataContext,
-              private translate: TranslateService,
+              public translationService: TranslationService,
               private url: LocationStrategy,
               private router: Router,
               private route: ActivatedRoute) {
@@ -54,6 +54,6 @@ export class DcContainerComponent {
   }
 
   isCurrentLang(langCode) {
-    return this.translate.currentLang === langCode;
+    return this.translationService.lang === langCode;
   }
 }

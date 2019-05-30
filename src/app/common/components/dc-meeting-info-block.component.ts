@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {DataContext} from '../context/data.context';
-import {TranslateService} from '@ngx-translate/core';
 import {Meeting} from '../models/meeting.model';
 import {SpeechOptions} from '../../page-main/models/speech-options.model';
+import {TranslationService} from '../translations/translation.service';
 
 @Component({
   selector: 'dc-meeting-info-block',
@@ -13,8 +13,10 @@ export class DcMeetingInfoBlockComponent {
   @Input() public meeting: Meeting;
   @Input() public showRegisterEvent: boolean;
   @Input() public speechOptions: SpeechOptions;
+  public lang: string;
 
   constructor(public dataContext: DataContext,
-              public translate: TranslateService) {
+              public translationService: TranslationService) {
+    this.lang = translationService.lang;
   }
 }

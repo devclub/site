@@ -1,19 +1,20 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {Lang} from './models/lang.model';
+import {Lang} from '../models/lang.model';
+import {TranslationService} from './translation.service';
 
 @Pipe({name: 'localize', pure: false})
 export class LocalizePipe implements PipeTransform {
 
-  constructor(private translate: TranslateService) {
+  constructor(private translationService: TranslationService) {
   }
 
   transform(value: any, defaultValue: any = ''): any {
     if (!value) {
       return defaultValue;
     }
-    if (value[this.translate.currentLang]) {
-      return value[this.translate.currentLang];
+    const v = value[this.translationService.lang];
+    if (v) {
+      return v;
     }
     if (value[Lang.DEFAULT]) {
       return value[Lang.DEFAULT];

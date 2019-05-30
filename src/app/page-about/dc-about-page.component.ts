@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {DataContext} from '../common/context/data.context';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {TranslateService} from '@ngx-translate/core';
 import {Lang} from '../common/models/lang.model';
+import {TranslationService} from '../common/translations/translation.service';
 
 @Component({
   templateUrl: './dc-about-page.component.html',
@@ -18,9 +18,9 @@ export class DcAboutPageComponent {
     '&ctz=Europe%2FTallinn&src=fmju94mnjv0a5s70hat38evqm8%40group.calendar.google.com';
 
   constructor(public dataContext: DataContext,
-              private translate: TranslateService,
+              private translationService: TranslationService,
               private sanitizer: DomSanitizer) {
-    const langParamValue = translate.currentLang === Lang.RU ? 'ru' : 'en';
+    const langParamValue = translationService.lang === Lang.RU ? 'ru' : 'en';
     const template = this.googlecalendarUrlTemplate.replace('{langParam}', langParamValue);
     this.calendarUrl = this.sanitizer.bypassSecurityTrustResourceUrl(template);
   }

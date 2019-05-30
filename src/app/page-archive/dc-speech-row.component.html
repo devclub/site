@@ -55,8 +55,8 @@
     </ng-container>
 
     <!-- language -->
-    <span class="badge badge-lang" [ngClass]="{'badge-lang': translate.currentLang === speech.lang,
-    'badge-danger': translate.currentLang !== speech.lang}">
+    <span class="badge badge-lang" [ngClass]="{'badge-lang': lang === speech.lang,
+    'badge-danger': lang !== speech.lang}">
       {{'common.speech.lang.' + speech.lang | translate}}
     </span>
   </div>

@@ -81,8 +81,8 @@
               {{label}}</span>
           </ng-container>
           <span class="badge badge-big mr-1"
-                [ngClass]="{'badge-lang': translate.currentLang === speech.lang,
-                  'badge-danger': translate.currentLang !== speech.lang}">
+                [ngClass]="{'badge-lang': lang === speech.lang,
+                  'badge-danger': lang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}
           </span>
           <span *ngFor="let presentationUrl of speech.presentations"

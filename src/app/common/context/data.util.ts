@@ -8,7 +8,6 @@ import {Member} from '../models/member.model';
 
 export class DataUtil {
   public static readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
-  public static readonly LATEST_MEETINGS_MAX_COUNT = 3;
 
   static processPhotos(photos: Photo[][], photoUrlPrefix: string): void {
     photos.forEach(

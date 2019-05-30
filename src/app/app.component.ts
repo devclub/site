@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
 import {DataContext} from './common/context/data.context';
 import * as fontawesome from '@fortawesome/fontawesome';
 import {
@@ -27,6 +26,7 @@ import {faGithub, faGooglePlusG, faSlideshare, faTwitter, faWordpress, faYoutube
 import {faEnvelope} from '@fortawesome/fontawesome-free-regular';
 import {GoogleAnalyticsService} from './common/google-analytics.service';
 import {environment} from '../environments/environment.dev-eu';
+import {TranslationService} from './common/translations/translation.service';
 
 fontawesome.library.add(faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle,
   faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkSquareAlt,
@@ -39,7 +39,7 @@ fontawesome.library.add(faRss, faComments, faCamera, faDesktop, faCalendarAlt, f
 export class AppComponent {
 
   constructor(private dataContext: DataContext,
-              private translate: TranslateService,
+              private translationService: TranslationService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private googleAnalyticsService: GoogleAnalyticsService) {
@@ -47,8 +47,7 @@ export class AppComponent {
       params => {
         let language = params['lang'];
         language = language ? language : dataContext.config.defaultLang;
-        this.translate.use(language);
-        this.translate.reloadLang(language);
+        this.translationService.setLang(language);
       }
     );
     this.router.events.subscribe((event) => {

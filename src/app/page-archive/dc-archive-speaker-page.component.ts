@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ArchiveTabState} from './services/archive.tab.state';
 import {DataContext} from '../common/context/data.context';
-import {TranslateService} from '@ngx-translate/core';
 import {SpeakerTabItem} from './models/speaker-tab-item.model';
+import {TranslationService} from '../common/translations/translation.service';
 
 @Component({
   templateUrl: './dc-archive-speaker-page.component.html'
@@ -11,7 +11,7 @@ export class DcArchiveSpeakerPageComponent {
   public speakers: Array<SpeakerTabItem>;
 
   constructor(private archiveTabState: ArchiveTabState,
-              private translate: TranslateService,
+              private translationService: TranslationService,
               public dataContext: DataContext) {
     archiveTabState.setSpeaker();
     this.sortByDate();
@@ -24,7 +24,7 @@ export class DcArchiveSpeakerPageComponent {
   }
 
   sortByName() {
-    const lang = this.translate.currentLang;
+    const lang = this.translationService.lang;
     this.sort((s1, s2) => {
       return s1.names[lang] > s2.names[lang] ? 1 : -1;
     });

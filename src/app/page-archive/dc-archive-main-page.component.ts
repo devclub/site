@@ -3,9 +3,9 @@ import {ArchiveTabState} from './services/archive.tab.state';
 import {DataContext} from '../common/context/data.context';
 import {DataUtil} from '../common/context/data.util';
 import {TypeaheadMatch} from 'ngx-bootstrap';
-import {TranslateService} from '@ngx-translate/core';
 import {Speaker} from '../common/models/speaker.model';
 import {Meeting} from '../common/models/meeting.model';
+import {TranslationService} from '../common/translations/translation.service';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
@@ -17,7 +17,7 @@ export class DcArchiveMainPageComponent {
   public meetings: Meeting[] = [];
   public speechOptions = {
     clickNameFn: (speaker: Speaker) => {
-      this.dataContext.filter.speaker = speaker.names[this.translate.currentLang];
+      this.dataContext.filter.speaker = speaker.names[this.translationService.lang];
       this.search();
     },
     clickLabelFn: (label: string) => {
@@ -27,7 +27,7 @@ export class DcArchiveMainPageComponent {
   };
 
   constructor(private archiveTabState: ArchiveTabState,
-              private translate: TranslateService,
+              private translationService: TranslationService,
               public dataContext: DataContext) {
     archiveTabState.setMain();
     this.search(true);

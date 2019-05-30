@@ -3,13 +3,13 @@
     <div class="btn-group" role="group">
       <button (click)="groupByPlace()"
               [ngClass]="{'active': isGroupByPlace()}"
-              type="button" class="btn btn-light" translate>
-        archive.best.filter.groupby.place
+              type="button" class="btn btn-light">
+        {{'archive.best.filter.groupby.place' | translate}}
       </button>
       <button (click)="groupBySeason()"
               [ngClass]="{'active': isGroupBySeason()}"
-              type="button" class="btn btn-light" translate>
-        archive.best.filter.groupby.year
+              type="button" class="btn btn-light">
+        {{'archive.best.filter.groupby.year' | translate}}
       </button>
     </div>
   </div>

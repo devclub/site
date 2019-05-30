@@ -8,7 +8,7 @@
             [showRegisterEvent]="true" [meeting]="m"></dc-meeting-info-block>
         </span>
         <div class="text-center pt-3 pb-3" *ngIf="this.dataContext.nextMeetings.length === 0">
-          <b translate>main.next_meeting.info.not_avaliable</b>
+          <b>{{'main.next_meeting.info.not_avaliable' | translate}}</b>
         </div>
       </div>
     </div>

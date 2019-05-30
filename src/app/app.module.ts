@@ -1,17 +1,16 @@
-import {CommonModule, DatePipe} from '@angular/common';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {PreloadAllModules, RouterModule} from '@angular/router';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {AppComponent} from './app.component';
 import {DcAboutPageComponent} from './page-about/dc-about-page.component';
 import {DcArchiveContainerPageComponent} from './page-archive/dc-archive-container.component';
 import {DcSpeakerPageComponent} from './page-speaker/dc-speaker-page.component';
 import {DataContext} from './common/context/data.context';
 import {DcContainerComponent} from './common/container/dc-container.component';
-import {LocalizePipe} from './common/localize.pipe';
+import {LocalizePipe} from './common/translations/localize.pipe';
 import {DcMeetingInfoBlockComponent} from './common/components/dc-meeting-info-block.component';
 import {DcAdsRowLowerComponent} from './common/container/dc-ads-row-lower.component';
 import {DcTeamRowsComponent} from './common/container/dc-team-rows.component';
@@ -38,20 +37,13 @@ import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.compone
 import {DcMeetingInfoListComponent} from './page-archive/dc-meeting-info-list.component';
 import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
 import {GoogleAnalyticsService} from './common/google-analytics.service';
+import {TranslationService} from './common/translations/translation.service';
+import {TranslatePipe} from './common/translations/translate.pipe';
 
 export function initialize(configContext: DataContext) {
   return () => {
     return configContext.initialize();
   };
-}
-
-export class DevclubTranslateHttpLoader implements TranslateLoader {
-  constructor(private http: HttpClient) {
-  }
-
-  public getTranslation(lang: string): any {
-    return this.http.get('assets/i18n/' + lang + '.json');
-  }
 }
 
 @NgModule({
@@ -81,6 +73,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     DcTeamRowsComponent,
     DcTitleRowComponent,
     DcRessourcesComponent,
+    TranslatePipe,
     LocalizePipe
   ],
   imports: [
@@ -91,14 +84,7 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     HttpClientModule,
     RouterModule.forRoot(AppRoutes, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TooltipModule.forRoot(),
-    TypeaheadModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http) => new DevclubTranslateHttpLoader(http),
-        deps: [HttpClient]
-      }
-    })
+    TypeaheadModule.forRoot()
   ],
   providers: [
     {provide: APP_INITIALIZER, useFactory: initialize, deps: [DataContext], multi: true},
@@ -106,9 +92,10 @@ export class DevclubTranslateHttpLoader implements TranslateLoader {
     ArchiveSeminarPageGuard,
     ArchiveTabState,
     DataContext,
+    TranslationService,
     CachedHttpService,
     GoogleAnalyticsService,
-    DatePipe,
+    TranslatePipe,
     LocalizePipe
   ]
 })

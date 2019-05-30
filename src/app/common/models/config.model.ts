@@ -6,12 +6,10 @@ export class Config {
 
   baseColor: string;
   lightColor: string;
-  footerStyle: Map<string, string>;
 
   devclubText: string;
   devclubMenuUrl: string;
   devclubMenuText: string;
-  blogUrl: string;
   hasTop: boolean;
 
   personUrlPrefix: string;
