@@ -73,16 +73,13 @@
   <dc-title-row>{{'about.title.thanks' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <div class="col d-none d-md-block" *ngFor="let p of dataContext.teamThanks">
+    <div class="col" *ngFor="let p of dataContext.teamThanks">
       <div class="image-wrap">
         <a href="{{p.url}}" target="_blank" class="image-lighten">
           <img src="{{p.imageUrl}}" class="img-fluid">
-          <div class="member-text">{{p.names | localize}}</div>
+          <div class="member-text d-none d-md-block">{{p.names | localize}}</div>
         </a>
       </div>
-    </div>
-    <div class="col-12 d-block d-md-none" *ngFor="let p of dataContext.teamThanks">
-      <a href="{{p.url}}">{{p.names | localize}}</a>
     </div>
   </div>
 </div>
