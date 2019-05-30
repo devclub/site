@@ -1,15 +1,13 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="d-flex">
-      <div *ngFor="let youtubeChannelId of youtubeChannelIds; let i = index">
-        <div class="pr-4" [ngClass]="{'d-none d-md-block': i !== 0}">
-          <div class="g-ytsubscribe"
-               [attr.data-channelid]="youtubeChannelId"
-               data-layout="full"
-               data-theme="default"
-               data-count="default">
-          </div>
-        </div>
+  <div class="row" style="min-height: 55px">
+    <div class="col text-center" style="min-height: 55px"
+         *ngFor="let youtubeChannelId of youtubeChannelIds; let i = index"
+         [ngClass]="{'d-none d-md-block': i !== 0}">
+      <div class="g-ytsubscribe"
+           [attr.data-channelid]="youtubeChannelId"
+           data-layout="full"
+           data-theme="default"
+           data-count="default">
       </div>
     </div>
   </div>
