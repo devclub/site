@@ -31,9 +31,7 @@ export class DataContext {
 
   public meetingsLoaded = false;
   public meetings = new Array<Meeting>();
-
   public nextMeetings = new Array<Meeting>();
-  public lastMeetings = new Array<Meeting>();
 
   public labelMap = new Map<string, LabelItem>();
   public labels = new Array<LabelItem>();
@@ -67,7 +65,6 @@ export class DataContext {
     this.setTeam(team);
     this.addMeetings(meetings);
     this.nextMeetings = DataUtil.getNextMeetings(this.meetings);
-    this.lastMeetings = DataUtil.getLastMeetings(this.meetings);
     return true;
   }
 

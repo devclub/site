@@ -68,18 +68,6 @@ export class DataUtil {
     return meetings.filter(m => now <= m.start.getTime() + this.MEETING_DURATION_IN_MS);
   }
 
-  static getLastMeetings(meetings: Meeting[]): Meeting[] {
-    let count = 0;
-    const today = new Date().getTime() + this.MEETING_DURATION_IN_MS;
-    return meetings.filter(m => {
-      if (today > m.start.getTime() && count < this.LATEST_MEETINGS_MAX_COUNT) {
-        count++;
-        return true;
-      }
-      return false;
-    });
-  }
-
   static processSeminars(seminars: Seminar[]) {
     seminars.forEach(seminar => {
       seminar.start = seminar.datetime ? new Date(seminar.datetime) : null;
