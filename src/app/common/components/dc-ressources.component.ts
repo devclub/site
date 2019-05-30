@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DataContext} from '../context/data.context';
 import {RessourceGroup} from '../models/ressource-group.model';
-import {TranslateService} from '@ngx-translate/core';
 import {Ressource} from '../models/ressource.model';
 import {ConfigResource} from '../models/config-resource.model';
 
@@ -9,19 +8,12 @@ import {ConfigResource} from '../models/config-resource.model';
   selector: 'dc-ressources',
   templateUrl: './dc-ressources.component.html'
 })
-export class DcRessourcesComponent implements OnInit {
-  groups: RessourceGroup[] = [];
+export class DcRessourcesComponent {
+  public groups: RessourceGroup[] = [];
 
-  constructor(private dataContext: DataContext,
-              private translate: TranslateService) {
-  }
-
-  ngOnInit(): void {
-    this.translate.get('resource.title.main')
-      .subscribe(title => {
-        this.addGroup(this.dataContext.config.resources.main, title);
-        this.dataContext.config.resources.extra.forEach(cr => this.addGroup(cr));
-      });
+  constructor(private dataContext: DataContext) {
+    this.addGroup(this.dataContext.config.resources.main, 'resource.title.main');
+    this.dataContext.config.resources.extra.forEach(cr => this.addGroup(cr));
   }
 
   addGroup(resource: ConfigResource, title?: string): void {
@@ -35,7 +27,7 @@ export class DcRessourcesComponent implements OnInit {
     }
 
     if (resource.youtubeChannelId) {
-      this.addRessource(group, 'https://www.youtube.com/channel/' +  resource.youtubeChannelId, 'fab fa-youtube', 'resource.youtube');
+      this.addRessource(group, 'https://www.youtube.com/channel/' + resource.youtubeChannelId, 'fab fa-youtube', 'resource.youtube');
     }
     if (resource.facebookPageId) {
       this.addRessource(group, 'https://www.facebook.com/' + resource.facebookPageId, 'fab fa-facebook', 'resource.facebookpage');
@@ -73,7 +65,7 @@ export class DcRessourcesComponent implements OnInit {
     const rs = new Ressource();
     rs.url = url;
     rs.iconClasses = iconClasses;
-    this.translate.get(messageCode).subscribe(v => rs.text = v);
+    rs.messageCode = messageCode;
     group.ressources.push(rs);
   }
 }
