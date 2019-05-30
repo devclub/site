@@ -7,11 +7,17 @@ export class TranslatePipe implements PipeTransform {
   constructor(private translationService: TranslationService) {
   }
 
-  transform(messageCode: any): any {
-    const value = this.translationService.get(messageCode);
-    if (value) {
-      return value;
+  transform(messageCode: any, params?: Object): any {
+    let value = this.translationService.get(messageCode);
+    if (!value) {
+      return messageCode;
     }
-    return messageCode;
+    if (params) {
+      const keys = Object.keys(params);
+      for (const key of keys) {
+        value = value.replace('{{' + key + '}}', params[key]);
+      }
+    }
+    return value;
   }
 }
