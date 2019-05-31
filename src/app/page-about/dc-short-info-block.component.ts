@@ -4,10 +4,10 @@ import {DataContext} from '../common/context/data.context';
 declare var FB: any;
 
 @Component({
-  selector: 'dc-social-block',
-  templateUrl: './dc-social-block.component.html'
+  selector: 'dc-short-info-block',
+  templateUrl: './dc-short-info-block.component.html'
 })
-export class DcSocialBlockComponent implements OnInit, OnDestroy {
+export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
   facebookPageUrl: string;
   facebookGroupUrl: string;
 

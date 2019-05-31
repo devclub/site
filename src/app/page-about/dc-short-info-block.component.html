@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col col-lg-8">
+    <img class="d-none d-sm-block" style="float:left" src="assets/images/logo_desc.png"/>
+    <p>{{'about.desc.p1' | translate}}</p>
+    <p>{{'about.desc.p2' | translate}}</p>
+    <p>{{'about.desc.p3' | translate}}</p>
+    <p>{{'about.desc.p4' | translate}}</p>
+  </div>
+  <div class="d-none d-lg-block col-lg-4">
+    <div class="fb-group"
+         [attr.data-href]="facebookGroupUrl"
+         data-width="260"
+         data-show-social-context="true"
+         data-show-metadata="true">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col pb-2">
+    <div class="fb-like"
+         [attr.data-href]="facebookPageUrl"
+         data-colorscheme="dark"
+         data-width=""
+         data-layout="standard"
+         data-action="like"
+         data-size="small"
+         data-show-faces="true"
+         data-share="true"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col d-flex flex-row pb-2">
+    <div class="pr-2">
+      <a class="github-button"
+         href="https://github.com/devclub"
+         data-size="large"
+         data-show-count="false"
+         aria-label="Follow @devclub on GitHub">Follow @devclub</a>
+    </div>
+    <div class="pr-2">
+      <a class="github-button" href="https://github.com/devclub/site/subscription" data-icon="octicon-eye"
+         data-size="large" data-show-count="true" aria-label="Watch devclub/site on GitHub">Watch</a>
+    </div>
+    <div class="pr-2">
+      <a class="github-button" href="https://github.com/devclub/site" data-icon="octicon-star" data-size="large"
+         data-show-count="true" aria-label="Star devclub/site on GitHub">Star</a>
+    </div>
+  </div>
+</div>

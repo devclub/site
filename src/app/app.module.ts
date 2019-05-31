@@ -29,11 +29,10 @@ import {DcAdsRowUpperComponent} from './common/container/dc-ads-row-upper.compon
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
 import {CachedHttpService} from './common/cached-http.service';
-import {DcSocialBlockComponent} from './page-main/dc-social-block.component';
 import {DcSocialYoutubeBlockComponent} from './common/container/dc-social-youtube-block.component';
 import {DcMeetingBlockComponent} from './page-main/dc-meeting-block.component';
 import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.component';
-import {DcShortInfoBlockComponent} from './page-main/dc-short-info-block.component';
+import {DcShortInfoBlockComponent} from './page-about/dc-short-info-block.component';
 import {DcMeetingInfoListComponent} from './page-archive/dc-meeting-info-list.component';
 import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
 import {GoogleAnalyticsService} from './common/google-analytics.service';
@@ -55,7 +54,6 @@ export function initialize(configContext: DataContext) {
     DcMeetingBlockComponent,
     DcSocialYoutubeBlockComponent,
     DcShortInfoBlockComponent,
-    DcSocialBlockComponent,
     DcLatestVideosBlockComponent,
     DcArchiveContainerPageComponent,
     DcArchiveMainPageComponent,
