@@ -16,6 +16,10 @@ export class DcLatestVideosBlockComponent {
   constructor(private dataContext: DataContext,
               private translationService: TranslationService,
               private cachedHttp: CachedHttpService) {
+    if (!dataContext.config.googleApiKey) {
+      return; // nothing, if google api key is not defined.
+    }
+
     const url = 'https://www.googleapis.com/youtube/v3/search' +
       '?part=snippet,id&type=video&order=date&maxResults=12' +
       '&key=' + dataContext.config.googleApiKey +
