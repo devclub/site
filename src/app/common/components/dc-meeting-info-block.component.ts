@@ -27,11 +27,15 @@ export class DcMeetingInfoBlockComponent {
       return [];
     }
     const size = speeches.length;
-    if (size < 5) {
+
+    if (size < 6) {
       return [speeches];
-    } else if (size < 7) {
+    }
+
+    if (size < 8) {
       return [speeches.slice(0, 3), speeches.slice(3, size)];
     }
+
     return [speeches.slice(0, 4), speeches.slice(4, size)];
   }
 }
