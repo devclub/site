@@ -1,5 +1,56 @@
+<div *ngIf="fullscreen" class="fullscreen-info">
+  <div class="row m-5">
+    <div class="col">
+      <a href="javascript:void(0)" (click)="fullscreen = false" class="float-right" style="color: #FFFFFF">
+        <span class="fas fa-times"></span></a>
+    </div>
+  </div>
+  <div class="container" style="padding-top: 100px">
+    <div class="row">
+      <div class="col-9">
+        <h1>{{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}</h1>
+        <p>
+          <span class="fas fa-calendar-alt w20"></span> {{meeting.start | date:'dd.MM.yyyy'}}
+          | {{'common.weekday.' + meeting.start.getDay() | translate }}
+          <span class="fas fa-clock"></span> {{meeting.start | date:'HH:mm'}}<br/>
+          <span *ngIf="meeting.place">
+            <span class="fas fa-home w20"></span> {{meeting.place.name}}<br/>
+            <span class="fas fa-map w20"></span> {{meeting.place.addr}}
+          </span>
+        </p>
+      </div>
+      <div class="col-3">
+        <img class="center-block" src="assets/images/logo_desc.png"/>
+      </div>
+    </div>
+    <div class="row mt-3" *ngFor="let speechRow of convertIntoMatrix(meeting.speeches)">
+      <div *ngFor="let speech of speechRow" class="col-xs-12"
+           [ngClass]="{'col-sm-4': speechRow.length < 4, 'col-sm-3': speechRow.length == 4}">
+        <div class="row">
+          <div class="col">
+            <img [src]="speech.speakers[0].imageUrl" class="img-fluid meeting-info-speaker-image"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="text-center pt-3" *ngFor="let speaker of speech.speakers">
+              <b>{{speaker.names | localize}}</b>
+            </div>
+            <h3 class="text-center pt-4">{{speech.titles | localize}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="col-12 meeting-container">
   <div class="row">
+    <div class="col-12">
+      <a class="float-right" href="javascript:void(0)" (click)="fullscreen = true" target="_blank">
+        <span class="fas fa-expand-arrows-alt"></span></a>
+    </div>
     <div class="col-12 meeting-header-container">
       <h2 class="mb-0">
         <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
@@ -30,8 +81,9 @@
       </p>
     </div>
     <div class="col-sm-3 text-right">
-      <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">{{'main.meeting.registration'
-        | translate}}</a>
+      <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">
+        {{'main.meeting.registration' | translate}}
+      </a>
     </div>
   </div>
   <div class="row speech-container" *ngFor="let speech of meeting.speeches" style="background-color: #FFFFFF">
@@ -50,7 +102,7 @@
             {{speaker.names | localize}}
           </ng-container>
         </h4>
-      <div class="small text-muted">{{speaker.titles | localize}}</div>  
+        <div class="small text-muted">{{speaker.titles | localize}}</div>
       </div>
 
 
@@ -73,7 +125,8 @@
         </h3>
         <div class="mb-3 mt-3">
           <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label mr-3 pointer" (click)="speechOptions.clickLabelFn(label)" *ngFor="let label of speech.labels">
+            <span class="badge badge-big badge-label mr-3 pointer" (click)="speechOptions.clickLabelFn(label)"
+                  *ngFor="let label of speech.labels">
               {{label}}</span>
           </ng-container>
           <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
@@ -90,9 +143,9 @@
                 placement="bottom">
             <a [href]="presentationUrl" target="_blank"><i class="fab fa-slideshare small"></i></a>
           </span>
-              <span *ngFor="let exampleUrl of speech.examples"
-                    [tooltip]="'common.speech.example.tooltip' | translate"
-                    placement="bottom">
+          <span *ngFor="let exampleUrl of speech.examples"
+                [tooltip]="'common.speech.example.tooltip' | translate"
+                placement="bottom">
             <a [href]="exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
           </span>
         </div>
@@ -102,5 +155,5 @@
       </div>
     </div>
   </div>
-  <div class="row mb-4"></div>  
+  <div class="row mb-4"></div>
 </div>
