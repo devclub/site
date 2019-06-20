@@ -5,6 +5,7 @@ import * as fontawesome from '@fortawesome/fontawesome';
 import {
   faAngleLeft,
   faAngleRight,
+  faArrowsAlt,
   faCalendarAlt,
   faCamera,
   faClock,
@@ -30,7 +31,7 @@ import {TranslationService} from './common/translations/translation.service';
 
 fontawesome.library.add(faRss, faComments, faCamera, faDesktop, faCalendarAlt, faClock, faEnvelope, faInfoCircle,
   faUser, faGithub, faYoutube, faTwitter, faWordpress, faGooglePlusG, faHome, faLocationArrow, faExternalLinkSquareAlt,
-  faFileAlt, faSlideshare, faTrophy, faThList, faTh, faTimes, faAngleLeft, faAngleRight);
+  faFileAlt, faSlideshare, faTrophy, faThList, faTh, faTimes, faAngleLeft, faAngleRight, faArrowsAlt);
 
 @Component({
   selector: '[app]',
