@@ -2,7 +2,8 @@
   <div class="row mt-2 mr-2">
     <div class="col">
       <a href="javascript:void(0)" (click)="fullscreen = false" class="float-right" style="color: #FFFFFF">
-        <span class="fas fa-times"></span></a>
+        <span class="fas fa-times"></span>
+      </a>
     </div>
   </div>
   <div class="container" style="padding-top: 60px">
@@ -10,9 +11,9 @@
       <div class="col-9">
         <h1>{{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}</h1>
         <p>
-          <span class="fas fa-calendar-alt w20"></span> {{meeting.start | date:'dd.MM.yyyy'}}
+          <span class="fas fa-calendar-alt w20"></span> {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
           | {{'common.weekday.' + meeting.start.getDay() | translate }}
-          <span class="fas fa-clock"></span> {{meeting.start | date:'HH:mm'}}<br/>
+          <span class="fas fa-clock"></span> {{meeting.start | date:'HH:mm':'GMT+3'}} (GMT+3)<br/>
           <span *ngIf="meeting.place">
             <span class="fas fa-home w20"></span> {{meeting.place.name}}<br/>
             <span class="fas fa-map w20"></span> {{meeting.place.addr}}
@@ -54,7 +55,7 @@
 <div class="col-12 meeting-container">
   <div class="row">
     <div class="col-12">
-      <a class="float-right" href="javascript:void(0)" (click)="fullscreen = true" target="_blank">
+      <a class="float-right" href="javascript:void(0)" (click)="fullscreen = true">
         <span class="fas fa-expand-arrows-alt"></span></a>
     </div>
     <div class="col-12 meeting-header-container">
@@ -69,10 +70,10 @@
     <div class="col-sm-9">
       <p class="main-info">
         <span class="fas fa-calendar-alt w20 meeting-info-icon"></span>
-        {{meeting.start | date:'dd.MM.yyyy'}}
+        {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
         | {{'common.weekday.' + meeting.start.getDay() | translate }}
         <span class="fas fa-clock meeting-info-icon"></span>
-        {{meeting.start | date:'HH:mm'}}<br/>
+        {{meeting.start | date:'HH:mm':'GMT+3'}} (GMT+3)<br/>
         <span *ngIf="meeting.place">
           <span class="fas fa-home w20 meeting-info-icon"></span>
           {{meeting.place.name}}
