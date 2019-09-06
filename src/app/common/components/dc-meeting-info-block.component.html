@@ -148,12 +148,12 @@
           <span *ngFor="let presentationUrl of speech.presentations"
                 [tooltip]="'common.speech.presentation.tooltip' | translate"
                 placement="bottom">
-            <a [href]="presentationUrl" target="_blank"><i class="fab fa-slideshare small"></i></a>
+            <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank"><i class="fab fa-slideshare small"></i></a>
           </span>
           <span *ngFor="let exampleUrl of speech.examples"
                 [tooltip]="'common.speech.example.tooltip' | translate"
                 placement="bottom">
-            <a [href]="exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
+            <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
           </span>
         </div>
       </div>

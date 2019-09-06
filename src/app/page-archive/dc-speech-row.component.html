@@ -24,13 +24,13 @@
     <span *ngFor="let presentationUrl of speech.presentations"
           [tooltip]="'common.speech.presentation.tooltip' | translate"
           placement="bottom">
-      <a [href]="presentationUrl" target="_blank"><i class="fab fa-slideshare small mr-1"></i></a>
+      <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank"><i class="fab fa-slideshare small mr-1"></i></a>
     </span>
 
     <!-- additional materials: examples -->
     <span *ngFor="let exampleUrl of speech.examples" [tooltip]="'common.speech.example.tooltip' | translate"
           placement="bottom">
-      <a [href]="exampleUrl" target="_blank"><i class="fas fa-file-alt small mr-1"></i></a>
+      <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank"><i class="fas fa-file-alt small mr-1"></i></a>
     </span>
 
     <span> — </span>

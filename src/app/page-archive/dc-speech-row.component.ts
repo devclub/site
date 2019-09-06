@@ -12,9 +12,11 @@ export class DcSpeechRowComponent {
   @Input() public speech: Speech;
   @Input() public options: SpeechOptions;
   public lang: string;
+  public fileUrlPrefix: string;
 
   constructor(public dataContext: DataContext,
               public translationService: TranslationService) {
     this.lang = translationService.lang;
+    this.fileUrlPrefix = dataContext.config.fileUrlPrefix;
   }
 }

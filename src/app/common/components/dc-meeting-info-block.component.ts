@@ -16,10 +16,12 @@ export class DcMeetingInfoBlockComponent {
   @Input() public speechOptions: SpeechOptions;
   public lang: string;
   public fullscreen: boolean;
+  public fileUrlPrefix: string;
 
   constructor(public dataContext: DataContext,
               public translationService: TranslationService) {
     this.lang = translationService.lang;
+    this.fileUrlPrefix = dataContext.config.fileUrlPrefix;
   }
 
   convertIntoMatrix = function (speeches: Speech[]) {
