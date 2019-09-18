@@ -43,11 +43,9 @@ export class DataUtil {
       if (rowMaxLength < row.length) {
         rowMaxLength = row.length
       }
-      ;
       if (row.length > 0) {
         result[i] = row
       }
-      ;
     });
 
     const empty = new Member();
