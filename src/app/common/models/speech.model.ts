@@ -5,6 +5,8 @@ import {Top} from './top.model';
 
 export class Speech {
   hiddenByFilter = false;
+  labelsAsText: string;
+
   youtube: string[];
   youtubeUrls: string[];
   speakers: Speaker[];

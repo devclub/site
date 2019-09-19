@@ -87,6 +87,7 @@ export class DataUtil {
 
   public static processSpeech(speech: Speech, config: Config) {
     speech.youtubeUrls = this._getYoutubeUrls(speech.youtube);
+    speech.labelsAsText = speech.labels ? speech.labels.join(', ') : '';
     this._processSpeakers(speech.speakers, config);
   }
 

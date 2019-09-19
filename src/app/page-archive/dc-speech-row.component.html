@@ -46,18 +46,13 @@
     </ng-container>
 
     <!-- labels -->
-    <ng-container *ngIf="options && options.clickLabelFn">
-      <span class="badge badge-label mr-1 pointer" (click)="options.clickLabelFn(label)"
-            *ngFor="let label of speech.labels">{{label}}</span>
-    </ng-container>
-    <ng-container *ngIf="!options || !options.clickLabelFn">
-      <span class="badge badge-label mr-1" *ngFor="let label of speech.labels">{{label}}</span>
-    </ng-container>
+    <span *ngIf="speech.labelsAsText" [tooltip]="speech.labelsAsText" placement="top">
+      <i class="fas fa-tags mr-1 text-muted"></i>
+    </span>
 
     <!-- language -->
-    <span class="badge badge-lang" [ngClass]="{'badge-lang': lang === speech.lang,
-    'badge-danger': lang !== speech.lang}">
-      {{'common.speech.lang.' + speech.lang | translate}}
+    <span *ngIf="lang !== speech.lang" [tooltip]="'common.speech.lang.' + speech.lang | translate" placement="top">
+      <i class="fas fa-language mr-1 text-danger"></i>
     </span>
   </div>
 </div>
