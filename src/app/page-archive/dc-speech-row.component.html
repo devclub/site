@@ -20,6 +20,16 @@
     <!-- title -->
     <b class="mr-1">{{speech.titles | localize}}</b>
 
+    <!-- labels -->
+    <span *ngIf="speech.labelsAsText" [tooltip]="speech.labelsAsText" placement="top">
+      <i class="fas fa-tags fa-xs mr-1 text-muted"></i>
+    </span>
+
+    <!-- language -->
+    <span *ngIf="lang !== speech.lang" [tooltip]="'common.speech.lang.' + speech.lang | translate" placement="top">
+      <i class="fas fa-language mr-1 text-danger"></i>
+    </span>
+
     <!-- additional materials: presentation -->
     <span *ngFor="let presentationUrl of speech.presentations"
           [tooltip]="'common.speech.presentation.tooltip' | translate"
@@ -44,15 +54,5 @@
       <ng-container *ngIf="!last">,</ng-container>
       <span>&nbsp;</span>
     </ng-container>
-
-    <!-- labels -->
-    <span *ngIf="speech.labelsAsText" [tooltip]="speech.labelsAsText" placement="top">
-      <i class="fas fa-tags mr-1 text-muted"></i>
-    </span>
-
-    <!-- language -->
-    <span *ngIf="lang !== speech.lang" [tooltip]="'common.speech.lang.' + speech.lang | translate" placement="top">
-      <i class="fas fa-language mr-1 text-danger"></i>
-    </span>
   </div>
 </div>
