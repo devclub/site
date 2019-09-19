@@ -6,7 +6,7 @@
 
 <table class="mt-3 mb-3 table table-bordered">
   <tbody>
-  <ng-container *ngFor="let seminar of dataContext.seminars">
+  <ng-container *ngFor="let seminar of dataContext.seminars; trackBy: trackByIndex">
     <tr class="table-secondary">
       <td colspan="6">
         <b>{{seminar.titles | localize}}</b>
@@ -14,7 +14,7 @@
     </tr>
     <tr class="small">
       <td colspan="6">
-        <span *ngFor="let speaker of seminar.speakers">
+        <span *ngFor="let speaker of seminar.speakers; trackBy: trackByIndex">
           <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
             <fa-icon [icon]="['fas', 'user']" class="small"></fa-icon>
           </a>
@@ -38,8 +38,8 @@
         {{'common.speech.lang.' + seminar.lang | translate}}
       </td>
       <td>
-        <a *ngFor="let url of seminar.url" href="{{url}}" target="_blank">
-          <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
+        <a *ngFor="let url of seminar.url; trackBy: trackByIndex" href="{{url}}" target="_blank">
+          <fa-icon [icon]="['fas', 'external-link-square-alt']" class="mr-1"></fa-icon>
         </a>
       </td>
       <td>

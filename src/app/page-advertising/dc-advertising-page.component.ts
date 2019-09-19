@@ -13,4 +13,8 @@ export class DcAdvertisingPageComponent {
     this.mail = dataContext.config.resources.main.mail;
     this.advertising = dataContext.advertising;
   }
+
+  trackByIndex(index: number) {
+    return index;
+  }
 }

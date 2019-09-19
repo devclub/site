@@ -8,4 +8,8 @@ import {Member} from '../models/member.model';
 })
 export class DcTeamRowsComponent {
   @Input() public memberRows: Array<Member[]>;
+
+  trackByIndex(index: number) {
+    return index;
+  }
 }

@@ -66,6 +66,7 @@ import {
   faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -104,6 +105,7 @@ export function initialize(configContext: DataContext) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

@@ -34,7 +34,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let speaker of speakers; let i = index">
+  <tr *ngFor="let speaker of speakers; let i = index; trackBy: trackByIndex">
     <th scope="row">{{i+1}}</th>
     <td>{{speaker.date | date:'dd.MM.yyyy'}}</td>
     <td>{{speaker.names | localize}}</td>

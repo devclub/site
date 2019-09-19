@@ -1,7 +1,7 @@
-<div class="row justify-content-center" *ngFor="let members of memberRows">
+<div class="row justify-content-center" *ngFor="let members of memberRows; trackBy: trackByIndex">
   <div class="col-md-12 col-lg-8">
     <div class="row">
-      <div class="col" *ngFor="let member of members">
+      <div class="col" *ngFor="let member of members; trackBy: trackByIndex">
         <div class="image-wrap mb-3">
           <a href="{{member.url}}" target="_blank" class="image-lighten">
             <img src="{{member.imageUrl}}" class="img-fluid">

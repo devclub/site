@@ -103,8 +103,8 @@
       </a>
     </div>
   </div>
-  <div class="row speech-container" *ngFor="let speech of meeting.speeches" style="background-color: #FFFFFF">
-    <ng-container *ngIf="!speech.hiddenByFilter">
+  <ng-container *ngFor="let speech of meeting.speeches">
+    <div class="row speech-container" *ngIf="!speech.hiddenByFilter" style="background-color: #FFFFFF">
       <div class="col-sm-4 col-md-3">
         <div *ngFor="let speaker of speech.speakers">
           <div class="image-wrap mb-3">
@@ -136,38 +136,38 @@
           </span>
             <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
                   [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
-                  placement="right">
+                  placement="right" class="ml-2">
             <fa-icon [icon]="['fas', 'trophy']"></fa-icon>
           </span>
             {{speech.titles | localize}}
           </h3>
           <div class="mb-3 mt-3">
             <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label mr-3 pointer" (click)="speechOptions.clickLabelFn(label)"
+            <span class="badge badge-big badge-label mr-3 mt-2 pointer" (click)="speechOptions.clickLabelFn(label)"
                   *ngFor="let label of speech.labels">
               {{label}}</span>
             </ng-container>
             <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label mr-3" *ngFor="let label of speech.labels">
+            <span class="badge badge-big badge-label mr-3 mt-2" *ngFor="let label of speech.labels">
               {{label}}</span>
             </ng-container>
-            <span class="badge badge-big mr-1"
+            <span class="badge badge-big mr-3 mt-2"
                   [ngClass]="{'badge-lang': lang === speech.lang,
                   'badge-danger': lang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}
           </span>
             <span *ngFor="let presentationUrl of speech.presentations"
                   [tooltip]="'common.speech.presentation.tooltip' | translate"
-                  placement="bottom">
+                  placement="bottom" class="mr-3 mt-1">
             <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank">
-              <fa-icon [icon]="['fab', 'slideshare']" class="small"></fa-icon>
+              <fa-icon [icon]="['fab', 'slideshare']" size="2x"></fa-icon>
             </a>
           </span>
             <span *ngFor="let exampleUrl of speech.examples"
                   [tooltip]="'common.speech.example.tooltip' | translate"
-                  placement="bottom">
+                  placement="bottom" class="mr-3 mt-1">
             <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank">
-              <fa-icon [icon]="['fas', 'file-alt']" class="small"></fa-icon>
+              <fa-icon [icon]="['fas', 'file-alt']" size="2x"></fa-icon>
             </a>
           </span>
           </div>
@@ -176,7 +176,7 @@
           <p class="small" *ngFor="let paragr of (speech.descr | localize:[])">{{paragr}}</p>
         </div>
       </div>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
   <div class="row mb-4"></div>
 </div>

@@ -17,6 +17,10 @@ export class DcArchiveSpeakerPageComponent {
     this.sortByDate();
   }
 
+  trackByIndex(index: number) {
+    return index;
+  }
+
   sortByDate() {
     this.sort((s1, s2) => {
       return s1.date.getTime() > s2.date.getTime() ? -1 : 1;
