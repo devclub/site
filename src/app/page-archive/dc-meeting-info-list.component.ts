@@ -13,4 +13,8 @@ export class DcMeetingInfoListComponent {
 
   constructor(public dataContext: DataContext) {
   }
+
+  trackByMeetingIdAndIndex(index: number) {
+    return (this.meeting ? this.meeting.num : 0) + '::' + index;
+  }
 }

@@ -3,6 +3,7 @@ import {Place} from './place.model';
 import {Speech} from './speech.model';
 
 export class Meeting {
+  hiddenByFilter = false;
   hidden: boolean;
   num: number;
   season: number;

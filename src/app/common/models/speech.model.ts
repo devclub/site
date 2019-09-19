@@ -4,6 +4,7 @@ import {LocalizedTextLists} from './localized-text-lists.model';
 import {Top} from './top.model';
 
 export class Speech {
+  hiddenByFilter = false;
   youtube: string[];
   youtubeUrls: string[];
   speakers: Speaker[];

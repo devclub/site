@@ -50,7 +50,7 @@ export class DcArchiveBestPageComponent {
     this.groups.clear();
 
     this.dataContext.best.forEach((speech) => {
-      let groupNumber = this.isGroupByPlace() ? speech.top.place : speech.top.season;
+      const groupNumber = this.isGroupByPlace() ? speech.top.place : speech.top.season;
       let speeches = this.groups.get(groupNumber);
       speeches = speeches ? speeches : [];
       speeches.push(speech);
