@@ -2,7 +2,7 @@
   <div class="row mt-2 mr-2">
     <div class="col">
       <a href="javascript:void(0)" (click)="fullscreen = false" class="float-right" style="color: #FFFFFF">
-        <span class="fas fa-times"></span>
+        <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </a>
     </div>
   </div>
@@ -11,12 +11,14 @@
       <div class="col-9">
         <h1>{{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}</h1>
         <p>
-          <span class="fas fa-calendar-alt w20"></span> {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
+          <fa-icon [icon]="['fas', 'calendar-alt']" class="pr-2"></fa-icon>
+          {{meeting.start | date:'dd.MM.yyyy'}}
           | {{'common.weekday.' + meeting.start.getDay() | translate }}
-          <span class="fas fa-clock"></span> {{meeting.start | date:'HH:mm':'GMT+3'}} (GMT+3)<br/>
+          <fa-icon [icon]="['fas', 'clock']" class="pr-2 pl-2"></fa-icon>
+          {{meeting.start | date:'HH:mm (zzz)'}}<br/>
           <span *ngIf="meeting.place">
-            <span class="fas fa-home w20"></span> {{meeting.place.name}}<br/>
-            <span class="fas fa-map w20"></span> {{meeting.place.addr}}
+            <fa-icon [icon]="['fas', 'home']" class="pr-2"></fa-icon> {{meeting.place.name}}<br/>
+            <fa-icon [icon]="['fas', 'map']" class="pr-2"></fa-icon> {{meeting.place.addr}}
           </span>
         </p>
       </div>
@@ -56,12 +58,14 @@
   <div class="row">
     <div class="col-12">
       <a class="float-right" href="javascript:void(0)" (click)="fullscreen = true">
-        <span class="fas fa-expand-arrows-alt"></span></a>
+        <fa-icon [icon]="['fas', 'expand-arrows-alt']"></fa-icon>
+      </a>
     </div>
     <div class="col-12 meeting-header-container">
       <h2 class="mb-0">
         <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
-          <span *ngIf="photo" class="fas fa-camera"></span></a>
+          <fa-icon *ngIf="photo" [icon]="['fas', 'camera']"></fa-icon>
+        </a>
         {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
       </h2>
     </div>
@@ -69,21 +73,23 @@
   <div class="row meeting-info-container">
     <div class="col-sm-9">
       <p class="main-info">
-        <span class="fas fa-calendar-alt w20 meeting-info-icon"></span>
+        <fa-icon [icon]="['fas', 'calendar-alt']" class="pr-2 meeting-info-icon"></fa-icon>
         {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
         | {{'common.weekday.' + meeting.start.getDay() | translate }}
-        <span class="fas fa-clock meeting-info-icon"></span>
-        {{meeting.start | date:'HH:mm':'GMT+3'}} (GMT+3)<br/>
+        <fa-icon [icon]="['fas', 'clock']" class="pr-2 pl-2 meeting-info-icon"></fa-icon>
+        {{meeting.start | date:'HH:mm (zzz)'}}<br/>
         <span *ngIf="meeting.place">
-          <span class="fas fa-home w20 meeting-info-icon"></span>
+          <fa-icon [icon]="['fas', 'home']" class="pr-2 meeting-info-icon"></fa-icon>
           {{meeting.place.name}}
           <a *ngIf="meeting.place.url" href="{{meeting.place.url}}" target="_blank">
-            <span class="fas fa-external-link-square-alt"></span></a>
+            <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
+          </a>
           <br/>
-          <span class="fas fa-map w20 meeting-info-icon"></span>
+          <fa-icon [icon]="['fas', 'map']" class="pr-2 meeting-info-icon"></fa-icon>
           {{meeting.place.addr}}
           <a *ngIf="meeting.place.loc" href="{{meeting.place.loc}}" target="_blank">
-            <span class="fas fa-external-link-square-alt"></span></a>
+            <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
+          </a>
         </span>
       </p>
     </div>
@@ -118,15 +124,15 @@
       <div class="mb-1">
         <h3 class="mb-0 pb-0">
           <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
-            <span *ngIf="youtubeUrl" class="fab fa-youtube"></span>
+            <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']"></fa-icon>
           </a>
           <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right">
-            <i class="fas fa-info-circle"></i>
+            <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
           </span>
           <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
                 [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
                 placement="right">
-            <i class="fas fa-trophy"></i>
+            <fa-icon [icon]="['fas', 'trophy']"></fa-icon>
           </span>
           {{speech.titles | localize}}
         </h3>
@@ -148,12 +154,16 @@
           <span *ngFor="let presentationUrl of speech.presentations"
                 [tooltip]="'common.speech.presentation.tooltip' | translate"
                 placement="bottom">
-            <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank"><i class="fab fa-slideshare small"></i></a>
+            <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank">
+              <fa-icon [icon]="['fab', 'slideshare']" class="small"></fa-icon>
+            </a>
           </span>
           <span *ngFor="let exampleUrl of speech.examples"
                 [tooltip]="'common.speech.example.tooltip' | translate"
                 placement="bottom">
-            <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank"><i class="fas fa-file-alt small"></i></a>
+            <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank">
+              <fa-icon [icon]="['fas', 'file-alt']" class="small"></fa-icon>
+            </a>
           </span>
         </div>
       </div>

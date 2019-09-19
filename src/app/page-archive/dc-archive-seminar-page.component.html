@@ -16,7 +16,8 @@
       <td colspan="6">
         <span *ngFor="let speaker of seminar.speakers">
           <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
-            <span class="fas fa-user small"></span></a>
+            <fa-icon [icon]="['fas', 'user']" class="small"></fa-icon>
+          </a>
           {{speaker.names | localize}}
           <span class="text-muted" *ngIf="speaker.titles">
             {{speaker.titles | localize}}
@@ -38,7 +39,8 @@
       </td>
       <td>
         <a *ngFor="let url of seminar.url" href="{{url}}" target="_blank">
-          <span class="fas fa-external-link-square-alt"></span></a>
+          <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
+        </a>
       </td>
       <td>
         <span>{{'archive.seminar.places' | translate}}</span>:
@@ -46,7 +48,8 @@
       </td>
       <td>
         <a *ngIf="seminar.place.url" href="{{seminar.place.url}}" target="_blank">
-          <span class="fas fa-location-arrow"></span></a>
+          <fa-icon [icon]="['fas', 'location-arrow']"></fa-icon>
+        </a>
         {{seminar.place.name}}
       </td>
     </tr>
@@ -58,12 +61,12 @@
     <tr class="small">
       <td colspan="6">
         <span *ngIf="seminar.prices">
-          <i class="fas fa-info-circle"></i>
+          <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
           {{seminar.prices | localize}}
           <br/>
         </span>
         <span *ngIf="seminar.info">
-          <i class="fas fa-info-circle"></i>
+          <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
           {{seminar.info | localize}}
         </span>
       </td>

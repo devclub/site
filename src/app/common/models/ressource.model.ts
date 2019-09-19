@@ -1,5 +1,5 @@
 export class Ressource {
-  iconClasses: string;
+  iconClasses: string[];
   url: string;
   messageCode: string;
 }

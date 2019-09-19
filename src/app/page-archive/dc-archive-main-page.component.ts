@@ -120,7 +120,7 @@ export class DcArchiveMainPageComponent {
       let allSpeechesHidden = true;
       if (m.speeches) {
         m.speeches.forEach(s => {
-          s.hiddenByFilter = this.isSpeechHidden(m, s)
+          s.hiddenByFilter = m.hiddenByFilter || hasSpeechFilterValues && this.isSpeechHidden(s)
           allSpeechesHidden = allSpeechesHidden && s.hiddenByFilter;
         });
       }
@@ -134,10 +134,7 @@ export class DcArchiveMainPageComponent {
     return meeting.season !== this.dataContext.filter.season && this.dataContext.filter.season !== this.ALL_SEASONS;
   }
 
-  isSpeechHidden(meeting: Meeting, speech: Speech): boolean {
-    if (meeting.hiddenByFilter) {
-      return true;
-    }
+  isSpeechHidden(speech: Speech): boolean {
     return !this.hasTextSpeakers(speech.speakers, this.dataContext.filter.speaker)
       || !this.hasTextTitles(speech, this.dataContext.filter.texts)
       || !this.hasLabel(speech, this.dataContext.filter.label);
