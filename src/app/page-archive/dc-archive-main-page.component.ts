@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
 import {ArchiveTabState} from './services/archive.tab.state';
 import {DataContext} from '../common/context/data.context';
-import {DataUtil} from '../common/context/data.util';
 import {TypeaheadMatch} from 'ngx-bootstrap';
 import {Speaker} from '../common/models/speaker.model';
 import {Meeting} from '../common/models/meeting.model';
 import {TranslationService} from '../common/translations/translation.service';
+import {Speech} from '../common/models/speech.model';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
 })
 export class DcArchiveMainPageComponent {
   public readonly ALL_SEASONS = -1;
+  public seasonDisabled = false;
   public asList = true;
-  public seasonTouched = false;
   public meetings: Meeting[] = [];
   public speechOptions = {
     clickNameFn: (speaker: Speaker) => {
@@ -30,7 +30,12 @@ export class DcArchiveMainPageComponent {
               private translationService: TranslationService,
               public dataContext: DataContext) {
     archiveTabState.setMain();
-    this.search(true);
+    this.meetings = this.dataContext.meetings;
+    this.search();
+  }
+
+  trackById(index: number, item: Meeting) {
+    return item.num;
   }
 
   searchByLabel(event: TypeaheadMatch) {
@@ -45,7 +50,6 @@ export class DcArchiveMainPageComponent {
   }
 
   searchBySeason() {
-    this.seasonTouched = true;
     this.search();
   }
 
@@ -101,40 +105,47 @@ export class DcArchiveMainPageComponent {
     this.search();
   }
 
-  search(initial = false) {
-    // deep copy
-    let result = JSON.parse(JSON.stringify(this.dataContext.meetings));
-    DataUtil.processMeetings(result,
-      this.dataContext.config.personUrlPrefix,
-      this.dataContext.config.personDefaultImage);
-
-    if (!initial && !this.seasonTouched) {
-      if (this.dataContext.filter.speaker
-        || this.dataContext.filter.texts
-        || this.dataContext.filter.label) {
-        this.dataContext.filter.season = this.ALL_SEASONS;
-      } else {
-        this.dataContext.filter.season = new Date().getFullYear();
-      }
+  search() {
+    const hasSpeechFilterValues = this.dataContext.filter.speaker || this.dataContext.filter.texts || this.dataContext.filter.label;
+    if (hasSpeechFilterValues) {
+      this.dataContext.filter.season = this.ALL_SEASONS;
+      this.seasonDisabled = true;
+    } else if (this.seasonDisabled) {
+      this.seasonDisabled = false;
+      this.dataContext.filter.season = new Date().getFullYear();
     }
 
-    // search
-    result = result.filter(m => {
-      const bySeason =
-        m.season === this.dataContext.filter.season
-        || this.dataContext.filter.season === this.ALL_SEASONS;
-      if (bySeason && m.speeches) {
-        m.speeches = m.speeches.filter(s => {
-          return this.hasTextSpeakers(s.speakers, this.dataContext.filter.speaker)
-            && (this.hasPattern(s.titles, this.dataContext.filter.texts)
-              || this.hasPattern(s.descr, this.dataContext.filter.texts))
-            && (!this.dataContext.filter.label
-              || (s.labels && s.labels.indexOf(this.dataContext.filter.label) > -1));
+    this.meetings.forEach(m => {
+      m.hiddenByFilter = this.isMeetingHidden(m);
+      let allSpeechesHidden = true;
+      if (m.speeches) {
+        m.speeches.forEach(s => {
+          s.hiddenByFilter = m.hiddenByFilter || hasSpeechFilterValues && this.isSpeechHidden(s)
+          allSpeechesHidden = allSpeechesHidden && s.hiddenByFilter;
         });
       }
-      return bySeason && m.speeches && m.speeches.length > 0;
-    });
-    this.meetings = result;
+      if (hasSpeechFilterValues && allSpeechesHidden) {
+        m.hiddenByFilter = true;
+      }
+    })
+  }
+
+  isMeetingHidden(meeting: Meeting): boolean {
+    return meeting.season !== this.dataContext.filter.season && this.dataContext.filter.season !== this.ALL_SEASONS;
+  }
+
+  isSpeechHidden(speech: Speech): boolean {
+    return !this.hasTextSpeakers(speech.speakers, this.dataContext.filter.speaker)
+      || !this.hasTextTitles(speech, this.dataContext.filter.texts)
+      || !this.hasLabel(speech, this.dataContext.filter.label);
+  }
+
+  hasLabel(speech: Speech, label: string): boolean {
+    return !label || (speech.labels && speech.labels.indexOf(label) > -1);
+  }
+
+  hasTextTitles(speech: Speech, pattern: string): boolean {
+    return this.hasPattern(speech.titles, pattern) || this.hasPattern(speech.descr, pattern);
   }
 
   hasTextSpeakers(speakers: Speaker[], pattern: string): boolean {

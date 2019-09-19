@@ -7,7 +7,7 @@
       <div class="input-group-append">
         <span class="input-group-text pointer"
               (click)="dataContext.filter.speaker = ''; search()">
-          <i class="fas fa-times"></i>
+          <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
     </div>
@@ -20,7 +20,7 @@
       <div class="input-group-append">
         <span class="input-group-text pointer"
               (click)="dataContext.filter.texts = ''; search()">
-          <i class="fas fa-times"></i>
+          <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <div class="input-group-append">
         <span class="input-group-text pointer"
               (click)="dataContext.filter.label = ''; search()">
-          <i class="fas fa-times"></i>
+          <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
     </div>
@@ -55,21 +55,21 @@
   <div class="form-group col-md-4">
     <label for="season">{{'archive.main.filter.seasons' | translate}}</label>
     <div class="input-group">
-      <div class="input-group-append" *ngIf="getMinusYearText() != ''">
+      <div class="input-group-append" *ngIf="getMinusYearText() != '' && !seasonDisabled">
         <span class="input-group-text pointer" (click)="minusYear()">
-          <i class="fas fa-angle-left"></i> &nbsp; {{getMinusYearText()}}
+          <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; {{getMinusYearText()}}
         </span>
       </div>
       <select id="season" class="form-control"
-              [(ngModel)]="dataContext.filter.season" (change)="searchBySeason()">
+              [(ngModel)]="dataContext.filter.season" (change)="searchBySeason()" [disabled]="seasonDisabled">
         <option [ngValue]="ALL_SEASONS">
           {{'archive.main.filter.seasons.all' | translate}}
         </option>
         <option *ngFor="let year of dataContext.seasons" [ngValue]="year">{{year}}</option>
       </select>
-      <div class="input-group-append" *ngIf="getPlusYearText() != ''">
+      <div class="input-group-append" *ngIf="getPlusYearText() != '' && !seasonDisabled">
         <span class="input-group-text pointer" (click)="plusYear()">
-          {{getPlusYearText() | translate}} &nbsp; <i class="fas fa-angle-right"></i>
+          {{getPlusYearText() | translate}} &nbsp; <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
         </span>
       </div>
     </div>
@@ -81,13 +81,13 @@
         <button (click)="asList = true"
                 [ngClass]="{'active': asList === true}"
                 type="button" class="btn btn-light">
-          <i class="fas fa-th-list"></i>
+          <fa-icon [icon]="['fas', 'th-list']" class="small"></fa-icon>
           {{'archive.main.mode.list' | translate}}
         </button>
         <button (click)="asList = false"
                 [ngClass]="{'active': asList === false}"
                 type="button" class="btn btn-light">
-          <i class="fas fa-th"></i>
+          <fa-icon [icon]="['fas', 'th']" class="small"></fa-icon>
           {{'archive.main.mode.block' | translate}}
         </button>
       </div>
@@ -95,11 +95,7 @@
   </div>
 </div>
 
-<div class="mt-3" *ngFor="let m of meetings">
-  <dc-meeting-info-block
-    *ngIf="asList === false" [meeting]="m"
-    [speechOptions]="speechOptions"></dc-meeting-info-block>
-  <dc-meeting-info-list
-    *ngIf="asList === true" [meeting]="m"
-    [speechOptions]="speechOptions"></dc-meeting-info-list>
+<div class="mt-3" *ngFor="let m of meetings; trackBy: trackById">
+  <dc-meeting-info-block *ngIf="!asList" [meeting]="m" [speechOptions]="speechOptions"></dc-meeting-info-block>
+  <dc-meeting-info-list *ngIf="asList" [meeting]="m" [speechOptions]="speechOptions"></dc-meeting-info-list>
 </div>

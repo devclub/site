@@ -9,4 +9,8 @@ import {DataContext} from '../context/data.context';
 export class DcAdsRowLowerComponent {
   constructor(public dataContext: DataContext) {
   }
+
+  trackByIndex(index: number) {
+    return index;
+  }
 }

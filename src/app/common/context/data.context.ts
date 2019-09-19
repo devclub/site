@@ -120,7 +120,7 @@ export class DataContext {
   };
 
   addMeetings(meetings: Meeting[]) {
-    DataUtil.processMeetings(meetings, this.config.personUrlPrefix, this.config.personDefaultImage);
+    DataUtil.processMeetings(meetings, this.config);
     meetings.forEach(meeting => {
       if (!meeting.hidden) {
         this.meetings.push(meeting);
@@ -131,7 +131,9 @@ export class DataContext {
       if (meeting.speeches) {
         meeting.speeches.forEach(speech => {
           if (speech.top) {
-            this.best.push(speech);
+            const speechCopy = JSON.parse(JSON.stringify(speech));
+            DataUtil.processSpeech(speechCopy, this.config);
+            this.best.push(speechCopy);
           }
           if (speech.labels) {
             speech.labels.forEach(label => {

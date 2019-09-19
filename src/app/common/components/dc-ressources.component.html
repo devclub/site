@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col mb-3" *ngFor="let group of groups">
     <h5 *ngIf="group.title">{{group.title | translate}}</h5>
-    <div *ngFor="let ressource of group.ressources">
-      <span class="f-icon"><i [ngClass]="ressource.iconClasses" class="mr-1"></i></span>
+    <div *ngFor="let ressource of group.ressources; trackBy: trackByIndex">
+      <span class="f-icon"><fa-icon [icon]="ressource.iconClasses" class="mr-1"></fa-icon></span>
       <a [href]="ressource.url">{{ressource.messageCode | translate}}</a>
     </div>
   </div>

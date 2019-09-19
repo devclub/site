@@ -5,6 +5,7 @@ import {Speech} from '../models/speech.model';
 import {Speaker} from '../models/speaker.model';
 import {AdvertisingCompany} from '../models/advertising-company.model';
 import {Member} from '../models/member.model';
+import {Config} from '../models/config.model';
 
 export class DataUtil {
   public static readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
@@ -43,11 +44,9 @@ export class DataUtil {
       if (rowMaxLength < row.length) {
         rowMaxLength = row.length
       }
-      ;
       if (row.length > 0) {
         result[i] = row
       }
-      ;
     });
 
     const empty = new Member();
@@ -73,20 +72,23 @@ export class DataUtil {
     });
   }
 
-  static processMeetings(meetings: Meeting[], personUrlPrefix: string, personDefaultImage: string) {
+  static processMeetings(meetings: Meeting[], config: Config) {
     meetings.forEach(meeting => {
       meeting.start = meeting.datetime ? new Date(meeting.datetime) : null;
       if (meeting.speeches) {
-        this._processSpeeches(meeting.speeches, personUrlPrefix, personDefaultImage);
+        this._processSpeeches(meeting.speeches, config);
       }
     });
   }
 
-  private static _processSpeeches(speeches: Speech[], personUrlPrefix: string, personDefaultImage: string) {
-    speeches.forEach(speech => {
-      speech.youtubeUrls = this._getYoutubeUrls(speech.youtube);
-      this._processSpeakers(speech.speakers, personUrlPrefix, personDefaultImage);
-    });
+  private static _processSpeeches(speeches: Speech[], config: Config) {
+    speeches.forEach(speech => this.processSpeech(speech, config));
+  }
+
+  public static processSpeech(speech: Speech, config: Config) {
+    speech.youtubeUrls = this._getYoutubeUrls(speech.youtube);
+    speech.labelsAsText = speech.labels ? speech.labels.join(', ') : '';
+    this._processSpeakers(speech.speakers, config);
   }
 
   private static _getYoutubeUrls(youtube: string[]) {
@@ -102,12 +104,12 @@ export class DataUtil {
     return result;
   }
 
-  private static _processSpeakers(speakers: Speaker[], personUrlPrefix: string, personDefaultImage: string) {
+  private static _processSpeakers(speakers: Speaker[], config: Config) {
     if (!speakers) {
       return;
     }
     speakers.forEach(speaker => {
-      speaker.imageUrl = personUrlPrefix + '/' + (speaker.image ? speaker.image : personDefaultImage);
+      speaker.imageUrl = config.personUrlPrefix + '/' + (speaker.image ? speaker.image : config.personDefaultImage);
     });
   }
 }

@@ -10,4 +10,8 @@ export class DcArchiveSeminarPageComponent {
               public dataContext: DataContext) {
     archiveTabState.setSeminar();
   }
+
+  trackByIndex(index: number) {
+    return index;
+  }
 }

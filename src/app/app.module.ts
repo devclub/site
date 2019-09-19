@@ -38,6 +38,35 @@ import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
 import {GoogleAnalyticsService} from './common/google-analytics.service';
 import {TranslationService} from './common/translations/translation.service';
 import {TranslatePipe} from './common/translations/translate.pipe';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
+import {
+  faAngleLeft,
+  faAngleRight,
+  faCalendarAlt,
+  faCamera,
+  faClock,
+  faComments,
+  faDesktop,
+  faEnvelope,
+  faExpandArrowsAlt,
+  faExternalLinkSquareAlt,
+  faFileAlt,
+  faHome,
+  faInfoCircle,
+  faLanguage,
+  faLocationArrow,
+  faMap,
+  faRss,
+  faTags,
+  faTh,
+  faThList,
+  faTimes,
+  faTrophy,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
+import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -76,10 +105,12 @@ export function initialize(configContext: DataContext) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule,
     RouterModule.forRoot(AppRoutes, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot()
@@ -98,4 +129,35 @@ export function initialize(configContext: DataContext) {
   ]
 })
 export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faTimes);
+    library.addIcons(faCalendarAlt);
+    library.addIcons(faClock);
+    library.addIcons(faHome);
+    library.addIcons(faMap);
+    library.addIcons(faExpandArrowsAlt);
+    library.addIcons(faCamera);
+    library.addIcons(faExternalLinkSquareAlt);
+    library.addIcons(faInfoCircle);
+    library.addIcons(faTrophy);
+    library.addIcons(faFileAlt);
+    library.addIcons(faYoutube);
+    library.addIcons(faSlideshare);
+    library.addIcons(faLocationArrow);
+    library.addIcons(faUser);
+    library.addIcons(faTh);
+    library.addIcons(faThList);
+    library.addIcons(faAngleRight);
+    library.addIcons(faAngleLeft);
+    library.addIcons(faRss);
+    library.addIcons(faComments);
+    library.addIcons(faDesktop);
+    library.addIcons(faEnvelope);
+    library.addIcons(faGithub);
+    library.addIcons(faWordpress);
+    library.addIcons(faTwitter);
+    library.addIcons(faFacebook);
+    library.addIcons(faTags);
+    library.addIcons(faLanguage);
+  }
 }
