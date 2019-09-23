@@ -51,7 +51,7 @@
 
   <dc-title-row>{{'about.title.photos' | translate}}</dc-title-row>
 
-  <div class="row" *ngFor="let rows of dataContext.config.photos">
+  <div class="row" *ngFor="let rows of dataContext.config.photos; trackBy: trackByIndex">
     <div class="col-12 col-md-4 col-lg-2 mb-3 text-center" *ngFor="let photo of rows">
       <div class="image-wrap">
         <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
@@ -65,11 +65,11 @@
   <dc-title-row>{{'about.title.thanks' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <div class="col" *ngFor="let p of dataContext.teamThanks">
+    <div class="col" *ngFor="let member of dataContext.teamThanks; trackBy: trackByIndex">
       <div class="image-wrap">
-        <a href="{{p.url}}" target="_blank" class="image-lighten">
-          <img src="{{p.imageUrl}}" class="img-fluid">
-          <div class="member-text d-none d-md-block">{{p.names | localize}}</div>
+        <a href="{{member.person.url}}" target="_blank" class="image-lighten">
+          <img src="{{member.imageUrl}}" class="img-fluid">
+          <div class="member-text d-none d-md-block">{{member.person.names | localize}}</div>
         </a>
       </div>
     </div>

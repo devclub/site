@@ -3,9 +3,9 @@
     <div class="row">
       <div class="col" *ngFor="let member of members; trackBy: trackByIndex">
         <div class="image-wrap mb-3">
-          <a href="{{member.url}}" target="_blank" class="image-lighten">
+          <a *ngIf="member.person" href="{{member.person.url}}" target="_blank" class="image-lighten">
             <img src="{{member.imageUrl}}" class="img-fluid">
-            <div class="member-text d-none d-md-block">{{member.names | localize}}</div>
+            <div class="member-text d-none d-md-block">{{member.person.names | localize}}</div>
           </a>
         </div>
       </div>

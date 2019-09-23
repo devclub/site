@@ -26,12 +26,26 @@ export class DataUtil {
     });
   }
 
-  static processMember(member: Member, personUrlPrefix: string): void {
-    member.imageUrl = personUrlPrefix + '/' + member.image;
+  static getMember(teamPerson: TeamPerson, personUrlPrefix: string): Member {
+    const result = new Member();
+    result.person = teamPerson;
+    result.imageUrl = personUrlPrefix + '/' + teamPerson.image;
+    return result;
   }
 
-  static processMembers(members: Member[], personUrlPrefix: string): void {
-    members.forEach(m => this.processMember(m, personUrlPrefix));
+  static getMembers(teamPersons: Map<string, TeamPerson>,  memberCodes: string[], personUrlPrefix: string): Array<Member> {
+    const result = new Array<Member>();
+    memberCodes.forEach(memberCode => {
+      result.push(this.getMember(teamPersons[memberCode], personUrlPrefix));
+    });
+    return result;
+  }
+
+  static fillMembers(teamPersons: Map<string, TeamPerson>, members: Array<Member>, personUrlPrefix: string): void {
+    members.forEach(member => {
+      member.person = teamPersons[member.personCode];
+      member.imageUrl = personUrlPrefix + '/' + member.person.image;
+    });
   }
 
   static convertToMatrix(members: Member[]): Array<Member[]> {
@@ -104,7 +118,7 @@ export class DataUtil {
     if (!youtube) {
       return [];
     }
-    const result = []
+    const result = [];
     youtube.forEach((youtubeId, index) => {
       if (youtubeId) {
         result.push('https://www.youtube.com/watch?v=' + youtubeId);

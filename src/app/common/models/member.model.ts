@@ -1,11 +1,11 @@
-import {LocalizedTexts} from './localized-texts.model';
+import {TeamPerson} from './team-person.model';
 
 export class Member {
+  emptyCell = false;
   row: number;
   col: number;
-  names: LocalizedTexts;
-  image: string;
+  personCode: string;
+
+  person: TeamPerson;
   imageUrl: string;
-  url: string;
-  emptyCell = false;
 }

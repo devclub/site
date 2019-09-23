@@ -99,9 +99,8 @@ export class DataContext {
 
   setTeam(team: Team) {
     this.logosArchiveUrl = team.logos;
-    DataUtil.processMembers(team.team, this.config.team.personUrlPrefix);
-    DataUtil.processMembers(team.thanks, this.config.team.personUrlPrefix);
-    this.teamThanks = team.thanks;
+    this.teamThanks = DataUtil.getMembers(team.persons, team.thanks, this.config.team.personUrlPrefix);
+    DataUtil.fillMembers(team.persons, team.team, this.config.team.personUrlPrefix);
     this.teamMember = DataUtil.convertToMatrix(team.team);
     this.teamPersons = team.persons;
   }
