@@ -1,11 +1,19 @@
 <ng-container *ngIf="!meeting.hiddenByFilter">
-  <div class="row border-bottom" style="height: 30px;">
+  <div class="row border-bottom" style="height: 28px;">
     <div class="col small text-muted">
-      {{ meeting.start | date:'dd.MM.yyyy' }}
-      | {{'common.weekday.' + meeting.start.getDay() | translate }}
-      &nbsp;&nbsp;&nbsp;
-      #{{ meeting.num }}{{ meeting.titles ? ': ' : ''}}{{ meeting.titles | localize }}
-      <div class="float-right">
+      <ng-template #moderatorInfo>
+        {{'meeting.info.moderated' | translate}}:<br/>
+        {{meeting.orgMod}}
+      </ng-template>
+      <span class="pr-1" placement="left" [tooltip]="moderatorInfo" [isDisabled]="!meeting.orgMod">
+        {{ meeting.start | date:'dd.MM.yyyy' }}
+        | #{{ meeting.num }}{{ meeting.titles ? ': ' : ''}}{{ meeting.titles | localize }}
+      </span>
+      <ng-template #photoInfo>
+        {{'meeting.info.photographs' | translate}}:<br/>
+        {{meeting.orgPhoto}}
+      </ng-template>
+      <div class="float-right" placement="left" [tooltip]="photoInfo" [isDisabled]="!meeting.orgPhoto">
         <ng-container *ngFor="let photo of meeting.photo">
           <a href="{{photo}}" target="_blank">
             <fa-icon *ngIf="photo" [icon]="['fas', 'camera']" size="2x"></fa-icon>

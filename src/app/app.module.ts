@@ -63,10 +63,12 @@ import {
   faThList,
   faTimes,
   faTrophy,
-  faUser
+  faUser,
+  faVideoSlash
 } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DataUtil} from './common/context/data.util';
 
 export function initialize(configContext: DataContext) {
   return () => {
@@ -121,6 +123,7 @@ export function initialize(configContext: DataContext) {
     ArchiveSeminarPageGuard,
     ArchiveTabState,
     DataContext,
+    DataUtil,
     TranslationService,
     CachedHttpService,
     GoogleAnalyticsService,
@@ -145,6 +148,7 @@ export class AppModule {
     library.addIcons(faSlideshare);
     library.addIcons(faLocationArrow);
     library.addIcons(faUser);
+    library.addIcons(faVideoSlash);
     library.addIcons(faTh);
     library.addIcons(faThList);
     library.addIcons(faAngleRight);

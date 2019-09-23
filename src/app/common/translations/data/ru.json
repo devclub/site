@@ -64,7 +64,7 @@
 	"common.speech.lang.en": "По-английски",
 	"common.speech.lang.et": "По-эстонски",
 	"common.speech.lang.ru": "По-русски",
-	"common.speech.presentation.tooltip": "Презентация, привязанные к докладу.",
+	"common.speech.presentation.tooltip": "Презентации, привязанные к докладу.",
 	"common.speech.top.tooltip": "{{place}}. место среди лучших докладов сезона.",
 	"common.title.meeting": "Встреча",
 	"common.title.team_members": "Организаторы Devclub",
@@ -85,6 +85,8 @@
 	"menu.blog": "Блог",
 	"menu.meeting": "Встреча",
 	"menu.speaker": "Выступи!",
+  "meeting.info.moderated": "Модераторы",
+  "meeting.info.photographs": "Фотографы",
   "resource.title.main": "Контакты",
   "resource.site": "Сайт",
   "resource.github": "Git: devclub",
@@ -127,5 +129,7 @@
 	"speaker.want_to_talk.p3": "У нас ты найдёшь собеседников и сможете утвердиться в правильности своего решения или же узнать о новых вариантах.",
 	"speaker.want_to_talk.p4": "От нас ты получишь небольшой сувенир в память о встрече и своё упоминание на этом сайте, что может расцениваться как бонус к социальным навыкам в твоем CV.",
 	"speaker.want_to_talk.p5": "Ты заинтересован? Есть тема? Заполняйте форму, и мы свяжемся с тобой!",
-	"speaker.want_to_talk.title": "Хочешь выступить?"
+	"speaker.want_to_talk.title": "Хочешь выступить?",
+  "speech.video.info.camera": "Съёмка",
+  "speech.video.info.edit": "Монтаж"
 }

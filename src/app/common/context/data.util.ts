@@ -6,6 +6,7 @@ import {Speaker} from '../models/speaker.model';
 import {AdvertisingCompany} from '../models/advertising-company.model';
 import {Member} from '../models/member.model';
 import {Config} from '../models/config.model';
+import {TeamPerson} from '../models/team-person.model';
 
 export class DataUtil {
   public static readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
@@ -72,22 +73,30 @@ export class DataUtil {
     });
   }
 
-  static processMeetings(meetings: Meeting[], config: Config) {
+  static processMeetings(meetings: Meeting[], config: Config, persons: Map<string, TeamPerson>, lang: string) {
     meetings.forEach(meeting => {
       meeting.start = meeting.datetime ? new Date(meeting.datetime) : null;
+      if (meeting.org) {
+        meeting.orgMod = this.joinOrgsAsText(meeting.org.mod, persons, lang);
+        meeting.orgPhoto = this.joinOrgsAsText(meeting.org.photo, persons, lang);
+      }
       if (meeting.speeches) {
-        this._processSpeeches(meeting.speeches, config);
+        this._processSpeeches(meeting.speeches, config, persons, lang);
       }
     });
   }
 
-  private static _processSpeeches(speeches: Speech[], config: Config) {
-    speeches.forEach(speech => this.processSpeech(speech, config));
+  private static _processSpeeches(speeches: Speech[], config: Config, persons: Map<string, TeamPerson>, lang: string) {
+    speeches.forEach(speech => this.processSpeech(speech, config, persons, lang));
   }
 
-  public static processSpeech(speech: Speech, config: Config) {
+  public static processSpeech(speech: Speech, config: Config, persons: Map<string, TeamPerson>, lang: string) {
     speech.youtubeUrls = this._getYoutubeUrls(speech.youtube);
     speech.labelsAsText = speech.labels ? speech.labels.join(', ') : '';
+    if (speech.org) {
+      speech.orgCam = this.joinOrgsAsText(speech.org.cam, persons, lang);
+      speech.orgEdit = this.joinOrgsAsText(speech.org.edit, persons, lang);
+    }
     this._processSpeakers(speech.speakers, config);
   }
 
@@ -112,5 +121,16 @@ export class DataUtil {
       speaker.imageUrl = config.personUrlPrefix + '/' + (speaker.image ? speaker.image : config.personDefaultImage);
     });
   }
-}
 
+  public static joinOrgsAsText(orgs: string[], persons: Map<string, TeamPerson>, lang: string): string {
+    const result = [];
+    if (orgs && orgs.length > 0) {
+      for (const org of orgs) {
+        const person = persons[org];
+        const name = person ? person.names[lang] : org;
+        result.push(name);
+      }
+    }
+    return result.join(', ');
+  }
+}
