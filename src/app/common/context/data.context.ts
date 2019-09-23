@@ -15,6 +15,8 @@ import {Advertising} from '../models/advertising.model';
 import {Member} from '../models/member.model';
 import {Team} from '../models/team.model';
 import {Config} from '../models/config.model';
+import {TeamPerson} from '../models/team-person.model';
+import {TranslationService} from '../translations/translation.service';
 
 @Injectable()
 export class DataContext {
@@ -25,6 +27,7 @@ export class DataContext {
 
   public teamMember = new Array<Member[]>();
   public teamThanks = new Array<Member>();
+  public teamPersons: Map<string, TeamPerson>;
 
   public seminarsLoaded = false;
   public seminars = new Array<Seminar>();
@@ -41,7 +44,7 @@ export class DataContext {
   public best = new Array<Speech>();
   public speakers = new Map<String, SpeakerTabItem>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private translationService: TranslationService) {
     this.filter.season = new Date().getFullYear();
   }
 
@@ -96,10 +99,10 @@ export class DataContext {
 
   setTeam(team: Team) {
     this.logosArchiveUrl = team.logos;
-    DataUtil.processMembers(team.team, this.config.team.personUrlPrefix);
-    DataUtil.processMembers(team.thanks, this.config.team.personUrlPrefix);
-    this.teamThanks = team.thanks;
+    this.teamThanks = DataUtil.getMembers(team.persons, team.thanks, this.config.team.personUrlPrefix);
+    DataUtil.fillMembers(team.persons, team.team, this.config.team.personUrlPrefix);
     this.teamMember = DataUtil.convertToMatrix(team.team);
+    this.teamPersons = team.persons;
   }
 
   addSeminars = (seminars: Seminar[]): boolean => {
@@ -120,7 +123,7 @@ export class DataContext {
   };
 
   addMeetings(meetings: Meeting[]) {
-    DataUtil.processMeetings(meetings, this.config);
+    DataUtil.processMeetings(meetings, this.config, this.teamPersons, this.translationService.lang);
     meetings.forEach(meeting => {
       if (!meeting.hidden) {
         this.meetings.push(meeting);
@@ -132,7 +135,7 @@ export class DataContext {
         meeting.speeches.forEach(speech => {
           if (speech.top) {
             const speechCopy = JSON.parse(JSON.stringify(speech));
-            DataUtil.processSpeech(speechCopy, this.config);
+            DataUtil.processSpeech(speechCopy, this.config, this.teamPersons, this.translationService.lang);
             this.best.push(speechCopy);
           }
           if (speech.labels) {

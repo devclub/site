@@ -24,4 +24,8 @@ export class DcAboutPageComponent {
     const template = this.googlecalendarUrlTemplate.replace('{langParam}', langParamValue);
     this.calendarUrl = this.sanitizer.bypassSecurityTrustResourceUrl(template);
   }
+
+  trackByIndex(index: number) {
+    return index;
+  }
 }

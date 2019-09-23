@@ -132,7 +132,7 @@
               <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']"></fa-icon>
             </a>
             <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right">
-            <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
+            <fa-icon [icon]="['fas', 'video-slash']"></fa-icon>
           </span>
             <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
                   [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"

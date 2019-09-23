@@ -4,11 +4,23 @@
     <span class="mr-1"></span>
 
     <!-- youtube -->
-    <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
-      <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="mr-1"></fa-icon></a>
+    <ng-template #videoInfo>
+      <ng-container *ngIf="speech.orgCam">
+        {{'speech.video.info.camera' | translate}}: {{speech.orgCam}}<br/>
+      </ng-container>
+      <ng-container *ngIf="speech.orgEdit">
+        {{'speech.video.info.edit' | translate}}: {{speech.orgEdit}}
+      </ng-container>
+    </ng-template>
+    <span placement="top" [tooltip]="videoInfo" [isDisabled]="!speech.orgCam && !speech.orgEdit">
+      <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
+        <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="mr-1"></fa-icon>
+      </a>
+    </span>
 
     <!-- speech info icon -->
-    <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right"><fa-icon [icon]="['fas', 'info-circle']" class="mr-1"></fa-icon></span>
+    <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right"><fa-icon
+      [icon]="['fas', 'video-slash']" class="mr-1"></fa-icon></span>
 
     <!-- trophy -->
     <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
@@ -49,7 +61,8 @@
     <!-- speakers -->
     <ng-container *ngFor="let speaker of speech.speakers; let last = last">
       <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
-        <fa-icon [icon]="['fas', 'user']" class="small mr-1"></fa-icon></a>
+        <fa-icon [icon]="['fas', 'user']" class="small mr-1"></fa-icon>
+      </a>
       <a *ngIf="options && options.clickNameFn" class="dotted" (click)="options.clickNameFn(speaker)"
          href="javascript:void(0)">{{speaker.names | localize}}</a>
       <ng-container *ngIf="!options || !options.clickNameFn">{{speaker.names | localize}}</ng-container>
