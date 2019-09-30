@@ -67,7 +67,7 @@ export class DataContext {
     this.setAdvertising(advertising);
     this.setTeam(team);
     this.addMeetings(meetings);
-    this.nextMeetings = DataUtil.getNextMeetings(this.meetings);
+    this.nextMeetings = DataUtil.getNextMeetings(this.meetings, this.config, team.persons, this.translationService.lang);
     return true;
   }
 

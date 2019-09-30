@@ -33,7 +33,7 @@ export class DataUtil {
     return result;
   }
 
-  static getMembers(teamPersons: Map<string, TeamPerson>,  memberCodes: string[], personUrlPrefix: string): Array<Member> {
+  static getMembers(teamPersons: Map<string, TeamPerson>, memberCodes: string[], personUrlPrefix: string): Array<Member> {
     const result = new Array<Member>();
     memberCodes.forEach(memberCode => {
       result.push(this.getMember(teamPersons[memberCode], personUrlPrefix));
@@ -76,9 +76,18 @@ export class DataUtil {
     return result;
   }
 
-  static getNextMeetings(meetings: Meeting[]): Meeting[] {
+  static getNextMeetings(meetings: Meeting[], config: Config, persons: Map<string, TeamPerson>, lang: string): Meeting[] {
     const now = new Date().getTime();
-    return meetings.filter(m => now <= m.start.getTime() + this.MEETING_DURATION_IN_MS);
+    const next = meetings.filter(m => now <= m.start.getTime() + this.MEETING_DURATION_IN_MS);
+    const result = new Array<Meeting>();
+    meetings.forEach(m => {
+      if (now <= m.start.getTime() + this.MEETING_DURATION_IN_MS) {
+        const meetingCopy = JSON.parse(JSON.stringify(m));
+        this.processMeeting(meetingCopy, config, persons, lang);
+        result.push(meetingCopy);
+      }
+    });
+    return result;
   }
 
   static processSeminars(seminars: Seminar[]) {
@@ -88,16 +97,18 @@ export class DataUtil {
   }
 
   static processMeetings(meetings: Meeting[], config: Config, persons: Map<string, TeamPerson>, lang: string) {
-    meetings.forEach(meeting => {
-      meeting.start = meeting.datetime ? new Date(meeting.datetime) : null;
-      if (meeting.org) {
-        meeting.orgMod = this.joinOrgsAsText(meeting.org.mod, persons, lang);
-        meeting.orgPhoto = this.joinOrgsAsText(meeting.org.photo, persons, lang);
-      }
-      if (meeting.speeches) {
-        this._processSpeeches(meeting.speeches, config, persons, lang);
-      }
-    });
+    meetings.forEach(meeting => this.processMeeting(meeting, config, persons, lang));
+  }
+
+  static processMeeting(meeting: Meeting, config: Config, persons: Map<string, TeamPerson>, lang: string) {
+    meeting.start = meeting.datetime ? new Date(meeting.datetime) : null;
+    if (meeting.org) {
+      meeting.orgMod = this.joinOrgsAsText(meeting.org.mod, persons, lang);
+      meeting.orgPhoto = this.joinOrgsAsText(meeting.org.photo, persons, lang);
+    }
+    if (meeting.speeches) {
+      this._processSpeeches(meeting.speeches, config, persons, lang);
+    }
   }
 
   private static _processSpeeches(speeches: Speech[], config: Config, persons: Map<string, TeamPerson>, lang: string) {
