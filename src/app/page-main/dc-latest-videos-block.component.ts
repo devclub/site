@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
-import {YoutubeVideo} from './models/youtube-video.model';
+import {DataContext} from '../context/data.context';
+import {YoutubeVideo} from '../models/YoutubeVideo.model';
 import * as moment from 'moment';
-import {CachedHttpService} from '../common/cached-http.service';
-import {TranslationService} from '../common/translations/translation.service';
+import {CachedHttpService} from '../services/CachedHttpService';
+import {TranslationService} from '../translations/TranslationService';
 
 @Component({
   selector: 'dc-latest-videos-block',

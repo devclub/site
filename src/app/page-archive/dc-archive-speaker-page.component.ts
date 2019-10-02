@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../common/context/data.context';
-import {SpeakerTabItem} from './models/speaker-tab-item.model';
-import {TranslationService} from '../common/translations/translation.service';
+import {DataContext} from '../context/data.context';
+import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
+import {TranslationService} from '../translations/TranslationService';
 
 @Component({
   templateUrl: './dc-archive-speaker-page.component.html'

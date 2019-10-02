@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../common/context/data.context';
-import {BestGroupBy} from './models/best-groups-by.model';
-import {Speech} from '../common/models/speech.model';
+import {DataContext} from '../context/data.context';
+import {BestGroupBy} from '../models/BestGroupBy.model';
+import {Speech} from '../models/Speech.model';
 
 @Component({
   templateUrl: './dc-archive-best-page.component.html'

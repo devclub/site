@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
+import {DataContext} from '../context/data.context';
 
 @Component({
   selector: 'dc-meeting-block',

@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
-import {Speech} from '../common/models/speech.model';
-import {SpeechOptions} from '../page-main/models/speech-options.model';
-import {TranslationService} from '../common/translations/translation.service';
+import {DataContext} from '../context/data.context';
+import {Speech} from '../models/Speech.model';
+import {SpeechOptions} from '../models/SpeechOptions.model';
+import {TranslationService} from '../translations/TranslationService';
 
 @Component({
   selector: 'dc-speech-row',

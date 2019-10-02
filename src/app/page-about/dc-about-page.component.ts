@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
+import {DataContext} from '../context/data.context';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Lang} from '../common/models/lang.model';
-import {TranslationService} from '../common/translations/translation.service';
+import {Lang} from '../models/Lang.model';
+import {TranslationService} from '../translations/TranslationService';
 
 @Component({
   templateUrl: './dc-about-page.component.html',

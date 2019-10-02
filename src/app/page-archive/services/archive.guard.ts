@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {DataContext} from '../../common/context/data.context';
+import {DataContext} from '../../context/data.context';
 import {Injectable} from '@angular/core';
 
 @Injectable()

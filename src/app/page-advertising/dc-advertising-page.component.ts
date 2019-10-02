@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Advertising} from '../common/models/advertising.model';
-import {DataContext} from '../common/context/data.context';
+import {Advertising} from '../models/Advertising.model';
+import {DataContext} from '../context/data.context';
 
 @Component({
   templateUrl: './dc-advertising-page.component.html'

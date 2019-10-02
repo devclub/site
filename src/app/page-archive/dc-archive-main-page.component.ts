@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../common/context/data.context';
+import {DataContext} from '../context/data.context';
 import {TypeaheadMatch} from 'ngx-bootstrap';
-import {Speaker} from '../common/models/speaker.model';
-import {Meeting} from '../common/models/meeting.model';
-import {TranslationService} from '../common/translations/translation.service';
-import {Speech} from '../common/models/speech.model';
+import {Speaker} from '../models/Speaker.model';
+import {Meeting} from '../models/Meeting.model';
+import {TranslationService} from '../translations/TranslationService';
+import {Speech} from '../models/Speech.model';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
