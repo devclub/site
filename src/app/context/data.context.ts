@@ -20,12 +20,10 @@ import {TranslationService} from '../translations/TranslationService';
 @Injectable()
 export class DataContext {
   public config: Config;
-  public logosArchiveUrl: string;
 
   public advertising: Advertising;
 
   public teamMember = new Array<Member[]>();
-  public teamThanks = new Array<Member>();
   public teamPersons: Map<string, TeamPerson>;
 
   public seminarsLoaded = false;
@@ -33,7 +31,6 @@ export class DataContext {
 
   public meetingsLoaded = false;
   public meetings = new Array<Meeting>();
-  public nextMeetings = new Array<Meeting>();
 
   public labelMap = new Map<string, LabelItem>();
   public labels = new Array<LabelItem>();
@@ -51,7 +48,6 @@ export class DataContext {
     this.setAdvertising(advertising);
     this.setTeam(team);
     this.addMeetings(meetings);
-    this.nextMeetings = DataUtil.getNextMeetings(this.meetings, this.config, team.persons, this.translationService.lang);
     return true;
   }
 
@@ -82,8 +78,6 @@ export class DataContext {
   }
 
   setTeam(team: Team) {
-    this.logosArchiveUrl = team.logos;
-    this.teamThanks = DataUtil.getMembers(team.persons, team.thanks, this.config.team.personUrlPrefix);
     DataUtil.fillMembers(team.persons, team.team, this.config.team.personUrlPrefix);
     this.teamMember = DataUtil.convertToMatrix(team.team);
     this.teamPersons = team.persons;

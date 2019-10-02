@@ -13,8 +13,7 @@
   <dc-title-row>{{'about.title.events' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <iframe [src]="calendarUrl" class="col" style="border: 0"
-            height="200" frameborder="0" scrolling="no"></iframe>
+    <iframe [src]="calendarUrl" class="col" style="border: 0" height="200" frameborder="0" scrolling="no"></iframe>
   </div>
 
   <dc-title-row>{{'about.title.resources' | translate}}</dc-title-row>
@@ -31,7 +30,7 @@
 
   <div class="row justify-content-center mb-3">
     <div class="col text-center">
-      <a href="{{dataContext.logosArchiveUrl}}" target="_blank" class="btn btn-primary">
+      <a href="{{logosArchiveUrl}}" target="_blank" class="btn btn-primary">
         {{'about.logos.button.download' | translate}}
       </a>
     </div>
@@ -51,7 +50,7 @@
 
   <dc-title-row>{{'about.title.photos' | translate}}</dc-title-row>
 
-  <div class="row" *ngFor="let rows of dataContext.config.photos; trackBy: trackByIndex">
+  <div class="row" *ngFor="let rows of photos; trackBy: trackByIndex">
     <div class="col-12 col-md-4 col-lg-2 mb-3 text-center" *ngFor="let photo of rows">
       <div class="image-wrap">
         <a href="{{photo.mainUrl}}" target="_blank" class="image-lighten">
@@ -65,7 +64,7 @@
   <dc-title-row>{{'about.title.thanks' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <div class="col" *ngFor="let member of dataContext.teamThanks; trackBy: trackByIndex">
+    <div class="col" *ngFor="let member of teamThanks; trackBy: trackByIndex">
       <div class="image-wrap">
         <a href="{{member.person.url}}" target="_blank" class="image-lighten">
           <img src="{{member.imageUrl}}" class="img-fluid">
