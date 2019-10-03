@@ -12,12 +12,15 @@ export class Config {
   devclubMenuText: string;
   hasTop: boolean;
 
+  calendarEmbedUrl: string;
+  speakerTalkFormUrl: string;
+
   personUrlPrefix: string;
   personDefaultImage: string;
   fileUrlPrefix: string;
 
   photoUrlPrefix: string;
-  photos: Photo[][];
+  photos: Array<Array<Photo>>;
 
   seminarsUrl: string;
   meetingsUrls: { main: string; archive: string[] };

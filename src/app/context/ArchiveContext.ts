@@ -8,10 +8,7 @@ import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
 
 @Injectable()
 export class ArchiveContext {
-  public seminarsLoaded = false;
   public seminars = new Array<Seminar>();
-
-  public meetingsLoaded = false;
   public meetings = new Array<Meeting>();
 
   public labelMap = new Map<string, LabelItem>();

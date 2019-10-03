@@ -1,6 +1,5 @@
 <div class="row mt-4 ml-2 mr-2">
-  <div class="image-wrap text-center pl-1 pr-2 d-none d-sm-block col-2 col-md"
-       *ngFor="let item of dataContext.advertising.companies; trackBy: trackByIndex">
+  <div class="image-wrap text-center pl-1 pr-2 d-none d-sm-block col-2 col-md" *ngFor="let item of companies; trackBy: trackByIndex">
     <a *ngIf="item.url" href="{{item.url}}" target="_blank" class="image-lighten">
       <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid p-2 mh">
     </a>

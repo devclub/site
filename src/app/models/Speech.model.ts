@@ -10,14 +10,14 @@ export class Speech {
   orgCam: string;
   orgEdit: string;
 
-  youtube: string[];
-  youtubeUrls: string[];
+  youtube: Array<string>;
+  youtubeUrls: Array<string>;
   speakers: Speaker[];
   titles: LocalizedTexts;
   descr: LocalizedTextLists;
-  presentations: string[];
-  examples: string[];
-  labels: string[];
+  presentations: Array<string>;
+  examples: Array<string>;
+  labels: Array<string>;
   info: string;
   org: OrganizedSpeech;
   lang: string;

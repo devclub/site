@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataContext} from '../context/data.context';
+import {AppContext} from '../context/AppContext';
 
 declare var FB: any;
 
@@ -8,11 +8,11 @@ declare var FB: any;
   templateUrl: './dc-social-youtube-block.component.html'
 })
 export class DcSocialYoutubeBlockComponent implements OnInit, OnDestroy {
-  youtubeChannelIds: string[] = [];
+  youtubeChannelIds = new Array<string>();
 
-  constructor(private dataContext: DataContext) {
-    this.youtubeChannelIds.push(dataContext.config.resources.main.youtubeChannelId);
-    dataContext.config.resources.extra.forEach(res => {
+  constructor(private appContext: AppContext) {
+    this.youtubeChannelIds.push(appContext.config.resources.main.youtubeChannelId);
+    appContext.config.resources.extra.forEach(res => {
       if (res.youtubeChannelId) {
         this.youtubeChannelIds.push(res.youtubeChannelId);
       }

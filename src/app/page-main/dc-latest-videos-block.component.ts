@@ -14,7 +14,6 @@ export class DcLatestVideosBlockComponent {
   public videos: YoutubeVideo[] = [];
 
   constructor(appContext: AppContext, translationService: TranslationService, cachedHttp: CachedHttpService) {
-    console.log(appContext.config.googleApiKey);
     if (!appContext.config.googleApiKey) {
       return; // nothing, if google api key is not defined.
     }

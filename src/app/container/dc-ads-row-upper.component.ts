@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../context/data.context';
+import {AdvertisingCompany} from '../models/AdvertisingCompany.model';
+import {AppContext} from '../context/AppContext';
 
 @Component({
   selector: 'dc-ads-row-upper',
@@ -7,7 +8,10 @@ import {DataContext} from '../context/data.context';
   styleUrls: ['./dc-ads-row-upper.component.css']
 })
 export class DcAdsRowUpperComponent {
-  constructor(public dataContext: DataContext) {
+  public companies = new Array<AdvertisingCompany>();
+
+  constructor(appContext: AppContext) {
+    this.companies.push(...appContext.advertising.companies);
   }
 
   trackByIndex(index: number) {

@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {DataContext} from '../context/data.context';
 import {Meeting} from '../models/Meeting.model';
 import {SpeechOptions} from '../models/SpeechOptions.model';
 import {TranslationService} from '../translations/TranslationService';
 import {Speech} from '../models/Speech.model';
+import {AppContext} from '../context/AppContext';
 
 @Component({
   selector: 'dc-meeting-info-block',
@@ -18,10 +18,9 @@ export class DcMeetingInfoBlockComponent {
   public fullscreen: boolean;
   public fileUrlPrefix: string;
 
-  constructor(public dataContext: DataContext,
-              public translationService: TranslationService) {
+  constructor(appContext: AppContext, translationService: TranslationService) {
     this.lang = translationService.lang;
-    this.fileUrlPrefix = dataContext.config.fileUrlPrefix;
+    this.fileUrlPrefix = appContext.config.fileUrlPrefix;
   }
 
   convertIntoMatrix = function (speeches: Speech[]) {

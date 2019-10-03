@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 import {DcAboutPageComponent} from './page-about/dc-about-page.component';
 import {DcArchiveContainerPageComponent} from './page-archive/dc-archive-container.component';
 import {DcSpeakerPageComponent} from './page-speaker/dc-speaker-page.component';
-import {DataContext} from './context/data.context';
 import {DcContainerComponent} from './container/dc-container.component';
 import {LocalizePipe} from './translations/LocalizePipe';
 import {DcMeetingInfoBlockComponent} from './components/dc-meeting-info-block.component';
@@ -17,13 +16,12 @@ import {DcTeamRowsComponent} from './container/dc-team-rows.component';
 import {AppRoutes} from './app.routes';
 import {DcRessourcesComponent} from './components/dc-ressources.component';
 import {DcTitleRowComponent} from './components/dc-title-row.component';
-import {ArchivePageGuard} from './page-archive/services/archive.guard';
+import {ArchivePageGuard} from './guard/ArchivePageGuard';
 import {DcArchiveMainPageComponent} from './page-archive/dc-archive-main-page.component';
 import {DcArchiveBestPageComponent} from './page-archive/dc-archive-best-page.component';
 import {DcArchiveSpeakerPageComponent} from './page-archive/dc-archive-speaker-page.component';
 import {DcArchiveSeminarPageComponent} from './page-archive/dc-archive-seminar-page.component';
-import {ArchiveTabState} from './page-archive/services/archive.tab.state';
-import {ArchiveSeminarPageGuard} from './page-archive/services/archive.seminar.guard';
+import {ArchiveSeminarPageGuard} from './guard/ArchiveSeminarPageGuard';
 import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {DcAdsRowUpperComponent} from './container/dc-ads-row-upper.component';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
@@ -68,7 +66,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DataUtil} from './context/data.util';
 import {DataHttpService} from './services/DataHttpService';
 import {AppContext} from './context/AppContext';
 import {ArchiveContext} from './context/ArchiveContext';
@@ -131,12 +128,9 @@ export function initialize(dataHttpService: DataHttpService, appContext: AppCont
     {provide: APP_INITIALIZER, useFactory: initialize, deps: [DataHttpService, AppContext, ArchiveContext], multi: true},
     ArchivePageGuard,
     ArchiveSeminarPageGuard,
-    ArchiveTabState,
     AppContext,
     ArchiveContext,
     NextMeetingsContext,
-    DataContext,
-    DataUtil,
     TranslationService,
     DataHttpService,
     CachedHttpService,

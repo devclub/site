@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
-import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../context/data.context';
 import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
 import {TranslationService} from '../translations/TranslationService';
+import {AppContext} from '../context/AppContext';
+import {ArchiveContext} from '../context/ArchiveContext';
 
 @Component({
   templateUrl: './dc-archive-speaker-page.component.html'
 })
 export class DcArchiveSpeakerPageComponent {
   public speakers: Array<SpeakerTabItem>;
+  public hasBestTab = false;
 
-  constructor(private archiveTabState: ArchiveTabState,
-              private translationService: TranslationService,
-              public dataContext: DataContext) {
-    archiveTabState.setSpeaker();
+  constructor(private translationService: TranslationService, appContext: AppContext, archiveContext: ArchiveContext) {
+    this.hasBestTab = appContext.config.hasTop;
+    this.speakers = Array.from(archiveContext.speakers.values());
     this.sortByDate();
   }
 
@@ -22,22 +22,16 @@ export class DcArchiveSpeakerPageComponent {
   }
 
   sortByDate() {
-    this.sort((s1, s2) => {
-      return s1.date.getTime() > s2.date.getTime() ? -1 : 1;
-    });
+    this.sort((s1, s2) => s1.date.getTime() > s2.date.getTime() ? -1 : 1);
   }
 
   sortByName() {
     const lang = this.translationService.lang;
-    this.sort((s1, s2) => {
-      return s1.names[lang] > s2.names[lang] ? 1 : -1;
-    });
+    this.sort((s1, s2) => s1.names[lang] > s2.names[lang] ? 1 : -1);
   }
 
   sortByCount() {
-    this.sort((s1, s2) => {
-      return s1.speechCount > s2.speechCount ? -1 : 1;
-    });
+    this.sort((s1, s2) => s1.speechCount > s2.speechCount ? -1 : 1);
   }
 
   sortByTop() {
@@ -59,6 +53,6 @@ export class DcArchiveSpeakerPageComponent {
   }
 
   sort(compareFn) {
-    this.speakers = Array.from(this.dataContext.speakers.values()).sort(compareFn);
+    this.speakers = this.speakers.sort(compareFn);
   }
 }

@@ -8,8 +8,8 @@ declare var FB: any;
   templateUrl: './dc-short-info-block.component.html'
 })
 export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
-  facebookPageUrl: string;
-  facebookGroupUrl: string;
+  public facebookPageUrl: string;
+  public facebookGroupUrl: string;
 
   constructor(appContext: AppContext) {
     this.facebookPageUrl = 'https://www.facebook.com/' + appContext.config.resources.main.facebookPageId;

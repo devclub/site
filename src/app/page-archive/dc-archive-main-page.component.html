@@ -2,11 +2,11 @@
   <div class="form-group col-md-6">
     <label for="speaker">{{'archive.main.filter.speaker' | translate}}</label>
     <div class="input-group">
-      <input id="speaker" [(ngModel)]="dataContext.filter.speaker"
+      <input id="speaker" [(ngModel)]="filter.speaker"
              (change)="searchBySpeaker()" type="text" class="form-control"/>
       <div class="input-group-append">
         <span class="input-group-text pointer"
-              (click)="dataContext.filter.speaker = ''; search()">
+              (click)="filter.speaker = ''; search()">
           <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
@@ -15,11 +15,11 @@
   <div class="form-group col-md-6">
     <label for="texts">{{'archive.main.filter.texts' | translate}}</label>
     <div class="input-group">
-      <input id="texts" [(ngModel)]="dataContext.filter.texts"
+      <input id="texts" [(ngModel)]="filter.texts"
              (change)="searchByTexts()" type="text" class="form-control"/>
       <div class="input-group-append">
         <span class="input-group-text pointer"
-              (click)="dataContext.filter.texts = ''; search()">
+              (click)="filter.texts = ''; search()">
           <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
@@ -35,8 +35,8 @@
         <span>{{model.name}} ({{model.count}})</span>
       </ng-template>
       <input id="labels"
-             [(ngModel)]="dataContext.filter.label"
-             [typeahead]="dataContext.labels"
+             [(ngModel)]="filter.label"
+             [typeahead]="labels"
              [typeaheadOptionsLimit]="7"
              [typeaheadMinLength]="0"
              typeaheadOptionField="name"
@@ -46,7 +46,7 @@
              class="form-control"/>
       <div class="input-group-append">
         <span class="input-group-text pointer"
-              (click)="dataContext.filter.label = ''; search()">
+              (click)="filter.label = ''; search()">
           <fa-icon [icon]="['fas', 'times']"></fa-icon>
         </span>
       </div>
@@ -61,11 +61,11 @@
         </span>
       </div>
       <select id="season" class="form-control"
-              [(ngModel)]="dataContext.filter.season" (change)="searchBySeason()" [disabled]="seasonDisabled">
+              [(ngModel)]="filter.season" (change)="searchBySeason()" [disabled]="seasonDisabled">
         <option [ngValue]="ALL_SEASONS">
           {{'archive.main.filter.seasons.all' | translate}}
         </option>
-        <option *ngFor="let year of dataContext.seasons" [ngValue]="year">{{year}}</option>
+        <option *ngFor="let year of seasons" [ngValue]="year">{{year}}</option>
       </select>
       <div class="input-group-append" *ngIf="getPlusYearText() != '' && !seasonDisabled">
         <span class="input-group-text pointer" (click)="plusYear()">

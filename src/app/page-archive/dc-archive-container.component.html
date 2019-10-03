@@ -6,26 +6,26 @@
     <div class="col">
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active': archiveTabState.isMain()}"
-             href="javascript:void(0)" (click)="navigate('/archive')" role="tab">
+          <a class="nav-link" [ngClass]="{'active': selected == 'main'}"
+             href="javascript:void(0)" (click)="navigate('main')" role="tab">
             {{'archive.main.tab' | translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active': archiveTabState.isSeminar()}"
-             href="javascript:void(0)" (click)="navigate('/archive/seminar')" role="tab">
+          <a class="nav-link" [ngClass]="{'active': selected == 'seminar'}"
+             href="javascript:void(0)" (click)="navigate('seminar')" role="tab">
             {{'archive.seminar.tab' | translate}}
           </a>
         </li>
-        <li class="nav-item" *ngIf="dataContext.config.hasTop">
-          <a class="nav-link" [ngClass]="{'active': archiveTabState.isBest()}"
-             href="javascript:void(0)" (click)="navigate('/archive/best')" role="tab">
+        <li class="nav-item" *ngIf="hasBestTab">
+          <a class="nav-link" [ngClass]="{'active': selected == 'best'}"
+             href="javascript:void(0)" (click)="navigate('best')" role="tab">
             {{'archive.best.tab' | translate}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [ngClass]="{'active': archiveTabState.isSpeaker()}"
-             href="javascript:void(0)" (click)="navigate('/archive/speaker')" role="tab">
+          <a class="nav-link" [ngClass]="{'active': selected == 'speaker'}"
+             href="javascript:void(0)" (click)="navigate('speaker')" role="tab">
             {{'archive.speaker.tab' | translate}}
           </a>
         </li>

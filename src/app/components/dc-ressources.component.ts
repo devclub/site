@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../context/data.context';
 import {RessourceGroup} from '../models/RessourceGroup.model';
 import {Ressource} from '../models/Ressource.model';
 import {ConfigResource} from '../models/ConfigResource.model';
+import {AppContext} from '../context/AppContext';
 
 @Component({
   selector: 'dc-ressources',
@@ -11,9 +11,9 @@ import {ConfigResource} from '../models/ConfigResource.model';
 export class DcRessourcesComponent {
   public groups: RessourceGroup[] = [];
 
-  constructor(private dataContext: DataContext) {
-    this.addGroup(this.dataContext.config.resources.main, 'resource.title.main');
-    this.dataContext.config.resources.extra.forEach(cr => this.addGroup(cr));
+  constructor(appContext: AppContext) {
+    this.addGroup(appContext.config.resources.main, 'resource.title.main');
+    appContext.config.resources.extra.forEach(cr => this.addGroup(cr));
   }
 
   trackByIndex(index: number) {

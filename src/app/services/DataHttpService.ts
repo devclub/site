@@ -37,7 +37,7 @@ export class DataHttpService {
     return this.http.get<Team>(url);
   }
 
-  private getMeetings(url: string): Observable<Array<Meeting>> {
+  public getMeetings(url: string): Observable<Array<Meeting>> {
     return this.http.get<Array<Meeting>>(url);
   }
 

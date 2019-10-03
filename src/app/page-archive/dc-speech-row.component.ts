@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {DataContext} from '../context/data.context';
 import {Speech} from '../models/Speech.model';
 import {SpeechOptions} from '../models/SpeechOptions.model';
 import {TranslationService} from '../translations/TranslationService';
+import {AppContext} from '../context/AppContext';
 
 @Component({
   selector: 'dc-speech-row',
@@ -14,9 +14,8 @@ export class DcSpeechRowComponent {
   public lang: string;
   public fileUrlPrefix: string;
 
-  constructor(public dataContext: DataContext,
-              public translationService: TranslationService) {
+  constructor(appContext: AppContext, translationService: TranslationService) {
     this.lang = translationService.lang;
-    this.fileUrlPrefix = dataContext.config.fileUrlPrefix;
+    this.fileUrlPrefix = appContext.config.fileUrlPrefix;
   }
 }

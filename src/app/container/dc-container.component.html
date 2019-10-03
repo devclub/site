@@ -2,7 +2,7 @@
      style="">
   <a class="navbar-brand" href="#/">
     <img src="assets/images/logo_navbar.png" height="30" class="d-inline-block align-top"/>
-    {{dataContext.config.devclubText}}
+    {{devclubText}}
   </a>
   <button class="navbar-toggler" [ngClass]="{'collapsed': !isMenuOpen}" type="button" (click)="toggleMenu()">
     <span class="navbar-toggler-icon"></span>
@@ -46,9 +46,9 @@
           <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
         </a>
       </li>
-      <li class="nav-item" *ngIf="dataContext.config.devclubMenuText">
-        <a class="nav-link" target="_blank" [href]="dataContext.config.devclubMenuUrl">
-          {{dataContext.config.devclubMenuText}}
+      <li class="nav-item" *ngIf="devclubMenuText">
+        <a class="nav-link" target="_blank" [href]="devclubMenuUrl">
+          {{devclubMenuText}}
           <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
         </a>
       </li>
@@ -66,7 +66,7 @@
 
 <div class="container">
   <dc-title-row>{{'common.title.team_members' | translate}}</dc-title-row>
-  <dc-team-rows [memberRows]="dataContext.teamMember"></dc-team-rows>
+  <dc-team-rows [memberRows]="teamMembers"></dc-team-rows>
 </div>
 
 <dc-ads-row-lower></dc-ads-row-lower>
