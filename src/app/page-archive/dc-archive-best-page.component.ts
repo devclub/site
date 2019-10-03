@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../common/context/data.context';
-import {BestGroupBy} from './models/best-groups-by.model';
-import {Speech} from '../common/models/speech.model';
+import {BestGroupBy} from '../models/BestGroupBy.model';
+import {Speech} from '../models/Speech.model';
+import {MeetingFilter} from '../models/MeetingFilter.model';
+import {ArchiveContext} from '../context/ArchiveContext';
 
 @Component({
   templateUrl: './dc-archive-best-page.component.html'
@@ -10,10 +10,12 @@ import {Speech} from '../common/models/speech.model';
 export class DcArchiveBestPageComponent {
   public groupNumbers: number[] = [];
   public groups: Map<number, Speech[]> = new Map();
+  public filter: MeetingFilter;
+  public best;
 
-  constructor(private archiveTabState: ArchiveTabState,
-              public dataContext: DataContext) {
-    archiveTabState.setBest();
+  constructor(archiveContext: ArchiveContext) {
+    this.filter = archiveContext.filter;
+    this.best = archiveContext.best;
     this.setGroupState();
   }
 
@@ -26,16 +28,16 @@ export class DcArchiveBestPageComponent {
   }
 
   private groupBy(groupByType: string): void {
-    this.dataContext.filter.bestGroupBy = groupByType;
+    this.filter.bestGroupBy = groupByType;
     this.setGroupState();
   }
 
   isGroupByPlace(): boolean {
-    return this.dataContext.filter.bestGroupBy === BestGroupBy.PLACE;
+    return this.filter.bestGroupBy === BestGroupBy.PLACE;
   }
 
   isGroupBySeason(): boolean {
-    return this.dataContext.filter.bestGroupBy === BestGroupBy.SEASON;
+    return this.filter.bestGroupBy === BestGroupBy.SEASON;
   }
 
   getGroupHeader(groupNumber: number) {
@@ -48,8 +50,7 @@ export class DcArchiveBestPageComponent {
 
   setGroupState(): void {
     this.groups.clear();
-
-    this.dataContext.best.forEach((speech) => {
+    this.best.forEach((speech) => {
       const groupNumber = this.isGroupByPlace() ? speech.top.place : speech.top.season;
       let speeches = this.groups.get(groupNumber);
       speeches = speeches ? speeches : [];

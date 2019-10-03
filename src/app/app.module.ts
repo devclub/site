@@ -8,36 +8,34 @@ import {AppComponent} from './app.component';
 import {DcAboutPageComponent} from './page-about/dc-about-page.component';
 import {DcArchiveContainerPageComponent} from './page-archive/dc-archive-container.component';
 import {DcSpeakerPageComponent} from './page-speaker/dc-speaker-page.component';
-import {DataContext} from './common/context/data.context';
-import {DcContainerComponent} from './common/container/dc-container.component';
-import {LocalizePipe} from './common/translations/localize.pipe';
-import {DcMeetingInfoBlockComponent} from './common/components/dc-meeting-info-block.component';
-import {DcAdsRowLowerComponent} from './common/container/dc-ads-row-lower.component';
-import {DcTeamRowsComponent} from './common/container/dc-team-rows.component';
+import {DcContainerComponent} from './container/dc-container.component';
+import {LocalizePipe} from './translations/LocalizePipe';
+import {DcMeetingInfoBlockComponent} from './components/dc-meeting-info-block.component';
+import {DcAdsRowLowerComponent} from './container/dc-ads-row-lower.component';
+import {DcTeamRowsComponent} from './container/dc-team-rows.component';
 import {AppRoutes} from './app.routes';
-import {DcRessourcesComponent} from './common/components/dc-ressources.component';
-import {DcTitleRowComponent} from './common/components/dc-title-row.component';
-import {ArchivePageGuard} from './page-archive/services/archive.guard';
+import {DcRessourcesComponent} from './components/dc-ressources.component';
+import {DcTitleRowComponent} from './components/dc-title-row.component';
+import {ArchivePageGuard} from './guard/ArchivePageGuard';
 import {DcArchiveMainPageComponent} from './page-archive/dc-archive-main-page.component';
 import {DcArchiveBestPageComponent} from './page-archive/dc-archive-best-page.component';
 import {DcArchiveSpeakerPageComponent} from './page-archive/dc-archive-speaker-page.component';
 import {DcArchiveSeminarPageComponent} from './page-archive/dc-archive-seminar-page.component';
-import {ArchiveTabState} from './page-archive/services/archive.tab.state';
-import {ArchiveSeminarPageGuard} from './page-archive/services/archive.seminar.guard';
+import {ArchiveSeminarPageGuard} from './guard/ArchiveSeminarPageGuard';
 import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
-import {DcAdsRowUpperComponent} from './common/container/dc-ads-row-upper.component';
+import {DcAdsRowUpperComponent} from './container/dc-ads-row-upper.component';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
-import {CachedHttpService} from './common/cached-http.service';
-import {DcSocialYoutubeBlockComponent} from './common/container/dc-social-youtube-block.component';
+import {CachedHttpService} from './services/CachedHttpService';
+import {DcSocialYoutubeBlockComponent} from './container/dc-social-youtube-block.component';
 import {DcMeetingBlockComponent} from './page-main/dc-meeting-block.component';
 import {DcLatestVideosBlockComponent} from './page-main/dc-latest-videos-block.component';
 import {DcShortInfoBlockComponent} from './page-about/dc-short-info-block.component';
 import {DcMeetingInfoListComponent} from './page-archive/dc-meeting-info-list.component';
 import {DcSpeechRowComponent} from './page-archive/dc-speech-row.component';
-import {GoogleAnalyticsService} from './common/google-analytics.service';
-import {TranslationService} from './common/translations/translation.service';
-import {TranslatePipe} from './common/translations/translate.pipe';
+import {GoogleAnalyticsService} from './services/GoogleAnalyticsService';
+import {TranslationService} from './translations/TranslationService';
+import {TranslatePipe} from './translations/TranslatePipe';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {
@@ -68,11 +66,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faGithub, faSlideshare, faTwitter, faWordpress, faYoutube} from '@fortawesome/free-brands-svg-icons';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DataUtil} from './common/context/data.util';
+import {DataHttpService} from './services/DataHttpService';
+import {AppContext} from './context/AppContext';
+import {ArchiveContext} from './context/ArchiveContext';
+import {NextMeetingsContext} from './context/NextMeetingsContext';
 
-export function initialize(configContext: DataContext) {
+export function initialize(dataHttpService: DataHttpService, appContext: AppContext, archiveContext: ArchiveContext) {
   return () => {
-    return configContext.initialize();
+    return dataHttpService.getInitial().then(
+      result => {
+        appContext.config = result[0];
+        appContext.advertising = result[1];
+        appContext.team = result[2];
+        archiveContext.meetings.push(...result[3]);
+      });
   };
 }
 
@@ -118,13 +125,14 @@ export function initialize(configContext: DataContext) {
     TypeaheadModule.forRoot()
   ],
   providers: [
-    {provide: APP_INITIALIZER, useFactory: initialize, deps: [DataContext], multi: true},
+    {provide: APP_INITIALIZER, useFactory: initialize, deps: [DataHttpService, AppContext, ArchiveContext], multi: true},
     ArchivePageGuard,
     ArchiveSeminarPageGuard,
-    ArchiveTabState,
-    DataContext,
-    DataUtil,
+    AppContext,
+    ArchiveContext,
+    NextMeetingsContext,
     TranslationService,
+    DataHttpService,
     CachedHttpService,
     GoogleAnalyticsService,
     TranslatePipe,

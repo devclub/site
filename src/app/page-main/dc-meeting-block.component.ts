@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
+import {Meeting} from '../models/Meeting.model';
+import {AppContext} from '../context/AppContext';
+import {NextMeetingsContext} from '../context/NextMeetingsContext';
 
 @Component({
   selector: 'dc-meeting-block',
@@ -8,7 +10,10 @@ import {DataContext} from '../common/context/data.context';
 })
 export class DcMeetingBlockComponent {
   public styleColor: string;
-  constructor(public dataContext: DataContext) {
-    this.styleColor = dataContext.config.lightColor;
+  public nextMeetings = new Array<Meeting>();
+
+  constructor(appContext: AppContext, nextMeetingsContext: NextMeetingsContext) {
+    this.styleColor = appContext.config.lightColor;
+    this.nextMeetings.push(...nextMeetingsContext.nextMeetings);
   }
 }

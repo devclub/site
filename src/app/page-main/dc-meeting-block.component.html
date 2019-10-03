@@ -2,12 +2,10 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col">
-        <span *ngIf="this.dataContext.nextMeetings.length > 0">
-          <dc-meeting-info-block
-            *ngFor="let m of this.dataContext.nextMeetings"
-            [showRegisterEvent]="true" [meeting]="m"></dc-meeting-info-block>
+        <span *ngIf="nextMeetings.length > 0">
+          <dc-meeting-info-block *ngFor="let m of nextMeetings" [showRegisterEvent]="true" [meeting]="m"></dc-meeting-info-block>
         </span>
-        <div class="text-center pt-3 pb-3" *ngIf="this.dataContext.nextMeetings.length === 0">
+        <div *ngIf="nextMeetings.length === 0" class="text-center pt-3 pb-3">
           <b>{{'main.next_meeting.info.not_avaliable' | translate}}</b>
         </div>
       </div>

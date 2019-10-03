@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataContext} from '../common/context/data.context';
+import {AppContext} from '../context/AppContext';
 
 declare var FB: any;
 
@@ -8,12 +8,12 @@ declare var FB: any;
   templateUrl: './dc-short-info-block.component.html'
 })
 export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
-  facebookPageUrl: string;
-  facebookGroupUrl: string;
+  public facebookPageUrl: string;
+  public facebookGroupUrl: string;
 
-  constructor(private dataContext: DataContext) {
-    this.facebookPageUrl = 'https://www.facebook.com/' + dataContext.config.resources.main.facebookPageId;
-    this.facebookGroupUrl = 'https://www.facebook.com/groups/' + dataContext.config.resources.main.facebookGroupId;
+  constructor(appContext: AppContext) {
+    this.facebookPageUrl = 'https://www.facebook.com/' + appContext.config.resources.main.facebookPageId;
+    this.facebookGroupUrl = 'https://www.facebook.com/groups/' + appContext.config.resources.main.facebookGroupId;
   }
 
   addScript(id: string, url: string, onloadFn?: any) {

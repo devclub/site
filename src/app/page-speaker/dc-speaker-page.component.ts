@@ -1,9 +1,13 @@
 import {Component} from '@angular/core';
+import {AppContext} from '../context/AppContext';
 
 @Component({
   templateUrl: './dc-speaker-page.component.html'
 })
 export class DcSpeakerPageComponent {
-  // FIXME - move out property
-  public addTopicUrl = 'https://docs.google.com/forms/d/1xdBXhnLIIpP3ll-1zWIHtOStGG8XH2M65TApPn77JK4/viewform';
+  public speakerTalkFormUrl: string;
+
+  constructor(appContext: AppContext) {
+    this.speakerTalkFormUrl = appContext.config.speakerTalkFormUrl;
+  }
 }

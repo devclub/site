@@ -17,7 +17,7 @@
         {{'archive.speaker.col.count' | translate}}
       </a>
     </th>
-    <th scope="col" *ngIf="dataContext.config.hasTop">
+    <th scope="col" *ngIf="hasBestTab">
       <span class="badge badge-pill badge-warning mr-1">I</span>
       <span class="badge badge-pill badge-secondary mr-1">II</span>
       <span class="badge badge-pill badge-info mr-1">III</span>
@@ -35,11 +35,11 @@
   </thead>
   <tbody>
   <tr *ngFor="let speaker of speakers; let i = index; trackBy: trackByIndex">
-    <th scope="row">{{i+1}}</th>
+    <th scope="row">{{i + 1}}</th>
     <td>{{speaker.date | date:'dd.MM.yyyy'}}</td>
     <td>{{speaker.names | localize}}</td>
     <td>{{speaker.speechCount}}</td>
-    <td *ngIf="dataContext.config.hasTop">
+    <td *ngIf="hasBestTab">
       <span *ngIf="speaker.top1 + speaker.top2 + speaker.top3 + speaker.topOther > 0">
         <span class="badge badge-pill badge-warning mr-1"
               [ngClass]="{'lighten': speaker.top1 === 0}">

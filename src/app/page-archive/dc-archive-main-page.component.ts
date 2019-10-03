@@ -1,36 +1,42 @@
 import {Component} from '@angular/core';
-import {ArchiveTabState} from './services/archive.tab.state';
-import {DataContext} from '../common/context/data.context';
 import {TypeaheadMatch} from 'ngx-bootstrap';
-import {Speaker} from '../common/models/speaker.model';
-import {Meeting} from '../common/models/meeting.model';
-import {TranslationService} from '../common/translations/translation.service';
-import {Speech} from '../common/models/speech.model';
+import {Speaker} from '../models/Speaker.model';
+import {Meeting} from '../models/Meeting.model';
+import {TranslationService} from '../translations/TranslationService';
+import {Speech} from '../models/Speech.model';
+import {MeetingFilter} from '../models/MeetingFilter.model';
+import {LabelItem} from '../models/LabelItem.model';
+import {ArchiveContext} from '../context/ArchiveContext';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
 })
 export class DcArchiveMainPageComponent {
   public readonly ALL_SEASONS = -1;
+
   public seasonDisabled = false;
   public asList = true;
-  public meetings: Meeting[] = [];
+  public filter: MeetingFilter;
+  public labels: Array<LabelItem>;
+  public seasons: Array<number>;
+
+  public meetings: Array<Meeting>;
   public speechOptions = {
     clickNameFn: (speaker: Speaker) => {
-      this.dataContext.filter.speaker = speaker.names[this.translationService.lang];
+      this.filter.speaker = speaker.names[this.translationService.lang];
       this.search();
     },
     clickLabelFn: (label: string) => {
-      this.dataContext.filter.label = label;
+      this.filter.label = label;
       this.search();
     }
   };
 
-  constructor(private archiveTabState: ArchiveTabState,
-              private translationService: TranslationService,
-              public dataContext: DataContext) {
-    archiveTabState.setMain();
-    this.meetings = this.dataContext.meetings;
+  constructor(private translationService: TranslationService, archiveContext: ArchiveContext) {
+    this.filter = archiveContext.filter;
+    this.seasons = archiveContext.seasons;
+    this.labels = archiveContext.labels;
+    this.meetings = archiveContext.meetings;
     this.search();
   }
 
@@ -39,12 +45,12 @@ export class DcArchiveMainPageComponent {
   }
 
   searchByLabel(event: TypeaheadMatch) {
-    this.dataContext.filter.label = event.item.name;
+    this.filter.label = event.item.name;
     this.search();
   }
 
   searchByLabelClear() {
-    if (!this.dataContext.filter.label) {
+    if (!this.filter.label) {
       this.search();
     }
   }
@@ -54,7 +60,7 @@ export class DcArchiveMainPageComponent {
   }
 
   getPlusYearText(): string {
-    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    const index = this.seasons.indexOf(this.filter.season);
     if (index === 0) {
       return 'archive.main.filter.seasons.all';
     } else if (index !== -1) {
@@ -64,33 +70,33 @@ export class DcArchiveMainPageComponent {
   }
 
   getMinusYearText(): string {
-    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    const index = this.seasons.indexOf(this.filter.season);
     if (index === -1) {
-      return '' + this.dataContext.seasons[0];
-    } else if (index < this.dataContext.seasons.length - 1) {
+      return '' + this.seasons[0];
+    } else if (index < this.seasons.length - 1) {
       return '-1';
     }
     return '';
   }
 
   plusYear() {
-    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    const index = this.seasons.indexOf(this.filter.season);
     if (index === -1) {
       return;
     } else if (index === 0) {
-      this.dataContext.filter.season = this.ALL_SEASONS;
+      this.filter.season = this.ALL_SEASONS;
     } else {
-      this.dataContext.filter.season = this.dataContext.seasons[index - 1];
+      this.filter.season = this.seasons[index - 1];
     }
     this.searchBySeason();
   }
 
   minusYear() {
-    const index = this.dataContext.seasons.indexOf(this.dataContext.filter.season);
+    const index = this.seasons.indexOf(this.filter.season);
     if (index === -1) {
-      this.dataContext.filter.season = this.dataContext.seasons[0];
-    } else if (index < this.dataContext.seasons.length - 1) {
-      this.dataContext.filter.season = this.dataContext.seasons[index + 1];
+      this.filter.season = this.seasons[0];
+    } else if (index < this.seasons.length - 1) {
+      this.filter.season = this.seasons[index + 1];
     } else {
       return;
     }
@@ -106,13 +112,13 @@ export class DcArchiveMainPageComponent {
   }
 
   search() {
-    const hasSpeechFilterValues = this.dataContext.filter.speaker || this.dataContext.filter.texts || this.dataContext.filter.label;
+    const hasSpeechFilterValues = this.filter.speaker || this.filter.texts || this.filter.label;
     if (hasSpeechFilterValues) {
-      this.dataContext.filter.season = this.ALL_SEASONS;
+      this.filter.season = this.ALL_SEASONS;
       this.seasonDisabled = true;
     } else if (this.seasonDisabled) {
       this.seasonDisabled = false;
-      this.dataContext.filter.season = new Date().getFullYear();
+      this.filter.season = new Date().getFullYear();
     }
 
     this.meetings.forEach(m => {
@@ -131,13 +137,13 @@ export class DcArchiveMainPageComponent {
   }
 
   isMeetingHidden(meeting: Meeting): boolean {
-    return meeting.season !== this.dataContext.filter.season && this.dataContext.filter.season !== this.ALL_SEASONS;
+    return meeting.season !== this.filter.season && this.filter.season !== this.ALL_SEASONS;
   }
 
   isSpeechHidden(speech: Speech): boolean {
-    return !this.hasTextSpeakers(speech.speakers, this.dataContext.filter.speaker)
-      || !this.hasTextTitles(speech, this.dataContext.filter.texts)
-      || !this.hasLabel(speech, this.dataContext.filter.label);
+    return !this.hasTextSpeakers(speech.speakers, this.filter.speaker)
+      || !this.hasTextTitles(speech, this.filter.texts)
+      || !this.hasLabel(speech, this.filter.label);
   }
 
   hasLabel(speech: Speech, label: string): boolean {
