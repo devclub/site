@@ -3,7 +3,7 @@ import {Meeting} from '../models/Meeting.model';
 
 @Injectable()
 export class NextMeetingsContext {
-  public readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000 * 24*40;
+  public readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
   public nextMeetings = new Array<Meeting>();
 
   public findNextMeetings(meetings: Array<Meeting>): void {
