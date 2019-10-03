@@ -5,7 +5,7 @@
         {{'meeting.info.moderated' | translate}}:<br/>
         {{meeting.orgMod}}
       </ng-template>
-      <span class="pr-1" placement="left" [tooltip]="moderatorInfo" [isDisabled]="!meeting.orgMod">
+      <span class="pr-1" placement="right" [tooltip]="moderatorInfo" [isDisabled]="!meeting.orgMod">
         {{ meeting.start | date:'dd.MM.yyyy' }}
         | #{{ meeting.num }}{{ meeting.titles ? ': ' : ''}}{{ meeting.titles | localize }}
       </span>
