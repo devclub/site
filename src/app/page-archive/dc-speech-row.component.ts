@@ -6,7 +6,14 @@ import {AppContext} from '../context/AppContext';
 
 @Component({
   selector: 'dc-speech-row',
-  templateUrl: './dc-speech-row.component.html'
+  templateUrl: './dc-speech-row.component.html',
+  /* tslint:disable no-unused-css*/
+  styles: [`
+      :host >>> .tooltip-inner {
+          text-align: left;
+          max-width: 600px;
+      }
+  `]
 })
 export class DcSpeechRowComponent {
   @Input() public speech: Speech;

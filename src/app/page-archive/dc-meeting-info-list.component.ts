@@ -4,7 +4,14 @@ import {SpeechOptions} from '../models/SpeechOptions.model';
 
 @Component({
   selector: 'dc-meeting-info-list',
-  templateUrl: './dc-meeting-info-list.component.html'
+  templateUrl: './dc-meeting-info-list.component.html',
+  /* tslint:disable no-unused-css*/
+  styles: [`
+      :host >>> .tooltip-inner {
+          text-align: left;
+          max-width: 600px;
+      }
+  `]
 })
 export class DcMeetingInfoListComponent {
   @Input() public meeting: Meeting;
