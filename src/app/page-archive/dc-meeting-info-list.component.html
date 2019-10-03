@@ -2,16 +2,14 @@
   <div class="row border-bottom" style="height: 28px;">
     <div class="col small text-muted">
       <ng-template #moderatorInfo>
-        {{'meeting.info.moderated' | translate}}:<br/>
-        {{meeting.orgMod}}
+        {{'meeting.info.moderated' | translate}}: {{meeting.orgMod}}
       </ng-template>
       <span class="pr-1" placement="right" [tooltip]="moderatorInfo" [isDisabled]="!meeting.orgMod">
         {{ meeting.start | date:'dd.MM.yyyy' }}
         | #{{ meeting.num }}{{ meeting.titles ? ': ' : ''}}{{ meeting.titles | localize }}
       </span>
       <ng-template #photoInfo>
-        {{'meeting.info.photographs' | translate}}:<br/>
-        {{meeting.orgPhoto}}
+        {{'meeting.info.photographs' | translate}}: {{meeting.orgPhoto}}
       </ng-template>
       <div class="float-right" placement="left" [tooltip]="photoInfo" [isDisabled]="!meeting.orgPhoto">
         <ng-container *ngFor="let photo of meeting.photo">

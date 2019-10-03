@@ -12,7 +12,7 @@
         {{'speech.video.info.edit' | translate}}: {{speech.orgEdit}}
       </ng-container>
     </ng-template>
-    <span placement="right" [tooltip]="videoInfo" [isDisabled]="!speech.orgCam && !speech.orgEdit">
+    <span placement="right" [tooltip]="videoInfo" containerClass="video-tooltip" [isDisabled]="!speech.orgCam && !speech.orgEdit">
       <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
         <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="mr-1"></fa-icon>
       </a>
