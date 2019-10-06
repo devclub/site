@@ -70,6 +70,7 @@ import {DataHttpService} from './services/DataHttpService';
 import {AppContext} from './context/AppContext';
 import {ArchiveContext} from './context/ArchiveContext';
 import {NextMeetingsContext} from './context/NextMeetingsContext';
+import {LocalizeOrgPipe} from './translations/LocalizeOrgPipe';
 
 export function initialize(dataHttpService: DataHttpService, appContext: AppContext, archiveContext: ArchiveContext) {
   return () => {
@@ -110,7 +111,8 @@ export function initialize(dataHttpService: DataHttpService, appContext: AppCont
     DcTitleRowComponent,
     DcRessourcesComponent,
     TranslatePipe,
-    LocalizePipe
+    LocalizePipe,
+    LocalizeOrgPipe
   ],
   imports: [
     BrowserModule,
@@ -136,7 +138,8 @@ export function initialize(dataHttpService: DataHttpService, appContext: AppCont
     CachedHttpService,
     GoogleAnalyticsService,
     TranslatePipe,
-    LocalizePipe
+    LocalizePipe,
+    LocalizeOrgPipe
   ]
 })
 export class AppModule {
