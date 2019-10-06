@@ -7,6 +7,7 @@ import {Speech} from '../models/Speech.model';
 import {MeetingFilter} from '../models/MeetingFilter.model';
 import {LabelItem} from '../models/LabelItem.model';
 import {ArchiveContext} from '../context/ArchiveContext';
+import {Lang} from '../models/Lang.model';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
@@ -24,6 +25,9 @@ export class DcArchiveMainPageComponent {
   public speechOptions = {
     clickNameFn: (speaker: Speaker) => {
       this.filter.speaker = speaker.names[this.translationService.lang];
+      if (!this.filter.speaker) {
+        this.filter.speaker = speaker.names[Lang.DEFAULT];
+      }
       this.search();
     },
     clickLabelFn: (label: string) => {

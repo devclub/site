@@ -5,14 +5,15 @@
 
     <!-- youtube -->
     <ng-template #videoInfo>
-      <ng-container *ngIf="speech.orgCam">
-        {{'speech.video.info.camera' | translate}}: {{speech.orgCam}}<br/>
+      <ng-container *ngIf="speech.org && speech.org.cam">
+        {{'speech.video.info.camera' | translate}}: {{speech.org.cam | localizeOrg}}<br/>
       </ng-container>
-      <ng-container *ngIf="speech.orgEdit">
-        {{'speech.video.info.edit' | translate}}: {{speech.orgEdit}}
+      <ng-container *ngIf="speech.org && speech.org.edit">
+        {{'speech.video.info.edit' | translate}}: {{speech.org.edit | localizeOrg}}
       </ng-container>
     </ng-template>
-    <span placement="right" [tooltip]="videoInfo" containerClass="video-tooltip" [isDisabled]="!speech.orgCam && !speech.orgEdit">
+    <span placement="right" [tooltip]="videoInfo" containerClass="video-tooltip"
+          [isDisabled]="!speech.org || (!speech.org.cam && !speech.org.edit)">
       <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
         <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="mr-1"></fa-icon>
       </a>
