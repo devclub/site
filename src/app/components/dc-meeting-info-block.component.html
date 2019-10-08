@@ -65,10 +65,20 @@
     </div>
     <div class="col-12 meeting-header-container">
       <h2 class="mb-0">
-        <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
-          <fa-icon *ngIf="photo" [icon]="['fas', 'camera']"></fa-icon>
-        </a>
-        {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
+        <ng-template #photoInfo>
+          {{'meeting.info.photographs' | translate}}: {{meeting.org.photo | localizeOrg}}
+        </ng-template>
+        <span placement="top" [tooltip]="photoInfo" [isDisabled]="!meeting.org && !meeting.org.photo">
+          <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
+            <fa-icon *ngIf="photo" [icon]="['fas', 'camera']"></fa-icon>
+          </a>
+        </span>
+        <ng-template #moderatorInfo>
+          {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
+        </ng-template>
+        <span placement="top" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org && !meeting.org.mod">
+          {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
+        </span>
       </h2>
     </div>
   </div>
@@ -128,10 +138,21 @@
       <div class="col-sm-8 col-md-9">
         <div class="mb-1">
           <h3 class="mb-0 pb-0">
-            <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
-              <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']"></fa-icon>
-            </a>
-            <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right">
+            <ng-template #videoInfo>
+              <ng-container *ngIf="speech.org && speech.org.cam">
+                {{'speech.video.info.camera' | translate}}: {{speech.org.cam | localizeOrg}}<br/>
+              </ng-container>
+              <ng-container *ngIf="speech.org && speech.org.edit">
+                {{'speech.video.info.edit' | translate}}: {{speech.org.edit | localizeOrg}}
+              </ng-container>
+            </ng-template>
+            <span placement="top" [tooltip]="videoInfo"
+                  [isDisabled]="!speech.org || (!speech.org.cam && !speech.org.edit)">
+              <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
+                <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']"></fa-icon>
+              </a>
+            </span>
+            <span placement="top" *ngIf="speech.info" [tooltip]="speech.info | localize">
             <fa-icon [icon]="['fas', 'video-slash']"></fa-icon>
           </span>
             <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"

@@ -8,7 +8,14 @@ import {AppContext} from '../context/AppContext';
 @Component({
   selector: 'dc-meeting-info-block',
   templateUrl: './dc-meeting-info-block.component.html',
-  styleUrls: ['./dc-meeting-info-block.component.css']
+  styleUrls: ['./dc-meeting-info-block.component.css'],
+  /* tslint:disable no-unused-css*/
+  styles: [`
+      :host >>> .tooltip-inner {
+          text-align: left;
+          max-width: 600px;
+      }
+  `]
 })
 export class DcMeetingInfoBlockComponent {
   @Input() public meeting: Meeting;

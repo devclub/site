@@ -36,11 +36,11 @@ export class ArchivePageGuard implements CanActivate {
 
   private processData(): void {
     this.archiveContext.meetings.forEach(meeting => this.processMeeting(meeting));
-    this.archiveContext.labels = Array.from(this.archiveContext.labelMap.values()).sort((a, b) => b.count - a.count);
+    this.archiveContext.labels.push(...Array.from(this.archiveContext.labelMap.values()).sort((a, b) => b.count - a.count));
   }
 
   private processMeeting(meeting: Meeting): void {
-    MeetingProcessUtil.processMeeting(meeting, this.appContext.team.persons, this.translationService.lang);
+    MeetingProcessUtil.processMeeting(meeting);
     this.addSeason(meeting);
     if (meeting.speeches) {
       meeting.speeches.forEach(speech => this.processSpeech(speech, meeting.start));
@@ -54,7 +54,7 @@ export class ArchivePageGuard implements CanActivate {
   }
 
   processSpeech(speech: Speech, meetingDate: Date): void {
-    MeetingProcessUtil.processSpeech(speech, this.appContext.config, this.appContext.team.persons, this.translationService.lang);
+    MeetingProcessUtil.processSpeech(speech, this.appContext.config);
     if (speech.top) {
       this.addTop(speech);
     }
@@ -71,7 +71,7 @@ export class ArchivePageGuard implements CanActivate {
 
   addTop(speech: Speech): void {
     const speechCopy = JSON.parse(JSON.stringify(speech));
-    MeetingProcessUtil.processSpeech(speechCopy, this.appContext.config, this.appContext.team.persons, this.translationService.lang);
+    MeetingProcessUtil.processSpeech(speechCopy, this.appContext.config);
     this.archiveContext.best.push(speechCopy);
   }
 

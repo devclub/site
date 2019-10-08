@@ -35,8 +35,7 @@ export class AppComponent {
 
     nextMeetingsContext.findNextMeetings(archiveContext.meetings);
     nextMeetingsContext.nextMeetings
-      .forEach(meeting => MeetingProcessUtil.processMeetingAndSpeeches(
-        meeting, appContext.team.persons, this.translationService.lang, appContext.config));
+      .forEach(meeting => MeetingProcessUtil.processMeetingAndSpeeches(meeting, appContext.config));
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
