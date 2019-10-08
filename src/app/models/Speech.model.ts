@@ -7,8 +7,6 @@ import {OrganizedSpeech} from './OrganizedSpeech.model';
 export class Speech {
   hiddenByFilter = false;
   labelsAsText: string;
-  orgCam: string;
-  orgEdit: string;
 
   youtube: Array<string>;
   youtubeUrls: Array<string>;

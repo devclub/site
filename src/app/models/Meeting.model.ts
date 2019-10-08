@@ -5,10 +5,7 @@ import {OrganizedMeeting} from './OrganizedMeeting.model';
 
 export class Meeting {
   hiddenByFilter = false;
-  orgMod: string;
-  orgPhoto: string;
 
-  hidden: boolean;
   num: number;
   season: number;
   titles: LocalizedTexts;
