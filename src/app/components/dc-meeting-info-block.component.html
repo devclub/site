@@ -68,7 +68,7 @@
         <ng-template #photoInfo>
           {{'meeting.info.photographs' | translate}}: {{meeting.org.photo | localizeOrg}}
         </ng-template>
-        <span placement="top" [tooltip]="photoInfo" [isDisabled]="!meeting.org && !meeting.org.photo">
+        <span placement="top" [tooltip]="photoInfo" [isDisabled]="!meeting.org || !meeting.org.photo">
           <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
             <fa-icon *ngIf="photo" [icon]="['fas', 'camera']"></fa-icon>
           </a>
@@ -76,7 +76,7 @@
         <ng-template #moderatorInfo>
           {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
         </ng-template>
-        <span placement="top" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org && !meeting.org.mod">
+        <span placement="top" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org || !meeting.org.mod">
           {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
         </span>
       </h2>
