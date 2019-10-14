@@ -118,9 +118,10 @@
       <div class="col-sm-4 col-md-3">
         <div *ngFor="let speaker of speech.speakers">
           <div class="image-wrap mb-3">
-            <a href="{{speaker.url}}" target="_blank">
+            <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
               <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
             </a>
+            <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
           </div>
           <div class="name-container">
             <h4>
