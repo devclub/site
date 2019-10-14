@@ -45,7 +45,7 @@ export class DcArchiveMainPageComponent {
   }
 
   trackById(index: number, item: Meeting) {
-    return item.num;
+    return item.num + '::' + this.asList;
   }
 
   searchByLabel(event: TypeaheadMatch) {
