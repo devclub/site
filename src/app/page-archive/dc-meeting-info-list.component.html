@@ -4,14 +4,14 @@
       <ng-template #moderatorInfo>
         {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
       </ng-template>
-      <span class="pr-1" placement="right" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org && !meeting.org.mod">
+      <span class="pr-1" placement="right" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org || !meeting.org.mod">
         {{ meeting.start | date:'dd.MM.yyyy' }}
         | #{{ meeting.num }}{{ meeting.titles ? ': ' : ''}}{{ meeting.titles | localize }}
       </span>
       <ng-template #photoInfo>
         {{'meeting.info.photographs' | translate}}: {{meeting.org.photo | localizeOrg}}
       </ng-template>
-      <div class="float-right" placement="left" [tooltip]="photoInfo" [isDisabled]="!meeting.org && !meeting.org.photo">
+      <div class="float-right" placement="left" [tooltip]="photoInfo" [isDisabled]="!meeting.org || !meeting.org.photo">
         <ng-container *ngFor="let photo of meeting.photo">
           <a href="{{photo}}" target="_blank">
             <fa-icon *ngIf="photo" [icon]="['fas', 'camera']" size="2x"></fa-icon>
