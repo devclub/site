@@ -19,7 +19,7 @@ export class DcArchiveContainerPageComponent {
     this.tabToUrl.set('speaker', '/archive/speaker');
 
     this.tabToUrl.forEach((v, k) => {
-      if (v === router.url) {
+      if (router.url.startsWith(v)) {
         this.selected = k;
       }
     });

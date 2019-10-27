@@ -78,13 +78,13 @@
     <label for="view">{{'archive.main.filter.view' | translate}}</label>
     <div class="input-group">
       <div class="btn-group" role="group" id="view">
-        <button (click)="asList = true"
+        <button (click)="changeView(true)"
                 [ngClass]="{'active': asList === true}"
                 type="button" class="btn btn-light">
           <fa-icon [icon]="['fas', 'th-list']" class="small"></fa-icon>
           {{'archive.main.mode.list' | translate}}
         </button>
-        <button (click)="asList = false"
+        <button (click)="changeView(false)"
                 [ngClass]="{'active': asList === false}"
                 type="button" class="btn btn-light">
           <fa-icon [icon]="['fas', 'th']" class="small"></fa-icon>

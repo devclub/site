@@ -8,6 +8,7 @@ import {MeetingFilter} from '../models/MeetingFilter.model';
 import {LabelItem} from '../models/LabelItem.model';
 import {ArchiveContext} from '../context/ArchiveContext';
 import {Lang} from '../models/Lang.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'
@@ -36,16 +37,25 @@ export class DcArchiveMainPageComponent {
     }
   };
 
-  constructor(private translationService: TranslationService, archiveContext: ArchiveContext) {
+  constructor(private translationService: TranslationService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              archiveContext: ArchiveContext) {
     this.filter = archiveContext.filter;
     this.seasons = archiveContext.seasons;
     this.labels = archiveContext.labels;
     this.meetings = archiveContext.meetings;
+    this.initSearchFilter();
     this.search();
   }
 
   trackById(index: number, item: Meeting) {
     return item.num + '::' + this.asList;
+  }
+
+  changeView(asList: boolean) {
+    this.asList = asList;
+    this.applyFilterToRoute();
   }
 
   searchByLabel(event: TypeaheadMatch) {
@@ -115,6 +125,21 @@ export class DcArchiveMainPageComponent {
     this.search();
   }
 
+  initSearchFilter(): void {
+    const params = this.activatedRoute.snapshot.params;
+    this.filter.season = params.season ? params.season * 1 : new Date().getFullYear();
+    this.asList = params.asList ? params.asList === 'true' : true;
+    if (params.label) {
+      this.filter.label = params.label;
+    }
+    if (params.speaker) {
+      this.filter.speaker = params.speaker;
+    }
+    if (params.descr) {
+      this.filter.texts = params.descr;
+    }
+  }
+
   search() {
     const hasSpeechFilterValues = this.filter.speaker || this.filter.texts || this.filter.label;
     if (hasSpeechFilterValues) {
@@ -125,6 +150,7 @@ export class DcArchiveMainPageComponent {
       this.filter.season = new Date().getFullYear();
     }
 
+    this.applyFilterToRoute();
     this.meetings.forEach(m => {
       m.hiddenByFilter = this.isMeetingHidden(m);
       let allSpeechesHidden = true;
@@ -138,6 +164,29 @@ export class DcArchiveMainPageComponent {
         m.hiddenByFilter = true;
       }
     })
+  }
+
+  private applyFilterToRoute(): void {
+    const urlFilter: any = {};
+    urlFilter.season = this.filter.season;
+    urlFilter.asList = this.asList;
+    if (this.filter.label) {
+      urlFilter.label = this.filter.label;
+    }
+    if (this.filter.speaker) {
+      urlFilter.speaker = this.filter.speaker;
+    }
+    if (this.filter.texts) {
+      urlFilter.descr = this.filter.texts;
+    }
+    this.router.navigate(
+      [urlFilter],
+      {
+        relativeTo: this.activatedRoute,
+        replaceUrl: true
+      }
+    );
+    document.title = `DEVCLUB MTÜ (archive): season ${this.filter.season}`;
   }
 
   isMeetingHidden(meeting: Meeting): boolean {
