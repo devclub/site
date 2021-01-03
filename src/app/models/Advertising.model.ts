@@ -9,4 +9,5 @@ export class Advertising {
   prices: AdvertisingPrice[];
 
   companies: AdvertisingCompany[];
+  persons: string[];
 }

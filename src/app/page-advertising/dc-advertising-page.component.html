@@ -37,15 +37,17 @@
       </div>
 
       <div class="card mb-2">
-        <h6 class="card-header">{{"advertising.donation_help.title" | translate}}</h6>
+        <h6 class="card-header">{{"advertising.why.title" | translate}}</h6>
         <div class="card-body">
-          <p class="card-text">{{"advertising.donation_help" | translate}}</p>
-          <ul class="list-unstyled">
-            <li><b>{{advertising.bankName}}:</b> {{advertising.bankNumber}}</li>
-            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{advertising.bankRecipient}}</li>
-            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{advertising.bankDescription}}
-            </li>
-          </ul>
+          <ol>
+            <li>{{"advertising.why.p1" | translate }}</li>
+            <li>{{"advertising.why.p2" | translate }}</li>
+            <li>{{"advertising.why.p3" | translate }}</li>
+            <li>{{"advertising.why.p4" | translate }}</li>
+            <li>{{"advertising.why.p5" | translate }}</li>
+            <li>{{"advertising.why.p6" | translate }}</li>
+          </ol>
+          <p class="card-text">{{"advertising.why.p7" | translate}}</p>
         </div>
       </div>
 
@@ -65,17 +67,27 @@
       </div>
 
       <div class="card mb-2">
-        <h6 class="card-header">{{"advertising.why.title" | translate}}</h6>
+        <h6 class="card-header">{{"advertising.donation_help.title" | translate}}</h6>
         <div class="card-body">
+          <p class="card-text">{{"advertising.donation_help" | translate}}</p>
+          <ul class="list-unstyled">
+            <li><b>{{advertising.bankName}}:</b> {{advertising.bankNumber}}</li>
+            <li><b>{{'advertising.donation_help.recipient' | translate}}:</b> {{advertising.bankRecipient}}</li>
+            <li><b>{{'advertising.donation_help.description' | translate}}:</b> {{advertising.bankDescription}}
+            </li>
+          </ul>
+          <p class="card-text">{{"advertising.donation_help.description.anonymous" | translate}}</p>
+          <p class="card-text"><b>{{"advertising.donation_help.description.best" | translate}}</b></p>
+        </div>
+      </div>
+
+      <div class="card mb-2">
+        <h6 class="card-header">{{"advertising.donations.title" | translate}}</h6>
+        <div class="card-body">
+          <p class="card-text">{{"advertising.donations.thanks" | translate}}</p>
           <ol>
-            <li>{{"advertising.why.p1" | translate }}</li>
-            <li>{{"advertising.why.p2" | translate }}</li>
-            <li>{{"advertising.why.p3" | translate }}</li>
-            <li>{{"advertising.why.p4" | translate }}</li>
-            <li>{{"advertising.why.p5" | translate }}</li>
-            <li>{{"advertising.why.p6" | translate }}</li>
+            <li *ngFor="let p of advertising.persons; trackBy: trackByIndex">{{p}}</li>
           </ol>
-          <p class="card-text">{{"advertising.why.p7" | translate}}</p>
         </div>
       </div>
 
