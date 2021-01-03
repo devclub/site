@@ -19,8 +19,8 @@
     "start": "npm run start:eu",
     "build:dev:eu": "npm run clean && ng build --dev",
     "build:dev:ee": "npm run clean && ng build --dev --configuration=dev-ee",
-    "build:prod:eu": "npm run clean && ng build --prod --configuration=prod-eu",
-    "build:prod:ee": "npm run clean && ng build --prod --configuration=prod-ee",
+    "build:prod:eu": "npm run clean && ng build --configuration=prod-eu",
+    "build:prod:ee": "npm run clean && ng build --configuration=prod-ee",
     "lint": "ng lint"
   },
   "dependencies": {
