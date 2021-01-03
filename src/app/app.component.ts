@@ -9,6 +9,7 @@ import {NextMeetingsContext} from './context/NextMeetingsContext';
 import {MeetingProcessUtil} from './util/MeetingProcessUtil';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: '[app]',
   templateUrl: './app.component.html'
 })

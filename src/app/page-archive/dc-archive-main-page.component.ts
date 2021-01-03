@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {TypeaheadMatch} from 'ngx-bootstrap';
 import {Speaker} from '../models/Speaker.model';
 import {Meeting} from '../models/Meeting.model';
 import {TranslationService} from '../translations/TranslationService';
@@ -9,6 +8,7 @@ import {LabelItem} from '../models/LabelItem.model';
 import {ArchiveContext} from '../context/ArchiveContext';
 import {Lang} from '../models/Lang.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TypeaheadMatch} from 'ngx-bootstrap/typeahead';
 
 @Component({
   templateUrl: './dc-archive-main-page.component.html'

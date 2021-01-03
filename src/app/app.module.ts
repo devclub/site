@@ -22,7 +22,6 @@ import {DcArchiveBestPageComponent} from './page-archive/dc-archive-best-page.co
 import {DcArchiveSpeakerPageComponent} from './page-archive/dc-archive-speaker-page.component';
 import {DcArchiveSeminarPageComponent} from './page-archive/dc-archive-seminar-page.component';
 import {ArchiveSeminarPageGuard} from './guard/ArchiveSeminarPageGuard';
-import {TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {DcAdsRowUpperComponent} from './container/dc-ads-row-upper.component';
 import {DcMainPageComponent} from './page-main/dc-main-page.component';
 import {DcAdvertisingPageComponent} from './page-advertising/dc-advertising-page.component';
@@ -71,6 +70,8 @@ import {AppContext} from './context/AppContext';
 import {ArchiveContext} from './context/ArchiveContext';
 import {NextMeetingsContext} from './context/NextMeetingsContext';
 import {LocalizeOrgPipe} from './translations/LocalizeOrgPipe';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {TypeaheadModule} from 'ngx-bootstrap/typeahead';
 
 export function initialize(dataHttpService: DataHttpService, appContext: AppContext, archiveContext: ArchiveContext) {
   return () => {
