@@ -64,7 +64,7 @@
   <dc-title-row>{{'about.title.thanks' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <div class="col" *ngFor="let member of teamThanks; trackBy: trackByIndex">
+    <div class="col-2" *ngFor="let member of teamThanks; trackBy: trackByIndex">
       <div class="image-wrap">
         <a href="{{member.person.url}}" target="_blank" class="image-lighten">
           <img src="{{member.imageUrl}}" class="img-fluid">
