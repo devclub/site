@@ -18,10 +18,10 @@ export class DcLatestVideosBlockComponent {
       return; // nothing, if google api key is not defined.
     }
 
-    const url = 'https://www.googleapis.com/youtube/v3/search' +
-      '?part=snippet,id&type=video&order=date&maxResults=12' +
+    const url = 'https://www.googleapis.com/youtube/v3/playlistItems' +
+      '?part=snippet,id&maxResults=12' +
       '&key=' + appContext.config.googleApiKey +
-      '&channelId=' + appContext.config.resources.main.youtubeChannelId;
+      '&playlistId=' + appContext.config.frontpagePlaylistId;
     cachedHttp.get<any>(url).then(val => val.items.forEach(i => this.addYoutubeVideo(i, translationService)));
   }
 

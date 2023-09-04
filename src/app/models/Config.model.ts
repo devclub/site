@@ -28,5 +28,6 @@ export class Config {
   team: { dataUrl: string; personUrlPrefix: string };
 
   googleApiKey: string;
+  frontpagePlaylistId: string;
   resources: ConfigResources;
 }
