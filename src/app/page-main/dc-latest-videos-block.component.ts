@@ -27,7 +27,7 @@ export class DcLatestVideosBlockComponent {
 
   addYoutubeVideo(item: any, translationService: TranslationService): void {
     const video = new YoutubeVideo();
-    video.id = item.id.videoId;
+    video.id = item.snippet.resourceId.videoId;
     video.title = item.snippet.title;
     const publishedAt = moment(item.snippet.publishedAt).locale(translationService.lang);
     video.publishedAt = publishedAt.format('YYYY.MM.DD HH:mm');
