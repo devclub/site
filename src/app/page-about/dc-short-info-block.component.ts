@@ -47,12 +47,12 @@ export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     const elements = document.getElementsByTagName('script');
-    const parentNode = elements[0].parentNode;
     for (let i = (elements.length - 1); i >= 0; i--) {
-      if (elements[i].id === 'github-buttons'
-        || elements[i].id === 'facebook-jssdk'
-        || elements[i].src.startsWith('https://connect.facebook.net')) {
-        parentNode.removeChild(elements[i]);
+      const el = elements[i];
+      if (el.id === 'github-buttons'
+        || el.id === 'facebook-jssdk'
+        || el.src.startsWith('https://connect.facebook.net')) {
+        el.parentNode?.removeChild(el);
       }
     }
   }
