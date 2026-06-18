@@ -1,5 +1,5 @@
 <table class="mt-3 mb-3 table table-hover">
-  <thead class="thead-light">
+  <thead class="table-light">
   <tr>
     <th scope="col">#</th>
     <th scope="col">
@@ -18,12 +18,12 @@
       </a>
     </th>
     <th scope="col" *ngIf="hasBestTab">
-      <span class="badge badge-pill badge-warning mr-1">I</span>
-      <span class="badge badge-pill badge-secondary mr-1">II</span>
-      <span class="badge badge-pill badge-info mr-1">III</span>
-      <span class="badge badge-pill badge-dark">&gt;III</span>
+      <span class="badge rounded-pill text-bg-warning me-1">I</span>
+      <span class="badge rounded-pill text-bg-secondary me-1">II</span>
+      <span class="badge rounded-pill text-bg-info me-1">III</span>
+      <span class="badge rounded-pill text-bg-dark">&gt;III</span>
       =
-      <span class="badge badge-pill badge-success">
+      <span class="badge rounded-pill text-bg-success">
         {{'archive.speaker.col.top.total' | translate}}
       </span>
       <br/>
@@ -41,24 +41,24 @@
     <td>{{speaker.speechCount}}</td>
     <td *ngIf="hasBestTab">
       <span *ngIf="speaker.top1 + speaker.top2 + speaker.top3 + speaker.topOther > 0">
-        <span class="badge badge-pill badge-warning mr-1"
+        <span class="badge rounded-pill text-bg-warning me-1"
               [ngClass]="{'lighten': speaker.top1 === 0}">
           {{speaker.top1}}
         </span>
-        <span class="badge badge-pill badge-secondary mr-1"
+        <span class="badge rounded-pill text-bg-secondary me-1"
               [ngClass]="{'lighten': speaker.top2 === 0}">
           {{speaker.top2}}
         </span>
-        <span class="badge badge-pill badge-info mr-1"
+        <span class="badge rounded-pill text-bg-info me-1"
               [ngClass]="{'lighten': speaker.top3 === 0}">
           {{speaker.top3}}
         </span>
-        <span class="badge badge-pill badge-dark"
+        <span class="badge rounded-pill text-bg-dark"
               [ngClass]="{'lighten': speaker.topOther === 0}">
           {{speaker.topOther}}
         </span>
         =
-        <span class="badge badge-pill badge-success">
+        <span class="badge rounded-pill text-bg-success">
           {{speaker.top1 + speaker.top2 + speaker.top3 + speaker.topOther}}
         </span>
       </span>

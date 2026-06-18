@@ -1,7 +1,7 @@
 <div class="row" *ngIf="!speech.hiddenByFilter">
   <div class="col">
     <ng-content></ng-content>
-    <span class="mr-1"></span>
+    <span class="me-1"></span>
 
     <!-- youtube -->
     <ng-template #videoInfo>
@@ -15,31 +15,31 @@
     <span placement="right" [tooltip]="videoInfo"
           [isDisabled]="!speech.org || (!speech.org.cam && !speech.org.edit)">
       <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
-        <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="mr-1"></fa-icon>
+        <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']" class="me-1"></fa-icon>
       </a>
     </span>
 
     <!-- speech info icon -->
     <span *ngIf="speech.info" [tooltip]="speech.info | localize" placement="right"><fa-icon
-      [icon]="['fas', 'video-slash']" class="mr-1"></fa-icon></span>
+      [icon]="['fas', 'video-slash']" class="me-1"></fa-icon></span>
 
     <!-- trophy -->
     <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
           [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
           placement="right">
-      <fa-icon [icon]="['fas', 'trophy']" class="small mr-1"></fa-icon></span>
+      <fa-icon [icon]="['fas', 'trophy']" class="small me-1"></fa-icon></span>
 
     <!-- title -->
-    <b class="mr-1">{{speech.titles | localize}}</b>
+    <b class="me-1">{{speech.titles | localize}}</b>
 
     <!-- labels -->
     <span *ngIf="speech.labelsAsText" [tooltip]="speech.labelsAsText" placement="top">
-      <fa-icon [icon]="['fas', 'tags']" size="xs" class="mr-1 text-muted"></fa-icon>
+      <fa-icon [icon]="['fas', 'tags']" size="xs" class="me-1 text-muted"></fa-icon>
     </span>
 
     <!-- language -->
     <span *ngIf="lang !== speech.lang" [tooltip]="'common.speech.lang.' + speech.lang | translate" placement="top">
-      <fa-icon [icon]="['fas', 'language']" class="mr-1 text-danger"></fa-icon>
+      <fa-icon [icon]="['fas', 'language']" class="me-1 text-danger"></fa-icon>
     </span>
 
     <!-- additional materials: presentation -->
@@ -47,14 +47,14 @@
           [tooltip]="'common.speech.presentation.tooltip' | translate"
           placement="bottom">
       <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank">
-        <fa-icon [icon]="['fab', 'slideshare']" class="small mr-1"></fa-icon></a>
+        <fa-icon [icon]="['fab', 'slideshare']" class="small me-1"></fa-icon></a>
     </span>
 
     <!-- additional materials: examples -->
     <span *ngFor="let exampleUrl of speech.examples" [tooltip]="'common.speech.example.tooltip' | translate"
           placement="bottom">
       <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank">
-        <fa-icon [icon]="['fas', 'file-alt']" class="small mr-1"></fa-icon></a>
+        <fa-icon [icon]="['fas', 'file-alt']" class="small me-1"></fa-icon></a>
     </span>
 
     <span> — </span>
@@ -62,7 +62,7 @@
     <!-- speakers -->
     <ng-container *ngFor="let speaker of speech.speakers; let last = last">
       <a *ngIf="speaker.url" [href]="speaker.url" target="_blank">
-        <fa-icon [icon]="['fas', 'user']" class="small mr-1"></fa-icon>
+        <fa-icon [icon]="['fas', 'user']" class="small me-1"></fa-icon>
       </a>
       <a *ngIf="options && options.clickNameFn" class="dotted" (click)="options.clickNameFn(speaker)"
          href="javascript:void(0)">{{speaker.names | localize}}</a>

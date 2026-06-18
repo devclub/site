@@ -1,0 +1,220 @@
+// Bootstrap 5, themed to match the project's previous Bootstrap 4 look.
+// These variable overrides are applied before Bootstrap is compiled so every
+// component (buttons, tables, cards, badges, links...) is generated with the
+// Bootstrap 4 design tokens. This keeps the visual design unchanged while
+// running on the modern Bootstrap 5 engine.
+
+// --- Bootstrap 4 grid gutter (30px) ---
+// Bootstrap 5 narrowed the default gutter to 1.5rem (24px); Bootstrap 4 used
+// 30px. The narrower gutter widens content columns and reflows wrapped text,
+// shifting layout. Restore 30px so columns and container padding match.
+$grid-gutter-width: 1.875rem;
+
+// --- Bootstrap 4 theme colors ---
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+
+$primary: $blue;
+$secondary: #6c757d;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: #f8f9fa;
+$dark: #343a40;
+
+// --- Bootstrap 4 typography ---
+// Bootstrap 4 shipped with responsive font sizes disabled; Bootstrap 5 enables
+// them by default, which scales headings down on smaller viewports and changes
+// the layout. Disable to keep Bootstrap 4's fixed heading sizes.
+$enable-rfs: false;
+$font-family-sans-serif:
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol';
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+$small-font-size: 80%;
+
+// --- Bootstrap 4 radii ---
+$border-radius: 0.25rem;
+$border-radius-sm: 0.2rem;
+$border-radius-lg: 0.3rem;
+
+// --- Bootstrap 4 spacing for tables and cards ---
+$table-cell-padding-y: 0.75rem;
+$table-cell-padding-x: 0.75rem;
+$table-cell-padding-y-sm: 0.3rem;
+$table-cell-padding-x-sm: 0.3rem;
+
+$card-spacer-y: 0.75rem;
+$card-spacer-x: 1.25rem;
+$card-cap-padding-y: 0.75rem;
+$card-cap-padding-x: 1.25rem;
+
+// --- Bootstrap 4 badge sizing ---
+$badge-font-size: 75%;
+$badge-font-weight: 700;
+$badge-padding-y: 0.25em;
+$badge-padding-x: 0.4em;
+
+@import 'bootstrap/scss/bootstrap';
+
+/**************************
+ * start page
+ **************************/
+
+.start-page {
+  background-color: #000000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+.start-page-neo {
+  color: #1ec503;
+  font-family: 'Courier New';
+  font-size: 10px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 10px 10px 0;
+}
+
+.start-page-logo {
+  background-color: #000000;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/**************************
+ * footer
+ **************************/
+
+footer {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+footer a,
+footer a:hover,
+footer a:active,
+footer a:visited,
+footer a:link {
+  color: #ffffff;
+}
+
+.f-icon {
+  width: 25px;
+  display: inline-block;
+}
+
+/**************************
+ * etc
+ **************************/
+
+.pointer {
+  cursor: pointer;
+}
+
+a.dotted {
+  color: #000000;
+  border-bottom: dashed 1px #000000;
+  text-decoration: none;
+}
+
+.lighten {
+  opacity: 0.3;
+}
+
+.lang {
+  font-size: 75%;
+}
+
+.badge-big {
+  padding: 8px 24px;
+  border-radius: 24px;
+}
+
+.badge-lang {
+  color: #ffffff;
+  background-color: #c1c1c1;
+}
+
+.badge-label {
+  color: #ffffff;
+  background-color: rgba(110, 171, 255, 0.73);
+}
+
+.place1 {
+  color: #cd9500;
+}
+
+.place2 {
+  color: #cdcdcd;
+}
+
+.place3 {
+  color: #9b7000;
+}
+
+.place4 {
+  color: #000000;
+}
+
+.place5 {
+  color: #000000;
+}
+
+.place6 {
+  color: #000000;
+}
+
+.place7 {
+  color: #000000;
+}
+
+.place8 {
+  color: #000000;
+}
+
+.place9 {
+  color: #000000;
+}
+
+.light-border {
+  border-top: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+/*
+ * FontAwesome 5 sized icons by aspect ratio via per-icon `fa-w-*` classes
+ * (width = viewBox ratio in em). FontAwesome 6/7 dropped those classes and
+ * uses a fixed default width, which changes icon widths and shifts inline
+ * text. Restore the FA5 behaviour so icon widths match exactly.
+ */
+.svg-inline--fa {
+  width: auto !important;
+  height: 1em;
+  vertical-align: -0.125em;
+}

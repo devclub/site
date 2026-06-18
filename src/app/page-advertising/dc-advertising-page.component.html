@@ -10,18 +10,18 @@
           <table class="table">
             <thead>
             <tr>
-              <th class="text-right" scope="col">{{"advertising.price.months" | translate}}</th>
-              <th class="text-right" scope="col">{{"advertising.price.total" | translate}}</th>
-              <th class="text-right text-muted" scope="col">{{"advertising.price.per_month" | translate}}</th>
-              <th class="text-right text-muted" scope="col">{{"advertising.price.per_year" | translate}}</th>
+              <th class="text-end" scope="col">{{"advertising.price.months" | translate}}</th>
+              <th class="text-end" scope="col">{{"advertising.price.total" | translate}}</th>
+              <th class="text-end text-muted" scope="col">{{"advertising.price.per_month" | translate}}</th>
+              <th class="text-end text-muted" scope="col">{{"advertising.price.per_year" | translate}}</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let price of advertising.prices">
-              <td class="text-right">{{price.month}}</td>
-              <td class="text-right">{{price.price * price.month}}</td>
-              <td class="text-right text-muted">{{price.price}}</td>
-              <td class="text-right text-muted">{{price.price * 12}}</td>
+              <td class="text-end">{{price.month}}</td>
+              <td class="text-end">{{price.price * price.month}}</td>
+              <td class="text-end text-muted">{{price.price}}</td>
+              <td class="text-end text-muted">{{price.price * 12}}</td>
             </tr>
             </tbody>
           </table>
@@ -57,7 +57,7 @@
         <h6 class="card-header">{{"advertising.what_to_do.title" | translate}}</h6>
         <div class="card-body">
           <p class="card-text">
-            <img class="float-left mr-3" src="assets/images/take_my_money.jpg"/>
+            <img class="float-start me-3" src="assets/images/take_my_money.jpg"/>
             {{"advertising.what_to_do" | translate}}
           </p>
           <p class="card-text">

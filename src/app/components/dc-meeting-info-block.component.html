@@ -1,7 +1,7 @@
 <div *ngIf="fullscreen" class="fullscreen-info">
-  <div class="row mt-2 mr-2">
+  <div class="row mt-2 me-2">
     <div class="col">
-      <a href="javascript:void(0)" (click)="fullscreen = false" class="float-right" style="color: #FFFFFF">
+      <a href="javascript:void(0)" (click)="fullscreen = false" class="float-end" style="color: #FFFFFF">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </a>
     </div>
@@ -11,15 +11,15 @@
       <div class="col-9">
         <h1>{{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}</h1>
         <p>
-          <fa-icon [icon]="['fas', 'calendar-alt']" class="pr-2"></fa-icon>
+          <fa-icon [icon]="['fas', 'calendar-alt']" class="pe-2"></fa-icon>
           {{meeting.start | date:'dd.MM.yyyy'}}
           | {{'common.weekday.' + meeting.start.getDay() | translate }}
-          <fa-icon [icon]="['fas', 'clock']" class="pr-2 pl-2"></fa-icon>
+          <fa-icon [icon]="['fas', 'clock']" class="pe-2 ps-2"></fa-icon>
           {{meeting.start | date:'HH:mm (zzz)'}}<br/>
           <span *ngIf="meeting.place">
-            <fa-icon [icon]="['fas', 'home']" class="pr-2"></fa-icon>
+            <fa-icon [icon]="['fas', 'home']" class="pe-2"></fa-icon>
             {{meeting.place.name}}<br/>
-            <fa-icon [icon]="['fas', 'map']" class="pr-2"></fa-icon>
+            <fa-icon [icon]="['fas', 'map']" class="pe-2"></fa-icon>
             {{meeting.place.addr}}
           </span>
         </p>
@@ -62,7 +62,7 @@
 <div class="col-12 meeting-container" *ngIf="!meeting.hiddenByFilter">
   <div class="row">
     <div class="col-12">
-      <a class="float-right" href="javascript:void(0)" (click)="fullscreen = true">
+      <a class="float-end" href="javascript:void(0)" (click)="fullscreen = true">
         <fa-icon [icon]="['fas', 'expand-arrows-alt']"></fa-icon>
       </a>
     </div>
@@ -88,13 +88,13 @@
   <div class="row meeting-info-container">
     <div class="col-sm-9">
       <p class="main-info">
-        <fa-icon [icon]="['fas', 'calendar-alt']" class="pr-2 meeting-info-icon"></fa-icon>
+        <fa-icon [icon]="['fas', 'calendar-alt']" class="pe-2 meeting-info-icon"></fa-icon>
         {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
         | {{'common.weekday.' + meeting.start.getDay() | translate }}
-        <fa-icon [icon]="['fas', 'clock']" class="pr-2 pl-2 meeting-info-icon"></fa-icon>
+        <fa-icon [icon]="['fas', 'clock']" class="pe-2 ps-2 meeting-info-icon"></fa-icon>
         {{meeting.start | date:'HH:mm (zzz)'}}<br/>
         <ng-container *ngIf="meeting.place?.name">
-          <fa-icon [icon]="['fas', 'home']" class="pr-2 meeting-info-icon"></fa-icon>
+          <fa-icon [icon]="['fas', 'home']" class="pe-2 meeting-info-icon"></fa-icon>
           {{meeting.place.name}}
           <a *ngIf="meeting.place.url" href="{{meeting.place.url}}" target="_blank">
             <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
@@ -102,7 +102,7 @@
           <br/>
         </ng-container>
         <ng-container *ngIf="meeting.place?.addr">
-          <fa-icon [icon]="['fas', 'map']" class="pr-2 meeting-info-icon"></fa-icon>
+          <fa-icon [icon]="['fas', 'map']" class="pe-2 meeting-info-icon"></fa-icon>
           {{meeting.place.addr}}
           <a *ngIf="meeting.place.loc" href="{{meeting.place.loc}}" target="_blank">
             <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
@@ -110,7 +110,7 @@
         </ng-container>
       </p>
     </div>
-    <div class="col-sm-3 text-right">
+    <div class="col-sm-3 text-end">
       <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">
         {{'main.meeting.registration' | translate}}
       </a>
@@ -161,36 +161,36 @@
           </span>
             <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
                   [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
-                  placement="right" class="ml-2">
+                  placement="right" class="ms-2">
             <fa-icon [icon]="['fas', 'trophy']"></fa-icon>
           </span>
             {{speech.titles | localize}}
           </h3>
           <div class="mb-3 mt-3">
             <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label mr-3 mt-2 pointer" (click)="speechOptions.clickLabelFn(label)"
+            <span class="badge badge-big badge-label me-3 mt-2 pointer" (click)="speechOptions.clickLabelFn(label)"
                   *ngFor="let label of speech.labels">
               {{label}}</span>
             </ng-container>
             <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label mr-3 mt-2" *ngFor="let label of speech.labels">
+            <span class="badge badge-big badge-label me-3 mt-2" *ngFor="let label of speech.labels">
               {{label}}</span>
             </ng-container>
-            <span class="badge badge-big mr-3 mt-2"
+            <span class="badge badge-big me-3 mt-2"
                   [ngClass]="{'badge-lang': lang === speech.lang,
-                  'badge-danger': lang !== speech.lang}">
+                  'text-bg-danger': lang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}
           </span>
             <span *ngFor="let presentationUrl of speech.presentations"
                   [tooltip]="'common.speech.presentation.tooltip' | translate"
-                  placement="bottom" class="mr-3 mt-1">
+                  placement="bottom" class="me-3 mt-1">
             <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank">
               <fa-icon [icon]="['fab', 'slideshare']" size="2x"></fa-icon>
             </a>
           </span>
             <span *ngFor="let exampleUrl of speech.examples"
                   [tooltip]="'common.speech.example.tooltip' | translate"
-                  placement="bottom" class="mr-3 mt-1">
+                  placement="bottom" class="me-3 mt-1">
             <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank">
               <fa-icon [icon]="['fas', 'file-alt']" size="2x"></fa-icon>
             </a>

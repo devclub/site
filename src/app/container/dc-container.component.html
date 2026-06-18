@@ -8,7 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div id="navbarNavDropdown" class="navbar-collapse collapse" [ngClass]="{'show': isMenuOpen}">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item" [ngClass]="{'active': isCurrentLang(lang.code)}" *ngFor="let lang of langs">
         <a class="nav-link lang" href="javascript:void(0)" (click)="switchLang(lang.code)">{{lang.text}}</a>
       </li>
@@ -35,7 +35,7 @@
            (click)="navigate('/about')">{{'menu.about' | translate}}</a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-danger mr-sm-2 mb-sm-0 mb-2"
+        <a class="btn btn-danger me-sm-2 mb-sm-0 mb-2"
            role="button" href="javascript:void(0)"
            [ngClass]="{'active': isCurrentUrl('/speaker')}"
            (click)="navigate('/speaker')">{{'menu.speaker' | translate}}</a>
