@@ -30,7 +30,11 @@ export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
     js.onload = onloadFn;
 
     const fjs = document.getElementsByTagName('script')[0];
-    fjs.parentNode.insertBefore(js, fjs);
+    if (fjs && fjs.parentNode) {
+      fjs.parentNode.insertBefore(js, fjs);
+    } else {
+      (document.head || document.body || document.documentElement).appendChild(js);
+    }
   }
 
   ngOnInit() {
@@ -47,6 +51,9 @@ export class DcShortInfoBlockComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     const elements = document.getElementsByTagName('script');
+    if (elements.length === 0 || !elements[0].parentNode) {
+      return;
+    }
     const parentNode = elements[0].parentNode;
     for (let i = (elements.length - 1); i >= 0; i--) {
       if (elements[i].id === 'github-buttons'
