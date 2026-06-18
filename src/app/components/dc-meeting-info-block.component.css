@@ -18,6 +18,8 @@
   height: auto;
   margin-left:20%;
   border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 .small{
   font-size: 14px;
