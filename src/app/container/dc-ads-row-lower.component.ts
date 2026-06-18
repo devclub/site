@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {AdvertisingCompany} from '../models/AdvertisingCompany.model';
 import {AppContext} from '../context/AppContext';
 
 @Component({
+  imports: [CommonModule],
   selector: 'dc-ads-row-lower',
   templateUrl: './dc-ads-row-lower.component.html',
   styleUrls: ['./dc-ads-row-lower.component.css']

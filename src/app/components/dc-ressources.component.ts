@@ -1,10 +1,14 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslatePipe } from '../translations/TranslatePipe';
 import {RessourceGroup} from '../models/RessourceGroup.model';
 import {Ressource} from '../models/Ressource.model';
 import {ConfigResource} from '../models/ConfigResource.model';
 import {AppContext} from '../context/AppContext';
 
 @Component({
+  imports: [CommonModule, FontAwesomeModule, TranslatePipe],
   selector: 'dc-ressources',
   templateUrl: './dc-ressources.component.html'
 })

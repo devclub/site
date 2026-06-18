@@ -1,4 +1,10 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { LocalizePipe } from '../translations/LocalizePipe';
+import { DcShortInfoBlockComponent } from './dc-short-info-block.component';
+import { DcRessourcesComponent } from '../components/dc-ressources.component';
+import { DcTitleRowComponent } from '../components/dc-title-row.component';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Lang} from '../models/Lang.model';
 import {TranslationService} from '../translations/TranslationService';
@@ -8,6 +14,7 @@ import {AppContext} from '../context/AppContext';
 import {TeamPerson} from '../models/TeamPerson.model';
 
 @Component({
+  imports: [CommonModule, TranslatePipe, LocalizePipe, DcShortInfoBlockComponent, DcRessourcesComponent, DcTitleRowComponent],
   templateUrl: './dc-about-page.component.html',
   styleUrls: ['./dc-about-page.component.css']
 })
@@ -36,7 +43,7 @@ export class DcAboutPageComponent {
     }));
   }
 
-  private getThanksMembers(teamPersons: Map<string, TeamPerson>, memberCodes: string[], personUrlPrefix: string): Array<Member> {
+  private getThanksMembers(teamPersons: { [code: string]: TeamPerson }, memberCodes: string[], personUrlPrefix: string): Array<Member> {
     const result = new Array<Member>();
     memberCodes.forEach(memberCode => {
       const member = new Member();

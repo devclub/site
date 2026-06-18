@@ -129,3 +129,16 @@ a.dotted {
   border-top: 1px solid #ccc;
   margin-bottom: 1rem;
 }
+
+/*
+ * FontAwesome 5 sized icons by aspect ratio via per-icon `fa-w-*` classes
+ * (width = viewBox ratio in em). FontAwesome 6/7 dropped those classes and
+ * uses a fixed default width, which changes icon widths and shifts inline
+ * text. Restore the FA5 behaviour so icon widths match exactly.
+ */
+.svg-inline--fa {
+  width: auto !important;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+

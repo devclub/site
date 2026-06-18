@@ -4,7 +4,7 @@ import {Team} from '../models/Team.model';
 import {Config} from '../models/Config.model';
 import {TeamPerson} from '../models/TeamPerson.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AppContext {
   public config: Config;
   public advertising: Advertising;
@@ -27,7 +27,7 @@ export class AppContext {
     this.advertising.companies.forEach(item => item.logoUrl = logoUrlPrefix + '/' + item.logo);
   }
 
-  private processMembers(teamPersons: Map<string, TeamPerson>, personUrlPrefix: string): void {
+  private processMembers(teamPersons: { [code: string]: TeamPerson }, personUrlPrefix: string): void {
     this.team.team.forEach(member => {
       member.person = teamPersons[member.personCode];
       member.imageUrl = personUrlPrefix + '/' + member.person.image;

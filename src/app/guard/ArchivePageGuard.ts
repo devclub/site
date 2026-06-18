@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {forkJoin} from 'rxjs';
+import {firstValueFrom, forkJoin} from 'rxjs';
 import {Meeting} from '../models/Meeting.model';
 import {AppContext} from '../context/AppContext';
 import {DataHttpService} from '../services/DataHttpService';
@@ -13,7 +13,7 @@ import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
 import {Speech} from '../models/Speech.model';
 import {MeetingProcessUtil} from '../util/MeetingProcessUtil';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ArchivePageGuard implements CanActivate {
   private initialized = false;
 
@@ -25,8 +25,8 @@ export class ArchivePageGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const urls = this.appContext.config.meetingsUrls.archive;
-    return this.initialized ? Promise.resolve(true) : forkJoin(urls.map(url => this.dataHttpService.getMeetings(url)))
-      .toPromise().then((meetingsMatrix: Array<Array<Meeting>>) => {
+    return this.initialized ? Promise.resolve(true) : firstValueFrom(forkJoin(urls.map(url => this.dataHttpService.getMeetings(url))))
+      .then((meetingsMatrix: Array<Array<Meeting>>) => {
         meetingsMatrix.forEach(meetings => meetings.forEach(meeting => this.archiveContext.meetings.push(meeting)));
         this.processData();
         this.initialized = true;
@@ -43,7 +43,7 @@ export class ArchivePageGuard implements CanActivate {
     MeetingProcessUtil.processMeeting(meeting);
     this.addSeason(meeting);
     if (meeting.speeches) {
-      meeting.speeches.forEach(speech => this.processSpeech(speech, meeting.start));
+      meeting.speeches.forEach(speech => this.processSpeech(speech, meeting.start!));
     }
   }
 
@@ -78,10 +78,11 @@ export class ArchivePageGuard implements CanActivate {
   addLabels(speech: Speech): void {
     speech.labels.forEach(label => {
       const labelMap = this.archiveContext.labelMap;
-      if (!labelMap.get(label)) {
+      const existing = labelMap.get(label);
+      if (!existing) {
         labelMap.set(label, new LabelItem(label));
       } else {
-        labelMap.get(label).addCount();
+        existing.addCount();
       }
     });
   }

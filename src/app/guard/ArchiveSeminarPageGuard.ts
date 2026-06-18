@@ -4,8 +4,9 @@ import {AppContext} from '../context/AppContext';
 import {DataHttpService} from '../services/DataHttpService';
 import {ArchiveContext} from '../context/ArchiveContext';
 import {Seminar} from '../models/Seminar.model';
+import {firstValueFrom} from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ArchiveSeminarPageGuard implements CanActivate {
   private initialized = false;
 
@@ -13,8 +14,8 @@ export class ArchiveSeminarPageGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return this.initialized ? Promise.resolve(true) : this.dataHttpService.getSeminars(this.appContext.config.seminarsUrl)
-      .toPromise().then(seminars => {
+    return this.initialized ? Promise.resolve(true) : firstValueFrom(this.dataHttpService.getSeminars(this.appContext.config.seminarsUrl))
+      .then(seminars => {
         seminars.forEach(seminar => this.processSeminar(seminar));
         this.initialized = true;
         return true;

@@ -1,127 +1,126 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
   "newProjectRoot": "projects",
   "projects": {
-    "app": {
+    "dcsite": {
+      "projectType": "application",
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "projectType": "application",
+      "prefix": "dc",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist",
+            "browser": "src/main.ts",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.json",
-            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "polyfills": ["zone.js"],
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
+                "input": "public"
               },
               {
-                "glob": "bootstrap.css",
-                "input": "node_modules/bootstrap/dist/css",
-                "output": "/assets/css"
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [],
             "scripts": []
           },
           "configurations": {
-            "dev-ee": {
+            "production-eu": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.dev-eu.ts",
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod-eu.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "production-ee": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod-ee.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
+            "development-ee": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev-ee.ts"
                 }
               ]
-            },
-            "prod-eu": {
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.dev-eu.ts",
-                  "with": "src/environments/environment.prod-eu.ts"
-                }
-              ]
-            },
-            "prod-ee": {
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.dev-eu.ts",
-                  "with": "src/environments/environment.prod-ee.ts"
-                }
-              ]
             }
-          }
+          },
+          "defaultConfiguration": "production-eu"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "browserTarget": "app:build",
             "port": 3000
           },
           "configurations": {
-            "dev-ee": {
-              "browserTarget": "app:build:dev-ee"
+            "production-eu": {
+              "buildTarget": "dcsite:build:production-eu"
             },
-            "prod-eu": {
-              "browserTarget": "app:build:prod-eu"
+            "production-ee": {
+              "buildTarget": "dcsite:build:production-ee"
             },
-            "prod-ee": {
-              "browserTarget": "app:build:prod-ee"
+            "development": {
+              "buildTarget": "dcsite:build:development"
+            },
+            "development-ee": {
+              "buildTarget": "dcsite:build:development-ee"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "app:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.json"
-            ],
-            "exclude": []
-          }
+        "test": {
+          "builder": "@angular/build:unit-test"
         }
       }
-    },
-    "app-e2e": {
-      "root": "",
-      "sourceRoot": "e2e",
-      "projectType": "application"
     }
-  },
-  "defaultProject": "app",
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "css"
-    },
-    "@schematics/angular:directive": {}
   }
 }

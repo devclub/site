@@ -1,14 +1,19 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { DcTitleRowComponent } from '../components/dc-title-row.component';
 import {Router} from '@angular/router';
 import {AppContext} from '../context/AppContext';
 
 @Component({
+  imports: [CommonModule, RouterOutlet, TranslatePipe, DcTitleRowComponent],
   templateUrl: './dc-archive-container.component.html'
 })
 export class DcArchiveContainerPageComponent {
   public tabToUrl = new Map<string, string>();
   public hasBestTab = false;
-  public selected;
+  public selected = '';
 
   constructor(private router: Router, appContext: AppContext) {
     this.hasBestTab = appContext.config.hasTop;

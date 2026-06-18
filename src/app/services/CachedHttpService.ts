@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import {firstValueFrom} from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CachedHttpService {
   private CACHE_DATE_PARAM_VALUE = 'CACHED_DATE';
   private CACHE_DATE_AGE_IN_HOURS = 6;
@@ -22,7 +22,7 @@ export class CachedHttpService {
       return; // no cachedDate value
     }
 
-    const cacheExpired = moment().add(this.CACHE_DATE_AGE_IN_HOURS * -1, 'h').isAfter(moment(cachedDate));
+    const cacheExpired = Date.now() - new Date(cachedDate).getTime() > this.CACHE_DATE_AGE_IN_HOURS * 60 * 60 * 1000;
     if (cacheExpired) {
       this.resetCache();
     }
@@ -38,7 +38,7 @@ export class CachedHttpService {
     if (item) {
       return Promise.resolve(JSON.parse(item));
     }
-    return this.http.get<T>(url).toPromise().then(r => {
+    return firstValueFrom(this.http.get<T>(url)).then(r => {
       localStorage.setItem(url, JSON.stringify(r));
       return r;
     });

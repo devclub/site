@@ -5,9 +5,8 @@ import {LocalizedTextLists} from './LocalizedTextLists.model';
 
 export class Seminar {
   datetime: string;
-  start: Date;
+  start: Date | null;
   duration_h: number;
-  places: number;
   place: Place;
   url: string[];
   speakers: Speaker[];

@@ -5,5 +5,5 @@ export class Team {
   logos: string;
   team: Array<Member>;
   thanks: Array<string>;
-  persons: Map<string, TeamPerson>
+  persons: { [code: string]: TeamPerson };
 }

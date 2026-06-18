@@ -1,19 +1,19 @@
 import {Component, Input} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DcTooltipDirective } from '../shared/tooltip.directive';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { LocalizePipe } from '../translations/LocalizePipe';
+import { LocalizeOrgPipe } from '../translations/LocalizeOrgPipe';
 import {Speech} from '../models/Speech.model';
 import {SpeechOptions} from '../models/SpeechOptions.model';
 import {TranslationService} from '../translations/TranslationService';
 import {AppContext} from '../context/AppContext';
 
 @Component({
+  imports: [CommonModule, FontAwesomeModule, DcTooltipDirective, TranslatePipe, LocalizePipe, LocalizeOrgPipe],
   selector: 'dc-speech-row',
-  templateUrl: './dc-speech-row.component.html',
-  /* tslint:disable no-unused-css*/
-  styles: [`
-      :host >>> .tooltip-inner {
-          text-align: left;
-          max-width: 600px;
-      }
-  `]
+  templateUrl: './dc-speech-row.component.html'
 })
 export class DcSpeechRowComponent {
   @Input() public speech: Speech;

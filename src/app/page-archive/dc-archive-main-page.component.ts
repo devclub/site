@@ -8,9 +8,17 @@ import {LabelItem} from '../models/LabelItem.model';
 import {ArchiveContext} from '../context/ArchiveContext';
 import {Lang} from '../models/Lang.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TypeaheadMatch} from 'ngx-bootstrap/typeahead';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DcTypeaheadDirective } from '../shared/typeahead.directive';
+import { TypeaheadMatch } from '../shared/typeahead-match';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { DcMeetingInfoBlockComponent } from '../components/dc-meeting-info-block.component';
+import { DcMeetingInfoListComponent } from './dc-meeting-info-list.component';
 
 @Component({
+  imports: [CommonModule, FormsModule, FontAwesomeModule, DcTypeaheadDirective, TranslatePipe, DcMeetingInfoBlockComponent, DcMeetingInfoListComponent],
   templateUrl: './dc-archive-main-page.component.html'
 })
 export class DcArchiveMainPageComponent {
@@ -141,7 +149,7 @@ export class DcArchiveMainPageComponent {
   }
 
   search() {
-    const hasSpeechFilterValues = this.filter.speaker || this.filter.texts || this.filter.label;
+    const hasSpeechFilterValues = !!(this.filter.speaker || this.filter.texts || this.filter.label);
     if (hasSpeechFilterValues) {
       this.filter.season = this.ALL_SEASONS;
       this.seasonDisabled = true;

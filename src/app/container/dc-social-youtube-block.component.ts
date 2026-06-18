@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {AppContext} from '../context/AppContext';
 
 declare var FB: any;
 
 @Component({
+  imports: [CommonModule],
   selector: 'dc-social-youtube-block',
   templateUrl: './dc-social-youtube-block.component.html'
 })

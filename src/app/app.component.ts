@@ -1,51 +1,110 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {GoogleAnalyticsService} from './services/GoogleAnalyticsService';
-import {environment} from '../environments/environment.dev-eu';
-import {TranslationService} from './translations/TranslationService';
-import {AppContext} from './context/AppContext';
-import {ArchiveContext} from './context/ArchiveContext';
-import {NextMeetingsContext} from './context/NextMeetingsContext';
-import {MeetingProcessUtil} from './util/MeetingProcessUtil';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faCalendarAlt,
+  faCamera,
+  faClock,
+  faComments,
+  faDesktop,
+  faEnvelope,
+  faExpandArrowsAlt,
+  faExternalLinkSquareAlt,
+  faFileAlt,
+  faHome,
+  faInfoCircle,
+  faLanguage,
+  faLocationArrow,
+  faMap,
+  faRss,
+  faTags,
+  faTh,
+  faThList,
+  faTimes,
+  faTrophy,
+  faUser,
+  faVideoSlash
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faFacebook,
+  faGithub,
+  faSlideshare,
+  faTwitter,
+  faWordpress,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons';
+import { TranslationService } from './translations/TranslationService';
+import { AppContext } from './context/AppContext';
+import { ArchiveContext } from './context/ArchiveContext';
+import { NextMeetingsContext } from './context/NextMeetingsContext';
+import { MeetingProcessUtil } from './util/MeetingProcessUtil';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: '[app]',
+  selector: 'dc-root',
+  imports: [RouterOutlet],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  constructor() {
+    const appContext = inject(AppContext);
+    const nextMeetingsContext = inject(NextMeetingsContext);
+    const archiveContext = inject(ArchiveContext);
+    const translationService = inject(TranslationService);
+    const router = inject(Router);
+    const activatedRoute = inject(ActivatedRoute);
+    const library = inject(FaIconLibrary);
 
-  constructor(
-    private appContext: AppContext,
-    private nextMeetingsContext: NextMeetingsContext,
-    private archiveContext: ArchiveContext,
-    private translationService: TranslationService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private googleAnalyticsService: GoogleAnalyticsService) {
+    library.addIcons(
+      faAngleLeft,
+      faAngleRight,
+      faCalendarAlt,
+      faCamera,
+      faClock,
+      faComments,
+      faDesktop,
+      faEnvelope,
+      faExpandArrowsAlt,
+      faExternalLinkSquareAlt,
+      faFileAlt,
+      faHome,
+      faInfoCircle,
+      faLanguage,
+      faLocationArrow,
+      faMap,
+      faRss,
+      faTags,
+      faTh,
+      faThList,
+      faTimes,
+      faTrophy,
+      faUser,
+      faVideoSlash,
+      faFacebook,
+      faGithub,
+      faSlideshare,
+      faTwitter,
+      faWordpress,
+      faYoutube
+    );
 
     appContext.processData();
 
-    activatedRoute.queryParams.subscribe(
-      params => {
-        let language = params['lang'];
-        language = language ? language : appContext.config.defaultLang;
-        this.translationService.setLang(language);
-      }
-    );
+    activatedRoute.queryParams.subscribe((params) => {
+      const language = params['lang'] ? params['lang'] : appContext.config.defaultLang;
+      translationService.setLang(language);
+    });
 
     nextMeetingsContext.findNextMeetings(archiveContext.meetings);
-    nextMeetingsContext.nextMeetings
-      .forEach(meeting => MeetingProcessUtil.processMeetingAndSpeeches(meeting, appContext.config));
+    nextMeetingsContext.nextMeetings.forEach((meeting) =>
+      MeetingProcessUtil.processMeetingAndSpeeches(meeting, appContext.config)
+    );
 
-    this.router.events.subscribe((event) => {
+    router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
       }
     });
-
-    if (environment.googleAnalyticsKey) {
-      googleAnalyticsService.appendGaTrackingCode(environment.googleAnalyticsKey);
-    }
   }
 }

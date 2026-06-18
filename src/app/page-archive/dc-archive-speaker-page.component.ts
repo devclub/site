@@ -1,10 +1,14 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { LocalizePipe } from '../translations/LocalizePipe';
 import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
 import {TranslationService} from '../translations/TranslationService';
 import {AppContext} from '../context/AppContext';
 import {ArchiveContext} from '../context/ArchiveContext';
 
 @Component({
+  imports: [CommonModule, TranslatePipe, LocalizePipe],
   templateUrl: './dc-archive-speaker-page.component.html'
 })
 export class DcArchiveSpeakerPageComponent {
@@ -52,7 +56,7 @@ export class DcArchiveSpeakerPageComponent {
     });
   }
 
-  sort(compareFn) {
+  sort(compareFn: (a: SpeakerTabItem, b: SpeakerTabItem) => number) {
     this.speakers = this.speakers.sort(compareFn);
   }
 }

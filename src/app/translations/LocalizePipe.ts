@@ -27,7 +27,7 @@ export class LocalizePipe implements PipeTransform {
       if (currentValue && !isArray) {
         return '[' + lang + '] ' + currentValue;
       } else if (currentValue && currentValue.length > 0) {
-        return currentValue.map(v => '[' + lang + '] ' + v);
+        return currentValue.map((v: string) => '[' + lang + '] ' + v);
       }
     }
 

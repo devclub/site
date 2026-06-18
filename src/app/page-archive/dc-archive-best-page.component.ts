@@ -1,10 +1,14 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { DcSpeechRowComponent } from './dc-speech-row.component';
 import {BestGroupBy} from '../models/BestGroupBy.model';
 import {Speech} from '../models/Speech.model';
 import {MeetingFilter} from '../models/MeetingFilter.model';
 import {ArchiveContext} from '../context/ArchiveContext';
 
 @Component({
+  imports: [CommonModule, TranslatePipe, DcSpeechRowComponent],
   templateUrl: './dc-archive-best-page.component.html'
 })
 export class DcArchiveBestPageComponent {

@@ -1,4 +1,14 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslatePipe } from '../translations/TranslatePipe';
+import { DcAdsRowUpperComponent } from './dc-ads-row-upper.component';
+import { DcAdsRowLowerComponent } from './dc-ads-row-lower.component';
+import { DcSocialYoutubeBlockComponent } from './dc-social-youtube-block.component';
+import { DcTeamRowsComponent } from './dc-team-rows.component';
+import { DcRessourcesComponent } from '../components/dc-ressources.component';
+import { DcTitleRowComponent } from '../components/dc-title-row.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocationStrategy} from '@angular/common';
 import {Lang} from '../models/Lang.model';
@@ -7,6 +17,7 @@ import {AppContext} from '../context/AppContext';
 import {Member} from '../models/Member.model';
 
 @Component({
+  imports: [CommonModule, RouterOutlet, FontAwesomeModule, TranslatePipe, DcAdsRowUpperComponent, DcAdsRowLowerComponent, DcSocialYoutubeBlockComponent, DcTeamRowsComponent, DcRessourcesComponent, DcTitleRowComponent],
   templateUrl: './dc-container.component.html'
 })
 export class DcContainerComponent {
@@ -42,12 +53,12 @@ export class DcContainerComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  navigate(url) {
+  navigate(url: string) {
     this.router.navigate([url], {queryParamsHandling: 'merge'});
     this.isMenuOpen = false;
   }
 
-  switchLang(langCode) {
+  switchLang(langCode: string) {
     this.router.navigate(['.'], {
       queryParams: {'lang': langCode},
       relativeTo: this.route
@@ -59,11 +70,11 @@ export class DcContainerComponent {
     return this.url.path() === '/' || this.url.path().startsWith('/?');
   }
 
-  isCurrentUrl(url) {
+  isCurrentUrl(url: string) {
     return this.router.isActive(url, false);
   }
 
-  isCurrentLang(langCode) {
+  isCurrentLang(langCode: string) {
     return this.translationService.lang === langCode;
   }
 

@@ -7,7 +7,7 @@ export class TranslatePipe implements PipeTransform {
   constructor(private translationService: TranslationService) {
   }
 
-  transform(messageCode: any, params?: Object): any {
+  transform(messageCode: any, params?: Record<string, string>): any {
     let value = this.translationService.get(messageCode);
     if (!value) {
       return messageCode;

@@ -1,2 +1,3 @@
-export class LocalizedTexts extends Map<string, string> {
+export interface LocalizedTexts {
+  [lang: string]: string;
 }

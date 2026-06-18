@@ -1,9 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../translations/TranslatePipe';
 import {AppContext} from '../context/AppContext';
 
 declare var FB: any;
 
 @Component({
+  imports: [CommonModule, TranslatePipe],
   selector: 'dc-short-info-block',
   templateUrl: './dc-short-info-block.component.html'
 })

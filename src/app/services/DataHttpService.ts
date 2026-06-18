@@ -1,14 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Config} from '../models/Config.model';
-import {environment} from '../../environments/environment.dev-eu';
-import {forkJoin, Observable, of} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {firstValueFrom, forkJoin, Observable, of} from 'rxjs';
 import {Advertising} from '../models/Advertising.model';
 import {Team} from '../models/Team.model';
 import {Meeting} from '../models/Meeting.model';
 import {Seminar} from '../models/Seminar.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DataHttpService {
   constructor(private http: HttpClient) {
   }
@@ -16,17 +16,17 @@ export class DataHttpService {
   public getInitial(): Promise<[Config, Advertising, Team, Array<Meeting>]> {
     return this.getConfig()
       .then(config => {
-        return forkJoin([
+        return firstValueFrom(forkJoin([
           of(config),
           this.getAdvertising(config.finances.dataUrl),
           this.getTeam(config.team.dataUrl),
           this.getMeetings(config.meetingsUrls.main)
-        ]).toPromise()
+        ]));
       });
   }
 
   private getConfig(): Promise<Config> {
-    return this.http.get<Config>(environment.config).toPromise();
+    return firstValueFrom(this.http.get<Config>(environment.config));
   }
 
   private getAdvertising(url: string): Observable<Advertising> {

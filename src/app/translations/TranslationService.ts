@@ -5,9 +5,9 @@ import * as ru from './data/ru.json';
 import * as et from './data/et.json';
 import {Lang} from '../models/Lang.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class TranslationService {
-  public lang;
+  public lang = '';
   public translations = new Map<string, any>();
 
   constructor() {

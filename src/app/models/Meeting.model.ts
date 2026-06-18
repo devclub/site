@@ -10,7 +10,7 @@ export class Meeting {
   season: number;
   titles: LocalizedTexts;
   datetime: string;
-  start: Date;
+  start: Date | null;
   event: string;
   place: Place;
   org: OrganizedMeeting;

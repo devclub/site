@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {AdvertisingCompany} from '../models/AdvertisingCompany.model';
 import {AppContext} from '../context/AppContext';
 
 @Component({
+  imports: [CommonModule],
   selector: 'dc-ads-row-upper',
   templateUrl: './dc-ads-row-upper.component.html',
   styleUrls: ['./dc-ads-row-upper.component.css']

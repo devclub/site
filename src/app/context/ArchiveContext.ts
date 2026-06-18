@@ -6,7 +6,7 @@ import {MeetingFilter} from '../models/MeetingFilter.model';
 import {Speech} from '../models/Speech.model';
 import {SpeakerTabItem} from '../models/SpeakerTabItem.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ArchiveContext {
   public seminars = new Array<Seminar>();
   public meetings = new Array<Meeting>();

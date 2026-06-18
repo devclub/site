@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Meeting} from '../models/Meeting.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class NextMeetingsContext {
   public readonly MEETING_DURATION_IN_MS = 4 * 60 * 60 * 1000;
   public nextMeetings = new Array<Meeting>();

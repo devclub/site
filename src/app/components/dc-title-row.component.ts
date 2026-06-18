@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports: [CommonModule],
   selector: 'dc-title-row',
   templateUrl: './dc-title-row.component.html',
   styleUrls: ['./dc-title-row.component.css']
