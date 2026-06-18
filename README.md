@@ -11,7 +11,7 @@ build time and all content is loaded at runtime from the data server
 - **Angular 22** (standalone components, signals-ready, hash routing)
 - **TypeScript** in strict mode
 - **esbuild** application builder (`@angular/build`)
-- **Bootstrap 5** compiled from SCSS (`src/scss/styles.scss`), themed to the project's look
+- **Bootstrap 5** compiled from SCSS (`src/scss/styles.scss`)
 - **FontAwesome 5** icons via `@fortawesome/angular-fontawesome`
 - **Angular CDK** overlay (tooltips + typeahead)
 - **date-fns** for date formatting
