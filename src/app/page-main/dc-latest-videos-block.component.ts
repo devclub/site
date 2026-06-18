@@ -38,7 +38,8 @@ export class DcLatestVideosBlockComponent {
       appContext.config.frontpagePlaylistId;
     cachedHttp
       .get<any>(url)
-      .then((val) => val.items.forEach((i: any) => this.addYoutubeVideo(i, translationService)));
+      .then((val) => val.items.forEach((i: any) => this.addYoutubeVideo(i, translationService)))
+      .catch((error) => console.error('Failed to load latest videos from YouTube', error));
   }
 
   addYoutubeVideo(item: any, translationService: TranslationService): void {

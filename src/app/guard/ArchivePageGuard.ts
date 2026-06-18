@@ -1,6 +1,7 @@
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {firstValueFrom, forkJoin} from 'rxjs';
+import {firstValueFrom, forkJoin, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {Meeting} from '../models/Meeting.model';
 import {AppContext} from '../context/AppContext';
 import {DataHttpService} from '../services/DataHttpService';
@@ -24,8 +25,17 @@ export class ArchivePageGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    if (this.initialized) {
+      return Promise.resolve(true);
+    }
     const urls = this.appContext.config.meetingsUrls.archive;
-    return this.initialized ? Promise.resolve(true) : firstValueFrom(forkJoin(urls.map(url => this.dataHttpService.getMeetings(url))))
+    const requests = urls.map(url => this.dataHttpService.getMeetings(url).pipe(
+      catchError(error => {
+        console.error('Failed to load archive meetings from ' + url, error);
+        return of([] as Array<Meeting>);
+      })
+    ));
+    return firstValueFrom(forkJoin(requests))
       .then((meetingsMatrix: Array<Array<Meeting>>) => {
         meetingsMatrix.forEach(meetings => meetings.forEach(meeting => this.archiveContext.meetings.push(meeting)));
         this.processData();

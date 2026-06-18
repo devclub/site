@@ -4,7 +4,8 @@ import {AppContext} from '../context/AppContext';
 import {DataHttpService} from '../services/DataHttpService';
 import {ArchiveContext} from '../context/ArchiveContext';
 import {Seminar} from '../models/Seminar.model';
-import {firstValueFrom} from 'rxjs';
+import {firstValueFrom, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class ArchiveSeminarPageGuard implements CanActivate {
@@ -14,8 +15,15 @@ export class ArchiveSeminarPageGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return this.initialized ? Promise.resolve(true) : firstValueFrom(this.dataHttpService.getSeminars(this.appContext.config.seminarsUrl))
-      .then(seminars => {
+    if (this.initialized) {
+      return Promise.resolve(true);
+    }
+    return firstValueFrom(this.dataHttpService.getSeminars(this.appContext.config.seminarsUrl).pipe(
+      catchError(error => {
+        console.error('Failed to load seminars from ' + this.appContext.config.seminarsUrl, error);
+        return of([] as Array<Seminar>);
+      })
+    )).then(seminars => {
         seminars.forEach(seminar => this.processSeminar(seminar));
         this.initialized = true;
         return true;

@@ -33,6 +33,21 @@ npm start          # devclub.eu (Russian)   -> http://localhost:3000
 npm run start:ee   # devclub.ee (English)   -> http://localhost:3000
 ```
 
+### Run both sites in parallel
+
+Both scripts default to port 3000, so to serve EU and EE at the same time give one of
+them a different port (`ng serve` accepts `--port` after `--`). Use two terminals:
+
+```bash
+# Terminal 1 — devclub.eu (Russian)  -> http://localhost:3000
+npm start
+
+# Terminal 2 — devclub.ee (English)  -> http://localhost:3001
+npm run start:ee -- --port 3001
+```
+
+Each dev server reloads independently, so you can compare both sites side by side.
+
 ## Build
 
 ```bash

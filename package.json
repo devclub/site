@@ -18,6 +18,10 @@
     "build:ee": "ng build --configuration production-ee",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:watch": "ng test",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report",
     "lint": "ng lint"
   },
   "packageManager": "npm@11.13.0",
@@ -43,6 +47,7 @@
     "@angular/build": "^22.0.3",
     "@angular/cli": "^22.0.3",
     "@angular/compiler-cli": "^22.0.0",
+    "@playwright/test": "^1.61.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
