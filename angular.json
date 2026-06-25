@@ -113,7 +113,8 @@
               "buildTarget": "dcsite:build:development"
             },
             "development-ee": {
-              "buildTarget": "dcsite:build:development-ee"
+              "buildTarget": "dcsite:build:development-ee",
+              "port": 3001
             }
           },
           "defaultConfiguration": "development"
