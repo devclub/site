@@ -21,6 +21,81 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
+
+/* Fullscreen promo: each talk is a flex column so the talk title can be
+   bottom-aligned across talks, even when a talk has a different number of
+   presenters. */
+.fullscreen-info .promo-speech {
+  display: flex;
+  flex-direction: column;
+}
+.fullscreen-info .promo-title {
+  margin-top: auto;
+}
+
+/* Circular speaker photo — the same size whether a talk has one presenter or
+   several, so co-presenters never look "smaller" / less important. */
+.fullscreen-info .promo-speaker-image {
+  width: 60%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Single presenter */
+.fullscreen-info .promo-solo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Multiple presenters: full-size photos overlapped into one group (avatar
+   stack), with each name lined up under its face. --count is set per talk. */
+.fullscreen-info .promo-group {
+  --photo: 300px;
+  --overlap: 72px;
+  width: calc(var(--photo) * var(--count, 2) - var(--overlap) * (var(--count, 2) - 1));
+  max-width: 100%;
+  margin-inline: auto;
+}
+.fullscreen-info .promo-photo-stack {
+  display: flex;
+  justify-content: center;
+}
+.fullscreen-info .promo-stacked {
+  box-sizing: border-box;
+  width: var(--photo);
+  max-width: 100%;
+  position: relative;
+  /* Ring in the background colour separates the overlapping photos cleanly. */
+  border: 6px solid #052c4b;
+}
+.fullscreen-info .promo-stacked:not(:first-child) {
+  margin-left: calc(var(--overlap) * -1);
+}
+/* Earlier presenters sit on top so the group reads left-to-right. */
+.fullscreen-info .promo-stacked:first-child {
+  z-index: 3;
+}
+.fullscreen-info .promo-stacked:nth-child(2) {
+  z-index: 2;
+}
+.fullscreen-info .promo-stacked:nth-child(3) {
+  z-index: 1;
+}
+.fullscreen-info .promo-names {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.85rem;
+}
+.fullscreen-info .promo-name {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 0.5rem;
+  text-align: center;
+}
 .small{
   font-size: 14px;
 }

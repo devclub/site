@@ -29,27 +29,33 @@
       </div>
     </div>
     <div class="row mt-3" *ngFor="let speechRow of convertIntoMatrix(meeting.speeches)">
-      <div *ngFor="let speech of speechRow" class="col-xs-12"
+      <div *ngFor="let speech of speechRow" class="col-xs-12 promo-speech"
            [ngClass]="{
              'col-sm-12': speechRow.length == 1,
              'col-sm-6': speechRow.length == 2,
              'col-sm-4': speechRow.length == 3,
              'col-sm-3': speechRow.length == 4,
              'col-sm': speechRow.length == 5}">
-        <div class="row">
-          <div class="col">
-            <img [src]="speech.speakers[0].imageUrl" class="img-fluid meeting-info-speaker-image"/>
+        <div class="promo-solo" *ngIf="speech.speakers.length === 1">
+          <img [src]="speech.speakers[0].imageUrl" class="promo-speaker-image"/>
+          <div class="text-center pt-3">
+            <b>{{speech.speakers[0].names | localize}}</b>
+            <div class="small">{{speech.speakers[0].titles | localize}}</div>
           </div>
         </div>
-        <div class="row">
-          <div class="col pt-3">
-            <div class="text-center" *ngFor="let speaker of speech.speakers">
+        <div class="promo-group" *ngIf="speech.speakers.length > 1" [style.--count]="speech.speakers.length">
+          <div class="promo-photo-stack">
+            <img *ngFor="let speaker of speech.speakers" [src]="speaker.imageUrl"
+                 class="promo-speaker-image promo-stacked"/>
+          </div>
+          <div class="promo-names">
+            <div class="promo-name" *ngFor="let speaker of speech.speakers">
               <b>{{speaker.names | localize}}</b>
               <div class="small">{{speaker.titles | localize}}</div>
             </div>
-            <h4 class="text-center pt-4">{{speech.titles | localize}}</h4>
           </div>
         </div>
+        <h4 class="text-center pt-4 promo-title">{{speech.titles | localize}}</h4>
       </div>
     </div>
     <div style="background-color: #FFFFFF">
