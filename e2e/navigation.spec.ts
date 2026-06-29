@@ -119,3 +119,26 @@ test('language switcher changes the UI language', async ({ page }) => {
   await page.getByRole('link', { name: 'EST', exact: true }).click();
   await expect(page.getByRole('link', { name: 'Arhiiv', exact: true })).toBeVisible();
 });
+
+test('archive season switch refreshes the meeting list (regression: list stayed on active year)', async ({ page }) => {
+  await gotoHash(page, '/archive');
+
+  const season = page.locator('select#season');
+  await expect(season).toBeVisible();
+
+  // Collect the selectable years (the "all seasons" option is non-numeric).
+  const years = (await season.locator('option').allInnerTexts())
+    .map((t) => t.trim())
+    .filter((t) => /^\d{4}$/.test(t));
+  expect(years.length).toBeGreaterThan(1);
+
+  const firstMeeting = page.locator('dc-meeting-info-list .text-muted span').first();
+
+  await season.selectOption({ label: years[0] });
+  await expect(firstMeeting).toBeVisible();
+  const before = await firstMeeting.innerText();
+
+  await season.selectOption({ label: years[1] });
+  await expect(firstMeeting).toBeVisible();
+  await expect(firstMeeting).not.toHaveText(before);
+});

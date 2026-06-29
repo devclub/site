@@ -31,6 +31,7 @@ export class DcArchiveMainPageComponent {
   public seasons: Array<number>;
 
   public meetings: Array<Meeting>;
+  public visibleMeetings: Array<Meeting> = [];
   public speechOptions = {
     clickNameFn: (speaker: Speaker) => {
       this.filter.speaker = speaker.names[this.translationService.lang];
@@ -172,6 +173,7 @@ export class DcArchiveMainPageComponent {
         m.hiddenByFilter = true;
       }
     })
+    this.visibleMeetings = this.meetings.filter(m => !m.hiddenByFilter);
   }
 
   private applyFilterToRoute(): void {

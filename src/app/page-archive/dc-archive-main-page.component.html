@@ -1,22 +1,30 @@
 <div class="row g-2 mt-3">
   <div class="col-md-6 mb-3">
-    <label for="speaker">{{'archive.main.filter.speaker' | translate}}</label>
+    <label for="speaker">{{ 'archive.main.filter.speaker' | translate }}</label>
     <div class="input-group">
-      <input id="speaker" [(ngModel)]="filter.speaker"
-             (change)="searchBySpeaker()" type="text" class="form-control"/>
-      <span class="input-group-text pointer"
-            (click)="filter.speaker = ''; search()">
+      <input
+        id="speaker"
+        [(ngModel)]="filter.speaker"
+        (change)="searchBySpeaker()"
+        type="text"
+        class="form-control"
+      />
+      <span class="input-group-text pointer" (click)="filter.speaker = ''; search()">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </span>
     </div>
   </div>
   <div class="col-md-6 mb-3">
-    <label for="texts">{{'archive.main.filter.texts' | translate}}</label>
+    <label for="texts">{{ 'archive.main.filter.texts' | translate }}</label>
     <div class="input-group">
-      <input id="texts" [(ngModel)]="filter.texts"
-             (change)="searchByTexts()" type="text" class="form-control"/>
-      <span class="input-group-text pointer"
-            (click)="filter.texts = ''; search()">
+      <input
+        id="texts"
+        [(ngModel)]="filter.texts"
+        (change)="searchByTexts()"
+        type="text"
+        class="form-control"
+      />
+      <span class="input-group-text pointer" (click)="filter.texts = ''; search()">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </span>
     </div>
@@ -25,67 +33,96 @@
 
 <div class="row g-2">
   <div class="col-md-3 col-lg-4 mb-3">
-    <label for="labels">{{'archive.main.filter.label' | translate}}</label>
+    <label for="labels">{{ 'archive.main.filter.label' | translate }}</label>
     <div class="input-group">
       <ng-template #labelItemTemplate let-model="item">
-        <span>{{model.name}} ({{model.count}})</span>
+        <span>{{ model.name }} ({{ model.count }})</span>
       </ng-template>
-      <input id="labels"
-             [(ngModel)]="filter.label"
-             [typeahead]="labels"
-             [typeaheadOptionsLimit]="7"
-             [typeaheadMinLength]="0"
-             typeaheadOptionField="name"
-             [typeaheadItemTemplate]="labelItemTemplate"
-             (typeaheadOnSelect)="searchByLabel($event)"
-             (change)="searchByLabelClear()"
-             class="form-control"/>
-      <span class="input-group-text pointer"
-            (click)="filter.label = ''; search()">
+      <input
+        id="labels"
+        [(ngModel)]="filter.label"
+        [typeahead]="labels"
+        [typeaheadOptionsLimit]="7"
+        [typeaheadMinLength]="0"
+        typeaheadOptionField="name"
+        [typeaheadItemTemplate]="labelItemTemplate"
+        (typeaheadOnSelect)="searchByLabel($event)"
+        (change)="searchByLabelClear()"
+        class="form-control"
+      />
+      <span class="input-group-text pointer" (click)="filter.label = ''; search()">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </span>
     </div>
   </div>
   <div class="col-md-4 mb-3">
-    <label for="season">{{'archive.main.filter.seasons' | translate}}</label>
+    <label for="season">{{ 'archive.main.filter.seasons' | translate }}</label>
     <div class="input-group">
-      <span class="input-group-text pointer" *ngIf="getMinusYearText() != '' && !seasonDisabled" (click)="minusYear()">
-        <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; {{getMinusYearText()}}
+      <span
+        class="input-group-text pointer"
+        *ngIf="getMinusYearText() != '' && !seasonDisabled"
+        (click)="minusYear()"
+      >
+        <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; {{ getMinusYearText() }}
       </span>
-      <select id="season" class="form-select"
-              [(ngModel)]="filter.season" (change)="searchBySeason()" [disabled]="seasonDisabled">
+      <select
+        id="season"
+        class="form-select"
+        [(ngModel)]="filter.season"
+        (change)="searchBySeason()"
+        [disabled]="seasonDisabled"
+      >
         <option [ngValue]="ALL_SEASONS">
-          {{'archive.main.filter.seasons.all' | translate}}
+          {{ 'archive.main.filter.seasons.all' | translate }}
         </option>
-        <option *ngFor="let year of seasons" [ngValue]="year">{{year}}</option>
+        <option *ngFor="let year of seasons" [ngValue]="year">{{ year }}</option>
       </select>
-      <span class="input-group-text pointer" *ngIf="getPlusYearText() != '' && !seasonDisabled" (click)="plusYear()">
-        {{getPlusYearText() | translate}} &nbsp; <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
+      <span
+        class="input-group-text pointer"
+        *ngIf="getPlusYearText() != '' && !seasonDisabled"
+        (click)="plusYear()"
+      >
+        {{ getPlusYearText() | translate }} &nbsp;
+        <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
       </span>
     </div>
   </div>
   <div class="col-md-5 col-lg-4 mb-3">
-    <label for="view">{{'archive.main.filter.view' | translate}}</label>
+    <label for="view">{{ 'archive.main.filter.view' | translate }}</label>
     <div class="input-group">
       <div class="btn-group" role="group" id="view">
-        <button (click)="changeView(true)"
-                [ngClass]="{'active': asList === true}"
-                type="button" class="btn btn-light">
+        <button
+          (click)="changeView(true)"
+          [ngClass]="{ active: asList === true }"
+          type="button"
+          class="btn btn-light"
+        >
           <fa-icon [icon]="['fas', 'th-list']" class="small"></fa-icon>
-          {{'archive.main.mode.list' | translate}}
+          {{ 'archive.main.mode.list' | translate }}
         </button>
-        <button (click)="changeView(false)"
-                [ngClass]="{'active': asList === false}"
-                type="button" class="btn btn-light">
+        <button
+          (click)="changeView(false)"
+          [ngClass]="{ active: asList === false }"
+          type="button"
+          class="btn btn-light"
+        >
           <fa-icon [icon]="['fas', 'th']" class="small"></fa-icon>
-          {{'archive.main.mode.block' | translate}}
+          {{ 'archive.main.mode.block' | translate }}
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="mt-3" *ngFor="let m of meetings; trackBy: trackById">
-  <dc-meeting-info-block *ngIf="!asList" [meeting]="m" [speechOptions]="speechOptions"></dc-meeting-info-block>
-  <dc-meeting-info-list *ngIf="asList" [meeting]="m" [speechOptions]="speechOptions"></dc-meeting-info-list>
+<div class="mt-3" *ngFor="let m of visibleMeetings; trackBy: trackById">
+  <dc-meeting-info-block
+    *ngIf="!asList"
+    [meeting]="m"
+    [speechOptions]="speechOptions"
+  ></dc-meeting-info-block>
+  <dc-meeting-info-list
+    *ngIf="asList"
+    [meeting]="m"
+    [speechOptions]="speechOptions"
+  ></dc-meeting-info-list>
 </div>
