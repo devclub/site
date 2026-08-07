@@ -12,7 +12,7 @@ build time and all content is loaded at runtime from the data server
 - **TypeScript** in strict mode
 - **esbuild** application builder (`@angular/build`)
 - **Bootstrap 5** compiled from SCSS (`src/scss/styles.scss`)
-- **FontAwesome 5** icons via `@fortawesome/angular-fontawesome`
+- **FontAwesome 7** icons via `@fortawesome/angular-fontawesome`
 - **Angular CDK** overlay (tooltips + typeahead)
 - **date-fns** for date formatting
 - Unit tests with **Vitest**, end-to-end tests with **Playwright**
