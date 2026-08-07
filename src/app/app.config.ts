@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { DataHttpService } from './services/DataHttpService';
 import { AppContext } from './context/AppContext';
@@ -19,7 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withHashLocation(), withPreloading(PreloadAllModules)),
     provideHttpClient(),
-    provideAnimations(),
     provideAppInitializer(() => {
       const dataHttpService = inject(DataHttpService);
       const appContext = inject(AppContext);
