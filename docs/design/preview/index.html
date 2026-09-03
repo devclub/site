@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en" data-dc-site="eu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Devclub redesign — visual reference</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ---------------------------------------------------------------------------
+   Visual reference for the Devclub redesign.
+
+   This page is a DESIGN ARTIFACT, not shipped code. It renders the real token
+   file (tokens.css, compiled from src/scss/_dc-tokens.scss) so the direction
+   can be judged in a browser and so the engineer can read the intended metrics
+   off a working example instead of inferring them from prose.
+
+   The site toggle at the top swaps the data-dc-site attribute, which is exactly
+   the mechanism the real app uses.
+--------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--dc-font-sans);
+  font-size: var(--dc-text-body);
+  line-height: var(--dc-leading-body);
+  color: var(--dc-ink-700);
+  background: var(--dc-surface-0);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  color: var(--dc-ink-900);
+  font-weight: var(--dc-weight-semibold);
+  line-height: var(--dc-leading-snug);
+  margin: 0;
+}
+
+a { color: var(--dc-accent); text-decoration: none; }
+a:hover { color: var(--dc-accent-hover); text-decoration: underline; text-underline-offset: .2em; }
+
+:focus-visible {
+  outline: var(--dc-focus-width) solid var(--dc-focus-ring);
+  outline-offset: var(--dc-focus-offset);
+  border-radius: var(--dc-radius-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--dc-space-4); }
+
+/* --- reference scaffolding (not part of the design) --------------------- */
+.ref-bar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; flex-wrap: wrap; gap: var(--dc-space-3); align-items: center;
+  padding: var(--dc-space-3) var(--dc-space-4);
+  background: var(--dc-ink-900); color: #fff;
+  font-size: var(--dc-text-micro);
+}
+.ref-bar strong { font-weight: var(--dc-weight-semibold); letter-spacing: .04em; text-transform: uppercase; }
+.ref-bar button {
+  font: inherit; font-weight: var(--dc-weight-semibold);
+  padding: .375rem .875rem; border-radius: var(--dc-radius-pill);
+  border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; cursor: pointer;
+}
+.ref-bar button[aria-pressed="true"] { background: #fff; color: var(--dc-ink-900); border-color: #fff; }
+.ref-bar :focus-visible { outline-color: #fff; }
+
+.ref-section {
+  padding-block: var(--dc-space-8);
+  border-top: 1px solid var(--dc-line);
+  /* Clear the 59px sticky .ref-bar when jumping to a section, otherwise the
+     section heading lands under it and reads as missing. */
+  scroll-margin-top: 5rem;
+}
+.ref-section:first-of-type { border-top: 0; }
+.ref-label {
+  display: block; font-size: var(--dc-text-micro); font-weight: var(--dc-weight-semibold);
+  letter-spacing: var(--dc-tracking-eyebrow); text-transform: uppercase;
+  color: var(--dc-ink-500); margin-bottom: var(--dc-space-2);
+}
+.ref-note {
+  font-size: var(--dc-text-small); color: var(--dc-ink-500);
+  max-width: var(--dc-measure); margin-top: var(--dc-space-2);
+}
+.ref-grid { display: grid; gap: var(--dc-space-5); }
+
+/* --- shell -------------------------------------------------------------- */
+.dc-shell { background: var(--dc-brand-shell); color: #fff; }
+.dc-shell a { color: #fff; }
+
+.dc-navbar {
+  display: flex; align-items: center; gap: var(--dc-space-5);
+  min-height: var(--dc-header-height);
+  padding-inline: var(--dc-space-4);
+}
+.dc-brand {
+  display: flex; align-items: center; gap: var(--dc-space-2);
+  font-family: var(--dc-font-mono); font-weight: var(--dc-weight-semibold);
+  letter-spacing: .04em; font-size: var(--dc-text-h5);
+}
+.dc-brand-mark {
+  width: 28px; height: 28px; border-radius: var(--dc-radius-sm);
+  background: rgba(255,255,255,.16); display: grid; place-items: center;
+  font-size: 13px; font-weight: var(--dc-weight-bold);
+}
+.dc-nav { display: flex; gap: var(--dc-space-4); margin-left: auto; align-items: center; }
+.dc-nav a {
+  font-size: var(--dc-text-small); font-weight: var(--dc-weight-medium);
+  color: var(--dc-navlink); padding-block: var(--dc-space-2);
+  border-bottom: 2px solid transparent; text-decoration: none;
+  transition: color var(--dc-duration-fast) var(--dc-ease-standard);
+}
+.dc-nav a:hover { color: #fff; }
+.dc-nav a[aria-current] { color: #fff; border-bottom-color: #fff; }
+
+/* language switcher — segmented control */
+.dc-lang { display: flex; gap: 2px; padding: 3px; border-radius: var(--dc-radius-pill); background: rgba(255,255,255,.14); }
+.dc-lang a {
+  font-size: var(--dc-text-micro); font-weight: var(--dc-weight-semibold);
+  padding: .25rem .625rem; border-radius: var(--dc-radius-pill);
+  color: var(--dc-navlink); text-decoration: none;
+}
+.dc-lang a[aria-current="true"] { background: #fff; color: var(--dc-brand-shell); }
+
+.dc-cta-nav {
+  background: var(--dc-danger); color: #fff !important;
+  padding: .5rem 1rem; border-radius: var(--dc-radius-pill);
+  font-size: var(--dc-text-small); font-weight: var(--dc-weight-semibold);
+  border-bottom: 0 !important;
+}
+
+/* --- hero --------------------------------------------------------------- */
+.dc-hero {
+  background: linear-gradient(180deg, var(--dc-hero-wash) 0%, var(--dc-surface-0) 100%);
+  border-bottom: 1px solid color-mix(in srgb, var(--dc-brand-seed) 60%, transparent);
+  padding-block: var(--dc-space-7);
+}
+.dc-eyebrow {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--dc-accent-soft); color: var(--dc-accent-on-soft);
+  font-size: var(--dc-text-micro); font-weight: var(--dc-weight-semibold);
+  padding: .3rem .75rem; border-radius: var(--dc-radius-pill);
+  font-family: var(--dc-font-mono);
+}
+.dc-hero h1 {
+  font-size: var(--dc-text-display);
+  letter-spacing: var(--dc-tracking-tight);
+  line-height: var(--dc-leading-tight);
+  margin-block: var(--dc-space-4) var(--dc-space-4);
+  max-width: 20ch;
+}
+.dc-meta { display: flex; flex-wrap: wrap; gap: var(--dc-space-2) var(--dc-space-5); color: var(--dc-ink-600); font-size: var(--dc-text-body); }
+.dc-meta span { display: inline-flex; align-items: center; gap: .45rem; font-variant-numeric: tabular-nums; }
+.dc-meta svg { color: var(--dc-accent); flex: none; }
+
+.dc-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font: inherit; font-weight: var(--dc-weight-semibold);
+  padding: var(--dc-space-3) var(--dc-space-6);
+  border-radius: var(--dc-radius-pill); border: 1px solid transparent;
+  background: var(--dc-accent); color: #fff; cursor: pointer;
+  box-shadow: var(--dc-shadow-sm); text-decoration: none;
+  min-height: 44px;
+  transition: background-color var(--dc-duration-fast) var(--dc-ease-standard),
+              box-shadow var(--dc-duration-fast) var(--dc-ease-standard);
+}
+.dc-btn:hover { background: var(--dc-accent-hover); color: #fff; text-decoration: none; box-shadow: var(--dc-shadow-md); }
+.dc-btn--danger { background: var(--dc-danger); }
+.dc-btn--danger:hover { background: #93200f; }
+.dc-btn--quiet { background: var(--dc-surface-0); color: var(--dc-ink-700); border-color: var(--dc-line-strong); box-shadow: none; }
+.dc-btn--quiet:hover { background: var(--dc-surface-1); color: var(--dc-ink-900); }
+.dc-hero .dc-btn { margin-top: var(--dc-space-5); }
+
+/* --- talk card ---------------------------------------------------------- */
+.dc-card {
+  background: var(--dc-surface-0); border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg); box-shadow: var(--dc-shadow-sm);
+  padding: var(--dc-space-5);
+  transition: box-shadow var(--dc-duration-base) var(--dc-ease-standard),
+              transform var(--dc-duration-base) var(--dc-ease-standard);
+}
+@media (hover: hover) {
+  .dc-card--interactive:hover { box-shadow: var(--dc-shadow-md); transform: translateY(-2px); }
+}
+.dc-talk { display: grid; grid-template-columns: minmax(150px, 168px) 1fr; gap: var(--dc-space-5); align-items: start; }
+.dc-avatar {
+  width: 112px; height: 112px; border-radius: 50%; object-fit: cover;
+  background: var(--dc-surface-3); display: grid; place-items: center;
+  color: var(--dc-ink-500); font-weight: var(--dc-weight-semibold); font-size: var(--dc-text-h3);
+  margin-inline: auto;
+}
+.dc-speaker-name { font-size: var(--dc-text-h4); color: var(--dc-ink-900); font-weight: var(--dc-weight-semibold); line-height: var(--dc-leading-snug); }
+.dc-speaker-title { font-size: var(--dc-text-small); color: var(--dc-ink-500); line-height: var(--dc-leading-snug); margin-top: .15rem; }
+.dc-talk h3 { font-size: var(--dc-text-h3); margin-bottom: var(--dc-space-3); }
+.dc-talk p { max-width: var(--dc-measure); margin: var(--dc-space-3) 0 0; }
+.dc-talk-person { text-align: center; }
+
+.dc-chips { display: flex; flex-wrap: wrap; gap: var(--dc-space-2); }
+.dc-chip {
+  font: inherit; font-size: var(--dc-text-micro); font-weight: var(--dc-weight-medium);
+  padding: .25rem .625rem; border-radius: var(--dc-radius-pill);
+  border: 0; cursor: pointer;
+  background: var(--dc-accent-soft); color: var(--dc-accent-on-soft);
+  transition: background-color var(--dc-duration-fast) var(--dc-ease-standard);
+}
+.dc-chip:hover { background: color-mix(in srgb, var(--dc-accent-soft) 70%, var(--dc-accent) 12%); }
+.dc-chip--neutral { background: var(--dc-surface-2); color: var(--dc-ink-700); cursor: default; }
+.dc-chip--foreign { background: var(--dc-danger-soft); color: var(--dc-danger-on-soft); cursor: default; }
+
+/* --- filter panel ------------------------------------------------------- */
+.dc-filters {
+  background: var(--dc-surface-1); border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg); padding: var(--dc-space-5);
+  display: grid; gap: var(--dc-space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.dc-field label {
+  display: block; font-size: var(--dc-text-micro); font-weight: var(--dc-weight-semibold);
+  color: var(--dc-ink-600); margin-bottom: var(--dc-space-1);
+}
+.dc-input-group { display: flex; }
+.dc-field input, .dc-field select {
+  font: inherit; width: 100%; min-height: 44px;
+  padding: var(--dc-space-2) var(--dc-space-3);
+  border: 1px solid var(--dc-line-strong); border-radius: var(--dc-radius);
+  background: var(--dc-surface-0); color: var(--dc-ink-800);
+}
+.dc-field input:focus, .dc-field select:focus { border-color: var(--dc-accent); }
+.dc-input-group input { border-radius: var(--dc-radius) 0 0 var(--dc-radius); }
+.dc-clear {
+  flex: none; width: 44px; min-height: 44px; cursor: pointer;
+  border: 1px solid var(--dc-line-strong); border-left: 0;
+  border-radius: 0 var(--dc-radius) var(--dc-radius) 0;
+  background: var(--dc-surface-0); color: var(--dc-ink-500); font-size: 1rem;
+}
+.dc-clear:hover { background: var(--dc-surface-2); color: var(--dc-ink-800); }
+
+.dc-segment { display: inline-flex; padding: 3px; gap: 2px; background: var(--dc-surface-2); border-radius: var(--dc-radius-pill); }
+.dc-segment button {
+  font: inherit; font-size: var(--dc-text-small); font-weight: var(--dc-weight-medium);
+  padding: .45rem 1rem; min-height: 38px; border: 0; cursor: pointer;
+  border-radius: var(--dc-radius-pill); background: transparent; color: var(--dc-ink-600);
+}
+.dc-segment button[aria-pressed="true"] { background: var(--dc-accent-soft); color: var(--dc-accent-on-soft); font-weight: var(--dc-weight-semibold); }
+
+/* --- tabs --------------------------------------------------------------- */
+.dc-tabs { display: flex; gap: var(--dc-space-5); border-bottom: 1px solid var(--dc-line); overflow-x: auto; }
+.dc-tabs a {
+  padding: var(--dc-space-3) 0; font-size: var(--dc-text-body); font-weight: var(--dc-weight-medium);
+  color: var(--dc-ink-500); border-bottom: 2px solid transparent; white-space: nowrap; text-decoration: none;
+}
+.dc-tabs a:hover { color: var(--dc-ink-800); text-decoration: none; }
+.dc-tabs a[aria-selected="true"] { color: var(--dc-accent); border-bottom-color: var(--dc-accent); font-weight: var(--dc-weight-semibold); }
+
+/* --- table -------------------------------------------------------------- */
+.dc-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dc-table { width: 100%; border-collapse: collapse; }
+.dc-table th, .dc-table td { padding: var(--dc-space-3); text-align: left; border-bottom: 1px solid var(--dc-line); }
+.dc-table thead th {
+  background: var(--dc-surface-2); font-size: var(--dc-text-micro); text-transform: uppercase;
+  letter-spacing: var(--dc-tracking-eyebrow); color: var(--dc-ink-600); font-weight: var(--dc-weight-semibold);
+}
+.dc-table tbody tr:hover { background: var(--dc-surface-1); }
+.dc-table td.num, .dc-table th.num { font-variant-numeric: tabular-nums; }
+.dc-sort { font: inherit; background: 0; border: 0; cursor: pointer; color: inherit; font-weight: inherit;
+  text-transform: inherit; letter-spacing: inherit; font-size: inherit; padding: 0; display: inline-flex; gap: .3rem; align-items: center; }
+.dc-sort[aria-sort] { color: var(--dc-accent); }
+.dc-rank { display: inline-block; min-width: 1.9rem; text-align: right; font-family: var(--dc-font-mono); color: var(--dc-ink-500); font-variant-numeric: tabular-nums; }
+.dc-medal { font-weight: var(--dc-weight-bold); font-variant-numeric: tabular-nums; }
+.dc-medal--1 { color: var(--dc-place-1); }
+.dc-medal--2 { color: var(--dc-place-2); }
+.dc-medal--3 { color: var(--dc-place-3); }
+.dc-total { background: var(--dc-accent-soft); color: var(--dc-accent-on-soft); border-radius: var(--dc-radius-pill); padding: .1rem .5rem; font-weight: var(--dc-weight-semibold); }
+
+/* --- team / media tiles ------------------------------------------------- */
+.dc-tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--dc-space-4); }
+.dc-tile { position: relative; border-radius: var(--dc-radius-lg); overflow: hidden; box-shadow: var(--dc-shadow-xs); aspect-ratio: 1; display: block;
+  transition: transform var(--dc-duration-base) var(--dc-ease-standard), box-shadow var(--dc-duration-base) var(--dc-ease-standard); }
+.dc-tile-img { position: absolute; inset: 0; background: var(--dc-surface-3); display: grid; place-items: center; color: var(--dc-ink-500); font-size: var(--dc-text-h3); font-weight: var(--dc-weight-semibold); }
+.dc-tile::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,18,32,.78) 0%, rgba(11,18,32,0) 55%);
+}
+.dc-tile-name {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  padding: var(--dc-space-3); color: #fff;
+  font-size: var(--dc-text-micro); font-weight: var(--dc-weight-semibold);
+}
+@media (hover: hover) { .dc-tile:hover { transform: translateY(-2px); box-shadow: var(--dc-shadow-md); } }
+
+/* --- states ------------------------------------------------------------- */
+.dc-state {
+  border: 1px dashed var(--dc-line-strong); border-radius: var(--dc-radius-lg);
+  background: var(--dc-surface-1); padding: var(--dc-space-7) var(--dc-space-5);
+  text-align: center;
+}
+.dc-state h3 { font-size: var(--dc-text-h4); margin-bottom: var(--dc-space-2); }
+.dc-state p { color: var(--dc-ink-600); margin: 0 auto var(--dc-space-4); max-width: 46ch; }
+.dc-state--error { border-style: solid; border-color: color-mix(in srgb, var(--dc-warning) 40%, var(--dc-line)); }
+.dc-state-icon { color: var(--dc-ink-500); margin-bottom: var(--dc-space-3); display: block; }
+.dc-state--error .dc-state-icon { color: var(--dc-warning); }
+
+.dc-progress { height: 2px; background: var(--dc-surface-2); overflow: hidden; }
+.dc-progress i { display: block; height: 100%; width: 38%; background: var(--dc-accent); animation: dcslide 1.4s var(--dc-ease-standard) infinite; }
+@keyframes dcslide { 0% { transform: translateX(-100%); } 100% { transform: translateX(360%); } }
+
+.dc-skel { background: var(--dc-surface-2); border-radius: var(--dc-radius-sm); position: relative; overflow: hidden; }
+.dc-skel::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent);
+  animation: dcshimmer 1.4s infinite;
+}
+@keyframes dcshimmer { 100% { transform: translateX(100%); } }
+
+.dc-notice {
+  display: flex; gap: var(--dc-space-3); align-items: flex-start;
+  border: 1px solid color-mix(in srgb, var(--dc-warning) 35%, var(--dc-line));
+  background: color-mix(in srgb, var(--dc-warning) 7%, var(--dc-surface-0));
+  border-radius: var(--dc-radius); padding: var(--dc-space-4); font-size: var(--dc-text-small);
+}
+.dc-notice svg { color: var(--dc-warning); flex: none; margin-top: 2px; }
+
+/* --- swatches ----------------------------------------------------------- */
+.dc-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: var(--dc-space-3); }
+.dc-swatch { border: 1px solid var(--dc-line); border-radius: var(--dc-radius); overflow: hidden; }
+.dc-swatch b { display: block; height: 56px; }
+.dc-swatch span { display: block; padding: var(--dc-space-2) var(--dc-space-3); font-size: var(--dc-text-micro); }
+.dc-swatch code { color: var(--dc-ink-500); font-family: var(--dc-font-mono); font-size: 11px; }
+
+/* --- footer ------------------------------------------------------------- */
+.dc-footer { padding-block: var(--dc-space-7) var(--dc-space-6); margin-top: var(--dc-space-8); }
+.dc-footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--dc-space-5); }
+.dc-footer h4 { color: #fff; font-size: var(--dc-text-h6); margin-bottom: var(--dc-space-2); }
+.dc-footer a { display: block; font-size: var(--dc-text-small); padding-block: .2rem; color: #fff; opacity: .88; }
+.dc-footer a:hover { opacity: 1; }
+.dc-copy { margin-top: var(--dc-space-6); font-size: var(--dc-text-micro); color: rgba(255,255,255,.78); }
+
+/* --- responsive --------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .dc-nav { display: none; }
+  .dc-tiles { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 767.98px) {
+  .dc-filters { grid-template-columns: 1fr; }
+  .dc-talk { grid-template-columns: 1fr; }
+  .dc-avatar { width: 88px; height: 88px; margin-inline: auto; }
+  .dc-talk-person { display: flex; align-items: center; gap: var(--dc-space-4); text-align: left; }
+  .dc-talk-person .dc-avatar { margin-inline: 0; flex: none; }
+  .dc-tiles { grid-template-columns: repeat(2, 1fr); }
+  .dc-footer-cols { grid-template-columns: 1fr; }
+  .dc-hero .dc-btn { width: 100%; }
+
+  /* Speakers table, §6.5. Column discipline first so the table genuinely fits
+     at 320px; the scroll wrapper is only a safety net for long names. */
+  .dc-breakdown { display: none; }            /* medal breakdown -> total only */
+  .dc-table th, .dc-table td { padding: var(--dc-space-2) var(--dc-space-1); }
+  .dc-table th:first-child, .dc-table td:first-child { width: 2.25rem; padding-left: 0; }
+  .dc-table th:nth-child(2), .dc-table td:nth-child(2) { white-space: nowrap; font-size: var(--dc-text-micro); }
+  .dc-table th:nth-child(3), .dc-table td:nth-child(3) { width: 100%; }
+  .dc-table th:nth-child(4), .dc-table td:nth-child(4) { width: 3rem; text-align: center; }
+  .dc-table th:last-child, .dc-table td:last-child { width: 3rem; text-align: center; padding-right: 0; }
+  .dc-table thead th { font-size: 11px; letter-spacing: .04em; }
+  .dc-rank { min-width: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dc-card--interactive:hover, .dc-tile:hover { transform: none; }
+  .dc-skel::after, .dc-progress i { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="ref-bar">
+  <strong>Devclub redesign — visual reference</strong>
+  <span style="opacity:.7">rendered from the real token file</span>
+  <span style="margin-left:auto"></span>
+  <button type="button" id="btn-eu" aria-pressed="true">devclub.eu</button>
+  <button type="button" id="btn-ee" aria-pressed="false">devclub.ee</button>
+</div>
+
+<!-- ============ SHELL ============ -->
+<header class="dc-shell">
+  <div class="wrap dc-navbar">
+    <a class="dc-brand" href="#"><span class="dc-brand-mark">D</span><span id="brandtext">DEVCLUB.EU</span></a>
+    <nav class="dc-nav">
+      <span class="dc-lang">
+        <a href="#" aria-current="true">EST</a><a href="#">ENG</a><a href="#">РУС</a>
+      </span>
+      <a href="#" aria-current="page">Meeting</a>
+      <a href="#">Archive</a>
+      <a href="#">Advertising</a>
+      <a href="#">About</a>
+      <a href="#" class="dc-cta-nav" role="button">Talk!</a>
+    </nav>
+  </div>
+</header>
+<div class="dc-progress" title="Route guard resolving — section 7"><i></i></div>
+
+<!-- ============ HERO ============ -->
+<section class="dc-hero">
+  <div class="wrap">
+    <span class="dc-eyebrow">MEETING #221</span>
+    <h1>Practical performance tuning for the JVM</h1>
+    <div class="dc-meta">
+      <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>18.09.2026 · Thursday</span>
+      <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>18:00 (GMT+3)</span>
+      <span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Lift99, Telliskivi 60</span>
+    </div>
+    <a class="dc-btn" href="#">Register
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+    </a>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ============ TALK CARD ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§6.2 · Talk card</span>
+    <div class="dc-card dc-card--interactive dc-talk">
+      <div class="dc-talk-person">
+        <div class="dc-avatar">AK</div>
+        <div style="margin-top:var(--dc-space-3)">
+          <div class="dc-speaker-name">Andrei Kuznetsov</div>
+          <div class="dc-speaker-title">Principal Engineer, Wise</div>
+        </div>
+      </div>
+      <div>
+        <h3>Escaping the allocation trap: profiling real workloads</h3>
+        <div class="dc-chips" style="margin-block:var(--dc-space-3)">
+          <button class="dc-chip" type="button">java</button>
+          <button class="dc-chip" type="button">performance</button>
+          <button class="dc-chip" type="button">jvm</button>
+          <span class="dc-chip dc-chip--neutral">English</span>
+        </div>
+        <p>A walk through the tooling we use to find allocation hot spots in production services, and the three fixes that account for most of the wins.</p>
+      </div>
+    </div>
+    <p class="ref-note">One card skin serves the hero and the archive. Chips are real
+      <code>&lt;button&gt;</code> elements — today they are click-handled
+      <code>&lt;span&gt;</code>s and unreachable by keyboard. Tab through them.</p>
+  </section>
+
+  <!-- ============ ARCHIVE ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§6.3–6.4 · Archive tabs and filters</span>
+    <nav class="dc-tabs" role="tablist" style="margin-bottom:var(--dc-space-5)">
+      <a href="#" role="tab" aria-selected="true">Meetings</a>
+      <a href="#" role="tab" aria-selected="false">Seminars</a>
+      <a href="#" role="tab" aria-selected="false">The Best</a>
+      <a href="#" role="tab" aria-selected="false">Speakers</a>
+    </nav>
+    <div class="dc-filters">
+      <div class="dc-field">
+        <label for="f-speaker">Speaker</label>
+        <div class="dc-input-group">
+          <input id="f-speaker" type="text" value="Kuksenko">
+          <button class="dc-clear" type="button" aria-label="Clear speaker filter">&times;</button>
+        </div>
+      </div>
+      <div class="dc-field">
+        <label for="f-text">Text</label>
+        <div class="dc-input-group">
+          <input id="f-text" type="text" placeholder="Search talks…">
+          <button class="dc-clear" type="button" aria-label="Clear text filter">&times;</button>
+        </div>
+      </div>
+      <div class="dc-field">
+        <label for="f-season">Season</label>
+        <select id="f-season"><option>All seasons</option><option selected>2026</option><option>2025</option></select>
+      </div>
+      <div class="dc-field">
+        <label>View</label>
+        <div class="dc-segment">
+          <button type="button" aria-pressed="true">List</button>
+          <button type="button" aria-pressed="false">Blocks</button>
+        </div>
+      </div>
+    </div>
+    <p class="ref-note">All five controls group into one panel. Clear buttons and the
+      season stepper become real buttons at 44&times;44px. <code>select#season</code>
+      keeps its id — it is an e2e contract selector (§10).</p>
+  </section>
+
+  <!-- ============ SPEAKERS TABLE ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§6.5 · Speakers table — resize below 768px to see the breakdown collapse</span>
+    <div class="dc-table-scroll">
+    <table class="dc-table">
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th><button class="dc-sort" type="button" aria-sort="descending">Date
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></th>
+          <th><button class="dc-sort" type="button">Name</button></th>
+          <th class="num"><button class="dc-sort" type="button">Talks</button></th>
+          <th class="num"><button class="dc-sort" type="button">Top</button></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="num"><span class="dc-rank">1</span></td><td class="num">18.09.2026</td><td>Sergei Kuksenko</td><td class="num">14</td>
+          <td class="num"><span class="dc-breakdown"><b class="dc-medal dc-medal--1">4</b> <b class="dc-medal dc-medal--2">2</b> <b class="dc-medal dc-medal--3">1</b> = </span><span class="dc-total">7</span></td></tr>
+        <tr><td class="num"><span class="dc-rank">2</span></td><td class="num">04.06.2026</td><td>Anton Arhipov</td><td class="num">11</td>
+          <td class="num"><span class="dc-breakdown"><b class="dc-medal dc-medal--1">2</b> <b class="dc-medal dc-medal--2">3</b> <b class="dc-medal dc-medal--3">0</b> = </span><span class="dc-total">5</span></td></tr>
+        <tr><td class="num"><span class="dc-rank">3</span></td><td class="num">12.03.2026</td><td>Nikita Salnikov-Tarnovski</td><td class="num">9</td>
+          <td class="num"><span class="dc-breakdown"><b class="dc-medal dc-medal--1">1</b> <b class="dc-medal dc-medal--2">1</b> <b class="dc-medal dc-medal--3">2</b> = </span><span class="dc-total">4</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="ref-note">Stays a real <code>&lt;table&gt;</code> with a genuine
+      <code>&lt;thead&gt;</code> — collapsing it to a stack would destroy the row/column
+      association screen readers depend on. Medal colours replace the legacy
+      <code>#cdcdcd</code> silver, which measured 1.55:1 and was effectively invisible.</p>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§6.9 · Team grid</span>
+    <div class="dc-tiles">
+      <a class="dc-tile" href="#"><span class="dc-tile-img">MR</span><span class="dc-tile-name">Marko Rebane</span></a>
+      <a class="dc-tile" href="#"><span class="dc-tile-img">JT</span><span class="dc-tile-name">Jaan Tamm</span></a>
+      <a class="dc-tile" href="#"><span class="dc-tile-img">OK</span><span class="dc-tile-name">Olga Kask</span></a>
+      <a class="dc-tile" href="#"><span class="dc-tile-img">PL</span><span class="dc-tile-name">Pavel Lebedev</span></a>
+      <a class="dc-tile" href="#"><span class="dc-tile-img">KS</span><span class="dc-tile-name">Kadri Saar</span></a>
+    </div>
+    <p class="ref-note">Photos render at full fidelity at rest with a gradient scrim
+      behind the caption. Today a 30% white veil covers every face by default and only
+      lifts on hover — the single largest "old site" tell on the home page. Captions now
+      show on mobile too, where they are more useful, not less.</p>
+  </section>
+
+  <!-- ============ STATES ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§7 · States engineers usually miss</span>
+    <div class="ref-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+
+      <div class="dc-state">
+        <svg class="dc-state-icon" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <h3>No meeting scheduled yet</h3>
+        <p>Existing translation string, restyled. The hero keeps its gradient so the page never looks broken.</p>
+        <a class="dc-btn dc-btn--quiet" href="#">Browse the archive</a>
+      </div>
+
+      <div class="dc-state">
+        <svg class="dc-state-icon" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <h3>No talks match these filters</h3>
+        <p>Today the list simply vanishes — indistinguishable from a load failure.</p>
+        <button class="dc-btn dc-btn--quiet" type="button">Clear filters</button>
+      </div>
+
+      <div class="dc-state dc-state--error">
+        <svg class="dc-state-icon" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <h3>Couldn't load the archive</h3>
+        <p>Must be visually distinct from "empty", or a broken feed reads as an empty club.</p>
+        <button class="dc-btn dc-btn--quiet" type="button">Try again</button>
+      </div>
+
+      <div class="dc-card">
+        <span class="ref-label">Loading skeleton</span>
+        <div style="display:grid;grid-template-columns:88px 1fr;gap:var(--dc-space-4);align-items:center">
+          <div class="dc-skel" style="width:88px;height:88px;border-radius:50%"></div>
+          <div style="display:grid;gap:var(--dc-space-2)">
+            <div class="dc-skel" style="height:14px;width:45%"></div>
+            <div class="dc-skel" style="height:20px;width:88%"></div>
+            <div class="dc-skel" style="height:14px;width:66%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dc-notice" style="margin-top:var(--dc-space-5)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <div><b>Partial load.</b> Some archive entries couldn't be loaded. Everything that did load is shown below — the page never fails wholesale because one of six JSON files 404s.</div>
+    </div>
+  </section>
+
+  <!-- ============ PALETTE ============ -->
+  <section class="ref-section">
+    <span class="ref-label">§9.1 · Palette — every value contrast-verified</span>
+    <div class="dc-swatches">
+      <div class="dc-swatch"><b style="background:var(--dc-brand-shell)"></b><span>Shell<br><code id="sw-shell">#12480c</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-accent)"></b><span>Accent<br><code id="sw-accent">#1a7a3c</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-accent-soft)"></b><span>Accent soft<br><code id="sw-soft">#e7f4ec</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-ink-900)"></b><span>Ink 900<br><code>#0b1220</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-ink-700)"></b><span>Ink 700 · body<br><code>#33414f</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-ink-500)"></b><span>Ink 500 · muted<br><code>#5e6e7f</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-line-strong)"></b><span>Border 3:1<br><code>#7e8c9b</code></span></div>
+      <div class="dc-swatch"><b style="background:var(--dc-danger)"></b><span>Danger<br><code>#b42318</code></span></div>
+    </div>
+    <p class="ref-note">Body text 10.45:1. Muted text 5.23:1 on white and 4.64:1 on the
+      hero wash — the tightest case in the product. Input borders 3.44:1, meeting WCAG
+      1.4.11. The legacy <code>#12480c</code> stays on the shell where it scores 10.73:1
+      behind white text, and never becomes the interactive accent.</p>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="dc-shell dc-footer">
+  <div class="wrap">
+    <div class="dc-footer-cols">
+      <div><h4>Devclub</h4><a href="#">Upcoming meeting</a><a href="#">Archive</a><a href="#">About us</a></div>
+      <div><h4>Take part</h4><a href="#">Propose a talk</a><a href="#">Advertising</a><a href="#">Support us</a></div>
+      <div><h4>Follow</h4><a href="#">YouTube</a><a href="#">Facebook</a><a href="#">GitHub</a></div>
+    </div>
+    <div class="dc-copy">© 2008–2026 Devclub team</div>
+  </div>
+</footer>
+
+<script>
+// The site toggle flips exactly the attribute the real app sets from
+// environment.site, plus the runtime brand seed that DcContainerComponent
+// publishes from config.baseColor / config.lightColor.
+const SITES = {
+  eu: { shell: '#12480c', seed: '#a7c1a4', navlink: '#d7e2d6', brand: 'DEVCLUB.EU',
+        accent: '#1a7a3c', soft: '#e7f4ec' },
+  ee: { shell: '#314f6a', seed: '#b3c8db', navlink: '#d6e0ea', brand: 'DEVCLUB.EE',
+        accent: '#1f6fb2', soft: '#e8f1f9' }
+};
+function setSite(site) {
+  const s = SITES[site];
+  const root = document.documentElement;
+  root.setAttribute('data-dc-site', site);
+  root.style.setProperty('--dc-brand-shell', s.shell);
+  root.style.setProperty('--dc-brand-seed', s.seed);
+  root.style.setProperty('--dc-navlink', s.navlink);
+  document.getElementById('brandtext').textContent = s.brand;
+  document.getElementById('sw-shell').textContent = s.shell;
+  document.getElementById('sw-accent').textContent = s.accent;
+  document.getElementById('sw-soft').textContent = s.soft;
+  document.getElementById('btn-eu').setAttribute('aria-pressed', String(site === 'eu'));
+  document.getElementById('btn-ee').setAttribute('aria-pressed', String(site === 'ee'));
+}
+document.getElementById('btn-eu').addEventListener('click', () => setSite('eu'));
+document.getElementById('btn-ee').addEventListener('click', () => setSite('ee'));
+setSite('eu');
+</script>
+</body>
+</html>

@@ -4,9 +4,9 @@
   </div>
 </div>
 
-<table class="mt-3 mb-3 table table-bordered">
-  <tbody>
+<table class="mt-3 mb-3 table table-bordered" role="presentation">
   <ng-container *ngFor="let seminar of seminars; trackBy: trackByIndex">
+  <tbody class="dc-seminar-group">
     <tr class="table-secondary">
       <td colspan="6">
         <b>{{seminar.titles | localize}}</b>
@@ -15,7 +15,7 @@
     <tr class="small">
       <td colspan="6">
         <span *ngFor="let speaker of seminar.speakers; trackBy: trackByIndex">
-          <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
+          <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank" rel="noopener noreferrer">
             <fa-icon [icon]="['fas', 'user']" class="small"></fa-icon>
           </a>
           {{speaker.names | localize}}
@@ -26,7 +26,7 @@
         </span>
       </td>
     </tr>
-    <tr class="small">
+    <tr class="small dc-seminar-facts">
       <td>
         <b>{{seminar.start | date:'dd.MM.yyyy'}}</b>
       </td>
@@ -38,7 +38,7 @@
         {{'common.speech.lang.' + seminar.lang | translate}}
       </td>
       <td>
-        <a *ngFor="let url of seminar.url; trackBy: trackByIndex" href="{{url}}" target="_blank">
+        <a *ngFor="let url of seminar.url; trackBy: trackByIndex" href="{{url}}" target="_blank" rel="noopener noreferrer">
           <fa-icon [icon]="['fas', 'external-link-square-alt']" class="me-1"></fa-icon>
         </a>
       </td>
@@ -47,7 +47,7 @@
         {{seminar.places}}
       </td>
       <td>
-        <a *ngIf="seminar.place.url" href="{{seminar.place.url}}" target="_blank">
+        <a *ngIf="seminar.place.url" href="{{seminar.place.url}}" target="_blank" rel="noopener noreferrer">
           <fa-icon [icon]="['fas', 'location-arrow']"></fa-icon>
         </a>
         {{seminar.place.name}}
@@ -71,7 +71,7 @@
         </span>
       </td>
     </tr>
-  </ng-container>
   </tbody>
+  </ng-container>
 </table>
 

@@ -1,5 +1,31 @@
-.block-bg {
-  background-color: #c1c1c1;
-  padding-top: 30px;
-  padding-bottom: 30px;
+/* Hero band: gradient wash fading into the page (§6.1). The same
+   dc-meeting-info-block is reused on the archive page over plain white, so
+   text inside stays dark in both contexts. */
+.dc-hero-band {
+  padding-top: var(--dc-space-7);
+  padding-bottom: var(--dc-space-7);
+  background: linear-gradient(180deg, var(--dc-hero-wash) 0%, var(--dc-surface-0) 100%);
+  border-bottom: 1px solid color-mix(in srgb, var(--dc-brand-seed, var(--dc-hero-wash)) 60%, transparent);
+}
+
+@media (min-width: 768px) {
+  .dc-hero-band {
+    padding-top: var(--dc-space-8);
+    padding-bottom: var(--dc-space-8);
+  }
+}
+
+.dc-empty-panel {
+  padding: var(--dc-space-7) var(--dc-space-5);
+  background: var(--dc-surface-1);
+  border: 1px dashed var(--dc-line-strong);
+  border-radius: var(--dc-radius-lg);
+  color: var(--dc-ink-600);
+}
+
+.dc-empty-panel-icon {
+  font-size: 2rem;
+  color: var(--dc-ink-500);
+  margin-bottom: var(--dc-space-3);
+  display: block;
 }

@@ -1,0 +1,20 @@
+.dc-title-row {
+  margin-top: var(--dc-space-6);
+  margin-bottom: var(--dc-space-4);
+}
+
+.dc-title-row-bar {
+  width: 3rem;
+  height: 3px;
+  border-radius: var(--dc-radius-pill);
+  background: var(--dc-accent);
+  margin-bottom: var(--dc-space-3);
+}
+
+.dc-title-row-heading {
+  margin: 0;
+  font-size: var(--dc-text-h2);
+  font-weight: var(--dc-weight-semibold);
+  color: var(--dc-ink-900);
+  letter-spacing: var(--dc-tracking-tight);
+}

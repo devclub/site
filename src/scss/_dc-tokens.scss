@@ -1,0 +1,357 @@
+// =============================================================================
+// Devclub design tokens
+// =============================================================================
+//
+// Single source of truth for the visual language of devclub.eu and devclub.ee.
+//
+// Two layers live here on purpose:
+//
+//   1. Sass variables ($dc-*)   - consumed at COMPILE time, so they can be fed
+//                                 into Bootstrap's own `!default` variables
+//                                 before `@import 'bootstrap/scss/bootstrap'`.
+//   2. CSS custom properties    - consumed at RUN time, so a single CSS bundle
+//      (--dc-*)                   can serve both sites. `styles.scss` is shared
+//                                 by every build configuration in angular.json,
+//                                 therefore per-site identity CANNOT be a Sass
+//                                 value; it is switched by the `data-dc-site`
+//                                 attribute on <html>.
+//
+// Colour rules that are NOT negotiable (each ratio below was measured, see
+// docs/design/redesign-spec.md section "Contrast ledger"):
+//
+//   * Body and secondary text >= 4.5:1 against every surface it can land on.
+//   * Form control borders and focus rings >= 3:1 (WCAG 1.4.11).
+//   * The runtime brand colours from the data repo (`baseColor`/`lightColor`)
+//     are a SEED, not the UI palette. `#12480c` (EU) is a dark, desaturated
+//     green: excellent as a shell background behind white text (10.73:1),
+//     unusable as an interactive accent. It therefore stays on the navbar and
+//     footer only, and never becomes `$primary`.
+//
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// 1. Neutrals
+// -----------------------------------------------------------------------------
+// Slate-tinted rather than pure grey. Pure #000/#888 neutrals are the single
+// strongest "built in 2014" signal on the old site.
+
+$dc-surface-0: #ffffff; // page background, cards
+$dc-surface-1: #f7f9fb; // app background, alternating band
+$dc-surface-2: #eff3f7; // filter bar, table header, raised band
+$dc-surface-3: #e4eaf1; // input rest state, table row stripe
+
+$dc-ink-900: #0b1220; // display headings, max contrast      18.72:1 on white
+$dc-ink-800: #16202e; // section headings                    16.40:1
+$dc-ink-700: #33414f; // body copy                           10.45:1
+$dc-ink-600: #4a5a6b; // de-emphasised body                   7.08:1
+$dc-ink-500: #5e6e7f; // muted / meta text                    5.23:1 on white
+//                                                            4.69:1 on surface-2
+//                                                            4.64:1 on hero tint
+// NOTE: #5e6e7f is the LIGHTEST permitted text colour anywhere in the product.
+// The next step down (#6b7a8a) measures 4.40:1 on white and fails.
+
+$dc-line: #e3e9ef; // decorative hairline, card edge
+$dc-line-strong: #7e8c9b; // form control border   3.44:1 white / 3.08:1 surface-2
+// NOTE: #8a97a5 measures 2.98:1 and fails 1.4.11. Do not lighten $dc-line-strong.
+
+// -----------------------------------------------------------------------------
+// 2. Per-site accent
+// -----------------------------------------------------------------------------
+// Derived from each site's existing hue family so the brand stays recognisable,
+// but lifted in saturation and lightness until it is usable as interactive
+// colour. Every value below passes 4.5:1 BOTH as text on white and as a
+// background behind white text, so one token can serve links and buttons alike.
+
+$dc-accent-eu: #1a7a3c; // 5.39:1 both ways   (from #12480c, forest green)
+$dc-accent-eu-hover: #14652f; // 7.16:1 behind white text
+$dc-accent-eu-soft: #e7f4ec; // chip / tint background
+$dc-accent-eu-on-soft: #115e2c; // 6.97:1 on the soft tint
+$dc-hero-eu: #edf5ef; // homepage hero wash
+
+$dc-accent-ee: #1f6fb2; // 5.28:1 both ways   (from #314f6a, slate blue)
+$dc-accent-ee-hover: #175a93; // 7.19:1 behind white text
+$dc-accent-ee-soft: #e8f1f9;
+$dc-accent-ee-on-soft: #145681; // 6.86:1 on the soft tint
+$dc-hero-ee: #ecf2f8;
+
+// Compile-time default fed to Bootstrap's `$primary`. Runtime CSS variables
+// override it per site; this value only matters for any Bootstrap output that
+// bakes the colour in literally.
+$dc-accent: $dc-accent-eu;
+$dc-accent-hover: $dc-accent-eu-hover;
+
+// -----------------------------------------------------------------------------
+// 3. Semantic colour
+// -----------------------------------------------------------------------------
+
+$dc-danger: #b42318; // 6.57:1 both ways - the "Talk!" CTA and foreign-language flag
+$dc-danger-soft: #fcedeb;
+$dc-danger-on-soft: #9a2a1c; // 6.78:1 on the soft tint
+$dc-success: #17803d; // 5.01:1 on white
+$dc-warning: #8a5300; // 6.33:1 on white
+$dc-info: #0e6e86; // 5.84:1 on white
+
+// Talk ranking (archive "The Best"). The legacy values (#cdcdcd silver at
+// 1.55:1) were invisible; these keep the medal metaphor and stay legible.
+$dc-place-1: #8a6100; // gold    5.54:1
+$dc-place-2: #6b7280; // silver  4.83:1
+$dc-place-3: #8a4b1f; // bronze  6.76:1
+$dc-place-other: $dc-ink-500; // 5.23:1
+
+// -----------------------------------------------------------------------------
+// 4. Typography
+// -----------------------------------------------------------------------------
+// System stack, deliberately. The content is Russian, English and Estonian, so
+// a webfont would need a Cyrillic subset plus Latin Extended - roughly 100 KB
+// before a single meeting renders, on a static GitHub Pages host. The system
+// stack covers all three scripts natively, paints on first frame, and is what
+// contemporary developer products (GitHub included) already use. The dated feel
+// of the old site came from scale, weight and rhythm, not from the typeface.
+
+$dc-font-sans:
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  'Noto Sans',
+  Arial,
+  sans-serif;
+$dc-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+// Fluid scale. Headings interpolate between the 320px and 1280px viewports, so
+// no per-breakpoint font-size overrides are needed anywhere in the app.
+$dc-text-display: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem); // hero meeting title
+$dc-text-h1: clamp(1.875rem, 1.45rem + 1.7vw, 2.75rem);
+$dc-text-h2: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+$dc-text-h3: clamp(1.25rem, 1.12rem + 0.5vw, 1.5rem);
+$dc-text-h4: 1.125rem;
+$dc-text-h5: 1rem;
+$dc-text-h6: 0.9375rem;
+$dc-text-body: 1rem; // 16px
+$dc-text-small: 0.875rem; // 14px
+$dc-text-micro: 0.8125rem; // 13px - the smallest size permitted in the product.
+//                            The legacy 12px overlay captions are a readability
+//                            defect and are raised to this value.
+
+$dc-leading-tight: 1.15; // display + h1/h2
+$dc-leading-snug: 1.3; // h3-h6
+$dc-leading-body: 1.65; // paragraphs
+$dc-tracking-tight: -0.02em; // display + h1, keeps large type from feeling loose
+$dc-tracking-eyebrow: 0.08em; // uppercase labels
+
+$dc-weight-regular: 400;
+$dc-weight-medium: 500;
+$dc-weight-semibold: 600;
+$dc-weight-bold: 700;
+
+$dc-measure: 72ch; // max line length for description paragraphs
+
+// -----------------------------------------------------------------------------
+// 5. Spacing - 4px base grid
+// -----------------------------------------------------------------------------
+
+$dc-space-1: 0.25rem;
+$dc-space-2: 0.5rem;
+$dc-space-3: 0.75rem;
+$dc-space-4: 1rem;
+$dc-space-5: 1.5rem;
+$dc-space-6: 2rem;
+$dc-space-7: 3rem;
+$dc-space-8: 4rem;
+$dc-space-9: 6rem;
+
+// -----------------------------------------------------------------------------
+// 6. Radii
+// -----------------------------------------------------------------------------
+// The old site is square-cornered throughout. Softening the corners is the
+// cheapest and most visible modernisation available.
+
+$dc-radius-sm: 0.375rem;
+$dc-radius: 0.625rem;
+$dc-radius-lg: 0.875rem;
+$dc-radius-xl: 1.25rem;
+$dc-radius-pill: 999px;
+
+// -----------------------------------------------------------------------------
+// 7. Elevation
+// -----------------------------------------------------------------------------
+// Wide, low-opacity, slate-tinted. The legacy `.speech-container` shadow is the
+// 2014 Material recipe (three stacked hard shadows) and reads as dated.
+
+$dc-shadow-xs: 0 1px 2px rgba(11, 18, 32, 0.06);
+$dc-shadow-sm:
+  0 1px 3px rgba(11, 18, 32, 0.07),
+  0 1px 2px rgba(11, 18, 32, 0.04);
+$dc-shadow-md:
+  0 4px 12px rgba(11, 18, 32, 0.08),
+  0 1px 3px rgba(11, 18, 32, 0.05);
+$dc-shadow-lg:
+  0 12px 28px rgba(11, 18, 32, 0.12),
+  0 4px 10px rgba(11, 18, 32, 0.06);
+$dc-shadow-ring: 0 0 0 1px rgba(11, 18, 32, 0.06); // hairline that survives on tints
+
+// -----------------------------------------------------------------------------
+// 8. Focus
+// -----------------------------------------------------------------------------
+// The ring is drawn with `outline` + `outline-offset`, never `box-shadow`.
+// The offset gap is load-bearing: a ring painted directly on a filled button
+// measures 1.22:1 against the EU accent and 2.85:1 against the danger red, both
+// failures. With a 2px gap the ring is measured against the page surface
+// instead, where it passes at 5.39:1 / 5.28:1.
+
+$dc-focus-width: 2px;
+$dc-focus-offset: 2px;
+
+// -----------------------------------------------------------------------------
+// 9. Motion
+// -----------------------------------------------------------------------------
+
+$dc-duration-fast: 120ms;
+$dc-duration-base: 180ms;
+$dc-duration-slow: 260ms;
+$dc-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+$dc-ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+// -----------------------------------------------------------------------------
+// 10. Layout
+// -----------------------------------------------------------------------------
+
+$dc-header-height: 4rem;
+$dc-z-navbar: 1030; // matches Bootstrap's $zindex-sticky
+$dc-z-overlay: 9999; // fullscreen promo view
+
+// =============================================================================
+// Runtime layer
+// =============================================================================
+// Emitted once. `[data-dc-site]` is set on <html> from `environment.site`, so a
+// single bundle themes both sites with no flash of the wrong brand colour.
+
+:root {
+  --dc-surface-0: #{$dc-surface-0};
+  --dc-surface-1: #{$dc-surface-1};
+  --dc-surface-2: #{$dc-surface-2};
+  --dc-surface-3: #{$dc-surface-3};
+
+  --dc-ink-900: #{$dc-ink-900};
+  --dc-ink-800: #{$dc-ink-800};
+  --dc-ink-700: #{$dc-ink-700};
+  --dc-ink-600: #{$dc-ink-600};
+  --dc-ink-500: #{$dc-ink-500};
+
+  --dc-line: #{$dc-line};
+  --dc-line-strong: #{$dc-line-strong};
+
+  // Overridden per site below.
+  --dc-accent: #{$dc-accent-eu};
+  --dc-accent-hover: #{$dc-accent-eu-hover};
+  --dc-accent-soft: #{$dc-accent-eu-soft};
+  --dc-accent-on-soft: #{$dc-accent-eu-on-soft};
+  --dc-hero-wash: #{$dc-hero-eu};
+
+  // Seeded from the data repo at runtime by DcContainerComponent. Falls back to
+  // the built-in value so the shell is never unpainted while config loads.
+  --dc-brand-shell: #{$dc-accent-eu-hover};
+  --dc-brand-seed: #{$dc-hero-eu};
+
+  --dc-danger: #{$dc-danger};
+  --dc-danger-soft: #{$dc-danger-soft};
+  --dc-danger-on-soft: #{$dc-danger-on-soft};
+  --dc-success: #{$dc-success};
+  --dc-warning: #{$dc-warning};
+  --dc-info: #{$dc-info};
+
+  --dc-place-1: #{$dc-place-1};
+  --dc-place-2: #{$dc-place-2};
+  --dc-place-3: #{$dc-place-3};
+  --dc-place-other: #{$dc-place-other};
+
+  --dc-font-sans: #{$dc-font-sans};
+  --dc-font-mono: #{$dc-font-mono};
+  --dc-text-display: #{$dc-text-display};
+  --dc-text-small: #{$dc-text-small};
+  --dc-text-micro: #{$dc-text-micro};
+  --dc-leading-body: #{$dc-leading-body};
+  --dc-tracking-tight: #{$dc-tracking-tight};
+  --dc-tracking-eyebrow: #{$dc-tracking-eyebrow};
+  --dc-measure: #{$dc-measure};
+
+  // Spacing. Emitted because component skins and the responsive rules in the
+  // design spec reference these directly (e.g. the mobile seminar fact grid).
+  --dc-space-1: #{$dc-space-1};
+  --dc-space-2: #{$dc-space-2};
+  --dc-space-3: #{$dc-space-3};
+  --dc-space-4: #{$dc-space-4};
+  --dc-space-5: #{$dc-space-5};
+  --dc-space-6: #{$dc-space-6};
+  --dc-space-7: #{$dc-space-7};
+  --dc-space-8: #{$dc-space-8};
+  --dc-space-9: #{$dc-space-9};
+
+  // Type scale. The heading steps are fluid clamps, so they must be available
+  // at runtime for any component that sets a size outside Bootstrap's headings.
+  --dc-text-h1: #{$dc-text-h1};
+  --dc-text-h2: #{$dc-text-h2};
+  --dc-text-h3: #{$dc-text-h3};
+  --dc-text-h4: #{$dc-text-h4};
+  --dc-text-h5: #{$dc-text-h5};
+  --dc-text-h6: #{$dc-text-h6};
+  --dc-text-body: #{$dc-text-body};
+  --dc-leading-tight: #{$dc-leading-tight};
+  --dc-leading-snug: #{$dc-leading-snug};
+  --dc-weight-regular: #{$dc-weight-regular};
+  --dc-weight-medium: #{$dc-weight-medium};
+  --dc-weight-semibold: #{$dc-weight-semibold};
+  --dc-weight-bold: #{$dc-weight-bold};
+
+  --dc-radius-sm: #{$dc-radius-sm};
+  --dc-radius: #{$dc-radius};
+  --dc-radius-lg: #{$dc-radius-lg};
+  --dc-radius-xl: #{$dc-radius-xl};
+  --dc-radius-pill: #{$dc-radius-pill};
+  --dc-shadow-xs: #{$dc-shadow-xs};
+  --dc-shadow-sm: #{$dc-shadow-sm};
+  --dc-shadow-md: #{$dc-shadow-md};
+  --dc-shadow-lg: #{$dc-shadow-lg};
+  --dc-shadow-ring: #{$dc-shadow-ring};
+
+  --dc-focus-width: #{$dc-focus-width};
+  --dc-focus-offset: #{$dc-focus-offset};
+  // Default ring for light surfaces. Flipped to white inside the dark shell.
+  --dc-focus-ring: #{$dc-accent-eu};
+
+  --dc-duration-fast: #{$dc-duration-fast};
+  --dc-duration-base: #{$dc-duration-base};
+  --dc-duration-slow: #{$dc-duration-slow};
+  --dc-ease-standard: #{$dc-ease-standard};
+  --dc-ease-out: #{$dc-ease-out};
+
+  --dc-header-height: #{$dc-header-height};
+}
+
+[data-dc-site='ee'] {
+  --dc-accent: #{$dc-accent-ee};
+  --dc-accent-hover: #{$dc-accent-ee-hover};
+  --dc-accent-soft: #{$dc-accent-ee-soft};
+  --dc-accent-on-soft: #{$dc-accent-ee-on-soft};
+  --dc-hero-wash: #{$dc-hero-ee};
+  --dc-brand-shell: #{$dc-accent-ee-hover};
+  --dc-brand-seed: #{$dc-hero-ee};
+  --dc-focus-ring: #{$dc-accent-ee};
+}
+
+// Inside the dark navbar and footer the accent ring collapses to 1.99:1 (EU)
+// and 1.62:1 (EE). White is the only ring that survives there: 10.73:1 / 8.55:1.
+.dc-shell {
+  --dc-focus-ring: #{$dc-surface-0};
+}
+
+// Users who ask for less motion get none of the decorative kind. Opacity-only
+// transitions are retained because they never move anything on screen.
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dc-duration-fast: 1ms;
+    --dc-duration-base: 1ms;
+    --dc-duration-slow: 1ms;
+  }
+}

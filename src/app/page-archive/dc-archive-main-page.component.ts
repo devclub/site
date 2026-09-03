@@ -199,6 +199,13 @@ export class DcArchiveMainPageComponent {
     document.title = `DEVCLUB MTÜ (archive): season ${this.filter.season}`;
   }
 
+  clearFilters() {
+    this.filter.speaker = '';
+    this.filter.texts = '';
+    this.filter.label = '';
+    this.search();
+  }
+
   isMeetingHidden(meeting: Meeting): boolean {
     return meeting.season !== this.filter.season && this.filter.season !== this.ALL_SEASONS;
   }

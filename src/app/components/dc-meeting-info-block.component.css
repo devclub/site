@@ -1,6 +1,6 @@
 .fullscreen-info {
   color: #FFFFFF;
-  background-color: #052c4b;
+  background-color: var(--dc-ink-900);
   position: fixed;
   width: 100%;
   min-width: 100%;
@@ -12,14 +12,8 @@
   left: 0;
   z-index: 9999;
 }
-
-.img-fluid{ /* Overwrites global style */
-  width: 60%;
-  height: auto;
-  margin-left:20%;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+.dc-fullscreen-close {
+  color: #FFFFFF;
 }
 
 /* Fullscreen promo: each talk is a flex column so the talk title can be
@@ -70,7 +64,7 @@
   max-width: 100%;
   position: relative;
   /* Ring in the background colour separates the overlapping photos cleanly. */
-  border: 6px solid #052c4b;
+  border: 6px solid var(--dc-ink-900);
 }
 .fullscreen-info .promo-stacked:not(:first-child) {
   margin-left: calc(var(--overlap) * -1);
@@ -100,17 +94,31 @@
   font-size: 14px;
 }
 .main-info {
-  color: #000000;
+  color: var(--dc-ink-600);
 }
 .name-container{
   text-align: center;
 }
 .speech-container{
   margin-top: 2rem;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-  			  0 1px 5px 0 rgba(0, 0, 0, 0.12),
-  			  0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  padding: 1rem 0px;
+  background: var(--dc-surface-0);
+  border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg);
+  box-shadow: var(--dc-shadow-sm);
+  padding: var(--dc-space-5);
+  transition: box-shadow var(--dc-duration-base) var(--dc-ease-standard),
+              transform var(--dc-duration-base) var(--dc-ease-standard);
+}
+@media (hover: hover) {
+  .speech-container:hover {
+    box-shadow: var(--dc-shadow-md);
+    transform: translateY(-2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .speech-container:hover {
+    transform: none;
+  }
 }
 .meeting-container{
   padding-top: 1.5rem;
@@ -119,11 +127,85 @@
 .meeting-header-container{
   padding-left: 0px;
 }
+.dc-meeting-title {
+  color: var(--dc-ink-900);
+  font-weight: var(--dc-weight-semibold);
+  line-height: var(--dc-leading-snug);
+}
 .meeting-info-container{
   padding-left: 1.7rem;
   margin-top: 1rem;
-  color: #666;
+  color: var(--dc-ink-600);
 }
 .meeting-info-icon{
-  color: #333;
+  color: var(--dc-accent);
 }
+.dc-tabular {
+  font-variant-numeric: tabular-nums;
+}
+.dc-speaker-col {
+  min-width: 150px;
+  max-width: 168px;
+}
+.meeting-info-speaker-image {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 112px;
+  height: 112px;
+  margin-inline: auto;
+  display: block;
+}
+@media (max-width: 575.98px) {
+  .meeting-info-speaker-image {
+    width: 88px;
+    height: 88px;
+  }
+}
+.dc-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--dc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.dc-link-btn:hover {
+  color: var(--dc-accent-hover);
+}
+.dc-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dc-space-2) var(--dc-space-3);
+  align-items: center;
+}
+.dc-chip {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  border-radius: var(--dc-radius-pill);
+  font-size: var(--dc-text-micro);
+  font-weight: var(--dc-weight-medium);
+  padding: 0.25rem 0.625rem;
+  background: var(--dc-surface-2);
+  color: var(--dc-ink-700);
+}
+.dc-chip-topic {
+  background: var(--dc-accent-soft);
+  color: var(--dc-accent-on-soft);
+  cursor: pointer;
+}
+.dc-chip-topic:hover {
+  background: var(--dc-accent-soft);
+  filter: brightness(0.96);
+}
+.dc-chip-lang-diff {
+  background: var(--dc-danger-soft);
+  color: var(--dc-danger-on-soft);
+}
+.place1 { color: var(--dc-place-1); }
+.place2 { color: var(--dc-place-2); }
+.place3 { color: var(--dc-place-3); }
+.place4, .place5, .place6, .place7, .place8, .place9 { color: var(--dc-place-other); }

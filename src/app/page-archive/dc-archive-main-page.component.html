@@ -1,3 +1,4 @@
+<div class="dc-archive-filters">
 <div class="row g-2 mt-3">
   <div class="col-md-6 mb-3">
     <label for="speaker">{{ 'archive.main.filter.speaker' | translate }}</label>
@@ -9,9 +10,10 @@
         type="text"
         class="form-control"
       />
-      <span class="input-group-text pointer" (click)="filter.speaker = ''; search()">
+      <button type="button" class="input-group-text pointer" (click)="filter.speaker = ''; search()"
+              aria-label="{{ 'archive.main.filter.speaker' | translate }}">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
-      </span>
+      </button>
     </div>
   </div>
   <div class="col-md-6 mb-3">
@@ -24,9 +26,10 @@
         type="text"
         class="form-control"
       />
-      <span class="input-group-text pointer" (click)="filter.texts = ''; search()">
+      <button type="button" class="input-group-text pointer" (click)="filter.texts = ''; search()"
+              aria-label="{{ 'archive.main.filter.texts' | translate }}">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
-      </span>
+      </button>
     </div>
   </div>
 </div>
@@ -50,21 +53,24 @@
         (change)="searchByLabelClear()"
         class="form-control"
       />
-      <span class="input-group-text pointer" (click)="filter.label = ''; search()">
+      <button type="button" class="input-group-text pointer" (click)="filter.label = ''; search()"
+              aria-label="{{ 'archive.main.filter.label' | translate }}">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
-      </span>
+      </button>
     </div>
   </div>
   <div class="col-md-4 mb-3">
     <label for="season">{{ 'archive.main.filter.seasons' | translate }}</label>
     <div class="input-group">
-      <span
+      <button
+        type="button"
         class="input-group-text pointer"
         *ngIf="getMinusYearText() != '' && !seasonDisabled"
         (click)="minusYear()"
+        aria-label="{{ getMinusYearText() }}"
       >
         <fa-icon [icon]="['fas', 'angle-left']"></fa-icon> &nbsp; {{ getMinusYearText() }}
-      </span>
+      </button>
       <select
         id="season"
         class="form-select"
@@ -77,14 +83,16 @@
         </option>
         <option *ngFor="let year of seasons" [ngValue]="year">{{ year }}</option>
       </select>
-      <span
+      <button
+        type="button"
         class="input-group-text pointer"
         *ngIf="getPlusYearText() != '' && !seasonDisabled"
         (click)="plusYear()"
+        aria-label="{{ getPlusYearText() | translate }}"
       >
         {{ getPlusYearText() | translate }} &nbsp;
         <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
-      </span>
+      </button>
     </div>
   </div>
   <div class="col-md-5 col-lg-4 mb-3">
@@ -94,6 +102,7 @@
         <button
           (click)="changeView(true)"
           [ngClass]="{ active: asList === true }"
+          [attr.aria-pressed]="asList === true"
           type="button"
           class="btn btn-light"
         >
@@ -103,6 +112,7 @@
         <button
           (click)="changeView(false)"
           [ngClass]="{ active: asList === false }"
+          [attr.aria-pressed]="asList === false"
           type="button"
           class="btn btn-light"
         >
@@ -112,6 +122,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <div class="mt-3" *ngFor="let m of visibleMeetings; trackBy: trackById">
@@ -125,4 +136,12 @@
     [meeting]="m"
     [speechOptions]="speechOptions"
   ></dc-meeting-info-list>
+</div>
+
+<div class="dc-empty-result" *ngIf="visibleMeetings.length === 0">
+  <fa-icon [icon]="['fas', 'th-list']" class="dc-empty-result-icon"></fa-icon>
+  <p class="mb-3">{{ 'archive.main.filter.no_results' | translate }}</p>
+  <button type="button" class="btn btn-outline-primary" (click)="clearFilters()">
+    {{ 'archive.main.filter.no_results.clear' | translate }}
+  </button>
 </div>

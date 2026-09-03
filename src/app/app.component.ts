@@ -40,6 +40,7 @@ import { AppContext } from './context/AppContext';
 import { ArchiveContext } from './context/ArchiveContext';
 import { NextMeetingsContext } from './context/NextMeetingsContext';
 import { MeetingProcessUtil } from './util/MeetingProcessUtil';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'dc-root',
@@ -91,9 +92,12 @@ export class AppComponent {
 
     appContext.processData();
 
+    document.documentElement.setAttribute('data-dc-site', environment.site);
+
     activatedRoute.queryParams.subscribe((params) => {
       const language = params['lang'] ? params['lang'] : appContext.config.defaultLang;
       translationService.setLang(language);
+      document.documentElement.setAttribute('lang', language);
     });
 
     nextMeetingsContext.findNextMeetings(archiveContext.meetings);

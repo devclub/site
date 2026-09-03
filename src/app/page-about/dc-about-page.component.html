@@ -1,6 +1,6 @@
 <div class="container">
 
-  <dc-title-row>{{'about.title.about_us' | translate}}</dc-title-row>
+  <dc-title-row [level]="1">{{'about.title.about_us' | translate}}</dc-title-row>
 
   <div class="row">
     <div class="col">
@@ -13,7 +13,8 @@
   <dc-title-row>{{'about.title.events' | translate}}</dc-title-row>
 
   <div class="row mb-3">
-    <iframe [src]="calendarUrl" class="col" style="border: 0" height="200" frameborder="0" scrolling="no"></iframe>
+    <iframe [src]="calendarUrl" class="col dc-calendar-frame" height="200" frameborder="0" scrolling="no"
+            title="{{'about.title.events' | translate}}"></iframe>
   </div>
 
   <dc-title-row>{{'about.title.resources' | translate}}</dc-title-row>
@@ -36,14 +37,14 @@
     </div>
   </div>
 
-  <div class="row mb-3">
-    <div class="col">
+  <div class="row mb-3 dc-brand-tiles">
+    <div class="col-12 col-sm-4">
       <img src="assets/images/brand/logo_eu.png" class="img-fluid">
     </div>
-    <div class="col">
+    <div class="col-12 col-sm-4">
       <img src="assets/images/brand/logo_ee.png" class="img-fluid">
     </div>
-    <div class="col">
+    <div class="col-12 col-sm-4">
       <img src="assets/images/brand/logo_lv.png" class="img-fluid">
     </div>
   </div>
@@ -68,7 +69,7 @@
       <div class="image-wrap">
         <a href="{{member.person.url}}" target="_blank" class="image-lighten">
           <img src="{{member.imageUrl}}" class="img-fluid">
-          <div class="member-text d-none d-md-block">{{member.person.names | localize}}</div>
+          <div class="member-text">{{member.person.names | localize}}</div>
         </a>
       </div>
     </div>

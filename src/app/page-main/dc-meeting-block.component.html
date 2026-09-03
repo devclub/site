@@ -1,12 +1,15 @@
-<div class="container-fluid pt-3 pb-3" [ngStyle]="{'background-color': styleColor}">
+<div class="dc-hero-band container-fluid">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col">
         <span *ngIf="nextMeetings.length > 0">
-          <dc-meeting-info-block *ngFor="let m of nextMeetings" [showRegisterEvent]="true" [meeting]="m"></dc-meeting-info-block>
+          <dc-meeting-info-block *ngFor="let m of nextMeetings; let first = first" [showRegisterEvent]="true" [meeting]="m" [headingLevel]="first ? 1 : 2"></dc-meeting-info-block>
         </span>
-        <div *ngIf="nextMeetings.length === 0" class="text-center pt-3 pb-3">
-          <b>{{'main.next_meeting.info.not_avaliable' | translate}}</b>
+        <div *ngIf="nextMeetings.length === 0" class="dc-empty-panel text-center">
+          <fa-icon [icon]="['fas', 'calendar-alt']" class="dc-empty-panel-icon"></fa-icon>
+          <p class="mb-3"><b>{{'main.next_meeting.info.not_avaliable' | translate}}</b></p>
+          <a routerLink="/archive"
+             [attr.aria-label]="(('main.next_meeting.info.not_avaliable' | translate) + ' – ' + ('menu.archive' | translate))">{{'menu.archive' | translate}}</a>
         </div>
       </div>
     </div>

@@ -9,4 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DcTitleRowComponent {
   @Input() public titleCode: String;
+  // The page-level <h1> must remain exactly one per page (§5.5): on `/` it is
+  // the meeting title, elsewhere it is the first dc-title-row.
+  @Input() public level: 1 | 2 = 2;
 }

@@ -1,11 +1,20 @@
-*:focus, *:visited {
-  outline: none !important;
-}
-
 .image-wrap {
   position: relative;
+  border-radius: var(--dc-radius);
+  overflow: hidden;
+  box-shadow: var(--dc-shadow-xs);
+  transition: transform var(--dc-duration-base) var(--dc-ease-standard);
 }
 
+.image-wrap img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+
+/* Real gradient scrim, replacing the legacy white-veil hover treatment
+   (§6.9). Photos render at full fidelity at rest. */
 .image-lighten:after {
   content: '\A';
   position: absolute;
@@ -13,36 +22,41 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: #FFFFFF;
-  opacity: 0.3;
-  transition: all 0.2s;
-  -webkit-transition: all 0.3s;
+  background: linear-gradient(transparent 55%, rgba(11, 18, 32, 0.78));
 }
 
-.image-lighten:hover:after {
-  opacity: 0;
+@media (hover: hover) {
+  .image-lighten:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .member-text {
   position: absolute;
-  bottom: 5%;
-  left: 5%;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  padding-right: 5%;
-  font-size: 12px;
+  padding: var(--dc-space-2);
+  font-size: var(--dc-text-micro);
   color: #FFFFFF;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  font-weight: bold;
+  font-weight: var(--dc-weight-semibold);
+}
+
+.dc-calendar-frame {
+  width: 100%;
+  border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius);
 }
 
 .photo-text {
   text-decoration: none;
   position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 90%;
-  font-size: 18px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--dc-space-2);
+  font-size: var(--dc-text-small);
   color: #FFFFFF;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  font-weight: bold;
+  font-weight: var(--dc-weight-semibold);
+  background: linear-gradient(rgba(11, 18, 32, 0.6), transparent 65%);
 }

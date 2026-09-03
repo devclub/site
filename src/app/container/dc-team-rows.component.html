@@ -5,7 +5,7 @@
         <div class="image-wrap mb-3">
           <a *ngIf="member.person" href="{{member.person.url}}" target="_blank" class="image-lighten">
             <img src="{{member.imageUrl}}" class="img-fluid">
-            <div class="member-text d-none d-md-block">{{member.person.names | localize}}</div>
+            <div class="member-text">{{member.person.names | localize}}</div>
           </a>
         </div>
       </div>

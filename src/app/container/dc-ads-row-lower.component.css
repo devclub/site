@@ -1,3 +1,26 @@
+.image-wrap {
+  background: var(--dc-surface-1);
+  border-radius: var(--dc-radius);
+  padding: var(--dc-space-4);
+  transition: opacity var(--dc-duration-base) var(--dc-ease-standard),
+              filter var(--dc-duration-base) var(--dc-ease-standard);
+}
+
+.image-lighten {
+  opacity: 0.72;
+  filter: saturate(0.85);
+  transition: opacity var(--dc-duration-base) var(--dc-ease-standard),
+              filter var(--dc-duration-base) var(--dc-ease-standard);
+  display: block;
+}
+
+.image-lighten:hover,
+.image-lighten:focus-visible {
+  opacity: 1;
+  filter: saturate(1);
+}
+
 .mh {
-  max-height: 150px;
+  max-height: 72px;
+  object-fit: contain;
 }

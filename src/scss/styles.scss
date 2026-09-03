@@ -1,16 +1,241 @@
-// Bootstrap 5 (default theme) plus the app's own custom styles.
+// Bootstrap 5 rethemed with the devclub design tokens (see
+// docs/design/redesign-spec.md §4 for the full rationale), plus the app's own
+// custom styles.
 //
-// Bootstrap is compiled from SCSS so the build stays self-contained (no
-// vendored CSS). The default Bootstrap 5 design tokens are used as-is.
+// Wiring order is load-bearing: `@use` (Sass, compile-time) must come before
+// any `@import`, and Bootstrap's `!default` variables only pick up values
+// declared before its import.
 
-@import 'bootstrap/scss/bootstrap';
+@use 'dc-tokens' as dc; // 1. tokens + :root custom properties
+
+// 2. Override Bootstrap defaults (§4.2) before Bootstrap compiles.
+$primary: dc.$dc-accent;
+$danger: dc.$dc-danger;
+$success: dc.$dc-success;
+$info: dc.$dc-info;
+$warning: dc.$dc-warning;
+
+$body-color: dc.$dc-ink-700;
+$body-bg: dc.$dc-surface-0;
+$body-secondary-color: dc.$dc-ink-500;
+
+$font-family-sans-serif: dc.$dc-font-sans;
+$font-family-monospace: dc.$dc-font-mono;
+$font-size-base: 1rem;
+$line-height-base: dc.$dc-leading-body;
+
+$headings-color: dc.$dc-ink-900;
+$headings-font-weight: dc.$dc-weight-semibold;
+$headings-line-height: dc.$dc-leading-snug;
+
+$border-radius: dc.$dc-radius;
+$border-radius-sm: dc.$dc-radius-sm;
+$border-radius-lg: dc.$dc-radius-lg;
+$border-radius-xl: dc.$dc-radius-xl;
+$border-radius-pill: dc.$dc-radius-pill;
+$border-color: dc.$dc-line;
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$box-shadow-sm: dc.$dc-shadow-sm;
+$box-shadow: dc.$dc-shadow-md;
+$box-shadow-lg: dc.$dc-shadow-lg;
+
+$input-bg: dc.$dc-surface-0;
+$input-border-color: dc.$dc-line-strong;
+$input-focus-border-color: dc.$dc-accent;
+
+$card-border-color: dc.$dc-line;
+$card-cap-bg: dc.$dc-surface-2;
+
+$nav-tabs-border-color: dc.$dc-line;
+$nav-tabs-link-active-color: dc.$dc-accent;
+
+$table-border-color: dc.$dc-line;
+$table-hover-bg: dc.$dc-surface-1;
+$table-cell-padding-y: dc.$dc-space-3;
+
+$btn-font-weight: dc.$dc-weight-semibold;
+$btn-padding-y: dc.$dc-space-2;
+$btn-padding-x: dc.$dc-space-4;
+
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-smooth-scroll: true;
+
+@import 'bootstrap/scss/bootstrap'; // 3. Bootstrap compiles with our values
+
+// =============================================================================
+// 4. App layer
+// =============================================================================
+
+// --- 4.1 Per-site accent re-pointing (§4.3) -----------------------------
+// Bootstrap bakes $primary into component variables literally, so the accent
+// will not follow [data-dc-site] unless it is re-pointed here, after the
+// Bootstrap import.
+
+.btn-primary {
+  --bs-btn-bg: var(--dc-accent);
+  --bs-btn-border-color: var(--dc-accent);
+  --bs-btn-hover-bg: var(--dc-accent-hover);
+  --bs-btn-hover-border-color: var(--dc-accent-hover);
+  --bs-btn-active-bg: var(--dc-accent-hover);
+  --bs-btn-active-border-color: var(--dc-accent-hover);
+  --bs-btn-disabled-bg: var(--dc-accent);
+  --bs-btn-disabled-border-color: var(--dc-accent);
+}
+
+a {
+  color: var(--dc-accent);
+}
+a:hover,
+a:focus-visible {
+  color: var(--dc-accent-hover);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--dc-accent);
+}
+
+// --- 4.2 Focus (§5.3, accessibility blocker) ----------------------------
+// Drawn with outline + outline-offset, never box-shadow. The offset is
+// load-bearing: a ring painted directly on a filled button fails contrast:
+// with a 2px gap it is measured against the page surface instead, where it
+// passes (see the contrast ledger in the design spec).
+
+:focus-visible {
+  outline: var(--dc-focus-width) solid var(--dc-focus-ring);
+  outline-offset: var(--dc-focus-offset);
+  border-radius: var(--dc-radius-sm);
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// --- 4.3 Shell — navbar + footer (§5.1, §5.2) ---------------------------
+
+.dc-shell {
+  background: var(--dc-brand-shell, var(--dc-accent-hover));
+  --dc-focus-ring: var(--dc-surface-0);
+}
+
+nav.dc-shell {
+  height: var(--dc-header-height);
+  transition:
+    box-shadow var(--dc-duration-base) var(--dc-ease-standard),
+    background-color var(--dc-duration-base) var(--dc-ease-standard);
+}
+
+nav.dc-shell.dc-shell--scrolled {
+  box-shadow: var(--dc-shadow-md);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  nav.dc-shell.dc-shell--scrolled {
+    backdrop-filter: none;
+  }
+}
+
+nav.dc-shell .navbar-brand {
+  font-family: var(--dc-font-mono);
+  letter-spacing: 0.04em;
+  font-weight: var(--dc-weight-semibold);
+}
+
+[data-dc-site='eu'] nav.dc-shell .nav-link {
+  color: #d7e2d6;
+}
+[data-dc-site='ee'] nav.dc-shell .nav-link {
+  color: #d6e0ea;
+}
+nav.dc-shell .nav-link:hover,
+nav.dc-shell .nav-link:focus-visible,
+nav.dc-shell .nav-link.active {
+  color: #ffffff;
+}
+nav.dc-shell .nav-link.active {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 2px;
+}
+
+nav.dc-shell .dc-lang-switch {
+  display: flex;
+  border-radius: var(--dc-radius-pill);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.14);
+}
+nav.dc-shell .dc-lang-switch .nav-link {
+  padding: 0.35rem 0.85rem;
+}
+nav.dc-shell .dc-lang-switch .nav-item.active .nav-link {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border-radius: var(--dc-radius-pill);
+}
+
+.navbar-toggler {
+  width: 44px;
+  height: 44px;
+}
+
+footer.dc-shell a {
+  color: #ffffff;
+}
+footer.dc-shell small {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+// --- 4.4 Skip link (§9.2) -----------------------------------------------
+
+.dc-skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0;
+  z-index: 2000;
+  padding: var(--dc-space-2) var(--dc-space-4);
+  background: var(--dc-ink-900);
+  color: #ffffff;
+  border-radius: 0 0 var(--dc-radius) 0;
+}
+.dc-skip-link:focus {
+  top: 0;
+}
+
+// --- 4.5 Scroll offset under the sticky navbar (§9.2) -------------------
+
+#main,
+.tab-pane {
+  scroll-margin-top: calc(var(--dc-header-height) + var(--dc-space-4));
+}
+
+// --- 4.6 Motion (§5.4) ---------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+// --- 4.7 Typography rhythm (§5.6) ---------------------------------------
+
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+p {
+  max-width: var(--dc-measure);
+}
 
 /**************************
  * start page
  **************************/
 
 .start-page {
-  background-color: #000000;
+  background-color: var(--dc-ink-900);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -18,9 +243,9 @@
 }
 
 .start-page-neo {
-  color: #1ec503;
-  font-family: 'Courier New';
-  font-size: 10px;
+  color: var(--dc-accent);
+  font-family: var(--dc-font-mono);
+  font-size: var(--dc-text-micro);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -28,7 +253,7 @@
 }
 
 .start-page-logo {
-  background-color: #000000;
+  background-color: var(--dc-ink-900);
   position: absolute;
   margin: auto;
   top: 0;
@@ -38,25 +263,307 @@
 }
 
 /**************************
- * footer
+ * archive — tabs (§6.3)
  **************************/
 
-footer {
-  color: #ffffff;
-  background-color: #000000;
+.nav-tabs {
+  border-bottom: 1px solid var(--dc-line);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+.nav-tabs .nav-link {
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--dc-ink-500);
+  white-space: nowrap;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--dc-ink-800);
+  border-color: transparent;
+}
+.nav-tabs .nav-link.active {
+  border-bottom-color: var(--dc-accent);
+  background: transparent;
 }
 
-footer a,
-footer a:hover,
-footer a:active,
-footer a:visited,
-footer a:link {
-  color: #ffffff;
+/**************************
+ * archive — filters (§6.4)
+ **************************/
+
+.dc-archive-filters {
+  background: var(--dc-surface-1);
+  border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg);
+  padding: var(--dc-space-5);
+  margin-bottom: var(--dc-space-6);
 }
+.dc-archive-filters label {
+  font-size: var(--dc-text-micro);
+  font-weight: var(--dc-weight-semibold);
+  color: var(--dc-ink-600);
+  text-transform: uppercase;
+  letter-spacing: var(--dc-tracking-eyebrow);
+  margin-bottom: var(--dc-space-1);
+}
+.dc-archive-filters .form-control,
+.dc-archive-filters .form-select {
+  min-height: 44px;
+}
+.dc-archive-filters .input-group-text {
+  min-width: 44px;
+  justify-content: center;
+}
+.dc-archive-filters .btn-group .btn {
+  min-height: 44px;
+}
+.dc-archive-filters .btn-group .btn.active {
+  background: var(--dc-accent-soft);
+  color: var(--dc-accent-on-soft);
+  border-color: var(--dc-line);
+}
+
+.dc-empty-result {
+  background: var(--dc-surface-1);
+  border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg);
+  padding: var(--dc-space-7) var(--dc-space-5);
+  text-align: center;
+  color: var(--dc-ink-600);
+}
+.dc-empty-result-icon {
+  font-size: 2rem;
+  color: var(--dc-ink-500);
+  margin-bottom: var(--dc-space-3);
+}
+
+/**************************
+ * archive — speakers table (§6.5)
+ **************************/
+
+.dc-table thead {
+  background: var(--dc-surface-2);
+  position: sticky;
+  top: var(--dc-header-height);
+  z-index: 2;
+}
+.dc-table thead th {
+  font-size: var(--dc-text-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--dc-tracking-eyebrow);
+  color: var(--dc-ink-600);
+  border-bottom-width: 1px;
+}
+.dc-table thead a,
+.dc-table thead button {
+  color: inherit;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.dc-table td,
+.dc-table th {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 767.98px) {
+  .dc-breakdown {
+    display: none;
+  }
+  .dc-table th,
+  .dc-table td {
+    padding: var(--dc-space-2) var(--dc-space-1);
+  }
+  .dc-table th:first-child,
+  .dc-table td:first-child {
+    width: 2.25rem;
+    padding-left: 0;
+  }
+  .dc-table th:nth-child(2),
+  .dc-table td:nth-child(2) {
+    white-space: nowrap;
+    font-size: var(--dc-text-micro);
+  }
+  .dc-table th:nth-child(3),
+  .dc-table td:nth-child(3) {
+    width: 100%;
+  }
+  .dc-table th:nth-child(4),
+  .dc-table td:nth-child(4) {
+    width: 3rem;
+    text-align: center;
+  }
+  .dc-table th:last-child,
+  .dc-table td:last-child {
+    width: 3rem;
+    text-align: center;
+    padding-right: 0;
+  }
+  .dc-table thead th {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+}
+
+/**************************
+ * archive — seminars (§6.6)
+ **************************/
+
+table.table-bordered {
+  border: none;
+}
+table.table-bordered .dc-seminar-group {
+  background: var(--dc-surface-0);
+  border: 1px solid var(--dc-line);
+  border-radius: var(--dc-radius-lg);
+  box-shadow: var(--dc-shadow-xs);
+  margin-bottom: var(--dc-space-5);
+  display: block;
+}
+table.table-bordered tr.table-secondary td {
+  background: var(--dc-surface-2);
+  border: none;
+  font-size: var(--dc-text-h4);
+  font-weight: var(--dc-weight-semibold);
+  border-top-left-radius: var(--dc-radius-lg);
+  border-top-right-radius: var(--dc-radius-lg);
+}
+table.table-bordered td {
+  border-color: var(--dc-line);
+}
+
+@media (max-width: 767.98px) {
+  table.table-bordered tr.dc-seminar-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--dc-space-2) var(--dc-space-4);
+  }
+  table.table-bordered tr.dc-seminar-facts > td {
+    border: 0;
+    padding: 0;
+    display: block;
+  }
+}
+
+/**************************
+ * archive — best talks (§6.7)
+ **************************/
+
+.dc-best-group-header {
+  text-transform: uppercase;
+  font-size: var(--dc-text-micro);
+  letter-spacing: var(--dc-tracking-eyebrow);
+  color: var(--dc-ink-500);
+  border-bottom: 1px solid var(--dc-line) !important;
+  padding-bottom: var(--dc-space-2);
+}
+
+/**************************
+ * archive — compact list rows (§6.8)
+ **************************/
+
+.dc-meeting-list-header {
+  min-height: 2rem;
+  padding-block: var(--dc-space-1);
+  background: var(--dc-surface-1);
+  border-radius: var(--dc-radius-sm);
+}
+dc-meeting-info-list .text-muted span,
+dc-meeting-info-list .text-muted {
+  font-family: var(--dc-font-mono);
+  color: var(--dc-ink-500);
+}
+dc-speech-row .row {
+  padding-block: var(--dc-space-2);
+  border-bottom: 1px solid var(--dc-line);
+}
+dc-speech-row .row:hover {
+  background: var(--dc-surface-1);
+}
+
+/**************************
+ * cards (§6.12)
+ **************************/
+
+.card {
+  border-radius: var(--dc-radius-lg);
+  box-shadow: var(--dc-shadow-xs);
+}
+.card-header {
+  background: var(--dc-surface-2);
+  font-size: var(--dc-text-h5);
+  font-weight: var(--dc-weight-semibold);
+  color: var(--dc-ink-900);
+  padding: var(--dc-space-4);
+}
+
+/**************************
+ * ressources
+ **************************/
 
 .f-icon {
   width: 25px;
   display: inline-block;
+}
+
+/**************************
+ * clickable name / label (dc-speech-row, dc-meeting-info-block)
+ **************************/
+
+.dc-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--dc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.dc-link-btn:hover {
+  color: var(--dc-accent-hover);
+}
+
+.dc-register-btn {
+  border-radius: var(--dc-radius-pill);
+  padding-block: var(--dc-space-3);
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .dc-register-btn {
+    width: auto;
+  }
+}
+
+/**************************
+ * ranking (best talks / speech-row)
+ **************************/
+
+.place1 {
+  color: var(--dc-place-1);
+}
+.place2 {
+  color: var(--dc-place-2);
+}
+.place3 {
+  color: var(--dc-place-3);
+}
+.place4,
+.place5,
+.place6,
+.place7,
+.place8,
+.place9 {
+  color: var(--dc-place-other);
 }
 
 /**************************
@@ -67,12 +574,6 @@ footer a:link {
   cursor: pointer;
 }
 
-a.dotted {
-  color: #000000;
-  border-bottom: dashed 1px #000000;
-  text-decoration: none;
-}
-
 .lighten {
   opacity: 0.3;
 }
@@ -81,64 +582,9 @@ a.dotted {
   font-size: 75%;
 }
 
-.badge-big {
-  padding: 8px 24px;
-  border-radius: 24px;
-}
-
-.badge-lang {
-  color: #ffffff;
-  background-color: #c1c1c1;
-}
-
-.badge-label {
-  color: #ffffff;
-  background-color: rgba(110, 171, 255, 0.73);
-}
-
-.place1 {
-  color: #cd9500;
-}
-
-.place2 {
-  color: #cdcdcd;
-}
-
-.place3 {
-  color: #9b7000;
-}
-
-.place4 {
-  color: #000000;
-}
-
-.place5 {
-  color: #000000;
-}
-
-.place6 {
-  color: #000000;
-}
-
-.place7 {
-  color: #000000;
-}
-
-.place8 {
-  color: #000000;
-}
-
-.place9 {
-  color: #000000;
-}
-
-.light-border {
-  border-top: 1px solid #ccc;
-  margin-bottom: 1rem;
-}
-
 .svg-inline--fa {
   width: auto !important;
   height: 1em;
   vertical-align: -0.125em;
 }
+

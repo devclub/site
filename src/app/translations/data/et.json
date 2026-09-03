@@ -50,6 +50,8 @@
 	"archive.main.filter.speaker": "Esineja",
 	"archive.main.filter.texts": "Nimetus/kirjeldus",
   "archive.main.filter.view": "Vaade",
+  "archive.main.filter.no_results": "Nendele filtritele ei vasta ükski kohtumine.",
+  "archive.main.filter.no_results.clear": "Tühjenda filtrid",
 	"archive.main.mode.block": "Rohkem info",
 	"archive.main.mode.list": "Kompaktselt",
 	"archive.main.tab": "Kõned",

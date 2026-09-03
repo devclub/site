@@ -5,8 +5,9 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-6" *ngFor="let video of videos">
       <div class="video-wrap mb-3">
-        <a href="{{video.url}}" target="_blank" class="video-lighten">
+        <a href="{{video.url}}" target="_blank" rel="noopener noreferrer" class="video-lighten">
           <img src="{{video.imageUrl}}" class="img-fluid">
+          <fa-icon [icon]="['fas', 'expand-arrows-alt']" class="video-play-glyph" aria-hidden="true"></fa-icon>
           <div class="upper-text">{{video.title}}</div>
           <div class="lower-text">
             {{'main.title.latest_videos.published' | translate}} {{video.publishedAgo}}<br/>

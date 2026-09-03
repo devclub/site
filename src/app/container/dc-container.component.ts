@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostBinding, HostListener} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,14 +27,20 @@ export class DcContainerComponent {
     {code: Lang.RU, text: 'РУС'}
   ];
   public isMenuOpen = false;
+  public isScrolled = false;
   public currentYear = new Date().getFullYear();
 
   public devclubText;
-  public styleColor;
   public blogUrl;
   public devclubMenuText;
   public devclubMenuUrl;
   public teamMembers;
+
+  // Runtime brand seed from the data repo (§4.4). Published as custom
+  // properties on the host so the shell (navbar + footer) and hero wash can
+  // consume them without per-element [ngStyle] bindings.
+  @HostBinding('style.--dc-brand-shell') brandShell;
+  @HostBinding('style.--dc-brand-seed') brandSeed;
 
   constructor(private url: LocationStrategy,
               private router: Router,
@@ -42,7 +48,8 @@ export class DcContainerComponent {
               private translationService: TranslationService,
               appContext: AppContext) {
     this.devclubText = appContext.config.devclubText;
-    this.styleColor = appContext.config.baseColor;
+    this.brandShell = appContext.config.baseColor;
+    this.brandSeed = appContext.config.lightColor;
     this.blogUrl = appContext.config.resources.main.blog;
     this.devclubMenuText = appContext.config.devclubMenuText;
     this.devclubMenuUrl = appContext.config.devclubMenuUrl;
@@ -51,6 +58,11 @@ export class DcContainerComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.isScrolled = (window.scrollY || document.documentElement.scrollTop) > 8;
   }
 
   navigate(url: string) {

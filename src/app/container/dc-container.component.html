@@ -1,16 +1,19 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark" [ngStyle]="{'background-color': styleColor}"
-     style="">
+<a class="dc-skip-link" href="#main">Skip to content</a>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark dc-shell" [ngClass]="{'dc-shell--scrolled': isScrolled}">
   <a class="navbar-brand" href="#/">
     <img src="assets/images/logo_navbar.png" height="30" class="d-inline-block align-top"/>
     {{devclubText}}
   </a>
-  <button class="navbar-toggler" [ngClass]="{'collapsed': !isMenuOpen}" type="button" (click)="toggleMenu()">
+  <button class="navbar-toggler" [ngClass]="{'collapsed': !isMenuOpen}" type="button" (click)="toggleMenu()"
+          [attr.aria-expanded]="isMenuOpen" aria-controls="navbarNavDropdown" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div id="navbarNavDropdown" class="navbar-collapse collapse" [ngClass]="{'show': isMenuOpen}">
-    <ul class="navbar-nav me-auto">
+    <ul class="navbar-nav me-auto dc-lang-switch" role="group" aria-label="Language">
       <li class="nav-item" [ngClass]="{'active': isCurrentLang(lang.code)}" *ngFor="let lang of langs">
-        <a class="nav-link lang" href="javascript:void(0)" (click)="switchLang(lang.code)">{{lang.text}}</a>
+        <a class="nav-link lang" href="javascript:void(0)" (click)="switchLang(lang.code)"
+           [attr.aria-current]="isCurrentLang(lang.code) ? 'true' : null">{{lang.text}}</a>
       </li>
     </ul>
     <ul class="navbar-nav nav-right">
@@ -41,13 +44,13 @@
            (click)="navigate('/speaker')">{{'menu.speaker' | translate}}</a>
       </li>
       <li class="nav-item" *ngIf="blogUrl">
-        <a class="nav-link" target="_blank" [href]="blogUrl">
+        <a class="nav-link" target="_blank" rel="noopener noreferrer" [href]="blogUrl">
           {{ 'menu.blog' | translate }}
           <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
         </a>
       </li>
       <li class="nav-item" *ngIf="devclubMenuText">
-        <a class="nav-link" target="_blank" [href]="devclubMenuUrl">
+        <a class="nav-link" target="_blank" rel="noopener noreferrer" [href]="devclubMenuUrl">
           {{devclubMenuText}}
           <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
         </a>
@@ -62,7 +65,9 @@
 
 <dc-social-youtube-block></dc-social-youtube-block>
 
-<router-outlet></router-outlet>
+<main id="main">
+  <router-outlet></router-outlet>
+</main>
 
 <div class="container">
   <dc-title-row>{{'common.title.team_members' | translate}}</dc-title-row>
@@ -71,7 +76,7 @@
 
 <dc-ads-row-lower></dc-ads-row-lower>
 
-<footer [ngStyle]="{'background-color': styleColor}" class="pt-3 mt-3 pb-5">
+<footer class="dc-shell pt-3 mt-3 pb-5">
   <div class="container">
     <dc-ressources></dc-ressources>
     <div class="row mt-3">

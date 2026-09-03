@@ -1,5 +1,5 @@
 <ng-container *ngIf="!meeting.hiddenByFilter">
-  <div class="row border-bottom" style="height: 28px;">
+  <div class="row border-bottom dc-meeting-list-header">
     <div class="col small text-muted">
       <ng-template #moderatorInfo>
         {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
@@ -13,7 +13,7 @@
       </ng-template>
       <div class="float-end" placement="left" [tooltip]="photoInfo" [isDisabled]="!meeting.org || !meeting.org.photo">
         <ng-container *ngFor="let photo of meeting.photo">
-          <a href="{{photo}}" target="_blank">
+          <a href="{{photo}}" target="_blank" rel="noopener noreferrer" aria-label="{{'meeting.info.photographs' | translate}}">
             <fa-icon *ngIf="photo" [icon]="['fas', 'camera']" size="2x"></fa-icon>
           </a>&nbsp;
         </ng-container>

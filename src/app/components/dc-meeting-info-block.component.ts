@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DcTooltipDirective } from '../shared/tooltip.directive';
@@ -22,6 +22,10 @@ export class DcMeetingInfoBlockComponent {
   @Input() public meeting: Meeting;
   @Input() public showRegisterEvent: boolean;
   @Input() public speechOptions: SpeechOptions;
+  // The meeting title is the page's single <h1> when this component renders
+  // the home hero; everywhere else (archive listing, fullscreen promo) it
+  // stays an <h2> so there is never more than one <h1> per route (§5.5).
+  @Input() public headingLevel: 1 | 2 = 2;
   public lang: string;
   public fullscreen: boolean;
   public fileUrlPrefix: string;
@@ -29,6 +33,13 @@ export class DcMeetingInfoBlockComponent {
   constructor(appContext: AppContext, translationService: TranslationService) {
     this.lang = translationService.lang;
     this.fileUrlPrefix = appContext.config.fileUrlPrefix;
+  }
+
+  @HostListener('document:keydown.escape')
+  closeFullscreenOnEscape(): void {
+    if (this.fullscreen) {
+      this.fullscreen = false;
+    }
   }
 
   convertIntoMatrix = function (speeches: Speech[]) {

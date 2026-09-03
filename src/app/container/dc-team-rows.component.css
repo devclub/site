@@ -1,11 +1,21 @@
-*:focus, *:visited {
-  outline: none !important;
-}
-
 .image-wrap {
   position: relative;
+  border-radius: var(--dc-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--dc-shadow-xs);
+  transition: transform var(--dc-duration-base) var(--dc-ease-standard);
 }
 
+.image-wrap img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+
+/* Real gradient scrim behind the caption, replacing the legacy
+   30%-white-veil-that-fades-on-hover treatment, which washed out every face
+   by default (§6.9). Photos render at full fidelity at rest. */
 .image-lighten:after {
   content: '\A';
   position: absolute;
@@ -13,24 +23,22 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: #FFFFFF;
-  opacity: 0.3;
-  transition: all 0.2s;
-  -webkit-transition: all 0.3s;
+  background: linear-gradient(transparent 55%, rgba(11, 18, 32, 0.78));
 }
 
-.image-lighten:hover:after {
-  opacity: 0;
+@media (hover: hover) {
+  .image-lighten:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .member-text {
   position: absolute;
-  bottom: 5%;
-  left: 5%;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  padding-right: 5%;
-  font-size: 12px;
+  padding: var(--dc-space-2) var(--dc-space-2);
+  font-size: var(--dc-text-micro);
   color: #FFFFFF;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  font-weight: bold;
+  font-weight: var(--dc-weight-semibold);
 }

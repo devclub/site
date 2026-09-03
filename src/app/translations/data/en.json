@@ -50,6 +50,8 @@
 	"archive.main.filter.speaker": "Speaker",
 	"archive.main.filter.texts": "Topic/description",
   "archive.main.filter.view": "View",
+  "archive.main.filter.no_results": "No meetings match these filters.",
+  "archive.main.filter.no_results.clear": "Clear filters",
 	"archive.main.mode.block": "More info",
 	"archive.main.mode.list": "Compact",
 	"archive.main.tab": "Meetings",

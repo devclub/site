@@ -1,7 +1,7 @@
-<div *ngIf="fullscreen" class="fullscreen-info">
+<div *ngIf="fullscreen" class="fullscreen-info" role="dialog" aria-modal="true" [attr.aria-label]="'common.title.meeting' | translate">
   <div class="row mt-2 me-2">
     <div class="col">
-      <a href="javascript:void(0)" (click)="fullscreen = false" class="float-end" style="color: #FFFFFF">
+      <a href="javascript:void(0)" (click)="fullscreen = false" class="float-end dc-fullscreen-close" aria-label="Close">
         <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </a>
     </div>
@@ -73,21 +73,28 @@
       </a>
     </div>
     <div class="col-12 meeting-header-container">
-      <h2 class="mb-0">
-        <ng-template #photoInfo>
-          {{'meeting.info.photographs' | translate}}: {{meeting.org.photo | localizeOrg}}
-        </ng-template>
+      <ng-template #photoInfo>
+        {{'meeting.info.photographs' | translate}}: {{meeting.org.photo | localizeOrg}}
+      </ng-template>
+      <ng-template #moderatorInfo>
+        {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
+      </ng-template>
+      <ng-template #headerContent>
         <span placement="top" [tooltip]="photoInfo" [isDisabled]="!meeting.org || !meeting.org.photo">
-          <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank">
+          <a *ngFor="let photo of meeting.photo" href="{{photo}}" target="_blank" rel="noopener noreferrer"
+             aria-label="{{'meeting.info.photographs' | translate}}">
             <fa-icon *ngIf="photo" [icon]="['fas', 'camera']"></fa-icon>
           </a>
         </span>
-        <ng-template #moderatorInfo>
-          {{'meeting.info.moderated' | translate}}: {{meeting.org.mod | localizeOrg}}
-        </ng-template>
         <span placement="top" [tooltip]="moderatorInfo" [isDisabled]="!meeting.org || !meeting.org.mod">
           {{'common.title.meeting' | translate}} #{{meeting.num}} {{meeting.titles | localize}}
         </span>
+      </ng-template>
+      <h1 *ngIf="headingLevel === 1" class="mb-0 dc-meeting-title">
+        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
+      </h1>
+      <h2 *ngIf="headingLevel !== 1" class="mb-0 dc-meeting-title">
+        <ng-container *ngTemplateOutlet="headerContent"></ng-container>
       </h2>
     </div>
   </div>
@@ -95,14 +102,14 @@
     <div class="col-sm-9">
       <p class="main-info">
         <fa-icon [icon]="['fas', 'calendar-alt']" class="pe-2 meeting-info-icon"></fa-icon>
-        {{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}
+        <span class="dc-tabular">{{meeting.start | date:'dd.MM.yyyy':'GMT+3'}}</span>
         | {{'common.weekday.' + meeting.start.getDay() | translate }}
         <fa-icon [icon]="['fas', 'clock']" class="pe-2 ps-2 meeting-info-icon"></fa-icon>
-        {{meeting.start | date:'HH:mm (zzz)'}}<br/>
+        <span class="dc-tabular">{{meeting.start | date:'HH:mm (zzz)'}}</span><br/>
         <ng-container *ngIf="meeting.place?.name">
           <fa-icon [icon]="['fas', 'home']" class="pe-2 meeting-info-icon"></fa-icon>
           {{meeting.place.name}}
-          <a *ngIf="meeting.place.url" href="{{meeting.place.url}}" target="_blank">
+          <a *ngIf="meeting.place.url" href="{{meeting.place.url}}" target="_blank" rel="noopener noreferrer">
             <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
           </a>
           <br/>
@@ -110,33 +117,34 @@
         <ng-container *ngIf="meeting.place?.addr">
           <fa-icon [icon]="['fas', 'map']" class="pe-2 meeting-info-icon"></fa-icon>
           {{meeting.place.addr}}
-          <a *ngIf="meeting.place.loc" href="{{meeting.place.loc}}" target="_blank">
+          <a *ngIf="meeting.place.loc" href="{{meeting.place.loc}}" target="_blank" rel="noopener noreferrer">
             <fa-icon [icon]="['fas', 'external-link-square-alt']"></fa-icon>
           </a>
         </ng-container>
       </p>
     </div>
-    <div class="col-sm-3 text-end">
-      <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-info" target="_blank">
+    <div class="col-sm-3 text-sm-end">
+      <a *ngIf="showRegisterEvent && meeting.event" href="{{meeting.event}}" class="btn btn-primary dc-register-btn" target="_blank" rel="noopener noreferrer">
         {{'main.meeting.registration' | translate}}
+        <fa-icon [icon]="['fas', 'external-link-square-alt']" class="ms-1"></fa-icon>
       </a>
     </div>
   </div>
   <ng-container *ngFor="let speech of meeting.speeches">
-    <div class="row speech-container" *ngIf="!speech.hiddenByFilter" style="background-color: #FFFFFF">
-      <div class="col-sm-4 col-md-3">
+    <div class="row speech-container" *ngIf="!speech.hiddenByFilter">
+      <div class="col-sm-4 col-md-3 dc-speaker-col">
         <div *ngFor="let speaker of speech.speakers">
           <div class="image-wrap mb-3">
-            <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank">
+            <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank" rel="noopener noreferrer">
               <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
             </a>
             <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
           </div>
           <div class="name-container">
             <h4>
-              <a *ngIf="speechOptions && speechOptions.clickNameFn" class="dotted"
-                 (click)="speechOptions.clickNameFn(speaker)" href="javascript:void(0)">
-                {{speaker.names | localize}}</a>
+              <button *ngIf="speechOptions && speechOptions.clickNameFn" type="button" class="dc-link-btn"
+                 (click)="speechOptions.clickNameFn(speaker)">
+                {{speaker.names | localize}}</button>
               <ng-container *ngIf="!speechOptions || !speechOptions.clickNameFn">
                 {{speaker.names | localize}}
               </ng-container>
@@ -158,7 +166,8 @@
             </ng-template>
             <span placement="top" [tooltip]="videoInfo"
                   [isDisabled]="!speech.org || (!speech.org.cam && !speech.org.edit)">
-              <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank">
+              <a *ngFor="let youtubeUrl of speech.youtubeUrls" href="{{youtubeUrl}}" target="_blank" rel="noopener noreferrer"
+                 aria-label="YouTube">
                 <fa-icon *ngIf="youtubeUrl" [icon]="['fab', 'youtube']"></fa-icon>
               </a>
             </span>
@@ -167,37 +176,40 @@
           </span>
             <span *ngIf="speech.top" [ngClass]="'place' + speech.top.place"
                   [tooltip]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
+                  [attr.aria-label]="'common.speech.top.tooltip' | translate:{place: speech.top.place}"
                   placement="right" class="ms-2">
             <fa-icon [icon]="['fas', 'trophy']"></fa-icon>
           </span>
             {{speech.titles | localize}}
           </h3>
-          <div class="mb-3 mt-3">
+          <div class="mb-3 mt-3 dc-chip-row">
             <ng-container *ngIf="speechOptions && speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label me-3 mt-2 pointer" (click)="speechOptions.clickLabelFn(label)"
+            <button type="button" class="dc-chip dc-chip-topic" (click)="speechOptions.clickLabelFn(label)"
                   *ngFor="let label of speech.labels">
-              {{label}}</span>
+              {{label}}</button>
             </ng-container>
             <ng-container *ngIf="!speechOptions || !speechOptions.clickLabelFn">
-            <span class="badge badge-big badge-label me-3 mt-2" *ngFor="let label of speech.labels">
+            <span class="dc-chip dc-chip-topic" *ngFor="let label of speech.labels">
               {{label}}</span>
             </ng-container>
-            <span class="badge badge-big me-3 mt-2"
-                  [ngClass]="{'badge-lang': lang === speech.lang,
-                  'text-bg-danger': lang !== speech.lang}">
+            <span class="dc-chip"
+                  [ngClass]="{'dc-chip-lang-match': lang === speech.lang,
+                  'dc-chip-lang-diff': lang !== speech.lang}">
             {{'common.speech.lang.' + speech.lang | translate}}
           </span>
             <span *ngFor="let presentationUrl of speech.presentations"
                   [tooltip]="'common.speech.presentation.tooltip' | translate"
                   placement="bottom" class="me-3 mt-1">
-            <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank">
+            <a [href]="fileUrlPrefix + '/' + presentationUrl" target="_blank" rel="noopener noreferrer"
+               aria-label="{{'common.speech.presentation.tooltip' | translate}}">
               <fa-icon [icon]="['fab', 'slideshare']" size="2x"></fa-icon>
             </a>
           </span>
             <span *ngFor="let exampleUrl of speech.examples"
                   [tooltip]="'common.speech.example.tooltip' | translate"
                   placement="bottom" class="me-3 mt-1">
-            <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank">
+            <a [href]="fileUrlPrefix + '/' + exampleUrl" target="_blank" rel="noopener noreferrer"
+               aria-label="{{'common.speech.example.tooltip' | translate}}">
               <fa-icon [icon]="['fas', 'file-alt']" size="2x"></fa-icon>
             </a>
           </span>

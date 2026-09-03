@@ -1,10 +1,11 @@
 <div class="container">
-  <dc-title-row>{{'speaker.title' | translate}}</dc-title-row>
+  <dc-title-row [level]="1">{{'speaker.title' | translate}}</dc-title-row>
 
   <div class="row justify-content-center mb-3">
     <div class="col text-center">
-      <a href="{{speakerTalkFormUrl}}" target="_blank" class="btn btn-danger">
+      <a href="{{speakerTalkFormUrl}}" target="_blank" rel="noopener noreferrer" role="button" class="btn btn-danger dc-register-btn">
         {{'speaker.button.add_topic' | translate}}
+        <fa-icon [icon]="['fas', 'external-link-alt']" class="ms-2"></fa-icon>
       </a>
     </div>
   </div>

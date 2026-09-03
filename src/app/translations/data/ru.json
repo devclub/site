@@ -50,6 +50,8 @@
 	"archive.main.filter.speaker": "Выступающий",
 	"archive.main.filter.texts": "Тема/описание",
   "archive.main.filter.view": "Вид",
+  "archive.main.filter.no_results": "Нет встреч, соответствующих этим фильтрам.",
+  "archive.main.filter.no_results.clear": "Сбросить фильтры",
 	"archive.main.mode.block": "Подробно",
 	"archive.main.mode.list": "Компактно",
 	"archive.main.tab": "Встречи",

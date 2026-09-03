@@ -16,7 +16,7 @@
 </div>
 
 <div class="mt-3" *ngFor="let groupNumber of groupNumbers">
-  <div class="row border-bottom small" *ngIf="groups.get(groupNumber)">
+  <div class="row border-bottom small dc-best-group-header" *ngIf="groups.get(groupNumber)">
     <div class="col">{{ getGroupHeader(groupNumber) }}</div>
   </div>
   <dc-speech-row [speech]="speech" *ngFor="let speech of groups.get(groupNumber)">

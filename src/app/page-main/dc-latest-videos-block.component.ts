@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { format, formatDistanceToNow } from 'date-fns';
 import { enUS, et, ru, Locale } from 'date-fns/locale';
 import { YoutubeVideo } from '../models/YoutubeVideo.model';
@@ -13,7 +14,7 @@ const LOCALES: Record<string, Locale> = { en: enUS, ru: ru, et: et };
 
 @Component({
   selector: 'dc-latest-videos-block',
-  imports: [CommonModule, TranslatePipe, DcTitleRowComponent],
+  imports: [CommonModule, FontAwesomeModule, TranslatePipe, DcTitleRowComponent],
   templateUrl: './dc-latest-videos-block.component.html',
   styleUrls: ['./dc-latest-videos-block.component.css']
 })
