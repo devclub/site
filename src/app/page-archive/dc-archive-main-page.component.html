@@ -103,6 +103,7 @@
           (click)="changeView(true)"
           [ngClass]="{ active: asList === true }"
           [attr.aria-pressed]="asList === true"
+          [attr.aria-label]="'archive.main.mode.list' | translate"
           type="button"
           class="btn btn-light"
         >
@@ -113,6 +114,7 @@
           (click)="changeView(false)"
           [ngClass]="{ active: asList === false }"
           [attr.aria-pressed]="asList === false"
+          [attr.aria-label]="'archive.main.mode.block' | translate"
           type="button"
           class="btn btn-light"
         >

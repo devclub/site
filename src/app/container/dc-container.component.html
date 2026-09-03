@@ -1,8 +1,8 @@
-<a class="dc-skip-link" href="#main">Skip to content</a>
+<button class="dc-skip-link" type="button" (click)="skipToMain($event)">Skip to content</button>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark dc-shell" [ngClass]="{'dc-shell--scrolled': isScrolled}">
   <a class="navbar-brand" href="#/">
-    <img src="assets/images/logo_navbar.png" height="30" class="d-inline-block align-top"/>
+    <img src="assets/images/logo_navbar.png" alt="" width="57" height="30" class="d-inline-block align-top"/>
     {{devclubText}}
   </a>
   <button class="navbar-toggler" [ngClass]="{'collapsed': !isMenuOpen}" type="button" (click)="toggleMenu()"
@@ -65,7 +65,7 @@
 
 <dc-social-youtube-block></dc-social-youtube-block>
 
-<main id="main">
+<main id="main" tabindex="-1">
   <router-outlet></router-outlet>
 </main>
 

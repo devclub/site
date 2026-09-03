@@ -4,7 +4,7 @@
       <div class="col" *ngFor="let member of members; trackBy: trackByIndex">
         <div class="image-wrap mb-3">
           <a *ngIf="member.person" href="{{member.person.url}}" target="_blank" class="image-lighten">
-            <img src="{{member.imageUrl}}" class="img-fluid">
+            <img src="{{member.imageUrl}}" alt="" width="300" height="300" class="img-fluid">
             <div class="member-text">{{member.person.names | localize}}</div>
           </a>
         </div>

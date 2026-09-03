@@ -57,7 +57,8 @@
         <h6 class="card-header">{{"advertising.what_to_do.title" | translate}}</h6>
         <div class="card-body">
           <p class="card-text">
-            <img class="float-start me-3" src="assets/images/take_my_money.jpg"/>
+            <img class="float-start me-3" src="assets/images/take_my_money.jpg"
+                 alt="" width="120" height="75"/>
             {{"advertising.what_to_do" | translate}}
           </p>
           <p class="card-text">
@@ -99,7 +100,7 @@
   <div class="row align-items-center mb-3">
     <div class="col-6 col-sm-4 col-lg-3 text-center" *ngFor="let item of advertising.companies; trackBy: trackByIndex">
       <a href="{{item.url}}" target="_blank">
-        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid">
+        <img src="{{item.logoUrl}}" alt="{{item.name}}" width="300" height="100" class="img-fluid">
       </a>
     </div>
   </div>

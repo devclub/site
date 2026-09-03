@@ -60,6 +60,11 @@ export class DcContainerComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  skipToMain(event: Event) {
+    event.preventDefault();
+    document.getElementById('main')?.focus();
+  }
+
   @HostListener('window:scroll')
   onWindowScroll() {
     this.isScrolled = (window.scrollY || document.documentElement.scrollTop) > 8;

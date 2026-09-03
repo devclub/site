@@ -25,7 +25,7 @@
         </p>
       </div>
       <div class="col-3">
-        <img class="center-block" src="assets/images/logo_desc.png"/>
+        <img class="center-block" src="assets/images/logo_desc.png" alt="" width="200" height="115"/>
       </div>
     </div>
     <div class="row mt-3" *ngFor="let speechRow of convertIntoMatrix(meeting.speeches)">
@@ -37,7 +37,8 @@
              'col-sm-3': speechRow.length == 4,
              'col-sm': speechRow.length == 5}">
         <div class="promo-solo" *ngIf="speech.speakers.length === 1">
-          <img [src]="speech.speakers[0].imageUrl" class="promo-speaker-image"/>
+          <img [src]="speech.speakers[0].imageUrl" [attr.alt]="speech.speakers[0].names | localize"
+               width="300" height="300" class="promo-speaker-image"/>
           <div class="text-center pt-3">
             <b>{{speech.speakers[0].names | localize}}</b>
             <div class="small">{{speech.speakers[0].titles | localize}}</div>
@@ -46,6 +47,7 @@
         <div class="promo-group" *ngIf="speech.speakers.length > 1" [style.--count]="speech.speakers.length">
           <div class="promo-photo-stack">
             <img *ngFor="let speaker of speech.speakers" [src]="speaker.imageUrl"
+                 [attr.alt]="speaker.names | localize" width="300" height="300"
                  class="promo-speaker-image promo-stacked"/>
           </div>
           <div class="promo-names">
@@ -136,9 +138,11 @@
         <div *ngFor="let speaker of speech.speakers">
           <div class="image-wrap mb-3">
             <a *ngIf="speaker.url" href="{{speaker.url}}" target="_blank" rel="noopener noreferrer">
-              <img src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
+              <img src="{{speaker.imageUrl}}" [attr.alt]="speaker.names | localize"
+                   width="112" height="112" class="img-fluid meeting-info-speaker-image">
             </a>
-            <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" class="img-fluid meeting-info-speaker-image">
+            <img *ngIf="!speaker.url" src="{{speaker.imageUrl}}" [attr.alt]="speaker.names | localize"
+                 width="112" height="112" class="img-fluid meeting-info-speaker-image">
           </div>
           <div class="name-container">
             <h4>

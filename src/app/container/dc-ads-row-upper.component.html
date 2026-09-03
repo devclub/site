@@ -1,10 +1,10 @@
 <div class="row mt-4 ms-2 me-2">
   <div class="image-wrap text-center ps-1 pe-2 d-none d-sm-block col-2 col-md" *ngFor="let item of companies; trackBy: trackByIndex">
     <a *ngIf="item.url" href="{{item.url}}" target="_blank" class="image-lighten">
-      <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid p-2 mh">
+      <img src="{{item.logoUrl}}" alt="{{item.name}}" width="300" height="100" class="img-fluid p-2 mh">
     </a>
     <span *ngIf="!item.url" class="image-lighten">
-        <img src="{{item.logoUrl}}" alt="{{item.name}}" class="img-fluid p-2 mh">
+        <img src="{{item.logoUrl}}" alt="{{item.name}}" width="300" height="100" class="img-fluid p-2 mh">
       </span>
   </div>
 </div>

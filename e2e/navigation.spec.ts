@@ -142,3 +142,50 @@ test('archive season switch refreshes the meeting list (regression: list stayed 
   await expect(firstMeeting).toBeVisible();
   await expect(firstMeeting).not.toHaveText(before);
 });
+
+test('page titles remain projected into a single meaningful h1', async ({ page }) => {
+  for (const hash of ['/archive', '/advertising', '/speaker']) {
+    await gotoHash(page, hash);
+    const heading = page.locator('main h1');
+    await expect(heading).toHaveCount(1);
+    await expect(heading).not.toHaveText('');
+  }
+});
+
+test('archive view toggles have stable accessible names', async ({ page }) => {
+  await gotoHash(page, '/archive');
+  const buttons = page.locator('#view button');
+
+  await expect(buttons).toHaveCount(2);
+  await expect(buttons.nth(0)).toHaveAttribute('aria-label', /\S+/);
+  await expect(buttons.nth(1)).toHaveAttribute('aria-label', /\S+/);
+});
+
+test('skip navigation focuses main without changing the hash route', async ({ page }) => {
+  await gotoHash(page, '/archive');
+  const hash = new URL(page.url()).hash;
+  const skipLink = page.getByRole('button', { name: 'Skip to content' });
+
+  await page.keyboard.press('Tab');
+  await expect(skipLink).toBeFocused();
+  await page.keyboard.press('Enter');
+
+  await expect(page.locator('main')).toBeFocused();
+  expect(new URL(page.url()).hash).toBe(hash);
+});
+
+test('rendered images expose alt text decisions and intrinsic dimensions', async ({ page }) => {
+  for (const hash of ['/', '/archive']) {
+    await gotoHash(page, hash);
+    const invalidImages = await page.locator('img').evaluateAll((images) =>
+      images
+        .filter((image) =>
+          image.getAttribute('alt') === null ||
+          Number(image.getAttribute('width')) <= 0 ||
+          Number(image.getAttribute('height')) <= 0
+        )
+        .map((image) => image.getAttribute('src'))
+    );
+    expect(invalidImages).toEqual([]);
+  }
+});
